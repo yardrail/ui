@@ -37,6 +37,8 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 24
+          # The pnpm cache needs pnpm on PATH, which corepack only provides in the next step.
+          package-manager-cache: false
 
       # corepack installs the pnpm version pinned by packageManager in package.json.
       - run: corepack enable
