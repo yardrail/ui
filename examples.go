@@ -1,0 +1,49 @@
+package ui
+
+import (
+	"context"
+	"io"
+
+	"github.com/a-h/templ"
+)
+
+// Example is one named rendering of a component. The snapshot tests compare it against
+// testdata/<component>/<name>.html, and the gallery serves it at /<component>/<name>.
+type Example struct {
+	// Component is the rendered example.
+	Component templ.Component
+	// Name is a lowercase kebab slug, used as a file name and a URL segment.
+	Name string
+}
+
+// ExampleGroup is every example of one component.
+type ExampleGroup struct {
+	// Component is the component's lowercase kebab slug, used as a directory name and a URL segment.
+	Component string
+	// Examples are the component's examples, in display order.
+	Examples []Example
+}
+
+// ExampleGroups returns every component's examples, in a fixed order.
+func ExampleGroups() []ExampleGroup {
+	return []ExampleGroup{
+		{Component: "button", Examples: buttonExamples()},
+		{Component: "form", Examples: formExamples()},
+		{Component: "field", Examples: fieldExamples()},
+		{Component: "table", Examples: tableExamples()},
+		{Component: "row-edit", Examples: rowEditExamples()},
+	}
+}
+
+// withChildren renders parent with children as its { children... }, the Go equivalent of
+// @parent { children } in templ.
+func withChildren(parent templ.Component, children ...templ.Component) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		return parent.Render(templ.WithChildren(ctx, templ.Join(children...)), w)
+	})
+}
+
+// text renders s, escaped, as a child component.
+func text(s string) templ.Component {
+	return templ.Raw(templ.EscapeString(s))
+}

@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - run: go test ./...
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+
+      - uses: actions/setup-go@v7
+        with:
+          go-version-file: go.mod
+
+      - name: golangci-lint
+        uses: golangci/golangci-lint-action@v9
+        with:
+          version: latest
+          args: --max-same-issues 50
+
+      - run: golangci-lint config verify
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 24
+
+      # corepack installs the pnpm version pinned by packageManager in package.json.
+      - run: corepack enable
+
+      - run: pnpm install --frozen-lockfile
+
+      - name: stylelint
+        run: pnpm exec stylelint "src/**/*.css"
+
+      - name: dist staleness check
+        run: |
+          pnpm build
+          git diff --exit-code dist/

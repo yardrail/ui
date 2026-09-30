@@ -1,0 +1,69 @@
+/* .yr-search — CSS-only, applied to a native <form>/<div> wrapping an
+   <input> (+ optional icon and button). Preserves native form semantics
+   (autofill, enter-to-submit). Consolidates depot's .hero-search,
+   .browse-search-wrap, and .connector-search-wrap — confirmed structurally
+   identical (icon + input + optional button) apart from sizing. */
+
+.yr-search {
+  position: relative;
+  display: flex;
+  align-items: center;
+  max-width: 600px;
+  background: var(--cream);
+  border: 1.5px solid var(--wood);
+  border-radius: 8px;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.yr-search:focus-within {
+  border-color: var(--navy);
+}
+
+.yr-search-icon {
+  position: absolute;
+  left: 0.75rem;
+  color: var(--slate-light);
+  pointer-events: none;
+}
+
+.yr-search-input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  padding: 0.625rem 0.75rem 0.625rem 2.5rem;
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--charcoal);
+  outline: none;
+  border-radius: 8px;
+}
+.yr-search-input::placeholder {
+  color: var(--slate-disabled);
+}
+
+/* --hero: larger, centered, cream-surface bg + shadow (mirrors depot's .hero-search) */
+.yr-search--hero {
+  max-width: 560px;
+  margin: 0 auto;
+  background: var(--cream-surface);
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+}
+.yr-search--hero:focus-within {
+  box-shadow: 0 2px 12px rgb(26 89 89 / 12%);
+}
+.yr-search--hero .yr-search-icon {
+  left: 1rem;
+}
+.yr-search--hero .yr-search-input {
+  padding: 0.875rem 1rem 0.875rem 2.75rem;
+}
+
+/* --compact: smaller, thinner border, focus ring instead of border-only (mirrors
+   depot's .connector-search-wrap) */
+.yr-search--compact {
+  max-width: 420px;
+  border-width: 1px;
+}
+.yr-search--compact .yr-search-input:focus {
+  box-shadow: 0 0 0 3px var(--navy-light);
+}

@@ -1,0 +1,17 @@
+/* .yr-nav-shell — CSS-only layout grid, applied to a native <nav>. Layout
+   only — brand/search/actions content stays fully service-local. Replaces
+   depot's .mkt-nav and yardrail's .topnav layout grids. */
+
+.yr-nav-shell {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0 1.5rem;
+  height: 52px;
+  background: var(--cream-surface);
+  border-bottom: 1px solid var(--wood);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}

@@ -1,0 +1,32 @@
+yr-alert {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  border-radius: 8px;
+  padding: 0.75rem 1rem;
+  border: 1px solid transparent;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+}
+
+yr-alert[tone="success"] {
+  background: var(--depot-green-light);
+  color: var(--depot-green);
+  border-color: var(--depot-green);
+}
+yr-alert[tone="error"] {
+  background: var(--signal-red-light);
+  color: var(--signal-red);
+  border-color: var(--signal-red);
+}
+yr-alert[tone="warning"] {
+  background: color-mix(in srgb, var(--lantern-yellow) 15%, white);
+  color: var(--lantern-yellow);
+  border-color: var(--lantern-yellow);
+}
+yr-alert:not([tone]),
+yr-alert[tone="info"] {
+  background: color-mix(in srgb, var(--conductor-blue) 12%, white);
+  color: var(--conductor-blue);
+  border-color: var(--conductor-blue);
+}

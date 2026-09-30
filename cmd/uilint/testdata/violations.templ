@@ -1,0 +1,14 @@
+package testdata
+
+templ Violations(items []string, show bool) {
+	<p class="top">Top level</p>
+	if show {
+		<div>
+			<span class="in-if">Inside if</span>
+		</div>
+	}
+	for _, item := range items {
+		<li class="in-for">{ item }</li>
+	}
+	<p class={ templ.KV("selected", show) }>Class expression</p>
+}

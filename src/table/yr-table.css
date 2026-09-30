@@ -1,0 +1,44 @@
+/* .yr-table — CSS-only, applied to a native <table>. Preserves native table
+   semantics. Replaces yardrail's .data-table, confirmed reused across
+   9+ pages. Column modifiers (.yr-table-name/.yr-table-mono) and a
+   .is-disabled row state match real usage. */
+
+.yr-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 6px;
+  overflow: hidden;
+  font-family: var(--font-body);
+}
+.yr-table th,
+.yr-table td {
+  text-align: left;
+  padding: 0.625rem 0.875rem;
+  border-bottom: 1px solid var(--wood);
+}
+.yr-table th {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--slate-light);
+  background: var(--cream-hover);
+}
+.yr-table tbody tr:last-child td {
+  border-bottom: none;
+}
+.yr-table tbody tr:hover {
+  background: var(--cream-hover);
+}
+.yr-table tr.is-disabled td {
+  color: var(--slate-disabled);
+}
+.yr-table td.yr-table-name {
+  font-weight: 500;
+}
+.yr-table td.yr-table-mono {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+}

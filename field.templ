@@ -1,0 +1,34 @@
+package ui
+
+// Field renders a labelled <input> named name, with an optional hint and validation error.
+templ Field(label, name string, p FieldProps) {
+	{{ requireArg("Field", "label", label) }}
+	{{ requireArg("Field", "name", name) }}
+	{{ ids := newFieldIDs(ctx, name) }}
+	<div class={ fieldClass(&p) }>
+		if p.HideLabel {
+			<label for={ ids.input } class="yr-visually-hidden">{ fieldLabel(label, &p) }</label>
+		} else {
+			<label for={ ids.input }>{ fieldLabel(label, &p) }</label>
+		}
+		<input
+			type={ p.Type.String() }
+			id={ ids.input }
+			name={ name }
+			if p.Value != "" {
+				value={ p.Value }
+			}
+			if p.Autocomplete.v != "" {
+				autocomplete={ p.Autocomplete.v }
+			}
+			autofocus?={ p.Focus }
+			{ fieldInputAttrs(ids, &p)... }
+		/>
+		if p.Hint != "" {
+			<span id={ ids.hint }>{ p.Hint }</span>
+		}
+		if p.Error != "" {
+			<span class="yr-field-error" id={ ids.error }>{ p.Error }</span>
+		}
+	</div>
+}

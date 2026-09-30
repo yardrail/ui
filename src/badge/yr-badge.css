@@ -1,0 +1,45 @@
+yr-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  border-radius: 4px;
+  padding: 0.15rem 0.45rem;
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+yr-badge[tone="navy"] {
+  background: var(--navy-light);
+  color: var(--navy);
+}
+yr-badge[tone="amber"] {
+  background: #fef3c7;
+  color: #b45309;
+}
+yr-badge[tone="blue"] {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+yr-badge[tone="pink"] {
+  background: #fce7f3;
+  color: #be185d;
+}
+yr-badge[tone="green"] {
+  background: #dcfce7;
+  color: #15803d;
+}
+yr-badge[tone="purple"] {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+yr-badge[tone="red"] {
+  background: var(--signal-red-light);
+  color: var(--signal-red);
+}
+yr-badge:not([tone]),
+yr-badge[tone="slate"] {
+  background: var(--cream-hover);
+  color: var(--slate-light);
+}

@@ -1,0 +1,38 @@
+yr-tabs {
+  display: block;
+}
+
+yr-tabs [role="tablist"] {
+  display: flex;
+  gap: 1.5rem;
+  border-bottom: 1px solid var(--wood);
+  margin-bottom: 1.5rem;
+}
+
+yr-tabs [role="tab"] {
+  appearance: none;
+  background: none;
+  border: none;
+  border-bottom: 2px solid transparent;
+  margin-bottom: -1px;
+  padding: 0.75rem 0.125rem;
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--slate);
+  cursor: pointer;
+}
+yr-tabs [role="tab"]:hover { color: var(--charcoal); }
+yr-tabs [role="tab"][aria-selected="true"] {
+  color: var(--navy);
+  border-bottom-color: var(--navy);
+}
+yr-tabs [role="tab"]:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 2px;
+}
+
+yr-tabs [role="tabpanel"]:focus-visible {
+  outline: 2px solid var(--navy);
+  outline-offset: 4px;
+}

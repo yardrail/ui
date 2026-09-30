@@ -1,0 +1,40 @@
+/* Yardrail Brand Guide tokens — the single source of truth shared by
+   depot, marketing, and yardrail-ui. Mirrors marketing/static/brand-guide.html. */
+
+:root {
+  /* Signature — primary brand colors */
+  --navy: #1B3A6B;
+  --navy-light: #E7ECF2;
+  --gold: #C9A84C;
+
+  /* Base — backgrounds & text */
+  --cream: #F5F2EB;
+  --cream-surface: #FFF;
+  --cream-hover: #F5F1E8;
+  --wood: #E8DCC4;
+  --charcoal: #2D2B2A;
+  --slate: #5C5A59;
+  --slate-light: #8A8785;
+  --slate-disabled: #ABA6A0;
+
+  /* Semantic accents — error/success/info/warning only, never primary CTAs */
+  --signal-red: #D94838;
+  --signal-red-light: #FBEAE7;
+  --depot-green: #4A7C59;
+  --depot-green-light: #E9F1EB;
+  --conductor-blue: #3B6A8C;
+  --lantern-yellow: #E6B043;
+
+  /* Signal status. Railway-themed aliases used across the UI, each mapped
+     to the semantic Yardrail color it represents. */
+  --signal-active: var(--depot-green);   /* Active   / Line Clear */
+  --signal-pending: var(--lantern-yellow); /* Pending  / Signal: Caution */
+  --signal-stopped: var(--signal-red);   /* Stopped  / Stop Signal */
+  --signal-idle: var(--slate-light);     /* Idle     / Cold Iron */
+
+  /* Typography */
+  --font-display: "Quicksand", sans-serif;
+  --font-body: "DM Sans", sans-serif;
+  --font-ui: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}

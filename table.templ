@@ -1,0 +1,66 @@
+package ui
+
+// Table renders a <table> with caption as its accessible name, a header row from p.Columns, and
+// its children, Row components, as the body.
+templ Table(caption string, p TableProps) {
+	{{ requireArg("Table", "caption", caption) }}
+	<table class="yr-table">
+		if p.HideCaption {
+			<caption class={ visuallyHiddenClass }>{ caption }</caption>
+		} else {
+			<caption>{ caption }</caption>
+		}
+		if len(p.Columns) > 0 {
+			<thead>
+				<tr>
+					for _, c := range p.Columns {
+						@columnHeader(c)
+					}
+				</tr>
+			</thead>
+		}
+		<tbody>
+			{ children... }
+		</tbody>
+	</table>
+}
+
+// columnHeader renders one header cell.
+templ columnHeader(c Column) {
+	if c.actions {
+		<th scope="col"><span class={ visuallyHiddenClass }>{ c.label }</span></th>
+	} else {
+		<th scope="col">{ c.label }</th>
+	}
+}
+
+// Row renders a <tr> around its children, Cell components. It renders correctly on its own, as
+// the body of an htmx response that swaps one row.
+templ Row(p RowProps) {
+	<tr
+		if p.Disabled {
+			class="is-disabled"
+		}
+		{ filterAttrs("Row", p.Attrs)... }
+	>
+		{ children... }
+	</tr>
+}
+
+// Cell renders a <td> around its children.
+templ Cell(p CellProps) {
+	<td
+		if p.Kind.class != "" {
+			class={ p.Kind.class }
+		}
+	>
+		{ children... }
+	</td>
+}
+
+// ActionsCell renders the <td> holding a row's buttons and RowEdit disclosures.
+templ ActionsCell() {
+	<td class="yr-row-actions">
+		{ children... }
+	</td>
+}

@@ -1,0 +1,36 @@
+/* .yr-brand — CSS-only, applied to a native <a>/<div>. Logo image +
+   product sub-label lockup, using the same horizontal logo as the
+   marketing site (logo-horizontal-transparent.png, served from each
+   app's static dir). Replaces depot's .mkt-brand/.mkt-brand-sub;
+   also used by yardrail-ui, which had no equivalent styling at all. */
+
+.yr-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 0.9375rem;
+}
+.yr-brand:hover {
+  text-decoration: none;
+  color: var(--charcoal);
+}
+.yr-brand img {
+  display: block;
+  height: 2rem;
+  width: auto;
+}
+
+.yr-brand-sub {
+  font-family: var(--font-body);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: var(--slate-light);
+  background: var(--cream-hover);
+  border-radius: 4px;
+  padding: 0.1rem 0.45rem;
+  margin-left: 0.125rem;
+}

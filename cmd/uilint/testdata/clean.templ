@@ -1,0 +1,11 @@
+package testdata
+
+templ Clean(items []string, show bool) {
+	<h1 id="title">No classes</h1>
+	if show {
+		<p data-state="shown">Shown</p>
+	}
+	for _, item := range items {
+		<li>{ item }</li>
+	}
+}

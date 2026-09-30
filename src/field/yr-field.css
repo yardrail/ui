@@ -1,0 +1,58 @@
+/* .yr-field — applied to a native <label> wrapping an <input>
+   (preserves autofill/validation/label-click-focus), or, as the Go ui.Field
+   component renders it, to a <div> holding a <label for> and its <input>. Replaces depot's
+   .account-field. .yr-field-input is the bare input class for standalone
+   inputs with no label wrapper (replaces depot's .mkt-input). */
+
+.yr-field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: var(--slate);
+}
+
+.yr-field input,
+.yr-field-input {
+  font: inherit;
+  font-size: 0.875rem;
+  color: var(--charcoal);
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 8px;
+  padding: 0.625rem 0.75rem;
+  outline: none;
+  transition: border-color 0.15s, box-shadow 0.15s;
+}
+.yr-field input:focus,
+.yr-field-input:focus {
+  border-color: var(--navy);
+  box-shadow: 0 0 0 3px var(--navy-light);
+}
+
+/* --inline: bare standalone input, larger/bolder (mirrors depot's .mkt-input) */
+.yr-field-input--inline {
+  flex: 1;
+  min-width: 150px;
+  padding: 0.75rem 1rem;
+  border-width: 1.5px;
+  font-size: 0.9375rem;
+}
+.yr-field-input--inline::placeholder {
+  color: var(--slate);
+}
+
+/* Validation error state, rendered by the Go ui.Field component when its
+   Error prop is set. */
+.yr-field-error {
+  display: block;
+  margin-top: 0.25rem;
+  font-size: 0.8125rem;
+  color: var(--signal-red);
+}
+
+.yr-field--invalid input {
+  border-color: var(--signal-red);
+}

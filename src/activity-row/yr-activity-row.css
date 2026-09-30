@@ -1,0 +1,57 @@
+/* .yr-activity-row — CSS-only, applied to a native <div>/<a>. id-badge +
+   text block + a trailing duration slot (filled by yr-live-duration, Batch
+   C). Replaces yardrail's .session-card + .inbox-item (dashboard's two
+   lists + inbox — 3 reuses). */
+
+.yr-activity-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: start;
+  gap: 1rem;
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  color: inherit;
+}
+.yr-activity-row.is-error {
+  border-color: var(--signal-stopped);
+}
+a.yr-activity-row:hover {
+  background: var(--cream-hover);
+  text-decoration: none;
+}
+
+.yr-activity-row-id-badge {
+  display: inline-block;
+  background: var(--cream-hover);
+  border-radius: 3px;
+  padding: 0.125rem 0.375rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--slate);
+  margin-right: 0.5rem;
+}
+
+.yr-activity-row-desc {
+  color: var(--charcoal);
+  font-family: var(--font-body);
+  margin-top: 0.25rem;
+}
+
+.yr-activity-row-meta {
+  color: var(--slate-light);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  margin: 0.25rem 0;
+}
+
+.yr-activity-row-duration {
+  text-align: right;
+  color: var(--slate-light);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+}
+.yr-activity-row-duration-label {
+  display: block;
+}

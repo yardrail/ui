@@ -1,0 +1,31 @@
+/* .yr-review-card — CSS-only, applied to a native <div>. Composed from
+   yr-rating + author name + body text. Replaces depot's .review-card. */
+
+.yr-review-card {
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+}
+
+.yr-review-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-bottom: 0.5rem;
+}
+
+.yr-review-card-author {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.875rem;
+  color: var(--charcoal);
+}
+
+.yr-review-card-body {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--slate);
+  line-height: 1.6;
+  margin: 0;
+}

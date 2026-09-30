@@ -1,0 +1,61 @@
+/* .yr-template-card — CSS-only, applied to a native <a> alongside
+   `.yr-card .yr-card--interactive` (real link — crawlable, no custom
+   element). Composed from .yr-card + yr-badge + yr-rating +
+   .yr-connector-pill--icon; the footer reuses .yr-card-footer. Replaces
+   depot's .template-card (browse/connector-detail/home) and yardrail's
+   structurally-near-identical .template-card. */
+
+.yr-template-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  text-decoration: none;
+  color: inherit;
+}
+.yr-template-card:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+.yr-template-card-name {
+  font-family: var(--font-body);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  color: var(--charcoal);
+  margin: 0;
+}
+
+.yr-template-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--slate);
+  flex: 1;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.yr-template-card-connectors {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.375rem;
+}
+
+.yr-template-card-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 0;
+}
+
+.yr-template-card-price {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+
+.yr-template-card-install-count {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--slate-light);
+}

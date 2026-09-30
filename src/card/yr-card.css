@@ -1,0 +1,46 @@
+/* .yr-card — CSS-only generic container, applied to a native <div>/<a>.
+   Replaces depot's .sidebar-card, .template-card (base shape),
+   .connector-card, .receipt-card, .account-form-card, .mkt-cat-card, and
+   yardrail's .session-card. Standardizes padding at 1.25rem (was
+   1rem-1.75rem across originals); hover-lift is opt-in via
+   --interactive since sidebar/receipt cards are static. */
+
+.yr-card {
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 10px;
+  padding: 1.25rem;
+}
+
+.yr-card--interactive {
+  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+}
+.yr-card--interactive:hover {
+  border-color: var(--navy);
+  box-shadow: 0 4px 16px rgb(26 89 89 / 10%);
+  transform: translateY(-1px);
+}
+
+.yr-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.yr-card-title {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  color: var(--slate-light);
+  margin: 0 0 0.75rem;
+}
+
+.yr-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--wood);
+  padding-top: 0.75rem;
+  margin-top: 0.5rem;
+}
