@@ -1,0 +1,17 @@
+yr-rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--slate);
+}
+
+yr-rating .yr-rating-stars {
+  color: #d97706;
+  letter-spacing: 1px;
+}
+
+yr-rating .yr-rating-count {
+  color: var(--slate-light);
+}

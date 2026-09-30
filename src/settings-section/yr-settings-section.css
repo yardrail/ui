@@ -1,0 +1,30 @@
+/* .yr-settings-section — CSS-only, applied to a native <div>. .yr-card +
+   heading + optional flash + either an avatar/logo-preview row or a plain
+   field row. Replaces yardrail's .settings-section (5 reuses across
+   settings.templ/organization.templ). */
+
+.yr-settings-section {
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 8px;
+  padding: 1.25rem 1.5rem;
+  max-width: 480px;
+}
+.yr-settings-section h2 {
+  margin-top: 0;
+}
+
+.yr-settings-section-avatar-row {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.yr-settings-section-success {
+  background: var(--depot-green-light);
+  color: var(--depot-green);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+}

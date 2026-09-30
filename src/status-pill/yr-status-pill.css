@@ -1,0 +1,26 @@
+yr-status-pill {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 0.125rem 0.625rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+}
+
+yr-status-pill[status="active"] {
+  background: var(--depot-green-light);
+  color: var(--depot-green);
+}
+yr-status-pill[status="pending"] {
+  background: color-mix(in srgb, var(--lantern-yellow) 20%, white);
+  color: var(--lantern-yellow);
+}
+yr-status-pill[status="stopped"] {
+  background: var(--signal-red-light);
+  color: var(--signal-red);
+}
+yr-status-pill:not([status]),
+yr-status-pill[status="idle"] {
+  background: var(--cream-hover);
+  color: var(--slate-light);
+}

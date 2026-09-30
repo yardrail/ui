@@ -1,0 +1,34 @@
+yr-copy-field {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+}
+
+.yr-copy-field-code {
+  flex: 1;
+  min-width: 0;
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  background: var(--cream-hover);
+  border: 1px solid var(--wood);
+  border-radius: 6px;
+  padding: 0.625rem 0.75rem;
+  overflow-x: auto;
+  white-space: pre;
+}
+
+.yr-copy-field-button {
+  flex-shrink: 0;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  color: var(--navy);
+  background: transparent;
+  border: 1.5px solid var(--navy);
+  border-radius: 8px;
+  padding: 0.5rem 0.875rem;
+  cursor: pointer;
+}
+.yr-copy-field-button:hover {
+  background: var(--navy-light);
+}

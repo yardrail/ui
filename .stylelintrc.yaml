@@ -1,0 +1,23 @@
+# Lints hand-written CSS in src/ for real hygiene issues (duplicate/conflicting
+# selectors, deprecated syntax, invalid values) without demanding a wholesale
+# reformat of its existing style. Run via `task lint:css`.
+extends: stylelint-config-standard
+
+rules:
+  # Components pack single-line rules (`.yr-x { gap: 4px; padding: 0; }`) and
+  # run rule blocks back-to-back with no blank line between them.
+  declaration-block-single-line-max-declarations: null
+  rule-empty-line-before: null
+  comment-empty-line-before: null
+
+  # BEM-style block__element--modifier class names (e.g. .yr-button--danger):
+  # allow one --modifier suffix on top of standard kebab-case.
+  selector-class-pattern: "^[a-z][a-z0-9]*(-[a-z0-9]+)*(--[a-z0-9]+(-[a-z0-9]+)*)?$"
+
+  # src/styles.css uses bare-string @import for its build-time imports.
+  import-notation: string
+
+  # State selectors deliberately follow the base rules they override
+  # (.yr-field--invalid input after .yr-field input:focus), which this rule
+  # reports as descending specificity.
+  no-descending-specificity: null

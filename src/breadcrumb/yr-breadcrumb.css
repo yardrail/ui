@@ -1,0 +1,21 @@
+/* .yr-breadcrumb — CSS-only, applied to a native <nav>. Replaces depot's
+   .breadcrumb family. */
+
+.yr-breadcrumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--slate-light);
+}
+.yr-breadcrumb a {
+  color: var(--navy);
+}
+.yr-breadcrumb-sep {
+  color: var(--slate-disabled);
+}
+.yr-breadcrumb-current {
+  color: var(--charcoal);
+  font-weight: 500;
+}

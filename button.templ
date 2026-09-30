@@ -1,0 +1,21 @@
+package ui
+
+// Button renders a native <button> whose text, and accessible name, is label.
+templ Button(label string, p ButtonProps) {
+	{{ requireArg("Button", "label", label) }}
+	<button
+		type={ p.Type.String() }
+		class={ p.Variant.class() }
+		if p.Name != "" {
+			name={ p.Name }
+		}
+		if p.Value != "" {
+			value={ p.Value }
+		}
+		if p.Confirm != "" {
+			hx-confirm={ p.Confirm }
+		}
+		disabled?={ p.Disabled }
+		{ filterAttrs("Button", p.Attrs)... }
+	>{ label }</button>
+}

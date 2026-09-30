@@ -1,0 +1,11 @@
+package ui
+
+// RowEdit renders a native <details> disclosure whose <summary> text is summary and whose body is
+// its children, usually an inline Form.
+templ RowEdit(summary string, p RowEditProps) {
+	{{ requireArg("RowEdit", "summary", summary) }}
+	<details class="yr-row-edit" open?={ p.Open }>
+		<summary>{ summary }</summary>
+		{ children... }
+	</details>
+}

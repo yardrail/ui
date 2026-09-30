@@ -1,0 +1,49 @@
+/* .yr-row-edit — CSS-only, applied to a native <details> wrapping an inline
+   edit form. The toggle is free (native disclosure), no JS needed.
+   Replaces yardrail's .row-edit/.row-actions. */
+
+/* baseline, not flex-start: the <summary> has no padding but the quiet
+   buttons beside it do, so top-aligning them sets the button text ~2px low.
+   Baseline also keeps an open RowEdit's summary level with its neighbours. */
+.yr-row-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 1rem;
+}
+
+.yr-row-edit > summary {
+  cursor: pointer;
+  list-style: none;
+  color: var(--navy);
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+.yr-row-edit > summary::-webkit-details-marker {
+  display: none;
+}
+.yr-row-edit > summary:hover {
+  text-decoration: underline;
+}
+
+.yr-row-edit-form {
+  margin-top: 0.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  align-items: center;
+}
+.yr-row-edit-form input[type="text"] {
+  border: 1px solid var(--wood);
+  border-radius: 6px;
+  padding: 0.4375rem 0.625rem;
+  font: inherit;
+  font-size: 0.8125rem;
+  background: var(--cream);
+  color: var(--charcoal);
+}
+.yr-row-edit-form input[type="text"]:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: -1px;
+}

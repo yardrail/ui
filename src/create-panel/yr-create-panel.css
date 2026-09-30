@@ -1,0 +1,54 @@
+/* .yr-create-panel — CSS-only, applied to a native <details> wrapping a
+   grid form. Toggle is free (native disclosure), same reasoning as
+   .yr-row-edit. Replaces yardrail's .create-panel (5 reuses: teams,
+   spaces, users, inference, triggers). */
+
+.yr-create-panel {
+  margin: 1.5rem 0;
+}
+.yr-create-panel > summary {
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-weight: 500;
+  color: var(--navy);
+}
+
+.yr-create-panel-form {
+  margin-top: 0.75rem;
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 6px;
+  padding: 1rem 1.25rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.75rem 1rem;
+  align-items: end;
+}
+.yr-create-panel-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--slate);
+}
+.yr-create-panel-form input[type="text"],
+.yr-create-panel-form select {
+  border: 1px solid var(--wood);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font: inherit;
+  background: var(--cream);
+  color: var(--charcoal);
+}
+.yr-create-panel-form input[type="text"]:focus,
+.yr-create-panel-form select:focus {
+  outline: 2px solid var(--navy);
+  outline-offset: -1px;
+}
+.yr-create-panel-form label.yr-create-panel-check {
+  flex-direction: row;
+  align-items: center;
+  gap: 0.5rem;
+  padding-bottom: 0.5rem;
+}

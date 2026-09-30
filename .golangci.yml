@@ -1,0 +1,151 @@
+version: "2"
+linters:
+  default: all
+  disable:
+    - depguard
+    - dupl
+    - exhaustruct
+    - forbidigo
+    - funlen
+    - gochecknoglobals
+    - ireturn
+    - tagliatelle
+    - testpackage
+    - varnamelen
+    - gomoddirectives
+    - gomodguard
+    - wrapcheck
+    - wsl
+    - prealloc
+  settings:
+    exhaustruct_v5:
+      allow-empty: true
+      ignore-patterns:
+        - "^net/http\\..*$"
+        # ui component Props: every zero-value field is the component's default.
+        - "^github\\.com/yardrail/ui\\..*Props$"
+    tagalign:
+      align: true
+      sort: true
+      strict: true
+    errcheck:
+      check-type-assertions: true
+      check-blank: true
+      disable-default-exclusions: true
+    revive:
+      severity: warning
+      # Only rules unique to revive — everything else is already covered
+      # by other golangci-lint linters (govet, staticcheck, gocritic,
+      # errcheck, gocognit, nakedret, predeclared, errname, etc.).
+      rules:
+        - name: call-to-gc
+        - name: confusing-results
+        - name: context-as-argument
+        - name: context-keys-type
+        - name: datarace
+        - name: deep-exit
+        - name: duplicated-imports
+        - name: early-return
+        - name: enforce-map-style
+          arguments: ["make"]
+        - name: enforce-repeated-arg-type-style
+          arguments: ["short"]
+        - name: enforce-slice-style
+          arguments: ["make"]
+        - name: enforce-switch-style
+        - name: epoch-naming
+        - name: error-return
+        - name: file-length-limit
+          arguments:
+            - max: 1500
+        - name: filename-format
+        - name: flag-parameter
+        - name: function-length
+          arguments: [60, 100]
+        - name: function-result-limit
+          arguments: [3]
+        - name: get-return
+        - name: indent-error-flow
+        - name: inefficient-map-lookup
+        - name: modifies-parameter
+        - name: modifies-value-receiver
+        - name: nested-structs
+        - name: optimize-operands-order
+        - name: package-directory-mismatch
+        - name: redundant-import-alias
+        - name: redundant-test-main-exit
+        - name: time-date
+        - name: time-equal
+        - name: time-naming
+        - name: unconditional-recursion
+        - name: unexported-naming
+        - name: unexported-return
+        - name: unnecessary-stmt
+        - name: useless-fallthrough
+    godoclint:
+      default: all
+      options:
+        max-len:
+          length: 120
+        require-doc:
+          ignore-exported: false
+          ignore-unexported: true
+        start-with-name:
+          include-unexported: false
+    gocritic:
+      enable-all: true
+      disabled-checks:
+        - unnamedResult
+    govet:
+      enable-all: true
+      disable:
+        - fieldalignment
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - exhaustruct_v5
+        path: "_test\\.go$"
+      - linters:
+          - godoclint
+        text: "symbol should have a godoc"
+        path: "_test\\.go$"
+      # templ writes a "templ: version" comment directly above package in every
+      # *_templ.go, which godoclint counts as a second package doc.
+      - linters:
+          - godoclint
+        text: "package has more than one godoc"
+        path: "^doc\\.go$"
+      - linters:
+          - contextcheck
+        text: "should pass the context parameter"
+        source: "\\.Render\\("
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      # Some npm packages (e.g. flatted) bundle a Go port of themselves that
+      # go build ./... would otherwise pick up as module source.
+      - node_modules
+formatters:
+  enable:
+    - gofmt
+    - gofumpt
+    - golines
+  settings:
+    golines:
+      max-len: 120
+  exclusions:
+    generated: lax
+    paths:
+      - third_party$
+      - builtin$
+      - examples$
+      # Some npm packages (e.g. flatted) bundle a Go port of themselves that
+      # go build ./... would otherwise pick up as module source.
+      - node_modules

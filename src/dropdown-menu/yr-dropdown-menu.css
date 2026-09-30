@@ -1,0 +1,115 @@
+/* yr-account-menu extends YrDropdownMenu but is a distinct tag name, so
+   every tag-selector rule below also targets it explicitly. */
+
+yr-dropdown-menu,
+yr-account-menu {
+  position: relative;
+  display: inline-block;
+}
+
+yr-dropdown-menu [slot="trigger"],
+yr-account-menu [slot="trigger"] {
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+  font: inherit;
+  /* The trigger is inline-level, so by default it sits on its parent's text
+     baseline, reserving descender space below it whose size depends on the
+     surrounding font's metrics — a different amount per service/font-size,
+     making the same trigger measure a couple px taller in one than another
+     for no layout reason. Pin it to the box's own top edge instead so its
+     height is just its content's height, consistently, everywhere. */
+  vertical-align: top;
+}
+
+/* yr-account-menu's auto-generated trigger only — hand-authored triggers
+   (used directly with yr-dropdown-menu) supply their own layout class. */
+.yr-account-menu-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem;
+  border-radius: 999px;
+}
+.yr-account-menu-trigger:hover {
+  background: var(--cream-hover);
+}
+
+yr-dropdown-menu [slot="panel"],
+yr-account-menu [slot="panel"] {
+  display: none;
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.5rem);
+  min-width: 200px;
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 8px;
+  padding: 0.5rem;
+  box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
+  z-index: 200;
+}
+yr-dropdown-menu[open] [slot="panel"],
+yr-account-menu[open] [slot="panel"] {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Optional utility classes for panel contents — service-authored menus can
+   use their own styling instead if they need something different. */
+.yr-dropdown-menu-item {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.5rem 0.75rem;
+  border: none;
+  background: none;
+  border-radius: 6px;
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  color: var(--charcoal);
+  text-decoration: none;
+  cursor: pointer;
+}
+.yr-dropdown-menu-item:hover {
+  background: var(--cream-hover);
+  text-decoration: none;
+}
+.yr-dropdown-menu-divider {
+  border-top: 1px solid var(--wood);
+  margin: 0.375rem 0;
+}
+
+/* Trigger chevron — rotates when the panel is open. Purely a visual
+   affordance signaling "this opens a menu"; entirely optional. */
+.yr-dropdown-menu-chevron {
+  color: var(--slate);
+  transition: transform 0.15s;
+}
+yr-dropdown-menu[open] .yr-dropdown-menu-chevron,
+yr-account-menu[open] .yr-dropdown-menu-chevron {
+  transform: rotate(180deg);
+}
+
+/* Optional header shown at the top of the panel — avatar + name/email,
+   for menus that identify the current user before listing actions. */
+.yr-dropdown-menu-header {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.375rem 0.5rem 0.75rem;
+  border-bottom: 1px solid var(--wood);
+  margin-bottom: 0.375rem;
+}
+.yr-dropdown-menu-header-name {
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--charcoal);
+}
+.yr-dropdown-menu-header-email {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: var(--slate);
+}

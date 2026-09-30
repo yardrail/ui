@@ -1,0 +1,41 @@
+version: '3'
+
+tasks:
+  install:
+    desc: Install npm dependencies (esbuild, stylelint)
+    sources:
+      - package.json
+      - pnpm-lock.yaml
+    generates:
+      - node_modules/.modules.yaml
+    cmd: pnpm install --frozen-lockfile
+
+  build:
+    desc: Build src/ to dist/ (ui.js, ui.css and their source maps)
+    deps: [install]
+    cmd: pnpm build
+
+  gen:
+    desc: Compile .templ files to *_templ.go
+    cmd: templ generate
+
+  test:
+    desc: Run Go tests
+    cmd: go test ./...
+
+  lint:
+    desc: Run Go lints
+    cmds:
+      - golangci-lint config verify
+      - golangci-lint fmt ./...
+      - golangci-lint run --fix --max-same-issues 50 ./...
+
+  lint:css:
+    desc: Lint hand-written CSS in src/
+    deps: [install]
+    cmd: pnpm exec stylelint "src/**/*.css"
+
+  gallery:
+    desc: Serve every component example on :6007, styled with the built library CSS
+    deps: [build]
+    cmd: go run ./cmd/gallery --addr localhost:6007

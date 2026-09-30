@@ -1,0 +1,23 @@
+/* .yr-icon-badge — CSS-only circular icon container, applied to a native
+   <div>. Replaces depot's .mkt-cat-icon and marketing's value-prop icon
+   circles. Reuses the same `tone` palette as yr-badge instead of the
+   original --teal/--terracotta/--olive names. */
+
+.yr-icon-badge {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  flex-shrink: 0;
+}
+
+.yr-icon-badge--navy   { background: var(--navy-light); color: var(--navy); }
+.yr-icon-badge--amber  { background: #fef3c7; color: #b45309; }
+.yr-icon-badge--blue   { background: #dbeafe; color: #1d4ed8; }
+.yr-icon-badge--pink   { background: #fce7f3; color: #be185d; }
+.yr-icon-badge--green  { background: #dcfce7; color: #15803d; }
+.yr-icon-badge--purple { background: #f3e8ff; color: #7c3aed; }
+.yr-icon-badge--slate  { background: var(--cream-hover); color: var(--slate-light); }
+.yr-icon-badge--red    { background: var(--signal-red-light); color: var(--signal-red); }

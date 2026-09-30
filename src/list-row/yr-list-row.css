@@ -1,0 +1,61 @@
+/* .yr-list-row — CSS-only, applied to a native <div>. Replaces depot's
+   .install-row/.deployment-item and yardrail's .connector-card (a
+   settings-list row, not depot's grid-tile connector card despite the
+   shared name). Grows a leading icon slot to cover the yardrail case;
+   still the same name+description+meta+trailing-action shape. */
+
+.yr-list-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 8px;
+  transition: border-color 0.15s;
+}
+.yr-list-row:hover {
+  border-color: var(--navy);
+}
+
+.yr-list-row-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.yr-list-row-main {
+  flex: 1;
+  min-width: 0;
+}
+.yr-list-row-name {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+}
+.yr-list-row-desc {
+  font-size: 0.8125rem;
+  color: var(--slate);
+  margin: 0.25rem 0 0;
+}
+.yr-list-row-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  margin-top: 0.375rem;
+  font-size: 0.75rem;
+  color: var(--slate-light);
+}
+
+.yr-list-row-actions {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
