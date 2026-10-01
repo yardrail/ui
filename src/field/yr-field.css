@@ -17,12 +17,12 @@
 .yr-field input,
 .yr-field-input {
   font: inherit;
-  font-size: 0.875rem;
+  font-size: var(--control-font);
   color: var(--charcoal);
   background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 8px;
-  padding: 0.625rem 0.75rem;
+  border: var(--control-border) solid var(--wood);
+  border-radius: var(--control-radius);
+  padding: var(--control-padding-y) var(--control-padding-x);
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -32,13 +32,19 @@
   box-shadow: 0 0 0 3px var(--navy-light);
 }
 
+/* lg: taller controls for hero/marketing contexts */
+.yr-field--lg input,
+.yr-field-input--lg {
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+  font-size: var(--control-font-lg);
+}
+
 /* --inline: bare standalone input, larger/bolder (mirrors depot's .mkt-input) */
 .yr-field-input--inline {
   flex: 1;
   min-width: 150px;
-  padding: 0.75rem 1rem;
-  border-width: 1.5px;
-  font-size: 0.9375rem;
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+  font-size: var(--control-font-lg);
 }
 .yr-field-input--inline::placeholder {
   color: var(--slate);
@@ -55,4 +61,12 @@
 
 .yr-field--invalid input {
   border-color: var(--signal-red);
+}
+
+/* Stacked form layout: vertical stack with consistent spacing between fields
+   and between the last field and the submit button. */
+.yr-form-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }

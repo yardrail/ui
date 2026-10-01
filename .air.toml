@@ -1,0 +1,14 @@
+root = "."
+tmp_dir = ".air"
+
+[build]
+  bin = ".air/gallery"
+  cmd = "pnpm build && go build -o .air/gallery ./cmd/gallery"
+  args_bin = ["--addr", "localhost:6007"]
+  delay = 200
+  include_ext = ["go", "templ", "css", "js", "mjs"]
+  exclude_dir = ["node_modules", "dist", ".air", ".git", "testdata"]
+  kill_delay = 500
+
+[log]
+  main_only = true

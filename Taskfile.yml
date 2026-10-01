@@ -36,6 +36,6 @@ tasks:
     cmd: pnpm exec stylelint "src/**/*.css"
 
   gallery:
-    desc: Serve every component example on :6007, styled with the built library CSS
+    desc: Serve every component example on :6007 with live reload via air
     deps: [build]
-    cmd: go run ./cmd/gallery --addr localhost:6007
+    cmd: air

@@ -1,0 +1,104 @@
+/* yr-pill — unified colored label component. Consolidates yr-badge,
+   yr-chip, and yr-status-pill into one element. Shape defaults to rect
+   (small radius); shape="pill" goes fully rounded. Works as a custom
+   element for static labels or as a class on a native <a> for
+   interactive/clickable use. */
+
+yr-pill,
+.yr-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3em;
+  border-radius: 6px;
+  padding: 0.25rem 0.625rem;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Pill shape — fully rounded */
+yr-pill[shape="pill"],
+.yr-pill--pill {
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+
+/* Interactive (link) styles */
+a.yr-pill:hover {
+  filter: brightness(0.95);
+  text-decoration: none;
+}
+a.yr-pill.is-active,
+yr-pill.is-active {
+  font-weight: 700;
+}
+
+/* Generic tones */
+yr-pill:not([tone]),
+yr-pill[tone="slate"],
+.yr-pill:not([class*="yr-pill--tone"]),
+.yr-pill--tone-slate {
+  background: var(--cream-hover);
+  color: var(--slate-light);
+}
+
+yr-pill[tone="navy"],
+.yr-pill--tone-navy {
+  background: var(--navy-light);
+  color: var(--navy);
+}
+yr-pill[tone="amber"],
+.yr-pill--tone-amber {
+  background: #fef3c7;
+  color: #b45309;
+}
+yr-pill[tone="blue"],
+.yr-pill--tone-blue {
+  background: #dbeafe;
+  color: #1d4ed8;
+}
+yr-pill[tone="green"],
+.yr-pill--tone-green {
+  background: #dcfce7;
+  color: #15803d;
+}
+yr-pill[tone="purple"],
+.yr-pill--tone-purple {
+  background: #f3e8ff;
+  color: #7c3aed;
+}
+yr-pill[tone="pink"],
+.yr-pill--tone-pink {
+  background: #fce7f3;
+  color: #be185d;
+}
+yr-pill[tone="red"],
+.yr-pill--tone-red {
+  background: var(--signal-red-light);
+  color: var(--signal-red);
+}
+
+/* Signal tones — semantic status colors from tokens.css */
+yr-pill[tone="active"],
+.yr-pill--tone-active {
+  background: var(--depot-green-light);
+  color: var(--depot-green);
+}
+yr-pill[tone="pending"],
+.yr-pill--tone-pending {
+  background: color-mix(in srgb, var(--lantern-yellow) 20%, white);
+  color: var(--lantern-yellow);
+}
+yr-pill[tone="stopped"],
+.yr-pill--tone-stopped {
+  background: var(--signal-red-light);
+  color: var(--signal-red);
+}
+yr-pill[tone="idle"],
+.yr-pill--tone-idle {
+  background: var(--cream-hover);
+  color: var(--slate-light);
+}

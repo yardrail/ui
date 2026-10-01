@@ -6,9 +6,7 @@ templ formElement(p FormProps) {
 		if p.ID != "" {
 			id={ p.ID }
 		}
-		if p.Layout.class != "" {
-			class={ p.Layout.class }
-		}
+		class={ p.layoutClass() }
 		method={ p.Method.String() }
 		if p.Action != "" {
 			action={ templ.URL(p.Action) }
