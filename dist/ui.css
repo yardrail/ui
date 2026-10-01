@@ -1354,5 +1354,39 @@ yr-author-link[size=lg] .yr-author-link-name {
   display: inline-flex;
 }
 
+/* src/action-card/yr-action-card.css */
+.yr-action-card {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.25rem;
+  background: var(--cream-surface);
+  border: 1px solid var(--wood);
+  border-radius: 10px;
+}
+.yr-action-card + .yr-action-card {
+  margin-top: 0.75rem;
+}
+.yr-action-card-body {
+  flex: 1;
+  min-width: 0;
+}
+.yr-action-card-title {
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  color: var(--charcoal);
+  margin: 0;
+}
+.yr-action-card-desc {
+  font-family: var(--font-body);
+  font-size: 0.8125rem;
+  color: var(--slate);
+  margin: 0.25rem 0 0;
+}
+.yr-action-card-action {
+  flex-shrink: 0;
+}
+
 /* src/styles.css */
 /*# sourceMappingURL=ui.css.map */
