@@ -1,6 +1,6 @@
 /* .yr-template-card — CSS-only, applied to a native <a> alongside
    `.yr-card .yr-card--interactive` (real link — crawlable, no custom
-   element). Composed from .yr-card + yr-badge + yr-rating +
+   element). Composed from .yr-card + yr-pill + yr-rating +
    .yr-connector-pill--icon; the footer reuses .yr-card-footer. Replaces
    depot's .template-card (browse/connector-detail/home) and yardrail's
    structurally-near-identical .template-card. */
