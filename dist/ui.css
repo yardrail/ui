@@ -97,6 +97,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+a[aria-disabled=true] {
+  pointer-events: none;
+  cursor: default;
+}
 code,
 .mono {
   font-family: var(--yr-font-mono);
