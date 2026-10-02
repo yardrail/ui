@@ -9,15 +9,15 @@
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
-  gap: 1rem;
+  gap: var(--yr-space-4);
 }
 
 .yr-row-edit > summary {
   cursor: pointer;
   list-style: none;
-  color: var(--navy);
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
+  color: var(--yr-accent);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
   font-weight: 500;
 }
 .yr-row-edit > summary::-webkit-details-marker {
@@ -28,22 +28,22 @@
 }
 
 .yr-row-edit-form {
-  margin-top: 0.5rem;
+  margin-top: var(--yr-space-2);
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: var(--yr-space-2);
   align-items: flex-start;
 }
 .yr-row-edit-form input[type="text"] {
-  border: var(--control-border) solid var(--wood);
-  border-radius: var(--control-radius);
-  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--yr-control-border-width) solid var(--yr-border);
+  border-radius: var(--yr-control-radius);
+  padding: var(--yr-control-padding-y) var(--yr-control-padding-x);
   font: inherit;
-  font-size: var(--control-font);
-  background: var(--cream);
-  color: var(--charcoal);
+  font-size: var(--yr-control-font);
+  background: var(--yr-bg);
+  color: var(--yr-text);
 }
 .yr-row-edit-form input[type="text"]:focus {
-  outline: 2px solid var(--navy);
+  outline: 2px solid var(--yr-accent);
   outline-offset: -1px;
 }

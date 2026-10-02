@@ -4,10 +4,10 @@
    settings.templ/organization.templ). */
 
 .yr-settings-section {
-  background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 8px;
-  padding: 1.25rem 1.5rem;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-6) var(--yr-space-6);
   max-width: 480px;
 }
 .yr-settings-section h2 {
@@ -17,14 +17,14 @@
 .yr-settings-section-avatar-row {
   display: flex;
   align-items: center;
-  gap: 1.25rem;
+  gap: var(--yr-space-6);
 }
 
 .yr-settings-section-success {
-  background: var(--depot-green-light);
-  color: var(--depot-green);
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
+  background: var(--yr-success-subtle);
+  color: var(--yr-success);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-2) var(--yr-space-3);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
 }

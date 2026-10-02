@@ -8,7 +8,7 @@
 .yr-template-card {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--yr-space-2);
   text-decoration: none;
   color: inherit;
 }
@@ -18,17 +18,17 @@
 }
 
 .yr-template-card-name {
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
   font-weight: 600;
-  color: var(--charcoal);
+  color: var(--yr-text);
   margin: 0;
 }
 
 .yr-template-card-desc {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--slate);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
   flex: 1;
   line-height: 1.5;
   margin: 0;
@@ -37,25 +37,25 @@
 .yr-template-card-connectors {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.375rem;
+  gap: var(--yr-space-2);
 }
 
 .yr-template-card-footer-left {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--yr-space-2);
   min-width: 0;
 }
 
 .yr-template-card-price {
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
   font-weight: 600;
-  color: var(--charcoal);
+  color: var(--yr-text);
 }
 
 .yr-template-card-install-count {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--slate-light);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-subtle);
 }

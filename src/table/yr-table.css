@@ -6,39 +6,39 @@
 .yr-table {
   width: 100%;
   border-collapse: collapse;
-  background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 6px;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
   overflow: hidden;
-  font-family: var(--font-body);
+  font-family: var(--yr-font-body);
 }
 .yr-table th,
 .yr-table td {
   text-align: left;
-  padding: 0.625rem 0.875rem;
-  border-bottom: 1px solid var(--wood);
+  padding: var(--yr-space-3) var(--yr-space-4);
+  border-bottom: 1px solid var(--yr-border);
 }
 .yr-table th {
-  font-size: 0.75rem;
+  font-size: var(--yr-font-size-sm);
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.04em;
-  color: var(--slate-light);
-  background: var(--cream-hover);
+  color: var(--yr-text-subtle);
+  background: var(--yr-surface-muted);
 }
 .yr-table tbody tr:last-child td {
   border-bottom: none;
 }
 .yr-table tbody tr:hover {
-  background: var(--cream-hover);
+  background: var(--yr-surface-muted);
 }
 .yr-table tr.is-disabled td {
-  color: var(--slate-disabled);
+  color: var(--yr-text-disabled);
 }
 .yr-table td.yr-table-name {
   font-weight: 500;
 }
 .yr-table td.yr-table-mono {
-  font-family: var(--font-mono);
-  font-size: 0.8125rem;
+  font-family: var(--yr-font-mono);
+  font-size: var(--yr-font-size-sm);
 }

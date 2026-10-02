@@ -1,50 +1,99 @@
-/* Yardrail Brand Guide tokens — the single source of truth shared by
-   depot, marketing, and yardrail-ui. Mirrors marketing/static/brand-guide.html. */
+/* Yardrail UI tokens — the single vocabulary for colour, spacing, text size,
+   radius and widths. Library and app stylesheets use only these names for
+   those properties. Every custom property the library defines is prefixed --yr-. */
 
 :root {
-  /* Signature — primary brand colors */
-  --navy: #1B3A6B;
-  --navy-light: #E7ECF2;
-  --gold: #C9A84C;
+  /* Surfaces & text */
+  --yr-bg: #F5F2EB;
+  --yr-surface: #FFF;
+  --yr-surface-muted: #F5F1E8;
+  --yr-border: #E8DCC4;
+  --yr-text: #2D2B2A;
+  --yr-text-muted: #5C5A59;
+  --yr-text-subtle: #8A8785;
+  --yr-text-disabled: #ABA6A0;
 
-  /* Base — backgrounds & text */
-  --cream: #F5F2EB;
-  --cream-surface: #FFF;
-  --cream-hover: #F5F1E8;
-  --wood: #E8DCC4;
-  --charcoal: #2D2B2A;
-  --slate: #5C5A59;
-  --slate-light: #8A8785;
-  --slate-disabled: #ABA6A0;
+  /* Accent — primary actions and links */
+  --yr-accent: #1B3A6B;
+  --yr-accent-hover: #163257;
+  --yr-accent-subtle: #E7ECF2;
+  --yr-on-accent: #F5F2EB; /* text on a filled colour */
 
-  /* Semantic accents — error/success/info/warning only, never primary CTAs */
-  --signal-red: #D94838;
-  --signal-red-light: #FBEAE7;
-  --depot-green: #4A7C59;
-  --depot-green-light: #E9F1EB;
-  --conductor-blue: #3B6A8C;
-  --lantern-yellow: #E6B043;
+  /* Status — one family, never primary CTAs. No neutral role: a pill with no
+     tone renders --yr-text-subtle on --yr-surface-muted. */
+  --yr-danger: #D94838;
+  --yr-danger-subtle: #FBEAE7;
+  --yr-success: #4A7C59;
+  --yr-success-subtle: #E9F1EB;
+  --yr-warning: #E6B043;
+  --yr-warning-subtle: #FBF3E3;
+  --yr-info: #3B6A8C;
+  --yr-info-subtle: #E7EDF1;
 
-  /* Signal status. Railway-themed aliases used across the UI, each mapped
-     to the semantic Yardrail color it represents. */
-  --signal-active: var(--depot-green);   /* Active   / Line Clear */
-  --signal-pending: var(--lantern-yellow); /* Pending  / Signal: Caution */
-  --signal-stopped: var(--signal-red);   /* Stopped  / Stop Signal */
-  --signal-idle: var(--slate-light);     /* Idle     / Cold Iron */
+  /* Brand & rating */
+  --yr-brand-highlight: #C9A84C;
+  --yr-rating: #D97706;
+
+  /* Category hues — pill and icon-badge tones */
+  --yr-category-amber-bg: #FEF3C7;
+  --yr-category-amber-fg: #B45309;
+  --yr-category-blue-bg: #DBEAFE;
+  --yr-category-blue-fg: #1D4ED8;
+  --yr-category-green-bg: #DCFCE7;
+  --yr-category-green-fg: #15803D;
+  --yr-category-purple-bg: #F3E8FF;
+  --yr-category-purple-fg: #7C3AED;
+  --yr-category-pink-bg: #FCE7F3;
+  --yr-category-pink-fg: #BE185D;
+
+  /* Spacing — named as multiples of 0.25rem. A new step takes the name its
+     multiple gives it; existing names never change. */
+  --yr-space-1: 0.25rem;
+  --yr-space-2: 0.5rem;
+  --yr-space-3: 0.75rem;
+  --yr-space-4: 1rem;
+  --yr-space-6: 1.5rem;
+  --yr-space-8: 2rem;
+  --yr-space-12: 3rem;
+  --yr-space-16: 4rem;
+
+  /* Text size — font-size in the name because --yr-text-* are colour roles */
+  --yr-font-size-xs: 0.75rem;  /* captions, table headers */
+  --yr-font-size-sm: 0.875rem; /* interface text */
+  --yr-font-size-md: 1rem;     /* body text, inputs */
+  --yr-font-size-lg: 1.125rem; /* card titles, lead text */
+  --yr-font-size-xl: 1.5rem;   /* section headings */
+  --yr-font-size-2xl: 2rem;    /* page titles, stat numbers */
+
+  /* Radius */
+  --yr-radius-sm: 4px;
+  --yr-radius-md: 8px;
+  --yr-radius-lg: 12px;
+  --yr-radius-full: 999px;
+
+  /* Measure — content widths */
+  --yr-measure-narrow: 24rem;
+  --yr-measure-prose: 36rem;
+  --yr-measure-wide: 48rem;
+
+  /* Side width — sidebars and side panels */
+  --yr-side-sm: 15rem;
+  --yr-side-md: 17.5rem;
+  --yr-side-lg: 20rem;
 
   /* Control sizing — shared by buttons and inputs so they match at each size */
-  --control-padding-y: 0.625rem;
-  --control-padding-x: 0.75rem;
-  --control-font: 0.875rem;
-  --control-radius: 8px;
-  --control-border: 1px;
-  --control-padding-y-lg: 0.75rem;
-  --control-padding-x-lg: 1.375rem;
-  --control-font-lg: 1rem;
+  --yr-control-padding-y: var(--yr-space-3);
+  --yr-control-padding-x: var(--yr-space-3);
+  --yr-control-font: var(--yr-font-size-md);
+  --yr-control-radius: var(--yr-radius-md);
+  --yr-control-border-width: 1px;
+  --yr-control-padding-y-lg: var(--yr-space-3);
+  --yr-control-padding-x-lg: var(--yr-space-6);
+  --yr-control-font-lg: var(--yr-font-size-lg);
 
   /* Typography */
-  --font-display: "Quicksand", sans-serif;
-  --font-body: "DM Sans", sans-serif;
-  --font-ui: "Inter", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --yr-font-display: "Quicksand", sans-serif;
+  --yr-font-body: "DM Sans", sans-serif;
+  --yr-font-ui: "Inter", system-ui, sans-serif;
+  --yr-font-mono: "JetBrains Mono", ui-monospace, monospace;
 }

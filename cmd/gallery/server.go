@@ -2,6 +2,7 @@ package main
 
 import (
 	"bytes"
+	"embed"
 	"html/template"
 	"io/fs"
 	"log/slog"
@@ -68,6 +69,12 @@ type indexPage struct {
 	ActiveSlug string
 }
 
+// galleryCSS holds gallery.css, the styles of the index page's own chrome (sidebar, chips,
+// browser frame). The examples themselves are styled by the library's ui.css only.
+//
+//go:embed gallery.css
+var galleryCSS embed.FS
+
 // indexTemplate renders the sidebar + main content layout with browser-frame preview.
 var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 <html lang="en">
@@ -75,143 +82,7 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 <meta charset="utf-8">
 <title>{{.Active.Name}} · ui gallery</title>
 <link rel="stylesheet" href="/ui.css">
-<style>
-html, body { margin: 0; height: 100%; }
-body { display: flex; background: var(--cream); }
-
-.sidebar {
-  width: 200px;
-  min-width: 200px;
-  background: var(--cream-surface);
-  border-right: 1px solid var(--wood);
-  padding: 1.5rem 0;
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
-  position: sticky;
-  top: 0;
-}
-.sidebar-title {
-  font-family: var(--font-display);
-  font-size: 1.1rem;
-  color: var(--navy);
-  padding: 0 1.25rem 1rem;
-  margin: 0;
-  border-bottom: 1px solid var(--wood);
-}
-.sidebar-nav { list-style: none; margin: 0; padding: 0.5rem 0; }
-.sidebar-nav a {
-  display: block;
-  padding: 0.5rem 1.25rem;
-  font-family: var(--font-ui);
-  font-size: 0.85rem;
-  color: var(--slate);
-  text-decoration: none;
-  border-left: 3px solid transparent;
-}
-.sidebar-nav a:hover { background: var(--cream-hover); color: var(--charcoal); text-decoration: none; }
-.sidebar-nav a.active {
-  color: var(--navy);
-  font-weight: 600;
-  border-left-color: var(--navy);
-  background: var(--navy-light);
-}
-
-.main {
-  flex: 1;
-  min-width: 0;
-  padding: 2rem 3rem;
-  overflow-y: auto;
-}
-.main > h1 {
-  color: var(--navy);
-  font-size: 1.5rem;
-  margin: 0 0 1.5rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid var(--wood);
-}
-
-.component { margin: 1.5rem 0; }
-.component > h3 {
-  font-family: var(--font-mono);
-  font-size: 0.9rem;
-  color: var(--slate);
-  margin: 0 0 0.5rem;
-}
-
-.example-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.75rem; }
-.example-chip {
-  font-family: var(--font-mono);
-  font-size: 0.8rem;
-  padding: 0.3rem 0.7rem;
-  border-radius: 4px;
-  border: 1px solid var(--wood);
-  background: var(--cream-surface);
-  color: var(--slate);
-  cursor: pointer;
-  text-decoration: none;
-  transition: all 0.1s;
-}
-.example-chip:hover { background: var(--cream-hover); color: var(--charcoal); text-decoration: none; }
-.example-chip.active {
-  background: var(--navy);
-  color: #fff;
-  border-color: var(--navy);
-}
-
-.browser-frame {
-  border: 1px solid var(--wood);
-  border-radius: 8px;
-  overflow: hidden;
-  background: var(--cream-surface);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
-}
-.browser-chrome {
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.5rem 0.75rem;
-  background: #e8e4dd;
-  border-bottom: 1px solid var(--wood);
-}
-.browser-dots { display: flex; gap: 5px; }
-.browser-dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-}
-.browser-dot.red { background: #ec6a5e; }
-.browser-dot.yellow { background: #f4bf4f; }
-.browser-dot.green { background: #61c554; }
-.browser-url {
-  flex: 1;
-  font-family: var(--font-mono);
-  font-size: 0.75rem;
-  color: var(--slate);
-  background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 4px;
-  padding: 0.25rem 0.6rem;
-  margin-left: 0.5rem;
-}
-.browser-body { background: #fff; }
-.browser-body iframe {
-  display: block;
-  width: 100%;
-  height: 300px;
-  border: none;
-}
-
-.no-examples {
-  color: var(--slate-disabled);
-  font-style: italic;
-  font-size: 0.85rem;
-  padding: 0.75rem 1rem;
-  background: var(--cream-surface);
-  border: 1px dashed var(--wood);
-  border-radius: 6px;
-}
-</style>
+<link rel="stylesheet" href="/gallery.css">
 </head>
 <body>
 <aside class="sidebar">
@@ -298,7 +169,8 @@ type gallery struct {
 	assets     fs.FS
 }
 
-// newHandler returns the gallery handler, serving ui.css from assets as /ui.css.
+// newHandler returns the gallery handler, serving ui.css from assets as /ui.css and the
+// embedded gallery.css as /gallery.css.
 func newHandler(assets fs.FS) http.Handler {
 	groups := ui.ExampleGroups()
 
@@ -334,6 +206,7 @@ func newHandler(assets fs.FS) http.Handler {
 	mux := http.NewServeMux()
 	mux.HandleFunc("GET /{$}", g.index)
 	mux.HandleFunc("GET /ui.css", g.css)
+	mux.HandleFunc("GET /gallery.css", g.galleryStyles)
 	mux.HandleFunc("GET /ui.js", g.js)
 	mux.HandleFunc("GET /{component}/{name}", g.example)
 
@@ -369,6 +242,11 @@ func (g *gallery) index(w http.ResponseWriter, r *http.Request) {
 // css serves the library CSS.
 func (g *gallery) css(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, g.assets, "ui.css")
+}
+
+// galleryStyles serves the index page's own stylesheet.
+func (*gallery) galleryStyles(w http.ResponseWriter, r *http.Request) {
+	http.ServeFileFS(w, r, galleryCSS, "gallery.css")
 }
 
 // js serves the library JS bundle.

@@ -1,19 +1,19 @@
 yr-rating {
   display: inline-flex;
   align-items: center;
-  gap: 0.25rem;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--slate);
+  gap: var(--yr-space-1);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
 }
 
 yr-rating .yr-rating-stars {
   display: inline-flex;
   align-items: center;
   gap: 2px;
-  color: #d97706;
+  color: var(--yr-rating);
 }
 
 yr-rating .yr-rating-count {
-  color: var(--slate-light);
+  color: var(--yr-text-subtle);
 }

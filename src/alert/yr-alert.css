@@ -1,32 +1,32 @@
 yr-alert {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  border-radius: 8px;
-  padding: 0.75rem 1rem;
+  gap: var(--yr-space-3);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-3) var(--yr-space-4);
   border: 1px solid transparent;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
 }
 
 yr-alert[tone="success"] {
-  background: var(--depot-green-light);
-  color: var(--depot-green);
-  border-color: var(--depot-green);
+  background: var(--yr-success-subtle);
+  color: var(--yr-success);
+  border-color: var(--yr-success);
 }
-yr-alert[tone="error"] {
-  background: var(--signal-red-light);
-  color: var(--signal-red);
-  border-color: var(--signal-red);
+yr-alert[tone="danger"] {
+  background: var(--yr-danger-subtle);
+  color: var(--yr-danger);
+  border-color: var(--yr-danger);
 }
 yr-alert[tone="warning"] {
-  background: color-mix(in srgb, var(--lantern-yellow) 15%, white);
-  color: var(--lantern-yellow);
-  border-color: var(--lantern-yellow);
+  background: var(--yr-warning-subtle);
+  color: var(--yr-warning);
+  border-color: var(--yr-warning);
 }
 yr-alert:not([tone]),
 yr-alert[tone="info"] {
-  background: color-mix(in srgb, var(--conductor-blue) 12%, white);
-  color: var(--conductor-blue);
-  border-color: var(--conductor-blue);
+  background: var(--yr-info-subtle);
+  color: var(--yr-info);
+  border-color: var(--yr-info);
 }

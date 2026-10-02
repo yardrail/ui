@@ -80,6 +80,32 @@ func TestGalleryCSS(t *testing.T) {
 	}
 }
 
+func TestGalleryStylesheet(t *testing.T) {
+	t.Parallel()
+
+	handler := newTestHandler(t)
+
+	_, index := get(t, handler, "/")
+	if !strings.Contains(index, `href="/gallery.css"`) {
+		t.Errorf("index does not link /gallery.css:\n%s", index)
+	}
+
+	rec := httptest.NewRecorder()
+	handler.ServeHTTP(rec, httptest.NewRequestWithContext(t.Context(), http.MethodGet, "/gallery.css", nil))
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+
+	if got := rec.Header().Get("Content-Type"); !strings.HasPrefix(got, "text/css") {
+		t.Errorf("Content-Type = %q, want text/css", got)
+	}
+
+	if !strings.Contains(rec.Body.String(), ".browser-frame") {
+		t.Errorf("stylesheet is missing .browser-frame:\n%s", rec.Body.String())
+	}
+}
+
 // newTestHandler returns a gallery handler whose assets hold a ui.css of testCSS.
 func newTestHandler(t *testing.T) http.Handler {
 	t.Helper()

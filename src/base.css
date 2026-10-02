@@ -2,28 +2,27 @@
    identically today (font-family assignment, heading font, link styling).
    Moving it here means Storybook (and eventually every consuming service,
    once Phase 3 deletes the duplicate copies) gets it from one place instead
-   of three near-identical ones. Font-size/line-height/root sizing stay
-   service-local — those are legitimate per-product density choices, not
-   part of the shared visual identity. */
+   of three near-identical ones. No stylesheet sets a root font size, here
+   or in a consuming service: 1rem is the browser's text size. */
 
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: var(--font-body);
-  color: var(--charcoal);
+  font-family: var(--yr-font-body);
+  color: var(--yr-text);
 }
 
 h1,
 h2,
 h3 {
-  font-family: var(--font-display);
+  font-family: var(--yr-font-display);
   margin: 0 0 0.5em;
 }
 
 a {
-  color: var(--navy);
+  color: var(--yr-accent);
   text-decoration: none;
 }
 a:hover {
@@ -32,7 +31,7 @@ a:hover {
 
 code,
 .mono {
-  font-family: var(--font-mono);
+  font-family: var(--yr-font-mono);
 }
 
 /* Visible to screen readers only: a Field label or Table caption that the

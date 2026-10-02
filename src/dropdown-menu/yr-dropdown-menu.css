@@ -28,12 +28,12 @@ yr-account-menu [slot="trigger"] {
 .yr-account-menu-trigger {
   display: inline-flex;
   align-items: center;
-  gap: 0.375rem;
-  padding: 0.25rem;
-  border-radius: 999px;
+  gap: var(--yr-space-2);
+  padding: var(--yr-space-1);
+  border-radius: var(--yr-radius-full);
 }
 .yr-account-menu-trigger:hover {
-  background: var(--cream-hover);
+  background: var(--yr-surface-muted);
 }
 
 yr-dropdown-menu [slot="panel"],
@@ -43,10 +43,10 @@ yr-account-menu [slot="panel"] {
   right: 0;
   top: calc(100% + 0.5rem);
   min-width: 200px;
-  background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 8px;
-  padding: 0.5rem;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-2);
   box-shadow: 0 12px 32px rgb(0 0 0 / 12%);
   z-index: 200;
 }
@@ -62,29 +62,29 @@ yr-account-menu[open] [slot="panel"] {
   display: block;
   width: 100%;
   text-align: left;
-  padding: 0.5rem 0.75rem;
+  padding: var(--yr-space-2) var(--yr-space-3);
   border: none;
   background: none;
-  border-radius: 6px;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: var(--charcoal);
+  border-radius: var(--yr-radius-md);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
+  color: var(--yr-text);
   text-decoration: none;
   cursor: pointer;
 }
 .yr-dropdown-menu-item:hover {
-  background: var(--cream-hover);
+  background: var(--yr-surface-muted);
   text-decoration: none;
 }
 .yr-dropdown-menu-divider {
-  border-top: 1px solid var(--wood);
-  margin: 0.375rem 0;
+  border-top: 1px solid var(--yr-border);
+  margin: var(--yr-space-2) 0;
 }
 
 /* Trigger chevron — rotates when the panel is open. Purely a visual
    affordance signaling "this opens a menu"; entirely optional. */
 .yr-dropdown-menu-chevron {
-  color: var(--slate);
+  color: var(--yr-text-muted);
   transition: transform 0.15s;
 }
 yr-dropdown-menu[open] .yr-dropdown-menu-chevron,
@@ -97,19 +97,19 @@ yr-account-menu[open] .yr-dropdown-menu-chevron {
 .yr-dropdown-menu-header {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  padding: 0.375rem 0.5rem 0.75rem;
-  border-bottom: 1px solid var(--wood);
-  margin-bottom: 0.375rem;
+  gap: var(--yr-space-3);
+  padding: var(--yr-space-2) var(--yr-space-2) var(--yr-space-3);
+  border-bottom: 1px solid var(--yr-border);
+  margin-bottom: var(--yr-space-2);
 }
 .yr-dropdown-menu-header-name {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
   font-weight: 600;
-  color: var(--charcoal);
+  color: var(--yr-text);
 }
 .yr-dropdown-menu-header-email {
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  color: var(--slate);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
 }
