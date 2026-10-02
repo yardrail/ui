@@ -13,35 +13,56 @@ import (
 	"github.com/yardrail/ui"
 )
 
-// categories defines how components are grouped on the index page.
-var categories = []category{
-	{Slug: "primitives", Name: "Primitives", Components: []string{
-		"button", "pill", "avatar", "icon-badge", "stat", "brand", "rating",
+// sections defines the two-tier grouping shown in the gallery sidebar.
+var sections = []section{
+	{Name: "Structure", Categories: []category{
+		{Slug: "page-shell", Name: "Page Shell", Components: []string{
+			"workspace",
+		}},
+		{Slug: "regions", Name: "Regions", Components: []string{
+			"navbar", "sidebar", "drawer",
+		}},
 	}},
-	{Slug: "forms", Name: "Forms", Components: []string{
-		"field", "form", "search", "copy-field",
+	{Name: "Components", Categories: []category{
+		{Slug: "primitives", Name: "Primitives", Components: []string{
+			"button", "pill", "avatar", "icon-badge", "stat", "brand", "rating",
+		}},
+		{Slug: "forms", Name: "Forms", Components: []string{
+			"field", "form", "search", "copy-field",
+		}},
+		{Slug: "navigation", Name: "Navigation", Components: []string{
+			"tabs", "breadcrumb", "nav-shell", "account-menu", "dropdown-menu",
+		}},
+		{Slug: "data", Name: "Data", Components: []string{
+			"table", "row-edit", "list-row", "activity-row", "meta-row",
+		}},
+		{Slug: "cards", Name: "Cards", Components: []string{
+			"card", "action-card", "auth-card", "review-card", "template-card", "create-panel", "settings-section",
+		}},
+		{Slug: "feedback", Name: "Feedback", Components: []string{
+			"alert", "empty-state",
+		}},
+		{Slug: "misc", Name: "Misc", Components: []string{
+			"author-link", "connector-pill", "live-duration",
+		}},
 	}},
-	{Slug: "navigation", Name: "Navigation", Components: []string{
-		"tabs", "breadcrumb", "nav-shell", "account-menu", "dropdown-menu",
-	}},
-	{Slug: "data", Name: "Data", Components: []string{
-		"table", "row-edit", "list-row", "activity-row", "meta-row",
-	}},
-	{Slug: "cards", Name: "Cards", Components: []string{
-		"card", "action-card", "auth-card", "review-card", "template-card", "create-panel", "settings-section",
-	}},
-	{Slug: "feedback", Name: "Feedback", Components: []string{
-		"alert", "empty-state",
-	}},
-	{Slug: "misc", Name: "Misc", Components: []string{
-		"author-link", "connector-pill", "live-duration",
-	}},
+}
+
+type section struct {
+	Name       string
+	Categories []category
 }
 
 type category struct {
 	Slug       string
 	Name       string
 	Components []string
+}
+
+// indexSection is the template data for one top-level sidebar group.
+type indexSection struct {
+	Name       string
+	Categories []indexCategory
 }
 
 // indexCategory is the template data for one category section.
@@ -64,7 +85,7 @@ type indexExample struct {
 
 // indexPage is the full template data for the gallery index.
 type indexPage struct {
-	Categories []indexCategory
+	Sections   []indexSection
 	Active     indexCategory
 	ActiveSlug string
 }
@@ -88,9 +109,10 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 <aside class="sidebar">
   <h1 class="sidebar-title">ui gallery</h1>
   <ul class="sidebar-nav">
+  {{range .Sections}}<li class="sidebar-section-label">{{.Name}}</li>
   {{range .Categories}}<li><a href="/?cat={{.Slug}}"
     {{- if eq $.ActiveSlug .Slug}} class="active"{{end}}>{{.Name}}</a></li>
-  {{end}}</ul>
+  {{end}}{{end}}</ul>
 </aside>
 <main class="main">
   <h1>{{.Active.Name}}</h1>
@@ -164,9 +186,9 @@ type examplePage struct {
 
 // gallery serves the ui examples and the library CSS.
 type gallery struct {
-	examples   map[string]templ.Component
-	categories []indexCategory
-	assets     fs.FS
+	examples map[string]templ.Component
+	sections []indexSection
+	assets   fs.FS
 }
 
 // newHandler returns the gallery handler, serving ui.css from assets as /ui.css and the
@@ -174,33 +196,38 @@ type gallery struct {
 func newHandler(assets fs.FS) http.Handler {
 	groups := ui.ExampleGroups()
 
-	// Index examples by component name for fast lookup.
 	byComponent := make(map[string][]ui.Example, len(groups))
 	for _, g := range groups {
 		byComponent[g.Component] = g.Examples
 	}
 
 	g := &gallery{
-		examples:   make(map[string]templ.Component),
-		categories: make([]indexCategory, len(categories)),
-		assets:     assets,
+		examples: make(map[string]templ.Component),
+		sections: make([]indexSection, len(sections)),
+		assets:   assets,
 	}
 
-	for i, cat := range categories {
-		ic := indexCategory{Slug: cat.Slug, Name: cat.Name, Components: make([]indexComponent, len(cat.Components))}
+	for i, sec := range sections {
+		is := indexSection{Name: sec.Name, Categories: make([]indexCategory, len(sec.Categories))}
 
-		for j, comp := range cat.Components {
-			ic.Components[j] = indexComponent{Name: comp, Examples: nil}
+		for j, cat := range sec.Categories {
+			ic := indexCategory{Slug: cat.Slug, Name: cat.Name, Components: make([]indexComponent, len(cat.Components))}
 
-			if exs, ok := byComponent[comp]; ok {
-				for _, ex := range exs {
-					g.examples[comp+"/"+ex.Name] = ex.Component
-					ic.Components[j].Examples = append(ic.Components[j].Examples, indexExample{Name: ex.Name})
+			for k, comp := range cat.Components {
+				ic.Components[k] = indexComponent{Name: comp, Examples: nil}
+
+				if exs, ok := byComponent[comp]; ok {
+					for _, ex := range exs {
+						g.examples[comp+"/"+ex.Name] = ex.Component
+						ic.Components[k].Examples = append(ic.Components[k].Examples, indexExample{Name: ex.Name})
+					}
 				}
 			}
+
+			is.Categories[j] = ic
 		}
 
-		g.categories[i] = ic
+		g.sections[i] = is
 	}
 
 	mux := http.NewServeMux()
@@ -219,21 +246,23 @@ func (g *gallery) index(w http.ResponseWriter, r *http.Request) {
 
 	var active *indexCategory
 
-	for i := range g.categories {
-		if g.categories[i].Slug == slug {
-			active = &g.categories[i]
+	for i := range g.sections {
+		for j := range g.sections[i].Categories {
+			if g.sections[i].Categories[j].Slug == slug {
+				active = &g.sections[i].Categories[j]
 
-			break
+				break
+			}
 		}
 	}
 
 	if active == nil {
-		active = &g.categories[0]
+		active = &g.sections[0].Categories[0]
 		slug = active.Slug
 	}
 
 	g.write(w, indexTemplate, indexPage{
-		Categories: g.categories,
+		Sections:   g.sections,
 		Active:     *active,
 		ActiveSlug: slug,
 	})

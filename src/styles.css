@@ -31,3 +31,6 @@
 @import "./tabs/yr-tabs.css";
 @import "./author-link/yr-author-link.css";
 @import "./action-card/yr-action-card.css";
+@import "./sidebar/yr-sidebar.css";
+@import "./drawer/yr-drawer.css";
+@import "./content/yr-content.css";

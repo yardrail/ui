@@ -1,0 +1,87 @@
+/* .yr-sidebar — fixed left sidebar, full height below yr-nav-shell.
+   Width controlled by --yr-sidebar-width on a parent element; collapses
+   to --yr-sidebar-width-collapsed when the parent carries
+   .yr-sidebar-collapsed. The toggle typically lives in yr-nav-shell. */
+
+:root {
+  --yr-sidebar-width: 220px;
+  --yr-sidebar-width-collapsed: 48px;
+}
+
+.yr-sidebar {
+  position: fixed;
+  top: 52px;
+  left: 0;
+  bottom: 0;
+  width: var(--yr-sidebar-width);
+  background: var(--yr-surface);
+  border-right: 1px solid var(--yr-border);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  transition: width 0.2s ease;
+  z-index: 50;
+}
+
+.yr-sidebar-collapsed .yr-sidebar {
+  width: var(--yr-sidebar-width-collapsed);
+}
+
+.yr-sidebar-header {
+  padding: var(--yr-space-4) var(--yr-space-6);
+  border-bottom: 1px solid var(--yr-border);
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.yr-sidebar-nav {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--yr-space-2) 0;
+  list-style: none;
+  margin: 0;
+}
+
+.yr-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+  padding: var(--yr-space-2) var(--yr-space-6);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+  text-decoration: none;
+  border-left: 3px solid transparent;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.yr-sidebar-link:hover {
+  background: var(--yr-surface-muted);
+  color: var(--yr-text);
+  text-decoration: none;
+}
+
+.yr-sidebar-link--active {
+  color: var(--yr-accent);
+  font-weight: 600;
+  border-left-color: var(--yr-accent);
+  background: var(--yr-accent-subtle);
+}
+
+.yr-sidebar-link-label {
+  opacity: 1;
+  transition: opacity 0.15s ease;
+}
+
+.yr-sidebar-collapsed .yr-sidebar-link-label {
+  opacity: 0;
+}
+
+.yr-sidebar-footer {
+  border-top: 1px solid var(--yr-border);
+  padding: var(--yr-space-3) var(--yr-space-6);
+  white-space: nowrap;
+  overflow: hidden;
+}
