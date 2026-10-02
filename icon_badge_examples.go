@@ -10,7 +10,10 @@ import (
 func iconBadgeItem(tone, iconName string) string {
 	var buf bytes.Buffer
 
-	_ = Icon(iconName).Render(context.Background(), &buf)
+	err := Icon(iconName).Render(context.Background(), &buf)
+	if err != nil {
+		panic("render icon " + iconName + ": " + err.Error())
+	}
 
 	return `<div style="display:flex;flex-direction:column;align-items:center;gap:0.5rem">` +
 		`<div class="yr-icon-badge yr-icon-badge--` + tone + `">` + buf.String() + `</div>` +

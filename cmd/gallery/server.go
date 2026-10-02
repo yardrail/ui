@@ -217,7 +217,8 @@ body { display: flex; background: var(--cream); }
 <aside class="sidebar">
   <h1 class="sidebar-title">ui gallery</h1>
   <ul class="sidebar-nav">
-  {{range .Categories}}<li><a href="/?cat={{.Slug}}"{{if eq $.ActiveSlug .Slug}} class="active"{{end}}>{{.Name}}</a></li>
+  {{range .Categories}}<li><a href="/?cat={{.Slug}}"
+    {{- if eq $.ActiveSlug .Slug}} class="active"{{end}}>{{.Name}}</a></li>
   {{end}}</ul>
 </aside>
 <main class="main">
@@ -317,7 +318,7 @@ func newHandler(assets fs.FS) http.Handler {
 		ic := indexCategory{Slug: cat.Slug, Name: cat.Name, Components: make([]indexComponent, len(cat.Components))}
 
 		for j, comp := range cat.Components {
-			ic.Components[j] = indexComponent{Name: comp}
+			ic.Components[j] = indexComponent{Name: comp, Examples: nil}
 
 			if exs, ok := byComponent[comp]; ok {
 				for _, ex := range exs {
