@@ -3,10 +3,11 @@ yr-button {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  padding: 0.75rem 1.375rem;
-  border-radius: 8px;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--control-border) solid transparent;
+  border-radius: var(--control-radius);
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: var(--control-font);
   font-weight: 600;
   cursor: pointer;
   user-select: none;
@@ -33,7 +34,7 @@ yr-button[variant="primary"]:hover {
 yr-button[variant="secondary"] {
   background: transparent;
   color: var(--navy);
-  border: 1.5px solid var(--navy);
+  border-color: var(--navy);
 }
 yr-button[variant="secondary"]:hover {
   background: var(--navy-light);
@@ -65,11 +66,11 @@ yr-button[variant="link"]:hover {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  padding: 0.75rem 1.375rem;
-  border: none;
-  border-radius: 8px;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--control-border) solid transparent;
+  border-radius: var(--control-radius);
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: var(--control-font);
   font-weight: 600;
   cursor: pointer;
   user-select: none;
@@ -81,6 +82,11 @@ yr-button[variant="link"]:hover {
   background: #163257;
 }
 
+.yr-button--lg {
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+  font-size: var(--control-font-lg);
+}
+
 .yr-button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
@@ -90,7 +96,7 @@ yr-button[variant="link"]:hover {
 .yr-button--secondary {
   background: transparent;
   color: var(--navy);
-  border: 1.5px solid var(--navy);
+  border-color: var(--navy);
 }
 .yr-button--secondary:hover {
   background: var(--navy-light);

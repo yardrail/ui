@@ -37,17 +37,11 @@ var YrButton = class extends HTMLElement {
 };
 customElements.define("yr-button", YrButton);
 
-// src/status-pill/yr-status-pill.ts
-var YrStatusPill = class extends HTMLElement {
-  static observedAttributes = ["status"];
+// src/pill/yr-pill.ts
+var YrPill = class extends HTMLElement {
+  static observedAttributes = ["tone", "shape"];
 };
-customElements.define("yr-status-pill", YrStatusPill);
-
-// src/badge/yr-badge.ts
-var YrBadge = class extends HTMLElement {
-  static observedAttributes = ["tone"];
-};
-customElements.define("yr-badge", YrBadge);
+customElements.define("yr-pill", YrPill);
 
 // src/avatar/yr-avatar.ts
 var YrAvatar = class extends HTMLElement {
@@ -84,6 +78,23 @@ var YrStat = class extends HTMLElement {
 customElements.define("yr-stat", YrStat);
 
 // src/rating/yr-rating.ts
+var STAR_PATH = "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z";
+function starSVG(filled) {
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("width", "16");
+  svg.setAttribute("height", "16");
+  svg.setAttribute("viewBox", "0 0 24 24");
+  svg.setAttribute("fill", filled ? "currentColor" : "none");
+  svg.setAttribute("stroke", "currentColor");
+  svg.setAttribute("stroke-width", "2");
+  svg.setAttribute("stroke-linecap", "round");
+  svg.setAttribute("stroke-linejoin", "round");
+  const path = document.createElementNS(ns, "path");
+  path.setAttribute("d", STAR_PATH);
+  svg.appendChild(path);
+  return svg;
+}
 var YrRating = class extends HTMLElement {
   static observedAttributes = ["value", "reviews"];
   connectedCallback() {
@@ -99,7 +110,9 @@ var YrRating = class extends HTMLElement {
     this.replaceChildren();
     const stars = document.createElement("span");
     stars.className = "yr-rating-stars";
-    stars.textContent = "\u2605".repeat(filled) + "\u2606".repeat(5 - filled);
+    for (let i = 0; i < 5; i++) {
+      stars.appendChild(starSVG(i < filled));
+    }
     this.append(stars);
     if (reviews) {
       const count = document.createElement("span");

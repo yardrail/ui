@@ -19,16 +19,19 @@ func TestGalleryIndex(t *testing.T) {
 
 	handler := newTestHandler(t)
 
-	status, body := get(t, handler, "/")
+	status, _ := get(t, handler, "/")
 	if status != http.StatusOK {
 		t.Fatalf("status = %d, want %d", status, http.StatusOK)
 	}
 
+	// Every example must be reachable as a standalone page.
 	for _, group := range ui.ExampleGroups() {
 		for _, ex := range group.Examples {
-			link := `href="/` + group.Component + "/" + ex.Name + `"`
-			if !strings.Contains(body, link) {
-				t.Errorf("index is missing %s", link)
+			path := "/" + group.Component + "/" + ex.Name
+
+			status, _ := get(t, handler, path)
+			if status != http.StatusOK {
+				t.Errorf("GET %s = %d, want %d", path, status, http.StatusOK)
 			}
 		}
 	}

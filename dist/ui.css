@@ -21,6 +21,14 @@
   --signal-pending: var(--lantern-yellow);
   --signal-stopped: var(--signal-red);
   --signal-idle: var(--slate-light);
+  --control-padding-y: 0.625rem;
+  --control-padding-x: 0.75rem;
+  --control-font: 0.875rem;
+  --control-radius: 8px;
+  --control-border: 1px;
+  --control-padding-y-lg: 0.75rem;
+  --control-padding-x-lg: 1.375rem;
+  --control-font-lg: 1rem;
   --font-display: "Quicksand", sans-serif;
   --font-body: "DM Sans", sans-serif;
   --font-ui:
@@ -76,10 +84,11 @@ yr-button {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  padding: 0.75rem 1.375rem;
-  border-radius: 8px;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--control-border) solid transparent;
+  border-radius: var(--control-radius);
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: var(--control-font);
   font-weight: 600;
   cursor: pointer;
   user-select: none;
@@ -102,7 +111,7 @@ yr-button[variant=primary]:hover {
 yr-button[variant=secondary] {
   background: transparent;
   color: var(--navy);
-  border: 1.5px solid var(--navy);
+  border-color: var(--navy);
 }
 yr-button[variant=secondary]:hover {
   background: var(--navy-light);
@@ -127,11 +136,11 @@ yr-button[variant=link]:hover {
   align-items: center;
   justify-content: center;
   gap: 0.375rem;
-  padding: 0.75rem 1.375rem;
-  border: none;
-  border-radius: 8px;
+  padding: var(--control-padding-y) var(--control-padding-x);
+  border: var(--control-border) solid transparent;
+  border-radius: var(--control-radius);
   font-family: var(--font-body);
-  font-size: 0.875rem;
+  font-size: var(--control-font);
   font-weight: 600;
   cursor: pointer;
   user-select: none;
@@ -142,6 +151,10 @@ yr-button[variant=link]:hover {
 .yr-button:hover {
   background: #163257;
 }
+.yr-button--lg {
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+  font-size: var(--control-font-lg);
+}
 .yr-button:disabled {
   cursor: not-allowed;
   opacity: 0.5;
@@ -150,7 +163,7 @@ yr-button[variant=link]:hover {
 .yr-button--secondary {
   background: transparent;
   color: var(--navy);
-  border: 1.5px solid var(--navy);
+  border-color: var(--navy);
 }
 .yr-button--secondary:hover {
   background: var(--navy-light);
@@ -185,75 +198,93 @@ yr-button[variant=link]:hover {
   background: var(--signal-red-light);
 }
 
-/* src/status-pill/yr-status-pill.css */
-yr-status-pill {
-  display: inline-block;
-  border-radius: 999px;
-  padding: 0.125rem 0.625rem;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
-  font-weight: 500;
-}
-yr-status-pill[status=active] {
-  background: var(--depot-green-light);
-  color: var(--depot-green);
-}
-yr-status-pill[status=pending] {
-  background: color-mix(in srgb, var(--lantern-yellow) 20%, white);
-  color: var(--lantern-yellow);
-}
-yr-status-pill[status=stopped] {
-  background: var(--signal-red-light);
-  color: var(--signal-red);
-}
-yr-status-pill:not([status]),
-yr-status-pill[status=idle] {
-  background: var(--cream-hover);
-  color: var(--slate-light);
-}
-
-/* src/badge/yr-badge.css */
-yr-badge {
+/* src/pill/yr-pill.css */
+yr-pill,
+.yr-pill {
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  border-radius: 4px;
-  padding: 0.15rem 0.45rem;
+  border-radius: 6px;
+  padding: 0.25rem 0.625rem;
   font-family: var(--font-body);
-  font-size: 0.6875rem;
+  font-size: 0.75rem;
   font-weight: 600;
   white-space: nowrap;
+  text-decoration: none;
+  color: inherit;
 }
-yr-badge[tone=navy] {
+yr-pill[shape=pill],
+.yr-pill--pill {
+  border-radius: 999px;
+  padding: 0.3rem 0.75rem;
+}
+a.yr-pill:hover {
+  filter: brightness(0.95);
+  text-decoration: none;
+}
+a.yr-pill.is-active,
+yr-pill.is-active {
+  font-weight: 700;
+}
+yr-pill:not([tone]),
+yr-pill[tone=slate],
+.yr-pill:not([class*=yr-pill--tone]),
+.yr-pill--tone-slate {
+  background: var(--cream-hover);
+  color: var(--slate-light);
+}
+yr-pill[tone=navy],
+.yr-pill--tone-navy {
   background: var(--navy-light);
   color: var(--navy);
 }
-yr-badge[tone=amber] {
+yr-pill[tone=amber],
+.yr-pill--tone-amber {
   background: #fef3c7;
   color: #b45309;
 }
-yr-badge[tone=blue] {
+yr-pill[tone=blue],
+.yr-pill--tone-blue {
   background: #dbeafe;
   color: #1d4ed8;
 }
-yr-badge[tone=pink] {
-  background: #fce7f3;
-  color: #be185d;
-}
-yr-badge[tone=green] {
+yr-pill[tone=green],
+.yr-pill--tone-green {
   background: #dcfce7;
   color: #15803d;
 }
-yr-badge[tone=purple] {
+yr-pill[tone=purple],
+.yr-pill--tone-purple {
   background: #f3e8ff;
   color: #7c3aed;
 }
-yr-badge[tone=red] {
+yr-pill[tone=pink],
+.yr-pill--tone-pink {
+  background: #fce7f3;
+  color: #be185d;
+}
+yr-pill[tone=red],
+.yr-pill--tone-red {
   background: var(--signal-red-light);
   color: var(--signal-red);
 }
-yr-badge:not([tone]),
-yr-badge[tone=slate] {
+yr-pill[tone=active],
+.yr-pill--tone-active {
+  background: var(--depot-green-light);
+  color: var(--depot-green);
+}
+yr-pill[tone=pending],
+.yr-pill--tone-pending {
+  background: color-mix(in srgb, var(--lantern-yellow) 20%, white);
+  color: var(--lantern-yellow);
+}
+yr-pill[tone=stopped],
+.yr-pill--tone-stopped {
+  background: var(--signal-red-light);
+  color: var(--signal-red);
+}
+yr-pill[tone=idle],
+.yr-pill--tone-idle {
   background: var(--cream-hover);
   color: var(--slate-light);
 }
@@ -349,8 +380,10 @@ yr-rating {
   color: var(--slate);
 }
 yr-rating .yr-rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   color: #d97706;
-  letter-spacing: 1px;
 }
 yr-rating .yr-rating-count {
   color: var(--slate-light);
@@ -369,68 +402,6 @@ yr-empty-state [slot=icon] {
   display: block;
   margin: 0 auto 1rem;
   opacity: 0.4;
-}
-
-/* src/chip/yr-chip.css */
-.yr-chip {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.3em;
-  border: 1px solid var(--wood);
-  border-radius: 6px;
-  padding: 0.2rem 0.625rem;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  font-weight: 500;
-  color: var(--slate);
-  text-decoration: none;
-  white-space: nowrap;
-  transition:
-    background 0.1s,
-    border-color 0.1s,
-    color 0.1s;
-}
-.yr-chip:hover {
-  background: var(--cream-hover);
-  color: var(--charcoal);
-  text-decoration: none;
-}
-.yr-chip.is-active {
-  background: var(--navy-light);
-  border-color: var(--navy);
-  color: var(--navy);
-  font-weight: 600;
-}
-.yr-chip--category {
-  border-radius: 999px;
-  padding: 0.25rem 0.875rem;
-}
-.yr-chip--category.is-active {
-  background: var(--charcoal);
-  border-color: var(--charcoal);
-  color: var(--cream-surface);
-  font-weight: 500;
-}
-.yr-chip--tag {
-  border-radius: 999px;
-  padding: 0.2rem 0.625rem;
-  font-size: 0.75rem;
-}
-.yr-chip--tag:hover {
-  border-color: var(--navy);
-  color: var(--navy);
-}
-.yr-chip--hero {
-  border: 1px solid rgb(26 89 89 / 25%);
-  border-radius: 999px;
-  padding: 0.3125rem 0.875rem;
-  background: rgb(255 255 255 / 60%);
-  color: var(--navy);
-}
-.yr-chip--hero:hover {
-  background: var(--cream-surface);
-  border-color: var(--navy);
-  color: var(--navy);
 }
 
 /* src/breadcrumb/yr-breadcrumb.css */
@@ -524,12 +495,12 @@ yr-empty-state [slot=icon] {
 .yr-field input,
 .yr-field-input {
   font: inherit;
-  font-size: 0.875rem;
+  font-size: var(--control-font);
   color: var(--charcoal);
   background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 8px;
-  padding: 0.625rem 0.75rem;
+  border: var(--control-border) solid var(--wood);
+  border-radius: var(--control-radius);
+  padding: var(--control-padding-y) var(--control-padding-x);
   outline: none;
   transition: border-color 0.15s, box-shadow 0.15s;
 }
@@ -538,12 +509,16 @@ yr-empty-state [slot=icon] {
   border-color: var(--navy);
   box-shadow: 0 0 0 3px var(--navy-light);
 }
+.yr-field--lg input,
+.yr-field-input--lg {
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+  font-size: var(--control-font-lg);
+}
 .yr-field-input--inline {
   flex: 1;
   min-width: 150px;
-  padding: 0.75rem 1rem;
-  border-width: 1.5px;
-  font-size: 0.9375rem;
+  padding: var(--control-padding-y-lg) var(--control-padding-x-lg);
+  font-size: var(--control-font-lg);
 }
 .yr-field-input--inline::placeholder {
   color: var(--slate);
@@ -556,6 +531,11 @@ yr-empty-state [slot=icon] {
 }
 .yr-field--invalid input {
   border-color: var(--signal-red);
+}
+.yr-form-stacked {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
 }
 
 /* src/card/yr-card.css */
@@ -825,14 +805,14 @@ yr-empty-state [slot=icon] {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
-  align-items: center;
+  align-items: flex-start;
 }
 .yr-row-edit-form input[type=text] {
-  border: 1px solid var(--wood);
-  border-radius: 6px;
-  padding: 0.4375rem 0.625rem;
+  border: var(--control-border) solid var(--wood);
+  border-radius: var(--control-radius);
+  padding: var(--control-padding-y) var(--control-padding-x);
   font: inherit;
-  font-size: 0.8125rem;
+  font-size: var(--control-font);
   background: var(--cream);
   color: var(--charcoal);
 }

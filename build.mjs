@@ -1,4 +1,5 @@
 import { build, context } from 'esbuild';
+import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 
 const jsOpts = {
   entryPoints: ['src/index.ts'],
@@ -18,6 +19,24 @@ const cssOpts = {
   logLevel: 'info',
 };
 
+// Copy Lucide SVG icons into dist/icons/ so Go can embed them.
+async function copyIcons() {
+  const src = 'node_modules/lucide-static/icons';
+  const dest = 'dist/icons';
+  await mkdir(dest, { recursive: true });
+  const files = await readdir(src);
+  let count = 0;
+  for (const f of files) {
+    if (!f.endsWith('.svg')) continue;
+    const svg = await readFile(`${src}/${f}`, 'utf8');
+    // Strip the license comment to keep embeds small.
+    const clean = svg.replace(/<!--[\s\S]*?-->\n?/, '').trim();
+    await writeFile(`${dest}/${f}`, clean);
+    count++;
+  }
+  console.log(`  dist/icons/   ${count} SVGs`);
+}
+
 if (process.argv.includes('--watch')) {
   const jsCtx = await context(jsOpts);
   const cssCtx = await context(cssOpts);
@@ -27,4 +46,5 @@ if (process.argv.includes('--watch')) {
 } else {
   await build(jsOpts);
   await build(cssOpts);
+  await copyIcons();
 }

@@ -1,14 +1,12 @@
 @import "./tokens.css";
 @import "./base.css";
 @import "./button/yr-button.css";
-@import "./status-pill/yr-status-pill.css";
-@import "./badge/yr-badge.css";
+@import "./pill/yr-pill.css";
 @import "./avatar/yr-avatar.css";
 @import "./alert/yr-alert.css";
 @import "./stat/yr-stat.css";
 @import "./rating/yr-rating.css";
 @import "./empty-state/yr-empty-state.css";
-@import "./chip/yr-chip.css";
 @import "./breadcrumb/yr-breadcrumb.css";
 @import "./search/yr-search.css";
 @import "./field/yr-field.css";

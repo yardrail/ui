@@ -1,0 +1,16 @@
+package ui
+
+import "github.com/a-h/templ"
+
+func ratingExamples() []Example {
+	return []Example{
+		{Name: "values", Component: templ.Raw(
+			`<div style="display:flex;flex-direction:column;gap:0.75rem">` +
+				`<yr-rating value="5" reviews="128"></yr-rating>` +
+				`<yr-rating value="4.5" reviews="42"></yr-rating>` +
+				`<yr-rating value="3"></yr-rating>` +
+				`<yr-rating value="1"></yr-rating>` +
+				`</div>`,
+		)},
+	}
+}

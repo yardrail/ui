@@ -8,8 +8,10 @@ yr-rating {
 }
 
 yr-rating .yr-rating-stars {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
   color: #d97706;
-  letter-spacing: 1px;
 }
 
 yr-rating .yr-rating-count {

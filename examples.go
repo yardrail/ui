@@ -28,10 +28,17 @@ type ExampleGroup struct {
 func ExampleGroups() []ExampleGroup {
 	return []ExampleGroup{
 		{Component: "button", Examples: buttonExamples()},
-		{Component: "form", Examples: formExamples()},
+		{Component: "pill", Examples: pillExamples()},
+		{Component: "avatar", Examples: avatarExamples()},
+		{Component: "icon-badge", Examples: iconBadgeExamples()},
+		{Component: "stat", Examples: statExamples()},
+		{Component: "brand", Examples: brandExamples()},
+		{Component: "rating", Examples: ratingExamples()},
 		{Component: "field", Examples: fieldExamples()},
+		{Component: "form", Examples: formExamples()},
 		{Component: "table", Examples: tableExamples()},
 		{Component: "row-edit", Examples: rowEditExamples()},
+		{Component: "author-link", Examples: authorLinkExamples()},
 	}
 }
 

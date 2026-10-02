@@ -1,6 +1,5 @@
 import './button/yr-button';
-import './status-pill/yr-status-pill';
-import './badge/yr-badge';
+import './pill/yr-pill';
 import './avatar/yr-avatar';
 import './alert/yr-alert';
 import './stat/yr-stat';

@@ -30,6 +30,10 @@ func (m FormMethod) String() string {
 // FormLayout is how a Form lays out its fields. The zero value stacks them.
 type FormLayout struct{ class string }
 
+// FormStacked stacks fields vertically with consistent spacing, the default for sign-up and
+// settings forms.
+var FormStacked = FormLayout{class: "yr-form-stacked"}
+
 // FormInline lays fields and buttons out on one line, for editing a table row in place.
 var FormInline = FormLayout{class: "yr-row-edit-form"}
 
@@ -46,6 +50,15 @@ type FormProps struct {
 	// ID is the form's id and the id prefix of every Field inside it. Forms repeated on one page,
 	// such as one per table row, must set it.
 	ID string
+}
+
+// layoutClass returns the CSS class for the form layout, defaulting to stacked.
+func (p *FormProps) layoutClass() string {
+	if p.Layout.class != "" {
+		return p.Layout.class
+	}
+
+	return FormStacked.class
 }
 
 // formIDKey is the context key under which a Form passes its ID to the Fields inside it.
