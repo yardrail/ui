@@ -46,7 +46,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
 
       - name: stylelint
-        run: pnpm exec stylelint "src/**/*.css"
+        run: pnpm exec stylelint "src/**/*.css" "cmd/gallery/gallery.css"
 
       - name: dist staleness check
         run: |

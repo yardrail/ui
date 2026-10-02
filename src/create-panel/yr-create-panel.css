@@ -4,51 +4,51 @@
    spaces, users, inference, triggers). */
 
 .yr-create-panel {
-  margin: 1.5rem 0;
+  margin: var(--yr-space-6) 0;
 }
 .yr-create-panel > summary {
   cursor: pointer;
-  font-family: var(--font-body);
+  font-family: var(--yr-font-body);
   font-weight: 500;
-  color: var(--navy);
+  color: var(--yr-accent);
 }
 
 .yr-create-panel-form {
-  margin-top: 0.75rem;
-  background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 6px;
-  padding: 1rem 1.25rem;
+  margin-top: var(--yr-space-3);
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-4) var(--yr-space-6);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 0.75rem 1rem;
+  gap: var(--yr-space-3) var(--yr-space-4);
   align-items: end;
 }
 .yr-create-panel-form label {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
-  font-family: var(--font-body);
-  font-size: 0.8125rem;
-  color: var(--slate);
+  gap: var(--yr-space-1);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
 }
 .yr-create-panel-form input[type="text"],
 .yr-create-panel-form select {
-  border: 1px solid var(--wood);
-  border-radius: 6px;
-  padding: 0.5rem 0.75rem;
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-2) var(--yr-space-3);
   font: inherit;
-  background: var(--cream);
-  color: var(--charcoal);
+  background: var(--yr-bg);
+  color: var(--yr-text);
 }
 .yr-create-panel-form input[type="text"]:focus,
 .yr-create-panel-form select:focus {
-  outline: 2px solid var(--navy);
+  outline: 2px solid var(--yr-accent);
   outline-offset: -1px;
 }
 .yr-create-panel-form label.yr-create-panel-check {
   flex-direction: row;
   align-items: center;
-  gap: 0.5rem;
-  padding-bottom: 0.5rem;
+  gap: var(--yr-space-2);
+  padding-bottom: var(--yr-space-2);
 }

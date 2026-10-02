@@ -4,9 +4,9 @@ yr-tabs {
 
 yr-tabs [role="tablist"] {
   display: flex;
-  gap: 1.5rem;
-  border-bottom: 1px solid var(--wood);
-  margin-bottom: 1.5rem;
+  gap: var(--yr-space-6);
+  border-bottom: 1px solid var(--yr-border);
+  margin-bottom: var(--yr-space-6);
 }
 
 yr-tabs [role="tab"] {
@@ -15,24 +15,24 @@ yr-tabs [role="tab"] {
   border: none;
   border-bottom: 2px solid transparent;
   margin-bottom: -1px;
-  padding: 0.75rem 0.125rem;
-  font-family: var(--font-body);
-  font-size: 0.9375rem;
+  padding: var(--yr-space-3) 2px;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
   font-weight: 600;
-  color: var(--slate);
+  color: var(--yr-text-muted);
   cursor: pointer;
 }
-yr-tabs [role="tab"]:hover { color: var(--charcoal); }
+yr-tabs [role="tab"]:hover { color: var(--yr-text); }
 yr-tabs [role="tab"][aria-selected="true"] {
-  color: var(--navy);
-  border-bottom-color: var(--navy);
+  color: var(--yr-accent);
+  border-bottom-color: var(--yr-accent);
 }
 yr-tabs [role="tab"]:focus-visible {
-  outline: 2px solid var(--navy);
+  outline: 2px solid var(--yr-accent);
   outline-offset: 2px;
 }
 
 yr-tabs [role="tabpanel"]:focus-visible {
-  outline: 2px solid var(--navy);
+  outline: 2px solid var(--yr-accent);
   outline-offset: 4px;
 }

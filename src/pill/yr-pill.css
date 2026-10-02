@@ -1,7 +1,6 @@
-/* yr-pill — unified colored label component. Consolidates yr-badge,
-   yr-chip, and yr-status-pill into one element. Shape defaults to rect
-   (small radius); shape="pill" goes fully rounded. Works as a custom
-   element for static labels or as a class on a native <a> for
+/* yr-pill — unified colored label component. Tone sets the color. Shape
+   defaults to rect (small radius); shape="pill" goes fully rounded. Works
+   as a custom element for static labels or as a class on a native <a> for
    interactive/clickable use. */
 
 yr-pill,
@@ -9,10 +8,10 @@ yr-pill,
   display: inline-flex;
   align-items: center;
   gap: 0.3em;
-  border-radius: 6px;
-  padding: 0.25rem 0.625rem;
-  font-family: var(--font-body);
-  font-size: 0.75rem;
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-1) var(--yr-space-3);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
   font-weight: 600;
   white-space: nowrap;
   text-decoration: none;
@@ -22,8 +21,8 @@ yr-pill,
 /* Pill shape — fully rounded */
 yr-pill[shape="pill"],
 .yr-pill--pill {
-  border-radius: 999px;
-  padding: 0.3rem 0.75rem;
+  border-radius: var(--yr-radius-full);
+  padding: var(--yr-space-1) var(--yr-space-3);
 }
 
 /* Interactive (link) styles */
@@ -38,67 +37,55 @@ yr-pill.is-active {
 
 /* Generic tones */
 yr-pill:not([tone]),
-yr-pill[tone="slate"],
-.yr-pill:not([class*="yr-pill--tone"]),
-.yr-pill--tone-slate {
-  background: var(--cream-hover);
-  color: var(--slate-light);
+.yr-pill:not([class*="yr-pill--tone"]) {
+  background: var(--yr-surface-muted);
+  color: var(--yr-text-subtle);
 }
 
-yr-pill[tone="navy"],
-.yr-pill--tone-navy {
-  background: var(--navy-light);
-  color: var(--navy);
+yr-pill[tone="accent"],
+.yr-pill--tone-accent {
+  background: var(--yr-accent-subtle);
+  color: var(--yr-accent);
 }
 yr-pill[tone="amber"],
 .yr-pill--tone-amber {
-  background: #fef3c7;
-  color: #b45309;
+  background: var(--yr-category-amber-bg);
+  color: var(--yr-category-amber-fg);
 }
 yr-pill[tone="blue"],
 .yr-pill--tone-blue {
-  background: #dbeafe;
-  color: #1d4ed8;
+  background: var(--yr-category-blue-bg);
+  color: var(--yr-category-blue-fg);
 }
 yr-pill[tone="green"],
 .yr-pill--tone-green {
-  background: #dcfce7;
-  color: #15803d;
+  background: var(--yr-category-green-bg);
+  color: var(--yr-category-green-fg);
 }
 yr-pill[tone="purple"],
 .yr-pill--tone-purple {
-  background: #f3e8ff;
-  color: #7c3aed;
+  background: var(--yr-category-purple-bg);
+  color: var(--yr-category-purple-fg);
 }
 yr-pill[tone="pink"],
 .yr-pill--tone-pink {
-  background: #fce7f3;
-  color: #be185d;
-}
-yr-pill[tone="red"],
-.yr-pill--tone-red {
-  background: var(--signal-red-light);
-  color: var(--signal-red);
+  background: var(--yr-category-pink-bg);
+  color: var(--yr-category-pink-fg);
 }
 
-/* Signal tones — semantic status colors from tokens.css */
-yr-pill[tone="active"],
-.yr-pill--tone-active {
-  background: var(--depot-green-light);
-  color: var(--depot-green);
+/* Status tones — semantic status colors from tokens.css */
+yr-pill[tone="success"],
+.yr-pill--tone-success {
+  background: var(--yr-success-subtle);
+  color: var(--yr-success);
 }
-yr-pill[tone="pending"],
-.yr-pill--tone-pending {
-  background: color-mix(in srgb, var(--lantern-yellow) 20%, white);
-  color: var(--lantern-yellow);
+yr-pill[tone="warning"],
+.yr-pill--tone-warning {
+  background: var(--yr-warning-subtle);
+  color: var(--yr-warning);
 }
-yr-pill[tone="stopped"],
-.yr-pill--tone-stopped {
-  background: var(--signal-red-light);
-  color: var(--signal-red);
-}
-yr-pill[tone="idle"],
-.yr-pill--tone-idle {
-  background: var(--cream-hover);
-  color: var(--slate-light);
+yr-pill[tone="danger"],
+.yr-pill--tone-danger {
+  background: var(--yr-danger-subtle);
+  color: var(--yr-danger);
 }

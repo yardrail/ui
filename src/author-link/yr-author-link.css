@@ -5,23 +5,23 @@ yr-author-link {
 .yr-author-link-inner {
   display: inline-flex;
   align-items: center;
-  gap: 0.3rem;
-  color: var(--charcoal);
-  font-family: var(--font-body);
+  gap: var(--yr-space-1);
+  color: var(--yr-text);
+  font-family: var(--yr-font-body);
 }
-a.yr-author-link-inner:hover { color: var(--navy); text-decoration: none; }
+a.yr-author-link-inner:hover { color: var(--yr-accent); text-decoration: none; }
 
 yr-author-link[size="lg"] .yr-author-link-inner {
   align-items: flex-start;
-  gap: 1.25rem;
+  gap: var(--yr-space-6);
 }
 
 .yr-author-link-name { color: inherit; }
 
 yr-author-link[size="lg"] .yr-author-link-name {
   display: block;
-  font-family: var(--font-display);
-  font-size: 2.25rem;
+  font-family: var(--yr-font-display);
+  font-size: var(--yr-font-size-2xl);
   font-weight: 700;
   margin: 0;
 }
@@ -29,12 +29,12 @@ yr-author-link[size="lg"] .yr-author-link-name {
 .yr-author-link-name-row {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: var(--yr-space-2);
 }
 
 .yr-author-link-handle {
-  color: var(--slate);
-  margin: 0.125rem 0 0;
+  color: var(--yr-text-muted);
+  margin: 2px 0 0;
 }
 
-.yr-author-link-badge { color: var(--navy); display: inline-flex; }
+.yr-author-link-badge { color: var(--yr-accent); display: inline-flex; }

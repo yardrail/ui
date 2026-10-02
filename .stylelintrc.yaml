@@ -1,7 +1,15 @@
-# Lints hand-written CSS in src/ for real hygiene issues (duplicate/conflicting
-# selectors, deprecated syntax, invalid values) without demanding a wholesale
-# reformat of its existing style. Run via `task lint:css`.
+# Lints hand-written CSS in src/ and the gallery's stylesheet for real hygiene
+# issues (duplicate/conflicting selectors, deprecated syntax, invalid values)
+# without demanding a wholesale reformat of its existing style, and holds
+# colour, spacing, text size and radius to the tokens in src/tokens.css. Run
+# via `task lint:css`.
 extends: stylelint-config-standard
+
+# src/tokens.css defines every --yr-* custom property. Registering it as a
+# reference lets no-unknown-custom-properties resolve var() usages in the other
+# stylesheets, which never import it themselves.
+referenceFiles:
+  - files: [src/tokens.css]
 
 rules:
   # Components pack single-line rules (`.yr-x { gap: 4px; padding: 0; }`) and
@@ -21,3 +29,49 @@ rules:
   # (.yr-field--invalid input after .yr-field input:focus), which this rule
   # reports as descending specificity.
   no-descending-specificity: null
+
+  # A var() must name a property that src/tokens.css (or the file itself)
+  # defines; a retired or misspelt name otherwise resolves to nothing at
+  # runtime without any error.
+  no-unknown-custom-properties: true
+
+  # no-unknown-custom-properties skips any var() that carries a fallback, so a
+  # fallback would hide an unknown name. Tokens are always defined; none is
+  # needed.
+  declaration-property-value-disallowed-list:
+    "/.+/": ["/var\\([^)]*,/"]
+
+  # Spacing, text size and radius come from the token scales. Every
+  # space-separated part of these properties' values must be a var() or one of
+  # the literals that have no token: 0, auto, inherit, 50%, an em value, a
+  # calc(), or a hairline/optical nudge under 3px written in px (1px, -2px).
+  # Rem values and px from 3 up are rejected.
+  declaration-property-value-allowed-list: &sizes
+    "/^(row-|column-)?gap$/": &tokens
+      - "/^(?:(?:0|auto|inherit|50%|-?(?:\\d+|\\d*\\.\\d+)em|-?(?:[0-2]|[0-2]?\\.\\d+)px|var\\(--[a-z0-9-]+\\)|calc\\((?:[^()]|\\((?:[^()]|\\([^()]*\\))*\\))*\\))(?:\\s+|$))+$/"
+    "/^(padding|margin)(-(top|right|bottom|left|block|inline)(-(start|end))?)?$/": *tokens
+    font-size: *tokens
+    "/^border-([a-z]+-)*radius$/": *tokens
+
+# Stylelint replaces a rule's whole value in an override, so each one below
+# merges the base list (<<) and adds one key; a declaration passes when any
+# key matching its property allows the value.
+overrides:
+  # The search input's left padding clears the absolutely positioned icon
+  # (2.5rem, 2.75rem in --hero), which no spacing step equals. Only the fourth
+  # value of the padding shorthand may be one of those two.
+  - files: [src/search/yr-search.css]
+    rules:
+      declaration-property-value-allowed-list:
+        <<: *sizes
+        padding:
+          - "/^(?:(?:0|auto|inherit|50%|-?(?:\\d+|\\d*\\.\\d+)em|-?(?:[0-2]|[0-2]?\\.\\d+)px|var\\(--[a-z0-9-]+\\)|calc\\((?:[^()]|\\((?:[^()]|\\([^()]*\\))*\\))*\\))\\s+){3}(?:2\\.5rem|2\\.75rem)$/"
+
+  # The connector initials are two labels under 11px, below the smallest
+  # text-size token.
+  - files: [src/connector-pill/*.css]
+    rules:
+      declaration-property-value-allowed-list:
+        <<: *sizes
+        font-size:
+          - "/^(?:(?:0\\.5625rem|0\\.5rem|0|auto|inherit|50%|-?(?:\\d+|\\d*\\.\\d+)em|-?(?:[0-2]|[0-2]?\\.\\d+)px|var\\(--[a-z0-9-]+\\)|calc\\((?:[^()]|\\((?:[^()]|\\([^()]*\\))*\\))*\\))(?:\\s+|$))+$/"

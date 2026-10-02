@@ -2,30 +2,30 @@
    yr-rating + author name + body text. Replaces depot's .review-card. */
 
 .yr-review-card {
-  background: var(--cream-surface);
-  border: 1px solid var(--wood);
-  border-radius: 8px;
-  padding: 1rem 1.25rem;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-4) var(--yr-space-6);
 }
 
 .yr-review-card-header {
   display: flex;
   align-items: center;
-  gap: 0.625rem;
-  margin-bottom: 0.5rem;
+  gap: var(--yr-space-3);
+  margin-bottom: var(--yr-space-2);
 }
 
 .yr-review-card-author {
-  font-family: var(--font-body);
+  font-family: var(--yr-font-body);
   font-weight: 600;
-  font-size: 0.875rem;
-  color: var(--charcoal);
+  font-size: var(--yr-font-size-md);
+  color: var(--yr-text);
 }
 
 .yr-review-card-body {
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  color: var(--slate);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
+  color: var(--yr-text-muted);
   line-height: 1.6;
   margin: 0;
 }

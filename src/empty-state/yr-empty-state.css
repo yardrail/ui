@@ -1,14 +1,14 @@
 yr-empty-state {
   display: block;
-  padding: 4rem 0;
+  padding: var(--yr-space-16) 0;
   text-align: center;
-  color: var(--slate-light);
-  font-family: var(--font-body);
-  font-size: 0.875rem;
+  color: var(--yr-text-subtle);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
 }
 
 yr-empty-state [slot="icon"] {
   display: block;
-  margin: 0 auto 1rem;
+  margin: 0 auto var(--yr-space-4);
   opacity: 0.4;
 }

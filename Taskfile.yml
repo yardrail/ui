@@ -31,9 +31,9 @@ tasks:
       - golangci-lint run --fix --max-same-issues 50 ./...
 
   lint:css:
-    desc: Lint hand-written CSS in src/
+    desc: Lint hand-written CSS in src/ and the gallery's stylesheet
     deps: [install]
-    cmd: pnpm exec stylelint "src/**/*.css"
+    cmd: pnpm exec stylelint "src/**/*.css" "cmd/gallery/gallery.css"
 
   gallery:
     desc: Serve every component example on :6007 with live reload via air

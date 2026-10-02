@@ -24,14 +24,13 @@ func iconBadgeExamples() []Example {
 	return []Example{
 		{Name: "tones", Component: templ.Raw(
 			`<div style="display:flex;flex-wrap:wrap;gap:1rem">` +
-				iconBadgeItem("navy", "pencil") +
+				iconBadgeItem("accent", "pencil") +
 				iconBadgeItem("amber", "mail") +
 				iconBadgeItem("blue", "star") +
 				iconBadgeItem("green", "check-circle") +
 				iconBadgeItem("purple", "shield") +
 				iconBadgeItem("pink", "user") +
-				iconBadgeItem("red", "zap") +
-				iconBadgeItem("slate", "settings") +
+				iconBadgeItem("danger", "zap") +
 				`</div>`,
 		)},
 	}

@@ -6,17 +6,17 @@ yr-avatar {
   width: 26px;
   height: 26px;
   border-radius: 50%;
-  background: var(--navy);
-  color: var(--cream);
-  font-family: var(--font-body);
-  font-size: 0.6875rem;
+  background: var(--yr-accent);
+  color: var(--yr-on-accent);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-xs);
   font-weight: 600;
 }
 
 yr-avatar[size="lg"] {
   width: 48px;
   height: 48px;
-  font-size: 1.0625rem;
+  font-size: var(--yr-font-size-lg);
 }
 
 yr-avatar img {
