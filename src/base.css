@@ -29,6 +29,15 @@ a:hover {
   text-decoration: underline;
 }
 
+/* A disabled link: an <a> has no disabled attribute, so aria-disabled="true"
+   marks it and this stops it responding to the pointer. Pair it with
+   tabindex="-1" to take it out of the tab order. Behaviour only; the
+   consumer styles how it looks. */
+a[aria-disabled="true"] {
+  pointer-events: none;
+  cursor: default;
+}
+
 code,
 .mono {
   font-family: var(--yr-font-mono);
