@@ -1,6 +1,6 @@
 /* .yr-icon-badge — CSS-only circular icon container, applied to a native
    <div>. Replaces depot's .mkt-cat-icon and marketing's value-prop icon
-   circles. Reuses the same `tone` palette as yr-badge instead of the
+   circles. Reuses the same `tone` palette as yr-pill instead of the
    original --teal/--terracotta/--olive names. */
 
 .yr-icon-badge {

@@ -1,5 +1,5 @@
 import { build, context } from 'esbuild';
-import { readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
+import { copyFile, readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 
 const jsOpts = {
   entryPoints: ['src/index.ts'],
@@ -34,6 +34,8 @@ async function copyIcons() {
     await writeFile(`${dest}/${f}`, clean);
     count++;
   }
+  // The per-file license comments are stripped above, so ship the license once.
+  await copyFile('node_modules/lucide-static/LICENSE', `${dest}/LICENSE`);
   console.log(`  dist/icons/   ${count} SVGs`);
 }
 
