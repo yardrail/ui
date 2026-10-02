@@ -19,7 +19,9 @@ var sections = []section{
 		{Slug: "page-shell", Name: "Page Shell", Components: []string{
 			"workspace",
 		}},
-		{Slug: "regions", Name: "Regions", Components: []string{
+		{Slug: "regions", Name: "Regions", ContextSlot: map[string]string{
+			"navbar": "nav", "sidebar": "sidebar", "drawer": "drawer",
+		}, Components: []string{
 			"navbar", "sidebar", "drawer",
 		}},
 	}},
@@ -54,9 +56,10 @@ type section struct {
 }
 
 type category struct {
-	Slug       string
-	Name       string
-	Components []string
+	Slug        string
+	Name        string
+	ContextSlot map[string]string // component name → shell slot ("nav","sidebar","drawer")
+	Components  []string
 }
 
 // indexSection is the template data for one top-level sidebar group.
@@ -74,8 +77,9 @@ type indexCategory struct {
 
 // indexComponent is the template data for one component within a category.
 type indexComponent struct {
-	Name     string
-	Examples []indexExample
+	Name       string
+	HasContext bool
+	Examples   []indexExample
 }
 
 // indexExample is one named example of a component.
@@ -116,25 +120,31 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 </aside>
 <main class="main">
   <h1>{{.Active.Name}}</h1>
-  {{range .Active.Components}}<div class="component">
+  {{range .Active.Components}}<div class="component"{{if .HasContext}} data-has-context{{end}}>
   <h3>{{.Name}}</h3>
-  {{if .Examples}}{{if gt (len .Examples) 1}}<div class="example-chips">
+  {{if .Examples}}<div class="example-toolbar">
+  {{if gt (len .Examples) 1}}<div class="example-chips">
     {{$comp := .Name}}{{range $i, $ex := .Examples}}<a class="example-chip{{if eq $i 0}} active{{end}}"
       data-component="{{$comp}}" data-example="{{$ex.Name}}"
       href="/{{$comp}}/{{$ex.Name}}">{{$ex.Name}}</a>
     {{end}}
+  </div>{{end}}
+  {{if .HasContext}}<div class="view-toggle">
+    <button class="view-toggle-btn" data-view="isolated">Isolated</button>
+    <button class="view-toggle-btn active" data-view="in-shell">In Shell</button>
+  </div>{{end}}
   </div>
-  {{end}}<div class="browser-frame">
+  <div class="browser-frame">
     <div class="browser-chrome">
       <div class="browser-dots">
         <span class="browser-dot red"></span>
         <span class="browser-dot yellow"></span>
         <span class="browser-dot green"></span>
       </div>
-      <span class="browser-url">/{{.Name}}/{{(index .Examples 0).Name}}</span>
+      <span class="browser-url">/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}</span>
     </div>
     <div class="browser-body">
-      <iframe src="/{{.Name}}/{{(index .Examples 0).Name}}"></iframe>
+      <iframe src="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}"></iframe>
     </div>
   </div>
   {{else}}<div class="no-examples">no examples yet</div>
@@ -142,20 +152,37 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
   {{end}}
 </main>
 <script>
-document.addEventListener('click', function(e) {
-  var chip = e.target.closest('.example-chip');
-  if (!chip) return;
-  e.preventDefault();
-  var component = chip.dataset.component;
-  var example = chip.dataset.example;
-  var frame = chip.closest('.component').querySelector('.browser-frame');
-  var url = '/' + component + '/' + example;
-  chip.closest('.example-chips').querySelectorAll('.example-chip').forEach(function(c) {
-    c.classList.remove('active');
-  });
-  chip.classList.add('active');
+function updateFrame(component) {
+  var chips = component.querySelector('.example-chips');
+  var activeChip = chips ? chips.querySelector('.example-chip.active') : null;
+  var compName = component.querySelector('h3').textContent;
+  var exName = activeChip ? activeChip.dataset.example : component.querySelector('iframe').src.split('/').pop().split('?')[0];
+  var url = '/' + compName + '/' + exName;
+  var toggle = component.querySelector('.view-toggle-btn.active');
+  if (toggle && toggle.dataset.view === 'in-shell') url += '?ctx=1';
+  var frame = component.querySelector('.browser-frame');
   frame.querySelector('.browser-url').textContent = url;
   frame.querySelector('iframe').src = url;
+}
+document.addEventListener('click', function(e) {
+  var chip = e.target.closest('.example-chip');
+  if (chip) {
+    e.preventDefault();
+    chip.closest('.example-chips').querySelectorAll('.example-chip').forEach(function(c) {
+      c.classList.remove('active');
+    });
+    chip.classList.add('active');
+    updateFrame(chip.closest('.component'));
+    return;
+  }
+  var toggle = e.target.closest('.view-toggle-btn');
+  if (toggle) {
+    toggle.closest('.view-toggle').querySelectorAll('.view-toggle-btn').forEach(function(b) {
+      b.classList.remove('active');
+    });
+    toggle.classList.add('active');
+    updateFrame(toggle.closest('.component'));
+  }
 });
 </script>
 </body>
@@ -177,6 +204,61 @@ var exampleTemplate = template.Must(template.New("example").Parse(`<!doctype htm
 </html>
 `))
 
+// contextTemplate wraps one rendered region example inside a workspace page shell.
+var contextTemplate = template.Must(template.New("context").Parse(`<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>{{.Component}}/{{.Name}} (in shell) · ui gallery</title>
+<link rel="stylesheet" href="/ui.css">
+<script type="module" src="/ui.js"></script>
+<style>
+html, body { margin: 0; height: 100%; overflow: hidden; }
+.demo-region {
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--yr-font-mono); font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+}
+.ctx-shell {
+  display: grid;
+  grid-template-rows: 52px 1fr;
+  grid-template-columns: var(--yr-sidebar-width) 1fr;
+  height: 100vh;
+}
+.ctx-shell > .yr-nav-shell {
+  grid-column: 1 / -1;
+}
+.ctx-shell > .yr-sidebar {
+  position: static !important;
+  width: auto !important;
+  height: 100% !important;
+  grid-row: 2;
+  grid-column: 1;
+}
+.ctx-shell > .yr-content {
+  margin-left: 0 !important;
+  height: 100% !important;
+  grid-row: 2;
+  grid-column: 2;
+}
+.ctx-shell .yr-drawer {
+  height: auto !important;
+}
+</style>
+</head>
+<body>
+<div class="yr-sidebar-expanded ctx-shell">
+  {{if eq .Slot "nav"}}{{.HTML}}{{else}}<nav class="yr-nav-shell"><div class="demo-region" style="width:100%">nav</div></nav>{{end}}
+  {{if eq .Slot "sidebar"}}{{.HTML}}{{else}}<aside class="yr-sidebar"><div class="demo-region" style="height:100%">sidebar</div></aside>{{end}}
+  <div class="yr-content">
+    <main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>
+    {{if eq .Slot "drawer"}}{{.HTML}}{{end}}
+  </div>
+</div>
+</body>
+</html>
+`))
+
 // examplePage is the data exampleTemplate renders.
 type examplePage struct {
 	Component string
@@ -184,11 +266,20 @@ type examplePage struct {
 	HTML      template.HTML
 }
 
+// contextPage is the data contextTemplate renders.
+type contextPage struct {
+	Component string
+	Name      string
+	Slot      string
+	HTML      template.HTML
+}
+
 // gallery serves the ui examples and the library CSS.
 type gallery struct {
-	examples map[string]templ.Component
-	sections []indexSection
-	assets   fs.FS
+	examples    map[string]templ.Component
+	contextSlot map[string]string // component name → shell slot
+	sections    []indexSection
+	assets      fs.FS
 }
 
 // newHandler returns the gallery handler, serving ui.css from assets as /ui.css and the
@@ -202,9 +293,10 @@ func newHandler(assets fs.FS) http.Handler {
 	}
 
 	g := &gallery{
-		examples: make(map[string]templ.Component),
-		sections: make([]indexSection, len(sections)),
-		assets:   assets,
+		examples:    make(map[string]templ.Component),
+		contextSlot: make(map[string]string),
+		sections:    make([]indexSection, len(sections)),
+		assets:      assets,
 	}
 
 	for i, sec := range sections {
@@ -214,7 +306,12 @@ func newHandler(assets fs.FS) http.Handler {
 			ic := indexCategory{Slug: cat.Slug, Name: cat.Name, Components: make([]indexComponent, len(cat.Components))}
 
 			for k, comp := range cat.Components {
-				ic.Components[k] = indexComponent{Name: comp, Examples: nil}
+				_, hasCtx := cat.ContextSlot[comp]
+				ic.Components[k] = indexComponent{Name: comp, HasContext: hasCtx, Examples: nil}
+
+				if slot, ok := cat.ContextSlot[comp]; ok {
+					g.contextSlot[comp] = slot
+				}
 
 				if exs, ok := byComponent[comp]; ok {
 					for _, ex := range exs {
@@ -305,7 +402,15 @@ func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 	}
 
 	//nolint:gosec // The markup is the ui package's own escaped render output.
-	g.write(w, exampleTemplate, examplePage{Component: component, Name: name, HTML: template.HTML(buf.String())})
+	html := template.HTML(buf.String())
+
+	if slot, ok := g.contextSlot[component]; ok && r.URL.Query().Get("ctx") == "1" {
+		g.write(w, contextTemplate, contextPage{Component: component, Name: name, Slot: slot, HTML: html})
+
+		return
+	}
+
+	g.write(w, exampleTemplate, examplePage{Component: component, Name: name, HTML: html})
 }
 
 // write executes t with data into a buffer, so a template error becomes a 500 instead of a

@@ -1511,7 +1511,7 @@ yr-author-link[size=lg] .yr-author-link-name {
 /* src/content/yr-content.css */
 .yr-content {
   margin-left: var(--yr-sidebar-width);
-  min-height: calc(100vh - 52px);
+  height: calc(100vh - 52px);
   display: flex;
   transition: margin-left 0.2s ease;
 }

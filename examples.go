@@ -60,6 +60,9 @@ func ExampleGroups() []ExampleGroup {
 		{Component: "tabs", Examples: tabsExamples()},
 		{Component: "template-card", Examples: templateCardExamples()},
 		{Component: "workspace", Examples: workspaceExamples()},
+		{Component: "navbar", Examples: navbarExamples()},
+		{Component: "sidebar", Examples: sidebarExamples()},
+		{Component: "drawer", Examples: drawerExamples()},
 	}
 }
 
