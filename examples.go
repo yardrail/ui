@@ -59,7 +59,7 @@ func ExampleGroups() []ExampleGroup {
 		{Component: "settings-section", Examples: settingsSectionExamples()},
 		{Component: "tabs", Examples: tabsExamples()},
 		{Component: "template-card", Examples: templateCardExamples()},
-		{Component: "workspace", Examples: workspaceExamples()},
+		{Component: "page-workspace", Examples: workspaceExamples()},
 		{Component: "navbar", Examples: navbarExamples()},
 		{Component: "sidebar", Examples: sidebarExamples()},
 		{Component: "drawer", Examples: drawerExamples()},

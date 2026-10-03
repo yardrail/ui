@@ -581,7 +581,10 @@ customElements.define("yr-drawer-close", YrDrawerClose);
 // src/content/yr-content.ts
 var YrContent = class extends HTMLElement {
 };
+var YrContentMain = class extends HTMLElement {
+};
 customElements.define("yr-content", YrContent);
+customElements.define("yr-content-main", YrContentMain);
 
 // src/resize-handle/yr-resize-handle.ts
 var YrResizeHandle = class extends HTMLElement {
@@ -640,4 +643,12 @@ var YrResizeHandle = class extends HTMLElement {
   }
 };
 customElements.define("yr-resize-handle", YrResizeHandle);
+
+// src/page-workspace/yr-page-workspace.ts
+var YrPageWorkspace = class extends HTMLElement {
+  connectedCallback() {
+    this.setAttribute("role", "main");
+  }
+};
+customElements.define("yr-page-workspace", YrPageWorkspace);
 //# sourceMappingURL=ui.js.map

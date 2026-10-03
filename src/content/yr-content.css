@@ -13,7 +13,8 @@ yr-sidebar[collapsed] ~ yr-content {
   margin-left: var(--yr-sidebar-width-collapsed);
 }
 
-.yr-content-main {
+yr-content-main {
+  display: block;
   flex: 1;
   min-width: 0;
   padding: var(--yr-space-8) var(--yr-space-12);

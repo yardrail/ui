@@ -17,7 +17,7 @@ import (
 var sections = []section{
 	{Name: "Structure", Categories: []category{
 		{Slug: "page-shell", Name: "Page Shell", ContextSlot: nil, Components: []string{
-			"workspace",
+			"page-workspace",
 		}},
 		{Slug: "regions", Name: "Regions", ContextSlot: map[string]string{
 			"navbar": "nav", "sidebar": "sidebar", "drawer": "drawer",
@@ -220,54 +220,31 @@ html, body { margin: 0; height: 100%; overflow: hidden; }
   font-family: var(--yr-font-mono); font-size: var(--yr-font-size-xs);
   color: var(--yr-text-disabled);
 }
-.ctx-shell {
-  display: grid;
-  grid-template-rows: 52px 1fr;
-  grid-template-columns: var(--yr-sidebar-width) 5px 1fr;
-  height: 100vh;
-}
-.ctx-shell > yr-nav-shell {
-  grid-column: 1 / -1;
-}
-.ctx-shell > yr-sidebar {
-  position: static !important;
-  width: auto !important;
-  height: 100% !important;
-  grid-row: 2;
-  grid-column: 1;
-}
-.ctx-shell > yr-resize-handle[target="sidebar"] {
-  position: relative !important;
-  top: 0 !important;
-  left: auto !important;
-  grid-row: 2;
-  grid-column: 2;
-  height: 100%;
-}
-.ctx-shell > yr-content {
-  margin-left: 0 !important;
-  height: 100% !important;
-  grid-row: 2;
-}
-.ctx-shell yr-drawer {
-  height: auto !important;
-}
 </style>
 </head>
 <body>
-<div class="ctx-shell">
+<yr-page-workspace>
   {{if eq .Slot "nav"}}{{.HTML}}{{else -}}
-  <yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>
+  <yr-nav-shell>
+    <div class="demo-region" style="width:100%">nav</div>
+  </yr-nav-shell>
   {{- end}}
   {{if eq .Slot "sidebar"}}{{.HTML}}{{else -}}
-  <yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>
+  <yr-sidebar>
+    <div class="demo-region" style="height:100%">sidebar</div>
+  </yr-sidebar>
   {{- end}}
   <yr-resize-handle target="sidebar"></yr-resize-handle>
   <yr-content>
-    <main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>
-    {{if eq .Slot "drawer"}}<yr-resize-handle target="drawer"></yr-resize-handle>{{.HTML}}{{end}}
+    <yr-content-main>
+      <div class="demo-region" style="height:100%">main</div>
+    </yr-content-main>
+    {{if eq .Slot "drawer" -}}
+    <yr-resize-handle target="drawer"></yr-resize-handle>
+    {{.HTML}}
+    {{- end}}
   </yr-content>
-</div>
+</yr-page-workspace>
 </body>
 </html>
 `))

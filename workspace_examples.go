@@ -4,44 +4,65 @@ import "github.com/a-h/templ"
 
 const workspaceBase = `<style>html,body{margin:0;height:100%}` +
 	`.demo-region{display:flex;align-items:center;justify-content:center;` +
-	`font-family:var(--font-mono);font-size:0.8rem;color:var(--slate-light)}</style>`
+	`font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);` +
+	`color:var(--yr-text-subtle)}</style>`
 
 func workspaceExamples() []Example {
 	return []Example{
 		{Name: "expanded", Component: templ.Raw(
 			workspaceBase +
-				`<div style="height:100vh">` +
-				`<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>` +
-				`<yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>` +
+				`<yr-page-workspace>` +
+				`<yr-nav-shell>` +
+				`<div class="demo-region" style="width:100%">nav</div>` +
+				`</yr-nav-shell>` +
+				`<yr-sidebar>` +
+				`<div class="demo-region" style="height:100%">sidebar</div>` +
+				`</yr-sidebar>` +
 				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
 				`<yr-content>` +
-				`<main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>` +
+				`<yr-content-main>` +
+				`<div class="demo-region" style="height:100%">main</div>` +
+				`</yr-content-main>` +
 				`</yr-content>` +
-				`</div>`,
+				`</yr-page-workspace>`,
 		)},
 		{Name: "with-drawer", Component: templ.Raw(
 			workspaceBase +
-				`<div style="height:100vh">` +
-				`<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>` +
-				`<yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>` +
+				`<yr-page-workspace>` +
+				`<yr-nav-shell>` +
+				`<div class="demo-region" style="width:100%">nav</div>` +
+				`</yr-nav-shell>` +
+				`<yr-sidebar>` +
+				`<div class="demo-region" style="height:100%">sidebar</div>` +
+				`</yr-sidebar>` +
 				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
 				`<yr-content>` +
-				`<main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>` +
+				`<yr-content-main>` +
+				`<div class="demo-region" style="height:100%">main</div>` +
+				`</yr-content-main>` +
 				`<yr-resize-handle target="drawer"></yr-resize-handle>` +
-				`<yr-drawer open><div class="demo-region" style="height:100%">drawer</div></yr-drawer>` +
+				`<yr-drawer open>` +
+				`<div class="demo-region" style="height:100%">drawer</div>` +
+				`</yr-drawer>` +
 				`</yr-content>` +
-				`</div>`,
+				`</yr-page-workspace>`,
 		)},
 		{Name: "collapsed", Component: templ.Raw(
 			workspaceBase +
-				`<div style="height:100vh">` +
-				`<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>` +
-				`<yr-sidebar collapsed><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>` +
+				`<yr-page-workspace>` +
+				`<yr-nav-shell>` +
+				`<div class="demo-region" style="width:100%">nav</div>` +
+				`</yr-nav-shell>` +
+				`<yr-sidebar collapsed>` +
+				`<div class="demo-region" style="height:100%">sidebar</div>` +
+				`</yr-sidebar>` +
 				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
 				`<yr-content>` +
-				`<main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>` +
+				`<yr-content-main>` +
+				`<div class="demo-region" style="height:100%">main</div>` +
+				`</yr-content-main>` +
 				`</yr-content>` +
-				`</div>`,
+				`</yr-page-workspace>`,
 		)},
 	}
 }

@@ -16,3 +16,4 @@ import './sidebar/yr-sidebar';
 import './drawer/yr-drawer';
 import './content/yr-content';
 import './resize-handle/yr-resize-handle';
+import './page-workspace/yr-page-workspace';
