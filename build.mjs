@@ -17,7 +17,23 @@ const cssOpts = {
   outfile: 'dist/ui.css',
   sourcemap: true,
   logLevel: 'info',
+  external: ['/fonts/*'],
 };
+
+// Copy vendored font files into dist/fonts/ so ui.css can reference them.
+async function copyFonts() {
+  const src = 'src/fonts';
+  const dest = 'dist/fonts';
+  await mkdir(dest, { recursive: true });
+  const files = await readdir(src);
+  let count = 0;
+  for (const f of files) {
+    if (!f.endsWith('.woff2')) continue;
+    await copyFile(`${src}/${f}`, `${dest}/${f}`);
+    count++;
+  }
+  console.log(`  dist/fonts/   ${count} woff2`);
+}
 
 // Copy Lucide SVG icons into dist/icons/ so Go can embed them.
 async function copyIcons() {
@@ -48,5 +64,6 @@ if (process.argv.includes('--watch')) {
 } else {
   await build(jsOpts);
   await build(cssOpts);
+  await copyFonts();
   await copyIcons();
 }

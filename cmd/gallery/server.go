@@ -18,6 +18,8 @@ var sections = []section{
 	{Name: "Structure", Categories: []category{
 		{Slug: "page-shell", Name: "Page Shell", ContextSlot: nil, Components: []string{
 			"page-workspace",
+			"page-auth",
+			"page-setup",
 		}},
 		{Slug: "regions", Name: "Regions", ContextSlot: map[string]string{
 			"navbar": "nav", "sidebar": "sidebar", "drawer": "drawer",
@@ -39,7 +41,7 @@ var sections = []section{
 			"table", "row-edit", "list-row", "activity-row", "meta-row",
 		}},
 		{Slug: "cards", Name: "Cards", ContextSlot: nil, Components: []string{
-			"card", "action-card", "auth-card", "review-card", "template-card", "create-panel", "settings-section",
+			"card", "action-card", "auth-card", "setup-card", "review-card", "template-card", "create-panel", "settings-section",
 		}},
 		{Slug: "feedback", Name: "Feedback", ContextSlot: nil, Components: []string{
 			"alert", "empty-state",
@@ -322,6 +324,7 @@ func newHandler(assets fs.FS) http.Handler {
 	mux.HandleFunc("GET /ui.css", g.css)
 	mux.HandleFunc("GET /gallery.css", g.galleryStyles)
 	mux.HandleFunc("GET /ui.js", g.js)
+	mux.HandleFunc("GET /fonts/{file}", g.font)
 	mux.HandleFunc("GET /{component}/{name}", g.example)
 
 	return mux
@@ -368,6 +371,11 @@ func (*gallery) galleryStyles(w http.ResponseWriter, r *http.Request) {
 // js serves the library JS bundle.
 func (g *gallery) js(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, g.assets, "ui.js")
+}
+
+// font serves vendored woff2 font files.
+func (g *gallery) font(w http.ResponseWriter, r *http.Request) {
+	http.ServeFileFS(w, r, g.assets, "fonts/"+r.PathValue("file"))
 }
 
 // example renders one example inside a page, or 404s for an unknown component or name.

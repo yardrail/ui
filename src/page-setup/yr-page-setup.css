@@ -1,0 +1,17 @@
+yr-page-setup {
+  display: grid;
+  grid-template-rows: 52px 1fr;
+  min-height: 100vh;
+}
+
+yr-page-setup > yr-nav-shell {
+  grid-row: 1;
+}
+
+yr-page-setup > yr-page-setup-content {
+  grid-row: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--yr-space-4);
+}

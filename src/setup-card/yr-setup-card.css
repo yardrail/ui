@@ -1,0 +1,84 @@
+yr-setup-card {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 720px;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-8);
+  gap: var(--yr-space-6);
+}
+
+yr-setup-card-progress {
+  display: flex;
+  justify-content: center;
+  gap: var(--yr-space-2);
+}
+
+.yr-setup-card-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--yr-radius-full);
+  background: var(--yr-border);
+  transition: background 0.2s ease, width 0.2s ease;
+}
+
+.yr-setup-card-dot--active {
+  width: 24px;
+  border-radius: var(--yr-radius-sm);
+  background: var(--yr-accent);
+}
+
+.yr-setup-card-dot--done {
+  background: var(--yr-accent-subtle);
+}
+
+yr-setup-card-header {
+  display: block;
+  text-align: center;
+}
+
+.yr-setup-card-title {
+  font-family: var(--yr-font-display);
+  font-size: var(--yr-font-size-xl);
+  font-weight: 600;
+  color: var(--yr-text);
+  margin: 0 0 var(--yr-space-2);
+}
+
+.yr-setup-card-subtitle {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+  margin: 0;
+  line-height: 1.5;
+}
+
+yr-setup-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-4);
+}
+
+yr-setup-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: var(--yr-space-2);
+}
+
+.yr-setup-card-back {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+  text-decoration: none;
+  cursor: pointer;
+  background: none;
+  border: none;
+  padding: 0;
+}
+
+.yr-setup-card-back:hover {
+  color: var(--yr-text);
+}

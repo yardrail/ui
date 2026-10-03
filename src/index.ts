@@ -17,3 +17,6 @@ import './drawer/yr-drawer';
 import './content/yr-content';
 import './resize-handle/yr-resize-handle';
 import './page-workspace/yr-page-workspace';
+import './page-auth/yr-page-auth';
+import './page-setup/yr-page-setup';
+import './setup-card/yr-setup-card';

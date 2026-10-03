@@ -651,4 +651,59 @@ var YrPageWorkspace = class extends HTMLElement {
   }
 };
 customElements.define("yr-page-workspace", YrPageWorkspace);
+
+// src/page-auth/yr-page-auth.ts
+var YrPageAuth = class extends HTMLElement {
+  connectedCallback() {
+    this.setAttribute("role", "main");
+  }
+};
+customElements.define("yr-page-auth", YrPageAuth);
+
+// src/page-setup/yr-page-setup.ts
+var YrPageSetup = class extends HTMLElement {
+  connectedCallback() {
+    this.setAttribute("role", "main");
+  }
+};
+var YrPageSetupContent = class extends HTMLElement {
+};
+customElements.define("yr-page-setup", YrPageSetup);
+customElements.define("yr-page-setup-content", YrPageSetupContent);
+
+// src/setup-card/yr-setup-card.ts
+var YrSetupCard = class extends HTMLElement {
+};
+var YrSetupCardProgress = class extends HTMLElement {
+  static observedAttributes = ["steps", "current"];
+  connectedCallback() {
+    this.render();
+  }
+  attributeChangedCallback() {
+    this.render();
+  }
+  render() {
+    const steps = parseInt(this.getAttribute("steps") || "0", 10);
+    const current = parseInt(this.getAttribute("current") || "1", 10);
+    this.innerHTML = "";
+    for (let i = 1; i <= steps; i++) {
+      const dot = document.createElement("span");
+      dot.className = "yr-setup-card-dot";
+      if (i < current) dot.classList.add("yr-setup-card-dot--done");
+      if (i === current) dot.classList.add("yr-setup-card-dot--active");
+      this.appendChild(dot);
+    }
+  }
+};
+var YrSetupCardHeader = class extends HTMLElement {
+};
+var YrSetupCardBody = class extends HTMLElement {
+};
+var YrSetupCardFooter = class extends HTMLElement {
+};
+customElements.define("yr-setup-card", YrSetupCard);
+customElements.define("yr-setup-card-progress", YrSetupCardProgress);
+customElements.define("yr-setup-card-header", YrSetupCardHeader);
+customElements.define("yr-setup-card-body", YrSetupCardBody);
+customElements.define("yr-setup-card-footer", YrSetupCardFooter);
 //# sourceMappingURL=ui.js.map

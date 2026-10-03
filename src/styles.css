@@ -1,3 +1,4 @@
+@import "./fonts.css";
 @import "./tokens.css";
 @import "./base.css";
 @import "./button/yr-button.css";
@@ -36,3 +37,6 @@
 @import "./content/yr-content.css";
 @import "./resize-handle/yr-resize-handle.css";
 @import "./page-workspace/yr-page-workspace.css";
+@import "./page-auth/yr-page-auth.css";
+@import "./page-setup/yr-page-setup.css";
+@import "./setup-card/yr-setup-card.css";
