@@ -1466,6 +1466,16 @@ yr-sidebar-link[active] {
   border-left-color: var(--yr-accent);
   background: var(--yr-accent-subtle);
 }
+yr-sidebar[collapsed] yr-sidebar-link {
+  font-size: 0;
+  gap: 0;
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+yr-sidebar[collapsed] yr-sidebar-link svg {
+  font-size: var(--yr-font-size-sm);
+}
 yr-sidebar-footer {
   display: block;
   border-top: 1px solid var(--yr-border);
@@ -1603,13 +1613,14 @@ yr-page-workspace > yr-nav-shell {
   grid-column: 1 / -1;
 }
 yr-page-workspace > yr-sidebar {
-  position: static;
-  width: auto;
-  height: 100%;
+  position: static !important;
+  width: auto !important;
+  height: 100% !important;
   grid-row: 2;
   grid-column: 1;
 }
-yr-page-workspace > yr-sidebar[collapsed] {
+yr-page-workspace:has(> yr-sidebar[collapsed]) {
+  grid-template-columns: var(--yr-sidebar-width-collapsed) 5px 1fr;
 }
 yr-page-workspace > yr-resize-handle[target=sidebar] {
   position: relative;

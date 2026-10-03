@@ -65,6 +65,18 @@ yr-sidebar-link[active] {
   background: var(--yr-accent-subtle);
 }
 
+yr-sidebar[collapsed] yr-sidebar-link {
+  font-size: 0;
+  gap: 0;
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+yr-sidebar[collapsed] yr-sidebar-link svg {
+  font-size: var(--yr-font-size-sm);
+}
+
 yr-sidebar-footer {
   display: block;
   border-top: 1px solid var(--yr-border);
