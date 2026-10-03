@@ -1,15 +1,15 @@
-/* .yr-content — main content area that sits to the right of yr-sidebar.
+/* yr-content — main content area that sits to the right of yr-sidebar.
    Margin-left tracks the sidebar width so it stays clear of the fixed
    sidebar. Contains the main scrollable area and an optional yr-drawer. */
 
-.yr-content {
+yr-content {
+  display: flex;
   margin-left: var(--yr-sidebar-width);
   height: calc(100vh - 52px);
-  display: flex;
   transition: margin-left 0.2s ease;
 }
 
-.yr-sidebar-collapsed .yr-content {
+yr-sidebar[collapsed] ~ yr-content {
   margin-left: var(--yr-sidebar-width-collapsed);
 }
 

@@ -1,0 +1,52 @@
+yr-resize-handle {
+  position: relative;
+  cursor: col-resize;
+  z-index: 51;
+  user-select: none;
+}
+
+yr-resize-handle::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 1px;
+  background: transparent;
+  transition: background 0.15s;
+}
+
+yr-resize-handle:hover::after,
+yr-resize-handle[active]::after {
+  background: var(--yr-accent);
+}
+
+yr-resize-handle[target="sidebar"] {
+  position: fixed;
+  top: 52px;
+  bottom: 0;
+  width: 5px;
+  left: var(--yr-sidebar-width);
+}
+yr-resize-handle[target="sidebar"]::after {
+  left: 2px;
+}
+
+yr-sidebar[collapsed] ~ yr-resize-handle[target="sidebar"] {
+  left: var(--yr-sidebar-width-collapsed);
+}
+
+yr-resize-handle[target="drawer"] {
+  width: 5px;
+  flex-shrink: 0;
+  align-self: stretch;
+}
+yr-resize-handle[target="drawer"]::after {
+  right: 2px;
+}
+
+.yr-resizing yr-sidebar,
+.yr-resizing yr-content,
+.yr-resizing yr-drawer,
+.yr-resizing yr-resize-handle {
+  transition: none;
+}

@@ -1,28 +1,29 @@
-/* .yr-drawer — right-side panel inside yr-content. Pushes main content
+/* yr-drawer — right-side panel inside yr-content. Pushes main content
    narrower when open; both remain visible side-by-side. Width controlled
-   by --yr-drawer-width. Hidden by default; shown via .yr-drawer--open. */
+   by --yr-drawer-width. Hidden by default; shown via open attribute. */
 
 :root {
   --yr-drawer-width: 360px;
 }
 
-.yr-drawer {
-  width: 0;
-  min-width: 0;
-  overflow: hidden;
-  border-left: 0 solid var(--yr-border);
-  background: var(--yr-surface);
-  transition: width 0.2s ease, min-width 0.2s ease, border-left-width 0.2s ease;
-  flex-shrink: 0;
-}
-
-.yr-drawer--open {
+yr-drawer {
   width: var(--yr-drawer-width);
   min-width: var(--yr-drawer-width);
-  border-left-width: 1px;
+  overflow: hidden;
+  border-left: 1px solid var(--yr-border);
+  background: var(--yr-surface);
+  flex-shrink: 0;
+  transform: translateX(100%);
+  margin-right: calc(-1 * var(--yr-drawer-width));
+  transition: transform 0.2s ease, margin-right 0.2s ease;
 }
 
-.yr-drawer-header {
+yr-drawer[open] {
+  transform: translateX(0);
+  margin-right: 0;
+}
+
+yr-drawer-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -40,7 +41,23 @@
   margin: 0;
 }
 
-.yr-drawer-body {
+yr-drawer-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--yr-space-1);
+  border-radius: var(--yr-radius-sm);
+  color: var(--yr-text-muted);
+  cursor: pointer;
+}
+
+yr-drawer-close:hover {
+  color: var(--yr-text);
+  background: var(--yr-surface-muted);
+}
+
+yr-drawer-body {
+  display: block;
   padding: var(--yr-space-6);
   overflow-y: auto;
   height: 100%;

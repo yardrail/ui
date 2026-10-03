@@ -11,3 +11,8 @@ import './account-menu/yr-account-menu';
 import './live-duration/yr-live-duration';
 import './tabs/yr-tabs';
 import './author-link/yr-author-link';
+import './nav-shell/yr-nav-shell';
+import './sidebar/yr-sidebar';
+import './drawer/yr-drawer';
+import './content/yr-content';
+import './resize-handle/yr-resize-handle';

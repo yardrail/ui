@@ -222,38 +222,46 @@ html, body { margin: 0; height: 100%; overflow: hidden; }
 .ctx-shell {
   display: grid;
   grid-template-rows: 52px 1fr;
-  grid-template-columns: var(--yr-sidebar-width) 1fr;
+  grid-template-columns: var(--yr-sidebar-width) 5px 1fr;
   height: 100vh;
 }
-.ctx-shell > .yr-nav-shell {
+.ctx-shell > yr-nav-shell {
   grid-column: 1 / -1;
 }
-.ctx-shell > .yr-sidebar {
+.ctx-shell > yr-sidebar {
   position: static !important;
   width: auto !important;
   height: 100% !important;
   grid-row: 2;
   grid-column: 1;
 }
-.ctx-shell > .yr-content {
+.ctx-shell > yr-resize-handle[target="sidebar"] {
+  position: relative !important;
+  top: 0 !important;
+  left: auto !important;
+  grid-row: 2;
+  grid-column: 2;
+  height: 100%;
+}
+.ctx-shell > yr-content {
   margin-left: 0 !important;
   height: 100% !important;
   grid-row: 2;
-  grid-column: 2;
 }
-.ctx-shell .yr-drawer {
+.ctx-shell yr-drawer {
   height: auto !important;
 }
 </style>
 </head>
 <body>
-<div class="yr-sidebar-expanded ctx-shell">
-  {{if eq .Slot "nav"}}{{.HTML}}{{else}}<nav class="yr-nav-shell"><div class="demo-region" style="width:100%">nav</div></nav>{{end}}
-  {{if eq .Slot "sidebar"}}{{.HTML}}{{else}}<aside class="yr-sidebar"><div class="demo-region" style="height:100%">sidebar</div></aside>{{end}}
-  <div class="yr-content">
+<div class="ctx-shell">
+  {{if eq .Slot "nav"}}{{.HTML}}{{else}}<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>{{end}}
+  {{if eq .Slot "sidebar"}}{{.HTML}}{{else}}<yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>{{end}}
+  <yr-resize-handle target="sidebar"></yr-resize-handle>
+  <yr-content>
     <main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>
-    {{if eq .Slot "drawer"}}{{.HTML}}{{end}}
-  </div>
+    {{if eq .Slot "drawer"}}<yr-resize-handle target="drawer"></yr-resize-handle>{{.HTML}}{{end}}
+  </yr-content>
 </div>
 </body>
 </html>

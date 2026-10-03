@@ -454,4 +454,190 @@ var YrAuthorLink = class extends HTMLElement {
   }
 };
 customElements.define("yr-author-link", YrAuthorLink);
+
+// src/nav-shell/yr-nav-shell.ts
+var YrNavShell = class extends HTMLElement {
+  connectedCallback() {
+    this.setAttribute("role", "navigation");
+    this.restructure();
+  }
+  restructure() {
+    if (this.querySelector("yr-nav-shell-right")) return;
+    const left = this.querySelector('[slot="left"]');
+    const center = this.querySelector('[slot="center"]');
+    const leftWrapper = document.createElement("yr-nav-shell-left");
+    if (left) leftWrapper.appendChild(left);
+    const centerWrapper = document.createElement("yr-nav-shell-center");
+    if (center) centerWrapper.appendChild(center);
+    const rightWrapper = document.createElement("yr-nav-shell-right");
+    const remaining = Array.from(this.childNodes).filter(
+      (n) => n !== leftWrapper && n !== centerWrapper
+    );
+    for (const child of remaining) rightWrapper.appendChild(child);
+    this.replaceChildren(leftWrapper, centerWrapper, rightWrapper);
+  }
+};
+var YrNavShellLeft = class extends HTMLElement {
+};
+var YrNavShellCenter = class extends HTMLElement {
+};
+var YrNavShellRight = class extends HTMLElement {
+};
+customElements.define("yr-nav-shell", YrNavShell);
+customElements.define("yr-nav-shell-left", YrNavShellLeft);
+customElements.define("yr-nav-shell-center", YrNavShellCenter);
+customElements.define("yr-nav-shell-right", YrNavShellRight);
+
+// src/sidebar/yr-sidebar.ts
+var YrSidebar = class extends HTMLElement {
+  static observedAttributes = ["collapsed"];
+  attributeChangedCallback() {
+  }
+};
+var YrSidebarHeader = class extends HTMLElement {
+};
+var YrSidebarNav = class extends HTMLElement {
+};
+var YrSidebarFooter = class extends HTMLElement {
+};
+var YrSidebarLink = class extends HTMLElement {
+  static observedAttributes = ["href", "active"];
+  onClick = (e) => {
+    const href = this.getAttribute("href");
+    if (!href) return;
+    e.preventDefault();
+    window.location.href = href;
+  };
+  connectedCallback() {
+    this.setAttribute("role", "link");
+    this.setAttribute("tabindex", "0");
+    this.addEventListener("click", this.onClick);
+    this.addEventListener("keydown", this.onKeyDown);
+  }
+  disconnectedCallback() {
+    this.removeEventListener("click", this.onClick);
+    this.removeEventListener("keydown", this.onKeyDown);
+  }
+  onKeyDown = (e) => {
+    if (e.key === "Enter") this.click();
+  };
+  attributeChangedCallback() {
+  }
+};
+customElements.define("yr-sidebar", YrSidebar);
+customElements.define("yr-sidebar-header", YrSidebarHeader);
+customElements.define("yr-sidebar-nav", YrSidebarNav);
+customElements.define("yr-sidebar-footer", YrSidebarFooter);
+customElements.define("yr-sidebar-link", YrSidebarLink);
+
+// src/drawer/yr-drawer.ts
+var YrDrawer = class extends HTMLElement {
+  static observedAttributes = ["open"];
+  onKeyDown = (e) => {
+    if (e.key === "Escape" && this.hasAttribute("open")) {
+      this.removeAttribute("open");
+    }
+  };
+  connectedCallback() {
+    document.addEventListener("keydown", this.onKeyDown);
+  }
+  disconnectedCallback() {
+    document.removeEventListener("keydown", this.onKeyDown);
+  }
+  attributeChangedCallback() {
+  }
+};
+var YrDrawerHeader = class extends HTMLElement {
+};
+var YrDrawerBody = class extends HTMLElement {
+};
+var YrDrawerClose = class extends HTMLElement {
+  onClick = () => {
+    this.closest("yr-drawer")?.removeAttribute("open");
+  };
+  connectedCallback() {
+    this.setAttribute("role", "button");
+    this.setAttribute("tabindex", "0");
+    this.setAttribute("aria-label", "Close drawer");
+    this.addEventListener("click", this.onClick);
+    this.addEventListener("keydown", this.onKeyDown);
+  }
+  disconnectedCallback() {
+    this.removeEventListener("click", this.onClick);
+    this.removeEventListener("keydown", this.onKeyDown);
+  }
+  onKeyDown = (e) => {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      this.onClick();
+    }
+  };
+};
+customElements.define("yr-drawer", YrDrawer);
+customElements.define("yr-drawer-header", YrDrawerHeader);
+customElements.define("yr-drawer-body", YrDrawerBody);
+customElements.define("yr-drawer-close", YrDrawerClose);
+
+// src/content/yr-content.ts
+var YrContent = class extends HTMLElement {
+};
+customElements.define("yr-content", YrContent);
+
+// src/resize-handle/yr-resize-handle.ts
+var YrResizeHandle = class extends HTMLElement {
+  static observedAttributes = ["target"];
+  startX = 0;
+  startWidth = 0;
+  get prop() {
+    return this.getAttribute("target") === "drawer" ? "--yr-drawer-width" : "--yr-sidebar-width";
+  }
+  get isSidebar() {
+    return this.getAttribute("target") !== "drawer";
+  }
+  resizeTarget() {
+    const tag = this.isSidebar ? "yr-sidebar" : "yr-drawer";
+    const shell = this.closest("body") ?? this.parentElement;
+    return shell?.querySelector(tag);
+  }
+  onMouseMove = (e) => {
+    e.preventDefault();
+    const delta = this.isSidebar ? e.clientX - this.startX : this.startX - e.clientX;
+    document.documentElement.style.setProperty(
+      this.prop,
+      `${Math.max(100, this.startWidth + delta)}px`
+    );
+  };
+  onMouseUp = () => {
+    this.removeAttribute("active");
+    document.documentElement.classList.remove("yr-resizing");
+    document.body.style.cursor = "";
+    document.body.style.userSelect = "";
+    document.removeEventListener("mousemove", this.onMouseMove);
+    document.removeEventListener("mouseup", this.onMouseUp);
+  };
+  onMouseDown = (e) => {
+    e.preventDefault();
+    const target = this.resizeTarget();
+    if (!target) return;
+    this.startX = e.clientX;
+    this.startWidth = target.getBoundingClientRect().width;
+    this.setAttribute("active", "");
+    document.documentElement.classList.add("yr-resizing");
+    document.body.style.cursor = "col-resize";
+    document.body.style.userSelect = "none";
+    document.addEventListener("mousemove", this.onMouseMove);
+    document.addEventListener("mouseup", this.onMouseUp);
+  };
+  connectedCallback() {
+    this.addEventListener("mousedown", this.onMouseDown);
+  }
+  disconnectedCallback() {
+    this.removeEventListener("mousedown", this.onMouseDown);
+    document.removeEventListener("mousemove", this.onMouseMove);
+    document.removeEventListener("mouseup", this.onMouseUp);
+  }
+  attributeChangedCallback() {
+  }
+};
+customElements.define("yr-resize-handle", YrResizeHandle);
 //# sourceMappingURL=ui.js.map

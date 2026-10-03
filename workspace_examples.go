@@ -10,33 +10,37 @@ func workspaceExamples() []Example {
 	return []Example{
 		{Name: "expanded", Component: templ.Raw(
 			workspaceBase +
-				`<div class="yr-sidebar-expanded" style="height:100vh">` +
-				`<nav class="yr-nav-shell"><div class="demo-region" style="width:100%">nav</div></nav>` +
-				`<aside class="yr-sidebar"><div class="demo-region" style="height:100%">sidebar</div></aside>` +
-				`<div class="yr-content">` +
+				`<div style="height:100vh">` +
+				`<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>` +
+				`<yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>` +
+				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
+				`<yr-content>` +
 				`<main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>` +
-				`</div>` +
+				`</yr-content>` +
 				`</div>`,
 		)},
 		{Name: "with-drawer", Component: templ.Raw(
 			workspaceBase +
-				`<div class="yr-sidebar-expanded" style="height:100vh">` +
-				`<nav class="yr-nav-shell"><div class="demo-region" style="width:100%">nav</div></nav>` +
-				`<aside class="yr-sidebar"><div class="demo-region" style="height:100%">sidebar</div></aside>` +
-				`<div class="yr-content">` +
+				`<div style="height:100vh">` +
+				`<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>` +
+				`<yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>` +
+				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
+				`<yr-content>` +
 				`<main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>` +
-				`<aside class="yr-drawer yr-drawer--open"><div class="demo-region" style="height:100%">drawer</div></aside>` +
-				`</div>` +
+				`<yr-resize-handle target="drawer"></yr-resize-handle>` +
+				`<yr-drawer open><div class="demo-region" style="height:100%">drawer</div></yr-drawer>` +
+				`</yr-content>` +
 				`</div>`,
 		)},
 		{Name: "collapsed", Component: templ.Raw(
 			workspaceBase +
-				`<div class="yr-sidebar-collapsed" style="height:100vh">` +
-				`<nav class="yr-nav-shell"><div class="demo-region" style="width:100%">nav</div></nav>` +
-				`<aside class="yr-sidebar"><div class="demo-region" style="height:100%">sidebar</div></aside>` +
-				`<div class="yr-content">` +
+				`<div style="height:100vh">` +
+				`<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>` +
+				`<yr-sidebar collapsed><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>` +
+				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
+				`<yr-content>` +
 				`<main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>` +
-				`</div>` +
+				`</yr-content>` +
 				`</div>`,
 		)},
 	}
