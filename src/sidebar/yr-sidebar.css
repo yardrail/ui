@@ -2,11 +2,6 @@
    Width controlled by --yr-sidebar-width; collapses to
    --yr-sidebar-width-collapsed when the collapsed attribute is set. */
 
-:root {
-  --yr-sidebar-width: 220px;
-  --yr-sidebar-width-collapsed: 48px;
-}
-
 yr-sidebar {
   position: fixed;
   top: 52px;
@@ -37,8 +32,7 @@ yr-sidebar-header {
 yr-sidebar-nav {
   display: block;
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden auto;
   padding: var(--yr-space-2) 0;
   list-style: none;
   margin: 0;

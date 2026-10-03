@@ -132,6 +132,10 @@ body { display: flex; background: var(--yr-bg); }
   overflow: hidden;
   background: var(--yr-surface);
   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
+  resize: both;
+  height: 340px;
+  min-height: 200px;
+  min-width: 300px;
 }
 .browser-chrome {
   display: flex;
@@ -160,13 +164,6 @@ body { display: flex; background: var(--yr-bg); }
   border-radius: var(--yr-radius-sm);
   padding: var(--yr-space-1) var(--yr-space-2);
   margin-left: var(--yr-space-2);
-}
-.browser-frame {
-  resize: both;
-  overflow: hidden;
-  height: 340px;
-  min-height: 200px;
-  min-width: 300px;
 }
 .browser-body { background: var(--yr-surface); height: calc(100% - 34px); }
 .browser-body iframe {

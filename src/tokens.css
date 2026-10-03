@@ -81,6 +81,11 @@
   --yr-side-md: 17.5rem;
   --yr-side-lg: 20rem;
 
+  /* Layout — sidebar and drawer defaults */
+  --yr-sidebar-width: 220px;
+  --yr-sidebar-width-collapsed: 48px;
+  --yr-drawer-width: 360px;
+
   /* Control sizing — shared by buttons and inputs so they match at each size */
   --yr-control-padding-y: var(--yr-space-3);
   --yr-control-padding-x: var(--yr-space-3);

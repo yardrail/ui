@@ -2,10 +2,6 @@
    narrower when open; both remain visible side-by-side. Width controlled
    by --yr-drawer-width. Hidden by default; shown via open attribute. */
 
-:root {
-  --yr-drawer-width: 360px;
-}
-
 yr-drawer {
   width: var(--yr-drawer-width);
   min-width: var(--yr-drawer-width);

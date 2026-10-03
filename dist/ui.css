@@ -56,6 +56,9 @@
   --yr-side-sm: 15rem;
   --yr-side-md: 17.5rem;
   --yr-side-lg: 20rem;
+  --yr-sidebar-width: 220px;
+  --yr-sidebar-width-collapsed: 48px;
+  --yr-drawer-width: 360px;
   --yr-control-padding-y: var(--yr-space-3);
   --yr-control-padding-x: var(--yr-space-3);
   --yr-control-font: var(--yr-font-size-md);
@@ -1407,10 +1410,6 @@ yr-author-link[size=lg] .yr-author-link-name {
 }
 
 /* src/sidebar/yr-sidebar.css */
-:root {
-  --yr-sidebar-width: 220px;
-  --yr-sidebar-width-collapsed: 48px;
-}
 yr-sidebar {
   position: fixed;
   top: 52px;
@@ -1438,8 +1437,7 @@ yr-sidebar-header {
 yr-sidebar-nav {
   display: block;
   flex: 1;
-  overflow-y: auto;
-  overflow-x: hidden;
+  overflow: hidden auto;
   padding: var(--yr-space-2) 0;
   list-style: none;
   margin: 0;
@@ -1477,9 +1475,6 @@ yr-sidebar-footer {
 }
 
 /* src/drawer/yr-drawer.css */
-:root {
-  --yr-drawer-width: 360px;
-}
 yr-drawer {
   width: var(--yr-drawer-width);
   min-width: var(--yr-drawer-width);

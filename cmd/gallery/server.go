@@ -16,7 +16,7 @@ import (
 // sections defines the two-tier grouping shown in the gallery sidebar.
 var sections = []section{
 	{Name: "Structure", Categories: []category{
-		{Slug: "page-shell", Name: "Page Shell", Components: []string{
+		{Slug: "page-shell", Name: "Page Shell", ContextSlot: nil, Components: []string{
 			"workspace",
 		}},
 		{Slug: "regions", Name: "Regions", ContextSlot: map[string]string{
@@ -26,25 +26,25 @@ var sections = []section{
 		}},
 	}},
 	{Name: "Components", Categories: []category{
-		{Slug: "primitives", Name: "Primitives", Components: []string{
+		{Slug: "primitives", Name: "Primitives", ContextSlot: nil, Components: []string{
 			"button", "pill", "avatar", "icon-badge", "stat", "brand", "rating",
 		}},
-		{Slug: "forms", Name: "Forms", Components: []string{
+		{Slug: "forms", Name: "Forms", ContextSlot: nil, Components: []string{
 			"field", "form", "search", "copy-field",
 		}},
-		{Slug: "navigation", Name: "Navigation", Components: []string{
+		{Slug: "navigation", Name: "Navigation", ContextSlot: nil, Components: []string{
 			"tabs", "breadcrumb", "nav-shell", "account-menu", "dropdown-menu",
 		}},
-		{Slug: "data", Name: "Data", Components: []string{
+		{Slug: "data", Name: "Data", ContextSlot: nil, Components: []string{
 			"table", "row-edit", "list-row", "activity-row", "meta-row",
 		}},
-		{Slug: "cards", Name: "Cards", Components: []string{
+		{Slug: "cards", Name: "Cards", ContextSlot: nil, Components: []string{
 			"card", "action-card", "auth-card", "review-card", "template-card", "create-panel", "settings-section",
 		}},
-		{Slug: "feedback", Name: "Feedback", Components: []string{
+		{Slug: "feedback", Name: "Feedback", ContextSlot: nil, Components: []string{
 			"alert", "empty-state",
 		}},
-		{Slug: "misc", Name: "Misc", Components: []string{
+		{Slug: "misc", Name: "Misc", ContextSlot: nil, Components: []string{
 			"author-link", "connector-pill", "live-duration",
 		}},
 	}},
@@ -156,7 +156,8 @@ function updateFrame(component) {
   var chips = component.querySelector('.example-chips');
   var activeChip = chips ? chips.querySelector('.example-chip.active') : null;
   var compName = component.querySelector('h3').textContent;
-  var exName = activeChip ? activeChip.dataset.example : component.querySelector('iframe').src.split('/').pop().split('?')[0];
+  var src = component.querySelector('iframe').src;
+  var exName = activeChip ? activeChip.dataset.example : src.split('/').pop().split('?')[0];
   var url = '/' + compName + '/' + exName;
   var toggle = component.querySelector('.view-toggle-btn.active');
   if (toggle && toggle.dataset.view === 'in-shell') url += '?ctx=1';
@@ -255,8 +256,12 @@ html, body { margin: 0; height: 100%; overflow: hidden; }
 </head>
 <body>
 <div class="ctx-shell">
-  {{if eq .Slot "nav"}}{{.HTML}}{{else}}<yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>{{end}}
-  {{if eq .Slot "sidebar"}}{{.HTML}}{{else}}<yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>{{end}}
+  {{if eq .Slot "nav"}}{{.HTML}}{{else -}}
+  <yr-nav-shell><div class="demo-region" style="width:100%">nav</div></yr-nav-shell>
+  {{- end}}
+  {{if eq .Slot "sidebar"}}{{.HTML}}{{else -}}
+  <yr-sidebar><div class="demo-region" style="height:100%">sidebar</div></yr-sidebar>
+  {{- end}}
   <yr-resize-handle target="sidebar"></yr-resize-handle>
   <yr-content>
     <main class="yr-content-main"><div class="demo-region" style="height:100%">main</div></main>

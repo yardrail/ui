@@ -14,7 +14,10 @@ func navShellExamples() []Example {
 				exampleIcon("search", `class="yr-search-icon"`, searchIconSize) +
 				`<input class="yr-search-input" type="search" placeholder="Search workflows, connectors…">` +
 				`</div>` +
-				`<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);text-decoration:none">Docs</a>` +
+				`<a href="#" style="font-family:var(--yr-font-ui);` +
+				`font-size:var(--yr-font-size-sm);` +
+				`color:var(--yr-text-muted);` +
+				`text-decoration:none">Docs</a>` +
 				`<yr-avatar>BL</yr-avatar>` +
 				`</yr-nav-shell>`,
 		)},
