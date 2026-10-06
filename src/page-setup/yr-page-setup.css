@@ -4,7 +4,9 @@ yr-page-setup {
   min-height: 100vh;
 }
 
-yr-page-setup > yr-nav-shell {
+yr-page-setup > yr-nav-shell,
+yr-page-setup > yr-navbar,
+yr-page-setup > yr-navbar-std {
   grid-row: 1;
 }
 

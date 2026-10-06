@@ -488,6 +488,78 @@ customElements.define("yr-nav-shell-left", YrNavShellLeft);
 customElements.define("yr-nav-shell-center", YrNavShellCenter);
 customElements.define("yr-nav-shell-right", YrNavShellRight);
 
+// src/navbar/yr-navbar.ts
+var YrNavbar = class extends HTMLElement {
+  connectedCallback() {
+    this.setAttribute("role", "navigation");
+    this.restructure();
+  }
+  restructure() {
+    if (this.querySelector(".yr-navbar-left")) return;
+    const left = this.querySelector('[slot="left"]');
+    const center = this.querySelector('[slot="center"]');
+    const leftDiv = document.createElement("div");
+    leftDiv.className = "yr-navbar-left";
+    if (left) leftDiv.appendChild(left);
+    const centerDiv = document.createElement("div");
+    centerDiv.className = "yr-navbar-center";
+    if (center) centerDiv.appendChild(center);
+    const rightDiv = document.createElement("div");
+    rightDiv.className = "yr-navbar-right";
+    const remaining = Array.from(this.childNodes).filter(
+      (n) => n !== leftDiv && n !== centerDiv
+    );
+    for (const child of remaining) rightDiv.appendChild(child);
+    this.replaceChildren(leftDiv, centerDiv, rightDiv);
+  }
+};
+var YrNavbarStd = class extends HTMLElement {
+  connectedCallback() {
+    this.setAttribute("role", "navigation");
+    this.restructure();
+  }
+  restructure() {
+    if (this.querySelector(".yr-navbar-left")) return;
+    const leftDiv = document.createElement("div");
+    leftDiv.className = "yr-navbar-left";
+    const logo = document.createElement("a");
+    logo.href = "/";
+    logo.className = "yr-brand";
+    const img = document.createElement("img");
+    img.src = this.getAttribute("logo") || "/logo.png";
+    img.alt = this.getAttribute("brand") || "Yardrail";
+    logo.appendChild(img);
+    leftDiv.appendChild(logo);
+    const centerDiv = document.createElement("div");
+    centerDiv.className = "yr-navbar-center";
+    const center = this.querySelector('[slot="center"]');
+    if (center) centerDiv.appendChild(center);
+    const rightDiv = document.createElement("div");
+    rightDiv.className = "yr-navbar-right";
+    const remaining = Array.from(this.childNodes).filter(
+      (n) => n !== leftDiv && n !== centerDiv
+    );
+    for (const child of remaining) rightDiv.appendChild(child);
+    if (!this.hasAttribute("authed")) {
+      const loginHref = this.getAttribute("login-href") || "/login";
+      const signupHref = this.getAttribute("signup-href") || "/signup";
+      const login = document.createElement("a");
+      login.href = loginHref;
+      login.className = "yr-navbar-login";
+      login.textContent = "Log in";
+      rightDiv.appendChild(login);
+      const signup = document.createElement("a");
+      signup.href = signupHref;
+      signup.className = "yr-navbar-signup";
+      signup.textContent = "Sign up";
+      rightDiv.appendChild(signup);
+    }
+    this.replaceChildren(leftDiv, centerDiv, rightDiv);
+  }
+};
+customElements.define("yr-navbar", YrNavbar);
+customElements.define("yr-navbar-std", YrNavbarStd);
+
 // src/sidebar/yr-sidebar.ts
 var YrSidebar = class extends HTMLElement {
   static observedAttributes = ["collapsed"];
@@ -495,6 +567,17 @@ var YrSidebar = class extends HTMLElement {
   }
 };
 var YrSidebarHeader = class extends HTMLElement {
+  connectedCallback() {
+    const toggle = document.createElement("button");
+    toggle.className = "yr-sidebar-toggle";
+    toggle.setAttribute("aria-label", "Toggle sidebar");
+    toggle.innerHTML = `<svg class="yr-sidebar-toggle-close" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m16 15-3-3 3-3"/></svg><svg class="yr-sidebar-toggle-open" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M9 3v18"/><path d="m14 9 3 3-3 3"/></svg>`;
+    toggle.addEventListener("click", () => {
+      const sidebar = this.closest("yr-sidebar");
+      if (sidebar) sidebar.toggleAttribute("collapsed");
+    });
+    this.insertBefore(toggle, this.firstChild);
+  }
 };
 var YrSidebarNav = class extends HTMLElement {
 };
@@ -524,11 +607,26 @@ var YrSidebarLink = class extends HTMLElement {
   attributeChangedCallback() {
   }
 };
+var YrSidebarOrg = class extends HTMLElement {
+  static observedAttributes = ["name", "initial"];
+  connectedCallback() {
+    this.render();
+  }
+  attributeChangedCallback() {
+    this.render();
+  }
+  render() {
+    const name = this.getAttribute("name") || "";
+    const initial = this.getAttribute("initial") || name.charAt(0).toUpperCase();
+    this.innerHTML = `<span class="yr-sidebar-org-pfp">${initial}</span><span class="yr-sidebar-org-name">${name}</span>`;
+  }
+};
 customElements.define("yr-sidebar", YrSidebar);
 customElements.define("yr-sidebar-header", YrSidebarHeader);
 customElements.define("yr-sidebar-nav", YrSidebarNav);
 customElements.define("yr-sidebar-footer", YrSidebarFooter);
 customElements.define("yr-sidebar-link", YrSidebarLink);
+customElements.define("yr-sidebar-org", YrSidebarOrg);
 
 // src/drawer/yr-drawer.ts
 var YrDrawer = class extends HTMLElement {

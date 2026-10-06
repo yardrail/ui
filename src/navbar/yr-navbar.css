@@ -1,0 +1,60 @@
+yr-navbar,
+yr-navbar-std {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: var(--yr-space-6);
+  padding: 0 var(--yr-space-6);
+  height: 52px;
+  background: var(--yr-surface);
+  border-bottom: 1px solid var(--yr-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+.yr-navbar-left {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+}
+
+.yr-navbar-center {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+}
+
+.yr-navbar-right {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-4);
+}
+
+.yr-navbar-login {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+  text-decoration: none;
+}
+
+.yr-navbar-login:hover {
+  color: var(--yr-text);
+  text-decoration: none;
+}
+
+.yr-navbar-signup {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  padding: var(--yr-space-1) var(--yr-space-3);
+  background: var(--yr-accent);
+  color: var(--yr-on-accent);
+  border-radius: var(--yr-radius-md);
+  text-decoration: none;
+}
+
+.yr-navbar-signup:hover {
+  filter: brightness(0.9);
+  text-decoration: none;
+}

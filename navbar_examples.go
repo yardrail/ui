@@ -14,15 +14,16 @@ func navbarExamples() []Example {
 				`color:var(--yr-text-disabled);` +
 				`font-family:var(--yr-font-mono);` +
 				`font-size:var(--yr-font-size-xs)}</style>` +
-				`<yr-nav-shell>` +
+				`<yr-navbar>` +
 				`<div class="demo-slot" slot="left">left</div>` +
 				`<div class="demo-slot" slot="center">center</div>` +
 				`<div class="demo-slot">right</div>` +
-				`</yr-nav-shell>`,
+				`</yr-navbar>`,
 		)},
 		{Name: "with-content", Component: templ.Raw(
-			`<yr-nav-shell>` +
-				`<a href="#" class="yr-brand" slot="left">Yardrail</a>` +
+			`<yr-navbar>` +
+				`<a href="#" class="yr-brand" slot="left">` +
+				`<img src="/logo.png" alt="Yardrail"></a>` +
 				`<div class="yr-search yr-search--compact"` +
 				` slot="center" style="max-width:320px">` +
 				exampleIcon("search",
@@ -47,7 +48,28 @@ func navbarExamples() []Example {
 				`<a class="yr-dropdown-menu-item" href="#">` +
 				`Sign out</a>` +
 				`</yr-account-menu>` +
-				`</yr-nav-shell>`,
+				`</yr-navbar>`,
+		)},
+		{Name: "standard-unauthed", Component: templ.Raw(
+			`<yr-navbar-std logo="/logo.png" brand="Yardrail">` +
+				`</yr-navbar-std>`,
+		)},
+		{Name: "standard-authed", Component: templ.Raw(
+			`<yr-navbar-std logo="/logo.png" brand="Yardrail" authed>` +
+				`<a href="#"` +
+				` style="font-family:var(--yr-font-ui);` +
+				`font-size:var(--yr-font-size-sm);` +
+				`color:var(--yr-text-muted);` +
+				`text-decoration:none">Docs</a>` +
+				`<yr-account-menu name="Brahm Lower"` +
+				` email="brahm@yardrail.com">` +
+				`<span slot="avatar">BL</span>` +
+				`<a class="yr-dropdown-menu-item" href="#">` +
+				`Account settings</a>` +
+				`<a class="yr-dropdown-menu-item" href="#">` +
+				`Sign out</a>` +
+				`</yr-account-menu>` +
+				`</yr-navbar-std>`,
 		)},
 	}
 }

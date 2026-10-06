@@ -14,6 +14,8 @@ type Example struct {
 	Component templ.Component
 	// Name is a lowercase kebab slug, used as a file name and a URL segment.
 	Name string
+	// DisplayURL is an optional realistic URL shown in the gallery's browser chrome.
+	DisplayURL string
 }
 
 // ExampleGroup is every example of one component.
@@ -66,6 +68,12 @@ func ExampleGroups() []ExampleGroup {
 		{Component: "sidebar", Examples: sidebarExamples()},
 		{Component: "drawer", Examples: drawerExamples()},
 		{Component: "setup-card", Examples: setupCardExamples()},
+		{Component: "msp-dashboard", Examples: mspDashboardExamples()},
+		{Component: "msp-clients", Examples: mspClientsExamples()},
+		{Component: "msp-client-overview", Examples: mspClientOverviewExamples()},
+		{Component: "msp-client-users", Examples: mspClientUsersExamples()},
+		{Component: "msp-client-connectors", Examples: mspClientConnectorsExamples()},
+		{Component: "msp-client-settings", Examples: mspClientSettingsExamples()},
 	}
 }
 

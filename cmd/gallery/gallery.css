@@ -64,12 +64,25 @@ body { display: flex; background: var(--yr-bg); }
 }
 
 .component { margin: var(--yr-space-6) 0; }
-.component > h3 {
+.component > summary {
+  cursor: pointer;
+  list-style: none;
+}
+.component > summary::-webkit-details-marker { display: none; }
+.component > summary > h3 {
   font-family: var(--yr-font-mono);
   font-size: var(--yr-font-size-sm);
   color: var(--yr-text-muted);
   margin: 0 0 var(--yr-space-2);
+  display: inline;
 }
+.component > summary::before {
+  content: "▶";
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+  margin-right: var(--yr-space-2);
+}
+.component[open] > summary::before { content: "▼"; }
 
 .example-toolbar {
   display: flex;
@@ -133,8 +146,8 @@ body { display: flex; background: var(--yr-bg); }
   background: var(--yr-surface);
   box-shadow: 0 2px 8px rgb(0 0 0 / 6%);
   resize: both;
-  height: 340px;
-  min-height: 200px;
+  height: 680px;
+  min-height: 300px;
   min-width: 300px;
 }
 .browser-chrome {

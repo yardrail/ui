@@ -1,0 +1,94 @@
+<style>html,body{margin:0;height:100%}.msp-page-title{font-family:var(--yr-font-display);font-size:var(--yr-font-size-xl);font-weight:600;color:var(--yr-text);margin:0 0 var(--yr-space-6)}.msp-section{margin-bottom:var(--yr-space-8)}.msp-section-title{font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);font-weight:600;text-transform:uppercase;letter-spacing:0.04em;color:var(--yr-text-subtle);margin:0 0 var(--yr-space-3)}.msp-grid{display:grid;gap:var(--yr-space-4)}.msp-grid-2{grid-template-columns:1fr 1fr}.msp-grid-3{grid-template-columns:1fr 1fr 1fr}.msp-grid-4{grid-template-columns:1fr 1fr 1fr 1fr}.msp-stat-card{background:var(--yr-surface);border:1px solid var(--yr-border);border-radius:var(--yr-radius-md);padding:var(--yr-space-4) var(--yr-space-6)}.msp-stat-value{font-family:var(--yr-font-display);font-size:var(--yr-font-size-2xl);font-weight:600;color:var(--yr-text);margin:0}.msp-stat-label{font-family:var(--yr-font-ui);font-size:var(--yr-font-size-xs);color:var(--yr-text-muted);margin:var(--yr-space-1) 0 0}.msp-feed{display:flex;flex-direction:column;gap:var(--yr-space-2)}.msp-feed-item{display:flex;align-items:center;gap:var(--yr-space-3);padding:var(--yr-space-2) var(--yr-space-3);font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);border-radius:var(--yr-radius-sm)}.msp-feed-item:hover{background:var(--yr-surface-muted)}.msp-feed-time{font-size:var(--yr-font-size-xs);color:var(--yr-text-disabled);margin-left:auto;white-space:nowrap}.msp-client-row{display:flex;align-items:center;gap:var(--yr-space-4);padding:var(--yr-space-3) var(--yr-space-4);border:1px solid var(--yr-border);border-radius:var(--yr-radius-md);background:var(--yr-surface);cursor:pointer;font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm)}.msp-client-row:hover{border-color:var(--yr-accent);background:var(--yr-accent-subtle)}.msp-client-name{font-weight:600;color:var(--yr-text);flex:1}.msp-client-meta{color:var(--yr-text-muted);font-size:var(--yr-font-size-xs)}</style><yr-page-workspace><yr-navbar-std logo="/logo.png" brand="Yardrail" authed><div class="yr-search yr-search--compact" slot="center" style="max-width:320px"><svg
+  class="yr-search-icon" style="left:0.5rem"
+  xmlns="http://www.w3.org/2000/svg"
+  width="14"
+  height="14"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="m21 21-4.34-4.34" />
+  <circle cx="11" cy="11" r="8" />
+</svg><input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"></div><yr-account-menu name="Brahm Lower" email="brahm@yardrail.com"><span slot="avatar">BL</span><a class="yr-dropdown-menu-item" href="#">Account settings</a><a class="yr-dropdown-menu-item" href="#">Sign out</a></yr-account-menu></yr-navbar-std><yr-sidebar><yr-sidebar-header><span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">MSP Portal</span></yr-sidebar-header><yr-sidebar-nav><yr-sidebar-link href="#"><svg
+  class="lucide lucide-layout-dashboard"
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <rect width="7" height="9" x="3" y="3" rx="1" />
+  <rect width="7" height="5" x="14" y="3" rx="1" />
+  <rect width="7" height="9" x="14" y="12" rx="1" />
+  <rect width="7" height="5" x="3" y="16" rx="1" />
+</svg> Dashboard</yr-sidebar-link><yr-sidebar-link href="#" active><svg
+  class="lucide lucide-building-2"
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M10 12h4" />
+  <path d="M10 8h4" />
+  <path d="M14 21v-3a2 2 0 0 0-4 0v3" />
+  <path d="M6 10H4a2 2 0 0 0-2 2v7a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2" />
+  <path d="M6 21V5a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v16" />
+</svg> Clients</yr-sidebar-link></yr-sidebar-nav><yr-sidebar-nav bottom><yr-sidebar-link href="#"><svg
+  class="lucide lucide-train-front"
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M8 3.1V7a4 4 0 0 0 8 0V3.1" />
+  <path d="m9 15-1-1" />
+  <path d="m15 15 1-1" />
+  <path d="M9 19c-2.8 0-5-2.2-5-5v-4a8 8 0 0 1 16 0v4c0 2.8-2.2 5-5 5Z" />
+  <path d="m8 19-2 3" />
+  <path d="m16 19 2 3" />
+</svg> Yardrail</yr-sidebar-link><yr-sidebar-link href="#"><svg
+  class="lucide lucide-user"
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+  <circle cx="12" cy="7" r="4" />
+</svg> Account</yr-sidebar-link></yr-sidebar-nav><yr-sidebar-footer><span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span></yr-sidebar-footer></yr-sidebar><yr-resize-handle target="sidebar"></yr-resize-handle><yr-content><yr-content-main><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)"><h1 class="msp-page-title" style="margin:0">Clients</h1><yr-button variant="primary"><svg
+  class="lucide lucide-plus"
+  xmlns="http://www.w3.org/2000/svg"
+  width="16"
+  height="16"
+  viewBox="0 0 24 24"
+  fill="none"
+  stroke="currentColor"
+  stroke-width="2"
+  stroke-linecap="round"
+  stroke-linejoin="round"
+>
+  <path d="M5 12h14" />
+  <path d="M12 5v14" />
+</svg> Add Client</yr-button></div><div class="msp-feed"><div class="msp-client-row"><yr-pill tone="success">healthy</yr-pill><span class="msp-client-name">Acme Corp</span><span class="msp-client-meta">8 users · 3 connectors · 12 workflows</span></div><div class="msp-client-row"><yr-pill tone="success">healthy</yr-pill><span class="msp-client-name">Beta LLC</span><span class="msp-client-meta">4 users · 2 connectors · 6 workflows</span></div><div class="msp-client-row"><yr-pill tone="warning">attention</yr-pill><span class="msp-client-name">Gamma Inc</span><span class="msp-client-meta">12 users · 5 connectors · 18 workflows</span></div><div class="msp-client-row"><yr-pill tone="success">healthy</yr-pill><span class="msp-client-name">Delta Co</span><span class="msp-client-meta">3 users · 1 connector · 4 workflows</span></div><div class="msp-client-row"><yr-pill tone="danger">critical</yr-pill><span class="msp-client-name">Epsilon Group</span><span class="msp-client-meta">6 users · 4 connectors · 9 workflows</span></div><div class="msp-client-row"><yr-pill tone="success">healthy</yr-pill><span class="msp-client-name">Zeta Partners</span><span class="msp-client-meta">5 users · 2 connectors · 7 workflows</span></div></div></yr-content-main></yr-content></yr-page-workspace>

@@ -9,7 +9,9 @@ yr-page-workspace {
   height: 100vh;
 }
 
-yr-page-workspace > yr-nav-shell {
+yr-page-workspace > yr-nav-shell,
+yr-page-workspace > yr-navbar,
+yr-page-workspace > yr-navbar-std {
   grid-column: 1 / -1;
 }
 

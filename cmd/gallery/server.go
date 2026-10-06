@@ -15,6 +15,16 @@ import (
 
 // sections defines the two-tier grouping shown in the gallery sidebar.
 var sections = []section{
+	{Name: "UI Mocks", Categories: []category{
+		{Slug: "msp-portal", Name: "MSP Portal", ContextSlot: nil, Components: []string{
+			"msp-dashboard",
+			"msp-clients",
+			"msp-client-overview",
+			"msp-client-users",
+			"msp-client-connectors",
+			"msp-client-settings",
+		}},
+	}},
 	{Name: "Structure", Categories: []category{
 		{Slug: "page-shell", Name: "Page Shell", ContextSlot: nil, Components: []string{
 			"page-workspace",
@@ -86,7 +96,8 @@ type indexComponent struct {
 
 // indexExample is one named example of a component.
 type indexExample struct {
-	Name string
+	Name       string
+	DisplayURL string
 }
 
 // indexPage is the full template data for the gallery index.
@@ -122,12 +133,13 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 </aside>
 <main class="main">
   <h1>{{.Active.Name}}</h1>
-  {{range .Active.Components}}<div class="component"{{if .HasContext}} data-has-context{{end}}>
-  <h3>{{.Name}}</h3>
+  {{range .Active.Components}}<details class="component" open{{if .HasContext}} data-has-context{{end}}>
+  <summary><h3>{{.Name}}</h3></summary>
   {{if .Examples}}<div class="example-toolbar">
   {{if gt (len .Examples) 1}}<div class="example-chips">
     {{$comp := .Name}}{{range $i, $ex := .Examples}}<a class="example-chip{{if eq $i 0}} active{{end}}"
-      data-component="{{$comp}}" data-example="{{$ex.Name}}"
+      data-component="{{$comp}}" data-example="{{$ex.Name}}"{{if $ex.DisplayURL}}
+      data-display-url="{{$ex.DisplayURL}}"{{end}}
       href="/{{$comp}}/{{$ex.Name}}">{{$ex.Name}}</a>
     {{end}}
   </div>{{end}}
@@ -143,14 +155,14 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
         <span class="browser-dot yellow"></span>
         <span class="browser-dot green"></span>
       </div>
-      <span class="browser-url">/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}</span>
+      <span class="browser-url">{{if (index .Examples 0).DisplayURL}}{{(index .Examples 0).DisplayURL}}{{else}}/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}{{end}}</span>
     </div>
     <div class="browser-body">
       <iframe src="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}"></iframe>
     </div>
   </div>
   {{else}}<div class="no-examples">no examples yet</div>
-  {{end}}</div>
+  {{end}}</details>
   {{end}}
 </main>
 <script>
@@ -164,7 +176,8 @@ function updateFrame(component) {
   var toggle = component.querySelector('.view-toggle-btn.active');
   if (toggle && toggle.dataset.view === 'in-shell') url += '?ctx=1';
   var frame = component.querySelector('.browser-frame');
-  frame.querySelector('.browser-url').textContent = url;
+  var displayUrl = activeChip && activeChip.dataset.displayUrl ? activeChip.dataset.displayUrl : url;
+  frame.querySelector('.browser-url').textContent = displayUrl;
   frame.querySelector('iframe').src = url;
 }
 document.addEventListener('click', function(e) {
@@ -308,7 +321,7 @@ func newHandler(assets fs.FS) http.Handler {
 				if exs, ok := byComponent[comp]; ok {
 					for _, ex := range exs {
 						g.examples[comp+"/"+ex.Name] = ex.Component
-						ic.Components[k].Examples = append(ic.Components[k].Examples, indexExample{Name: ex.Name})
+						ic.Components[k].Examples = append(ic.Components[k].Examples, indexExample{Name: ex.Name, DisplayURL: ex.DisplayURL})
 					}
 				}
 			}
@@ -325,6 +338,7 @@ func newHandler(assets fs.FS) http.Handler {
 	mux.HandleFunc("GET /gallery.css", g.galleryStyles)
 	mux.HandleFunc("GET /ui.js", g.js)
 	mux.HandleFunc("GET /fonts/{file}", g.font)
+	mux.HandleFunc("GET /logo.png", g.logo)
 	mux.HandleFunc("GET /{component}/{name}", g.example)
 
 	return mux
@@ -376,6 +390,11 @@ func (g *gallery) js(w http.ResponseWriter, r *http.Request) {
 // font serves vendored woff2 font files.
 func (g *gallery) font(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, g.assets, "fonts/"+r.PathValue("file"))
+}
+
+// logo serves the Yardrail logo.
+func (g *gallery) logo(w http.ResponseWriter, r *http.Request) {
+	http.ServeFileFS(w, r, g.assets, "logo.png")
 }
 
 // example renders one example inside a page, or 404s for an unknown component or name.

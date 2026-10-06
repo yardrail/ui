@@ -12,9 +12,9 @@ func pageSetupExamples() []Example {
 		{Name: "default", Component: templ.Raw(
 			pageSetupBase +
 				`<yr-page-setup>` +
-				`<yr-nav-shell>` +
+				`<yr-navbar>` +
 				`<div class="demo-region" style="width:100%">nav</div>` +
-				`</yr-nav-shell>` +
+				`</yr-navbar>` +
 				`<yr-page-setup-content>` +
 				`<div class="demo-region" style="width:720px;height:400px;` +
 				`border:1px dashed var(--yr-border);` +
@@ -27,11 +27,8 @@ func pageSetupExamples() []Example {
 		{Name: "with-setup-card", Component: templ.Raw(
 			pageSetupBase +
 				`<yr-page-setup>` +
-				`<yr-nav-shell>` +
-				`<span slot="left" style="font-family:var(--yr-font-display);` +
-				`font-weight:600;color:var(--yr-accent)">` +
-				`Yardrail</span>` +
-				`</yr-nav-shell>` +
+				`<yr-navbar-std logo="/logo.png" brand="Yardrail">` +
+				`</yr-navbar-std>` +
 				`<yr-page-setup-content>` +
 				`<yr-setup-card>` +
 				`<yr-setup-card-progress steps="3" current="1">` +
