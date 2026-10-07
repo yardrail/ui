@@ -1069,9 +1069,8 @@ yr-empty-state [slot=icon] {
 .yr-table td.yr-table-name {
   font-weight: 500;
 }
-.yr-table td.yr-table-mono {
-  font-family: var(--yr-font-mono);
-  font-size: var(--yr-font-size-sm);
+.yr-table td.yr-table-numeric {
+  font-variant-numeric: tabular-nums;
 }
 
 /* src/list-row/yr-list-row.css */

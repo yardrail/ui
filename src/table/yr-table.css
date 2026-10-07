@@ -1,6 +1,6 @@
 /* .yr-table — CSS-only, applied to a native <table>. Preserves native table
    semantics. Replaces yardrail's .data-table, confirmed reused across
-   9+ pages. Column modifiers (.yr-table-name/.yr-table-mono) and a
+   9+ pages. Column modifiers (.yr-table-name/.yr-table-numeric) and a
    .is-disabled row state match real usage. */
 
 .yr-table {
@@ -38,7 +38,6 @@
 .yr-table td.yr-table-name {
   font-weight: 500;
 }
-.yr-table td.yr-table-mono {
-  font-family: var(--yr-font-mono);
-  font-size: var(--yr-font-size-sm);
+.yr-table td.yr-table-numeric {
+  font-variant-numeric: tabular-nums;
 }

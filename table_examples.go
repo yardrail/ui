@@ -32,9 +32,9 @@ func tableExamples() []Example {
 			Row(RowProps{}),
 			withChildren(Cell(CellProps{Kind: CellName}), text("Platform")),
 		), DisplayURL: ""},
-		{Name: "cell-mono", Component: withChildren(
+		{Name: "cell-numeric", Component: withChildren(
 			Row(RowProps{}),
-			withChildren(Cell(CellProps{Kind: CellMono}), text("whk_7f3a9c")),
+			withChildren(Cell(CellProps{Kind: CellNumeric}), text("1m 42s")),
 		), DisplayURL: ""},
 	}
 }

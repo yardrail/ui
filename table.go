@@ -48,8 +48,8 @@ type CellKind struct{ class string }
 var (
 	// CellName emphasises the cell that names the row.
 	CellName = CellKind{class: "yr-table-name"}
-	// CellMono sets the cell in the monospace font, for ids and keys.
-	CellMono = CellKind{class: "yr-table-mono"}
+	// CellNumeric aligns digits in columns of numbers, timestamps and durations.
+	CellNumeric = CellKind{class: "yr-table-numeric"}
 )
 
 // CellProps holds a Cell's optional settings; every zero value is the default.
