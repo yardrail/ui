@@ -1,0 +1,14 @@
+pre-commit:
+  parallel: true
+  commands:
+    gen-check:
+      run: task gen:check
+    lint:
+      run: task lint
+    test:
+      run: task test
+
+commit-msg:
+  commands:
+    commitlint:
+      run: commitlint --edit {1}
