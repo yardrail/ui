@@ -3,9 +3,6 @@
    .yr-row-edit. Replaces yardrail's .create-panel (5 reuses: teams,
    spaces, users, inference, triggers). */
 
-.yr-create-panel {
-  margin: var(--yr-space-6) 0;
-}
 .yr-create-panel > summary {
   cursor: pointer;
   font-family: var(--yr-font-body);

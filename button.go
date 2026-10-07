@@ -8,10 +8,10 @@ type ButtonType struct{ v string }
 
 // Button types beyond the zero value.
 var (
-	// Submit renders type="submit".
-	Submit = ButtonType{v: "submit"}
-	// Reset renders type="reset".
-	Reset = ButtonType{v: "reset"}
+	// ButtonSubmit renders type="submit".
+	ButtonSubmit = ButtonType{v: "submit"}
+	// ButtonReset renders type="reset".
+	ButtonReset = ButtonType{v: "reset"}
 )
 
 // String returns the value of the type attribute.
@@ -23,21 +23,21 @@ func (t ButtonType) String() string {
 	return t.v
 }
 
-// ButtonVariant is the visual style of a Button. The zero value is Primary.
+// ButtonVariant is the visual style of a Button. The zero value is ButtonPrimary.
 type ButtonVariant struct{ v string }
 
 // Button variants.
 var (
-	// Primary is the filled default action.
-	Primary = ButtonVariant{}
-	// Secondary is the outlined alternative action.
-	Secondary = ButtonVariant{v: "secondary"}
-	// Link looks like a text link.
-	Link = ButtonVariant{v: "link"}
-	// Danger is a filled destructive action.
-	Danger = ButtonVariant{v: "danger"}
-	// DangerQuiet is a low-emphasis destructive action, for example Remove in a table row.
-	DangerQuiet = ButtonVariant{v: "danger-quiet"}
+	// ButtonPrimary is the filled default action.
+	ButtonPrimary = ButtonVariant{}
+	// ButtonSecondary is the outlined alternative action.
+	ButtonSecondary = ButtonVariant{v: "secondary"}
+	// ButtonLink looks like a text link.
+	ButtonLink = ButtonVariant{v: "link"}
+	// ButtonDanger is a filled destructive action.
+	ButtonDanger = ButtonVariant{v: "danger"}
+	// ButtonDangerQuiet is a low-emphasis destructive action, for example Remove in a table row.
+	ButtonDangerQuiet = ButtonVariant{v: "danger-quiet"}
 )
 
 // buttonClass is the base class every Button carries.
@@ -58,7 +58,7 @@ type ButtonProps struct {
 	Attrs templ.Attributes
 	// Type is the native button type; the zero value is type="button".
 	Type ButtonType
-	// Variant is the visual style; the zero value is Primary.
+	// Variant is the visual style; the zero value is ButtonPrimary.
 	Variant ButtonVariant
 	// Name is the name submitted with the form, when set.
 	Name string

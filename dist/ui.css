@@ -199,7 +199,7 @@ h1,
 h2,
 h3 {
   font-family: var(--yr-font-display);
-  margin: 0 0 0.5em;
+  margin: 0;
 }
 a {
   color: var(--yr-accent);
@@ -1069,9 +1069,8 @@ yr-empty-state [slot=icon] {
 .yr-table td.yr-table-name {
   font-weight: 500;
 }
-.yr-table td.yr-table-mono {
-  font-family: var(--yr-font-mono);
-  font-size: var(--yr-font-size-sm);
+.yr-table td.yr-table-numeric {
+  font-variant-numeric: tabular-nums;
 }
 
 /* src/list-row/yr-list-row.css */
@@ -1407,9 +1406,6 @@ yr-navbar-std {
 }
 
 /* src/create-panel/yr-create-panel.css */
-.yr-create-panel {
-  margin: var(--yr-space-6) 0;
-}
 .yr-create-panel > summary {
   cursor: pointer;
   font-family: var(--yr-font-body);
@@ -1679,7 +1675,6 @@ yr-tabs [role=tablist] {
   display: flex;
   gap: var(--yr-space-6);
   border-bottom: 1px solid var(--yr-border);
-  margin-bottom: var(--yr-space-6);
 }
 yr-tabs [role=tab] {
   appearance: none;
@@ -1762,9 +1757,6 @@ yr-author-link[size=lg] .yr-author-link-name {
   background: var(--yr-surface);
   border: 1px solid var(--yr-border);
   border-radius: var(--yr-radius-lg);
-}
-.yr-action-card + .yr-action-card {
-  margin-top: var(--yr-space-3);
 }
 .yr-action-card-body {
   flex: 1;

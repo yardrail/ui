@@ -13,10 +13,6 @@
   border-radius: var(--yr-radius-lg);
 }
 
-.yr-action-card + .yr-action-card {
-  margin-top: var(--yr-space-3);
-}
-
 .yr-action-card-body {
   flex: 1;
   min-width: 0;

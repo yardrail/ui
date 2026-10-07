@@ -6,22 +6,22 @@ import "github.com/a-h/templ"
 func buttonExamples() []Example {
 	return []Example{
 		{Name: "primary", Component: Button("Save", ButtonProps{}), DisplayURL: ""},
-		{Name: "secondary", Component: Button("Cancel", ButtonProps{Variant: Secondary}), DisplayURL: ""},
-		{Name: "link", Component: Button("Show details", ButtonProps{Variant: Link}), DisplayURL: ""},
-		{Name: "danger", Component: Button("Delete organization", ButtonProps{Variant: Danger}), DisplayURL: ""},
-		{Name: "danger-quiet", Component: Button("Remove", ButtonProps{Variant: DangerQuiet}), DisplayURL: ""},
+		{Name: "secondary", Component: Button("Cancel", ButtonProps{Variant: ButtonSecondary}), DisplayURL: ""},
+		{Name: "link", Component: Button("Show details", ButtonProps{Variant: ButtonLink}), DisplayURL: ""},
+		{Name: "danger", Component: Button("Delete organization", ButtonProps{Variant: ButtonDanger}), DisplayURL: ""},
+		{Name: "danger-quiet", Component: Button("Remove", ButtonProps{Variant: ButtonDangerQuiet}), DisplayURL: ""},
 		{Name: "disabled", Component: Button("Publish", ButtonProps{Disabled: true}), DisplayURL: ""},
 		{
 			Name:       "submit",
-			Component:  Button("Create team", ButtonProps{Type: Submit, Name: "intent", Value: "create"}),
+			Component:  Button("Create team", ButtonProps{Type: ButtonSubmit, Name: "intent", Value: "create"}),
 			DisplayURL: "",
 		},
 		{Name: "confirm", Component: Button("Revoke key", ButtonProps{
-			Variant: Danger,
+			Variant: ButtonDanger,
 			Confirm: "Revoke this key? Clients using it stop working immediately.",
 		}), DisplayURL: ""},
 		{Name: "attrs", Component: Button("Archive", ButtonProps{
-			Variant: DangerQuiet,
+			Variant: ButtonDangerQuiet,
 			Attrs: templ.Attributes{
 				"id":        "archive-team-7",
 				"hx-post":   "/organization/teams/7/archive",

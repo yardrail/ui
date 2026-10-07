@@ -6,7 +6,6 @@ yr-tabs [role="tablist"] {
   display: flex;
   gap: var(--yr-space-6);
   border-bottom: 1px solid var(--yr-border);
-  margin-bottom: var(--yr-space-6);
 }
 
 yr-tabs [role="tab"] {
