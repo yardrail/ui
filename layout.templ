@@ -1,0 +1,15 @@
+package ui
+
+// layoutBox renders the element of a layout primitive around its children: a <div>, or a
+// <ul role="list"> when as is AsList.
+templ layoutBox(component, class string, as As, attrs templ.Attributes) {
+	if as.list() {
+		<ul role="list" class={ class } { filterAttrs(component, attrs)... }>
+			{ children... }
+		</ul>
+	} else {
+		<div class={ class } { filterAttrs(component, attrs)... }>
+			{ children... }
+		</div>
+	}
+}

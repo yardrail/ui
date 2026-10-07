@@ -1,0 +1,65 @@
+/* Layout primitives — Stack, Cluster, Grid, Split, Center and Divider
+   (layout.go, layout.templ). They arrange their children and draw nothing:
+   no background, border, radius, shadow, colour or outer margin. Each block
+   sets its defaults as block-local custom properties, and each modifier
+   class overrides one of them. A primitive sets every property it reads on
+   itself, so a nested primitive never inherits its parent's modifiers. */
+
+/* AsList renders a primitive as <ul role="list">; reset the list styling. */
+ul:is(.yr-stack, .yr-cluster) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Stack — a column with a consistent gap. */
+.yr-stack {
+  --yr-stack-gap: var(--yr-space-4);
+  --yr-stack-align: stretch;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-stack-gap);
+  align-items: var(--yr-stack-align);
+}
+.yr-stack--gap-1 { --yr-stack-gap: var(--yr-space-1); }
+.yr-stack--gap-2 { --yr-stack-gap: var(--yr-space-2); }
+.yr-stack--gap-3 { --yr-stack-gap: var(--yr-space-3); }
+.yr-stack--gap-4 { --yr-stack-gap: var(--yr-space-4); }
+.yr-stack--gap-6 { --yr-stack-gap: var(--yr-space-6); }
+.yr-stack--gap-8 { --yr-stack-gap: var(--yr-space-8); }
+.yr-stack--gap-12 { --yr-stack-gap: var(--yr-space-12); }
+.yr-stack--gap-16 { --yr-stack-gap: var(--yr-space-16); }
+.yr-stack--align-start { --yr-stack-align: start; }
+.yr-stack--align-center { --yr-stack-align: center; }
+.yr-stack--align-end { --yr-stack-align: end; }
+.yr-stack--align-stretch { --yr-stack-align: stretch; }
+
+/* Cluster — a row that wraps. */
+.yr-cluster {
+  --yr-cluster-gap: var(--yr-space-2);
+  --yr-cluster-justify: start;
+  --yr-cluster-align: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--yr-cluster-gap);
+  justify-content: var(--yr-cluster-justify);
+  align-items: var(--yr-cluster-align);
+}
+.yr-cluster--gap-1 { --yr-cluster-gap: var(--yr-space-1); }
+.yr-cluster--gap-2 { --yr-cluster-gap: var(--yr-space-2); }
+.yr-cluster--gap-3 { --yr-cluster-gap: var(--yr-space-3); }
+.yr-cluster--gap-4 { --yr-cluster-gap: var(--yr-space-4); }
+.yr-cluster--gap-6 { --yr-cluster-gap: var(--yr-space-6); }
+.yr-cluster--gap-8 { --yr-cluster-gap: var(--yr-space-8); }
+.yr-cluster--gap-12 { --yr-cluster-gap: var(--yr-space-12); }
+.yr-cluster--gap-16 { --yr-cluster-gap: var(--yr-space-16); }
+.yr-cluster--justify-start { --yr-cluster-justify: start; }
+.yr-cluster--justify-center { --yr-cluster-justify: center; }
+.yr-cluster--justify-end { --yr-cluster-justify: end; }
+.yr-cluster--justify-between { --yr-cluster-justify: space-between; }
+.yr-cluster--align-start { --yr-cluster-align: start; }
+.yr-cluster--align-center { --yr-cluster-align: center; }
+.yr-cluster--align-end { --yr-cluster-align: end; }
+.yr-cluster--align-stretch { --yr-cluster-align: stretch; }
