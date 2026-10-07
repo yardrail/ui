@@ -10,7 +10,7 @@ func connectorPillExamples() []Example {
 				`<div class="yr-connector-pill--icon" title="HubSpot">HS</div>` +
 				`<div class="yr-connector-pill--icon" title="Google Sheets">GS</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "large", Component: templ.Raw(
 			`<div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">` +
 				`<a href="#" class="yr-connector-pill--large" title="Slack">` +
@@ -26,6 +26,6 @@ func connectorPillExamples() []Example {
 				`<span class="yr-connector-pill-name">Google Sheets</span>` +
 				`</span>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

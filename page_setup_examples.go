@@ -9,7 +9,7 @@ const pageSetupBase = `<style>html,body{margin:0;height:100%}` +
 
 func pageSetupExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			pageSetupBase +
 				`<yr-page-setup>` +
 				`<yr-navbar>` +
@@ -23,7 +23,7 @@ func pageSetupExamples() []Example {
 				`</div>` +
 				`</yr-page-setup-content>` +
 				`</yr-page-setup>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-setup-card", Component: templ.Raw(
 			pageSetupBase +
 				`<yr-page-setup>` +
@@ -53,6 +53,6 @@ func pageSetupExamples() []Example {
 				`</yr-setup-card>` +
 				`</yr-page-setup-content>` +
 				`</yr-page-setup>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

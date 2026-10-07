@@ -19,8 +19,8 @@ func createPanelExamples() []Example {
 				`<yr-button variant="primary" type="submit">Add trigger</yr-button>` +
 				`</form>` +
 				`</details>`,
-		)},
-		{Name: "collapsed", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleCollapsed, Component: templ.Raw(
 			`<details class="yr-create-panel">` +
 				`<summary>Add a space</summary>` +
 				`<form method="post" action="#" class="yr-create-panel-form">` +
@@ -28,6 +28,6 @@ func createPanelExamples() []Example {
 				`<yr-button variant="primary" type="submit">Add space</yr-button>` +
 				`</form>` +
 				`</details>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

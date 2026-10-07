@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func mspClientOverviewExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/msp/clients/acme-corp", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/msp/clients/acme-corp", Component: templ.Raw(
 			mspMockStyle +
 				`<yr-page-workspace>` +
 				mspNavbar() +
@@ -65,7 +65,7 @@ func mspClientOverviewExamples() []Example {
 
 func mspClientUsersExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/msp/clients/acme-corp/users", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/msp/clients/acme-corp/users", Component: templ.Raw(
 			mspMockStyle +
 				`<yr-page-workspace>` +
 				mspNavbar() +
@@ -131,61 +131,65 @@ func mspClientUsersExamples() []Example {
 
 func mspClientConnectorsExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/msp/clients/acme-corp/connectors", Component: templ.Raw(
-			mspMockStyle +
-				`<yr-page-workspace>` +
-				mspNavbar() +
-				mspSidebarClientDetail("connectors") +
-				`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
-				`<yr-content><yr-content-main>` +
-				`<div style="display:flex;justify-content:space-between;` +
-				`align-items:center;margin-bottom:var(--yr-space-6)">` +
-				`<h1 class="msp-page-title" style="margin:0">` +
-				`Acme Corp — Connectors</h1>` +
-				`<yr-button variant="primary">` +
-				exampleIcon("plug", "", mspIconSize) +
-				` Add Connector</yr-button></div>` +
+		{
+			Name:       exampleDefault,
+			DisplayURL: "platform.yardrail.com/msp/clients/acme-corp/connectors",
+			Component: templ.Raw(
+				mspMockStyle +
+					`<yr-page-workspace>` +
+					mspNavbar() +
+					mspSidebarClientDetail("connectors") +
+					`<yr-resize-handle target="sidebar"></yr-resize-handle>` +
+					`<yr-content><yr-content-main>` +
+					`<div style="display:flex;justify-content:space-between;` +
+					`align-items:center;margin-bottom:var(--yr-space-6)">` +
+					`<h1 class="msp-page-title" style="margin:0">` +
+					`Acme Corp — Connectors</h1>` +
+					`<yr-button variant="primary">` +
+					exampleIcon("plug", "", mspIconSize) +
+					` Add Connector</yr-button></div>` +
 
-				`<div class="msp-feed">` +
+					`<div class="msp-feed">` +
 
-				`<div class="msp-client-row">` +
-				`<div style="display:flex;align-items:center;` +
-				`gap:var(--yr-space-3);flex:1">` +
-				exampleIcon("message-square", "", mspIconSize) +
-				`<div><span class="msp-client-name">Slack</span>` +
-				`<span class="msp-client-meta" style="display:block">` +
-				`OAuth · Used by 4 workflows</span></div></div>` +
-				`<yr-pill tone="danger">Expired</yr-pill></div>` +
+					`<div class="msp-client-row">` +
+					`<div style="display:flex;align-items:center;` +
+					`gap:var(--yr-space-3);flex:1">` +
+					exampleIcon("message-square", "", mspIconSize) +
+					`<div><span class="msp-client-name">Slack</span>` +
+					`<span class="msp-client-meta" style="display:block">` +
+					`OAuth · Used by 4 workflows</span></div></div>` +
+					`<yr-pill tone="danger">Expired</yr-pill></div>` +
 
-				`<div class="msp-client-row">` +
-				`<div style="display:flex;align-items:center;` +
-				`gap:var(--yr-space-3);flex:1">` +
-				exampleIcon("database", "", mspIconSize) +
-				`<div><span class="msp-client-name">HubSpot</span>` +
-				`<span class="msp-client-meta" style="display:block">` +
-				`API Key · Used by 6 workflows</span></div></div>` +
-				`<yr-pill tone="success">Healthy</yr-pill></div>` +
+					`<div class="msp-client-row">` +
+					`<div style="display:flex;align-items:center;` +
+					`gap:var(--yr-space-3);flex:1">` +
+					exampleIcon("database", "", mspIconSize) +
+					`<div><span class="msp-client-name">HubSpot</span>` +
+					`<span class="msp-client-meta" style="display:block">` +
+					`API Key · Used by 6 workflows</span></div></div>` +
+					`<yr-pill tone="success">Healthy</yr-pill></div>` +
 
-				`<div class="msp-client-row">` +
-				`<div style="display:flex;align-items:center;` +
-				`gap:var(--yr-space-3);flex:1">` +
-				exampleIcon("credit-card", "", mspIconSize) +
-				`<div><span class="msp-client-name">Stripe</span>` +
-				`<span class="msp-client-meta" style="display:block">` +
-				`API Key · Used by 2 workflows</span></div></div>` +
-				`<yr-pill tone="success">Healthy</yr-pill></div>` +
+					`<div class="msp-client-row">` +
+					`<div style="display:flex;align-items:center;` +
+					`gap:var(--yr-space-3);flex:1">` +
+					exampleIcon("credit-card", "", mspIconSize) +
+					`<div><span class="msp-client-name">Stripe</span>` +
+					`<span class="msp-client-meta" style="display:block">` +
+					`API Key · Used by 2 workflows</span></div></div>` +
+					`<yr-pill tone="success">Healthy</yr-pill></div>` +
 
-				`</div>` +
+					`</div>` +
 
-				`</yr-content-main></yr-content>` +
-				`</yr-page-workspace>`,
-		)},
+					`</yr-content-main></yr-content>` +
+					`</yr-page-workspace>`,
+			),
+		},
 	}
 }
 
 func mspClientSettingsExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/msp/clients/acme-corp/settings", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/msp/clients/acme-corp/settings", Component: templ.Raw(
 			mspMockStyle +
 				`<yr-page-workspace>` +
 				mspNavbar() +

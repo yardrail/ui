@@ -11,7 +11,7 @@ func cardExamples() []Example {
 				`<p style="margin:0">Everything is connected. Finish setup to start using this workflow.</p>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "header-footer", Component: templ.Raw(
 			`<div style="max-width:22rem">` +
 				`<div class="yr-card">` +
@@ -26,12 +26,12 @@ func cardExamples() []Example {
 				`</div>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "interactive", Component: templ.Raw(
 			`<div style="display:grid;grid-template-columns:repeat(2,minmax(0,16rem));gap:1rem">` +
 				`<a href="#" class="yr-card yr-card--interactive">Marketing</a>` +
 				`<a href="#" class="yr-card yr-card--interactive">Analytics</a>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

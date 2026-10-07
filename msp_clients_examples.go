@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func mspClientsExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/msp/clients", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/msp/clients", Component: templ.Raw(
 			mspMockStyle +
 				`<yr-page-workspace>` +
 				mspNavbar() +

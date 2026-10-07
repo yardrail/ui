@@ -6,7 +6,7 @@ const navSearchIconSize = 14
 
 func navbarExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			`<style>.demo-slot{background:var(--yr-bg);` +
 				`border:1px dashed var(--yr-border);` +
 				`border-radius:var(--yr-radius-sm);` +
@@ -19,8 +19,8 @@ func navbarExamples() []Example {
 				`<div class="demo-slot" slot="center">center</div>` +
 				`<div class="demo-slot">right</div>` +
 				`</yr-navbar>`,
-		)},
-		{Name: "with-content", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleWithContent, Component: templ.Raw(
 			`<yr-navbar>` +
 				`<a href="#" class="yr-brand" slot="left">` +
 				`<img src="/logo.png" alt="Yardrail"></a>` +
@@ -49,11 +49,11 @@ func navbarExamples() []Example {
 				`Sign out</a>` +
 				`</yr-account-menu>` +
 				`</yr-navbar>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "standard-unauthed", Component: templ.Raw(
 			`<yr-navbar-std logo="/logo.png" brand="Yardrail">` +
 				`</yr-navbar-std>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "standard-authed", Component: templ.Raw(
 			`<yr-navbar-std logo="/logo.png" brand="Yardrail" authed>` +
 				`<a href="#"` +
@@ -70,6 +70,6 @@ func navbarExamples() []Example {
 				`Sign out</a>` +
 				`</yr-account-menu>` +
 				`</yr-navbar-std>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

@@ -12,9 +12,9 @@ func breadcrumbExamples() []Example {
 				`<span class="yr-breadcrumb-sep">/</span>` +
 				`<span class="yr-breadcrumb-current">Run 8f3a2c1d</span>` +
 				`</nav>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "back-link", Component: templ.Raw(
 			`<nav class="yr-breadcrumb"><a href="#">← Browse</a></nav>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

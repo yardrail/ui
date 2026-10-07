@@ -12,7 +12,7 @@ const sidebarSlotStyle = `<style>.demo-slot{background:var(--yr-bg);` +
 
 func sidebarExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			sidebarSlotStyle +
 				`<yr-sidebar style="position:relative;top:0;` +
 				`height:100vh">` +
@@ -26,8 +26,8 @@ func sidebarExamples() []Example {
 				`<div class="demo-slot">footer</div>` +
 				`</yr-sidebar-footer>` +
 				`</yr-sidebar>`,
-		)},
-		{Name: "with-content", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleWithContent, Component: templ.Raw(
 			`<yr-sidebar style="position:relative;top:0;` +
 				`height:100vh">` +
 				`<yr-sidebar-header>` +
@@ -55,8 +55,8 @@ func sidebarExamples() []Example {
 				`color:var(--yr-text-subtle)">v0.1.0</span>` +
 				`</yr-sidebar-footer>` +
 				`</yr-sidebar>`,
-		)},
-		{Name: "collapsed", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleCollapsed, Component: templ.Raw(
 			`<yr-sidebar collapsed style="position:relative;` +
 				`top:0;height:100vh">` +
 				`<yr-sidebar-header>` +
@@ -79,6 +79,6 @@ func sidebarExamples() []Example {
 				` Settings</yr-sidebar-link>` +
 				`</yr-sidebar-nav>` +
 				`</yr-sidebar>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

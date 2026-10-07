@@ -7,10 +7,17 @@ import (
 	"io/fs"
 	"log/slog"
 	"net/http"
+	"path"
 
 	"github.com/a-h/templ"
 
 	"github.com/yardrail/ui"
+)
+
+// Region component slugs that double as the name of the shell slot each fills.
+const (
+	sidebar = "sidebar"
+	drawer  = "drawer"
 )
 
 // sections defines the two-tier grouping shown in the gallery sidebar.
@@ -32,9 +39,9 @@ var sections = []section{
 			"page-setup",
 		}},
 		{Slug: "regions", Name: "Regions", ContextSlot: map[string]string{
-			"navbar": "nav", "sidebar": "sidebar", "drawer": "drawer",
+			"navbar": "nav", sidebar: sidebar, drawer: drawer,
 		}, Components: []string{
-			"navbar", "sidebar", "drawer",
+			"navbar", sidebar, drawer,
 		}},
 	}},
 	{Name: "Components", Categories: []category{
@@ -51,7 +58,14 @@ var sections = []section{
 			"table", "row-edit", "list-row", "activity-row", "meta-row",
 		}},
 		{Slug: "cards", Name: "Cards", ContextSlot: nil, Components: []string{
-			"card", "action-card", "auth-card", "setup-card", "review-card", "template-card", "create-panel", "settings-section",
+			"card",
+			"action-card",
+			"auth-card",
+			"setup-card",
+			"review-card",
+			"template-card",
+			"create-panel",
+			"settings-section",
 		}},
 		{Slug: "feedback", Name: "Feedback", ContextSlot: nil, Components: []string{
 			"alert", "empty-state",
@@ -155,7 +169,8 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
         <span class="browser-dot yellow"></span>
         <span class="browser-dot green"></span>
       </div>
-      <span class="browser-url">{{if (index .Examples 0).DisplayURL}}{{(index .Examples 0).DisplayURL}}{{else}}/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}{{end}}</span>
+      <span class="browser-url">{{if (index .Examples 0).DisplayURL}}{{(index .Examples 0).DisplayURL}}
+        {{- else}}/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}{{end}}</span>
     </div>
     <div class="browser-body">
       <iframe src="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}"></iframe>
@@ -321,7 +336,10 @@ func newHandler(assets fs.FS) http.Handler {
 				if exs, ok := byComponent[comp]; ok {
 					for _, ex := range exs {
 						g.examples[comp+"/"+ex.Name] = ex.Component
-						ic.Components[k].Examples = append(ic.Components[k].Examples, indexExample{Name: ex.Name, DisplayURL: ex.DisplayURL})
+						ic.Components[k].Examples = append(
+							ic.Components[k].Examples,
+							indexExample{Name: ex.Name, DisplayURL: ex.DisplayURL},
+						)
 					}
 				}
 			}
@@ -389,7 +407,7 @@ func (g *gallery) js(w http.ResponseWriter, r *http.Request) {
 
 // font serves vendored woff2 font files.
 func (g *gallery) font(w http.ResponseWriter, r *http.Request) {
-	http.ServeFileFS(w, r, g.assets, "fonts/"+r.PathValue("file"))
+	http.ServeFileFS(w, r, g.assets, path.Join("fonts", path.Base(r.PathValue("file"))))
 }
 
 // logo serves the Yardrail logo.

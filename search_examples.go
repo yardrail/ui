@@ -24,8 +24,12 @@ func searchExample(modifier, placeholder string, iconSize int) templ.Component {
 
 func searchExamples() []Example {
 	return []Example{
-		{Name: "plain", Component: searchExample("", "Search templates…", searchIconSize)},
-		{Name: "hero", Component: searchExample("hero", "Search 500+ templates…", searchHeroIconSize)},
-		{Name: "compact", Component: searchExample("compact", "Search connectors…", searchCompactIconSize)},
+		{Name: "plain", Component: searchExample("", "Search templates…", searchIconSize), DisplayURL: ""},
+		{Name: "hero", Component: searchExample("hero", "Search 500+ templates…", searchHeroIconSize), DisplayURL: ""},
+		{
+			Name:       "compact",
+			Component:  searchExample("compact", "Search connectors…", searchCompactIconSize),
+			DisplayURL: "",
+		},
 	}
 }

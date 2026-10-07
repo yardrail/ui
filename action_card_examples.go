@@ -28,6 +28,6 @@ func actionCardExamples() []Example {
 				`</div>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

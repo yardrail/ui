@@ -9,10 +9,10 @@ func emptyStateExamples() []Example {
 	return []Example{
 		{Name: "text", Component: templ.Raw(
 			`<yr-empty-state>No teams yet. Add one above.</yr-empty-state>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-icon", Component: templ.Raw(
 			`<yr-empty-state>` + exampleIcon("search", `slot="icon"`, emptyStateIconSize) +
 				`No templates match your search.</yr-empty-state>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

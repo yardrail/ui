@@ -15,6 +15,6 @@ func liveDurationExamples() []Example {
 				`<code style="font-size:0.75rem;color:#5C5A59">no started-at</code>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

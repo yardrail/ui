@@ -16,7 +16,7 @@ func authCardExamples() []Example {
 				`</form>` +
 				`<p class="yr-auth-card-footer">No account? <a href="#">Sign up</a></p>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-error", Component: templ.Raw(
 			`<div class="yr-auth-card">` +
 				`<p class="yr-auth-card-brand">Yardrail</p>` +
@@ -30,6 +30,6 @@ func authCardExamples() []Example {
 				`</form>` +
 				`<p class="yr-auth-card-footer">No account? <a href="#">Sign up</a></p>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

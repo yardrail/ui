@@ -32,6 +32,6 @@ func iconBadgeExamples() []Example {
 				iconBadgeItem("pink", "user") +
 				iconBadgeItem("danger", "zap") +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

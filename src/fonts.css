@@ -20,7 +20,7 @@
 
 /* Quicksand — latin-ext */
 @font-face {
-  font-family: 'Quicksand';
+  font-family: Quicksand;
   font-style: normal;
   font-weight: 500 700;
   font-display: swap;
@@ -30,7 +30,7 @@
 
 /* Quicksand — latin */
 @font-face {
-  font-family: 'Quicksand';
+  font-family: Quicksand;
   font-style: normal;
   font-weight: 500 700;
   font-display: swap;

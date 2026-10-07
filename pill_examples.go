@@ -15,7 +15,7 @@ func pillExamples() []Example {
 				`<yr-pill tone="danger">Danger</yr-pill>` +
 				`<yr-pill>No tone</yr-pill>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "status", Component: templ.Raw(
 			`<div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">` +
 				`<yr-pill tone="success" shape="pill">Running</yr-pill>` +
@@ -23,7 +23,7 @@ func pillExamples() []Example {
 				`<yr-pill tone="danger" shape="pill">Failed</yr-pill>` +
 				`<yr-pill shape="pill">Idle</yr-pill>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "interactive", Component: templ.Raw(
 			`<div style="display:flex;flex-wrap:wrap;gap:0.5rem">` +
 				`<a href="#" class="yr-pill yr-pill--pill yr-pill--tone-accent is-active">All</a>` +
@@ -31,6 +31,6 @@ func pillExamples() []Example {
 				`<a href="#" class="yr-pill yr-pill--pill">Analytics</a>` +
 				`<a href="#" class="yr-pill yr-pill--pill">Sales</a>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

@@ -52,7 +52,7 @@
     U+FFFD;
 }
 @font-face {
-  font-family: "Quicksand";
+  font-family: Quicksand;
   font-style: normal;
   font-weight: 500 700;
   font-display: swap;
@@ -77,7 +77,7 @@
     U+A720-A7FF;
 }
 @font-face {
-  font-family: "Quicksand";
+  font-family: Quicksand;
   font-style: normal;
   font-weight: 500 700;
   font-display: swap;

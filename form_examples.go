@@ -13,8 +13,8 @@ func formExamples() []Example {
 			Field("Email", "email", FieldProps{Type: FieldEmail, Autocomplete: AutocompleteEmail}),
 			Field("Password", "password", FieldProps{Type: FieldPassword, Autocomplete: AutocompleteNewPassword}),
 			Button("Create account", ButtonProps{Type: Submit}),
-		)},
-		{Name: "inline", Component: exampleRenameForm("")},
+		), DisplayURL: ""},
+		{Name: "inline", Component: exampleRenameForm(""), DisplayURL: ""},
 	}
 }
 

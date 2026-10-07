@@ -7,6 +7,13 @@ import (
 	"github.com/a-h/templ"
 )
 
+// Example names shared by several components.
+const (
+	exampleDefault     = "default"
+	exampleWithContent = "with-content"
+	exampleCollapsed   = "collapsed"
+)
+
 // Example is one named rendering of a component. The snapshot tests compare it against
 // testdata/<component>/<name>.html, and the gallery serves it at /<component>/<name>.
 type Example struct {

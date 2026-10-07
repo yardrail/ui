@@ -10,11 +10,11 @@ func tableExamples() []Example {
 			Table("Teams", TableProps{Columns: []Column{Col("Name"), Col("Members")}}),
 			exampleTeamRow("Platform", "12"),
 			exampleTeamRow("Design", "4"),
-		)},
+		), DisplayURL: ""},
 		{Name: "hidden-caption", Component: withChildren(
 			Table("Teams", TableProps{Columns: []Column{Col("Name"), Col("Members")}, HideCaption: true}),
 			exampleTeamRow("Platform", "12"),
-		)},
+		), DisplayURL: ""},
 		{Name: "actions", Component: withChildren(
 			Table("Teams", TableProps{Columns: []Column{Col("Name"), ActionsCol()}}),
 			withChildren(
@@ -22,20 +22,20 @@ func tableExamples() []Example {
 				withChildren(Cell(CellProps{Kind: CellName}), text("Platform")),
 				withChildren(ActionsCell(), Button("Remove", ButtonProps{Variant: DangerQuiet})),
 			),
-		)},
-		{Name: "row-plain", Component: exampleTeamRow("Platform", "12")},
+		), DisplayURL: ""},
+		{Name: "row-plain", Component: exampleTeamRow("Platform", "12"), DisplayURL: ""},
 		{Name: "row-disabled", Component: withChildren(
 			Row(RowProps{Disabled: true}),
 			withChildren(Cell(CellProps{}), text("Archived")),
-		)},
+		), DisplayURL: ""},
 		{Name: "cell-name", Component: withChildren(
 			Row(RowProps{}),
 			withChildren(Cell(CellProps{Kind: CellName}), text("Platform")),
-		)},
+		), DisplayURL: ""},
 		{Name: "cell-mono", Component: withChildren(
 			Row(RowProps{}),
 			withChildren(Cell(CellProps{Kind: CellMono}), text("whk_7f3a9c")),
-		)},
+		), DisplayURL: ""},
 	}
 }
 

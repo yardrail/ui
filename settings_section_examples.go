@@ -16,7 +16,7 @@ func settingsSectionExamples() []Example {
 				`</form>` +
 				`</div>` +
 				`</section>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "field-row", Component: templ.Raw(
 			`<section class="yr-settings-section">` +
 				`<h2>Display name</h2>` +
@@ -26,6 +26,6 @@ func settingsSectionExamples() []Example {
 				`<div><yr-button variant="primary" type="submit">Save</yr-button></div>` +
 				`</form>` +
 				`</section>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

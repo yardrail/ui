@@ -135,44 +135,36 @@ func mspSidebarClientDetail(activePage string) string {
 		{"settings", "Settings", "settings"},
 	}
 
-	var b strings.Builder
-
-	b.WriteString(`<yr-sidebar>`)
-	b.WriteString(`<yr-sidebar-header>`)
-	b.WriteString(`<span style="font-family:var(--yr-font-body);`)
-	b.WriteString(`font-weight:600;font-size:var(--yr-font-size-sm)">`)
-	b.WriteString(`MSP Portal</span>`)
-	b.WriteString(`</yr-sidebar-header>`)
-
-	b.WriteString(`<yr-sidebar-nav>`)
-	b.WriteString(`<yr-sidebar-link href="#">`)
-	b.WriteString(exampleIcon("layout-dashboard", "", mspIconSize))
-	b.WriteString(` Dashboard</yr-sidebar-link>`)
-	b.WriteString(`<yr-sidebar-link href="#">`)
-	b.WriteString(exampleIcon("building-2", "", mspIconSize))
-	b.WriteString(` Clients</yr-sidebar-link>`)
-	b.WriteString(`</yr-sidebar-nav>`)
-
-	b.WriteString(`<yr-sidebar-nav>`)
-	b.WriteString(`<yr-sidebar-org name="Acme Corp"></yr-sidebar-org>`)
-
+	links := make([]string, 0, len(clientLinks))
 	for _, l := range clientLinks {
 		active := ""
 		if l.slug == activePage {
 			active = " active"
 		}
-		b.WriteString(`<yr-sidebar-link href="#"`)
-		b.WriteString(active)
-		b.WriteString(`>`)
-		b.WriteString(exampleIcon(l.icon, "", mspIconSize))
-		b.WriteString(` `)
-		b.WriteString(l.label)
-		b.WriteString(`</yr-sidebar-link>`)
+
+		links = append(links, `<yr-sidebar-link href="#"`+active+`>`+
+			exampleIcon(l.icon, "", mspIconSize)+
+			` `+l.label+`</yr-sidebar-link>`)
 	}
 
-	b.WriteString(`</yr-sidebar-nav>`)
-	b.WriteString(mspSidebarFooter())
-	b.WriteString(`</yr-sidebar>`)
-
-	return b.String()
+	return `<yr-sidebar>` +
+		`<yr-sidebar-header>` +
+		`<span style="font-family:var(--yr-font-body);` +
+		`font-weight:600;font-size:var(--yr-font-size-sm)">` +
+		`MSP Portal</span>` +
+		`</yr-sidebar-header>` +
+		`<yr-sidebar-nav>` +
+		`<yr-sidebar-link href="#">` +
+		exampleIcon("layout-dashboard", "", mspIconSize) +
+		` Dashboard</yr-sidebar-link>` +
+		`<yr-sidebar-link href="#">` +
+		exampleIcon("building-2", "", mspIconSize) +
+		` Clients</yr-sidebar-link>` +
+		`</yr-sidebar-nav>` +
+		`<yr-sidebar-nav>` +
+		`<yr-sidebar-org name="Acme Corp"></yr-sidebar-org>` +
+		strings.Join(links, "") +
+		`</yr-sidebar-nav>` +
+		mspSidebarFooter() +
+		`</yr-sidebar>`
 }

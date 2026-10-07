@@ -20,6 +20,6 @@ func navShellExamples() []Example {
 				`text-decoration:none">Docs</a>` +
 				`<yr-avatar>BL</yr-avatar>` +
 				`</yr-nav-shell>`,
-		)},
+		), DisplayURL: ""},
 	}
 }
