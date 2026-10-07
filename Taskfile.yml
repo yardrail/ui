@@ -19,11 +19,27 @@ tasks:
     desc: Compile .templ files to *_templ.go
     cmd: templ generate
 
+  gen:check:
+    desc: Verify committed codegen output (*_templ.go, dist/) is up to date with its sources
+    cmds:
+      - task: gen
+      - task: build
+      # -N (intent-to-add) surfaces newly generated, untracked files to git diff
+      # so a new .templ file whose output was never committed fails the check too.
+      - git add -N -- '*_templ.go' dist/
+      - git diff --exit-code -- '*_templ.go' dist/
+
   test:
     desc: Run Go tests
     cmd: go test ./...
 
   lint:
+    desc: Run all lints
+    cmds:
+      - task: lint:go
+      - task: lint:css
+
+  lint:go:
     desc: Run Go lints
     cmds:
       - golangci-lint config verify
