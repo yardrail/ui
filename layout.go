@@ -2,11 +2,15 @@ package ui
 
 import (
 	"context"
+	"errors"
 	"io"
 	"strings"
 
 	"github.com/a-h/templ"
 )
+
+// errRegionOutsideSplit reports a SplitAside or SplitMain whose parent is not a Split.
+var errRegionOutsideSplit = errors.New("region rendered outside a Split")
 
 // Positions shared by Align and Justify.
 const (
@@ -65,6 +69,7 @@ const (
 	clusterBlock = "yr-cluster"
 	gridBlock    = "yr-grid"
 	centerBlock  = "yr-center"
+	splitBlock   = "yr-split"
 )
 
 // Modifier names shared by several primitives.
@@ -86,6 +91,11 @@ func (w ItemWidth) step() string {
 // step returns the scale step of m, such as "narrow" for MeasureNarrow, or "" for the zero value.
 func (m Measure) step() string {
 	return strings.TrimPrefix(m.v, "--yr-measure-")
+}
+
+// step returns the scale step of w, such as "lg" for SideWidthLg, or "" for the zero value.
+func (w SideWidth) step() string {
+	return strings.TrimPrefix(w.v, "--yr-side-")
 }
 
 // modifier returns the class block--name-value, or "" when value is empty.
@@ -125,6 +135,17 @@ type layoutParentKey struct{}
 // withLayoutParent returns ctx carrying info as the enclosing layout primitive.
 func withLayoutParent(ctx context.Context, info layoutInfo) context.Context {
 	return context.WithValue(ctx, layoutParentKey{}, info)
+}
+
+// layoutParent returns the innermost enclosing layout primitive, or the zero layoutInfo outside
+// one.
+func layoutParent(ctx context.Context) layoutInfo {
+	info, ok := ctx.Value(layoutParentKey{}).(layoutInfo)
+	if !ok {
+		return layoutInfo{}
+	}
+
+	return info
 }
 
 // asParent renders el with info as the enclosing layout primitive of its children.
@@ -231,4 +252,61 @@ func (p *CenterProps) class() string {
 func Center(p CenterProps) templ.Component {
 	return asParent(layoutInfo{block: centerBlock, list: false},
 		layoutBox("Center", p.class(), As{}, p.Attrs))
+}
+
+// RegionProps holds a region's optional settings; every zero value is the default.
+type RegionProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+}
+
+// SplitProps holds a Split's optional settings; every zero value is the default.
+type SplitProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// SideWidth is the width of the aside while the regions sit side by side; the zero value is
+	// SideWidthMd.
+	SideWidth SideWidth
+	// Gap is the space between the regions; the zero value is Space6.
+	Gap Space
+}
+
+// class returns the class attribute of a Split.
+func (p *SplitProps) class() string {
+	return classes(
+		splitBlock,
+		modifier(splitBlock, "side", p.SideWidth.step()),
+		modifier(splitBlock, modGap, p.Gap.step()),
+	)
+}
+
+// Split lays out a SplitAside and a SplitMain side by side, in the order the caller writes them,
+// and stacks them when the main region would be narrower than half the Split.
+func Split(p SplitProps) templ.Component {
+	return asParent(layoutInfo{block: splitBlock, list: false},
+		layoutBox("Split", p.class(), As{}, p.Attrs))
+}
+
+// SplitAside renders the side region of a Split. It must be a direct child of a Split.
+func SplitAside(p RegionProps) templ.Component {
+	return splitRegion("SplitAside", splitBlock+"__aside", p)
+}
+
+// SplitMain renders the main region of a Split. It must be a direct child of a Split.
+func SplitMain(p RegionProps) templ.Component {
+	return splitRegion("SplitMain", splitBlock+"__main", p)
+}
+
+// splitRegion renders a region of a Split with class, reporting it when its parent is not a Split.
+// The region is the enclosing layout of its own children.
+func splitRegion(component, class string, p RegionProps) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		if layoutParent(ctx).block != splitBlock {
+			report(component, errRegionOutsideSplit)
+		}
+
+		ctx = withLayoutParent(ctx, layoutInfo{block: class, list: false})
+
+		return layoutBox(component, class, As{}, p.Attrs).Render(ctx, w)
+	})
 }

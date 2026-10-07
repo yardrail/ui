@@ -126,3 +126,24 @@ func centerExamples() []Example {
 		},
 	}
 }
+
+// Placeholder labels for the regions of Split examples.
+const (
+	placeholderAside = "Aside"
+	placeholderMain  = "Main"
+)
+
+func splitExamples() []Example {
+	aside := withChildren(SplitAside(RegionProps{}), placeholder(placeholderAside))
+	main := withChildren(SplitMain(RegionProps{}), placeholder(placeholderMain))
+
+	return []Example{
+		{Name: "aside-first", Component: withChildren(Split(SplitProps{}), aside, main), DisplayURL: ""},
+		{Name: "main-first", Component: withChildren(Split(SplitProps{}), main, aside), DisplayURL: ""},
+		{
+			Name:       "side-lg",
+			Component:  withChildren(Split(SplitProps{SideWidth: SideWidthLg}), aside, main),
+			DisplayURL: "",
+		},
+	}
+}

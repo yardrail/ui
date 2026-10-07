@@ -96,3 +96,36 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
 .yr-center--measure-narrow { --yr-center-measure: var(--yr-measure-narrow); }
 .yr-center--measure-prose { --yr-center-measure: var(--yr-measure-prose); }
 .yr-center--measure-wide { --yr-center-measure: var(--yr-measure-wide); }
+
+/* Split — an aside and a main region side by side, in source order. The
+   main region grows far faster than the aside, and wraps under it when it
+   would be narrower than half the container, so the regions stack without
+   a media or container query. */
+.yr-split {
+  --yr-split-side: var(--yr-side-md);
+  --yr-split-gap: var(--yr-space-6);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--yr-split-gap);
+}
+.yr-split--side-sm { --yr-split-side: var(--yr-side-sm); }
+.yr-split--side-md { --yr-split-side: var(--yr-side-md); }
+.yr-split--side-lg { --yr-split-side: var(--yr-side-lg); }
+.yr-split--gap-1 { --yr-split-gap: var(--yr-space-1); }
+.yr-split--gap-2 { --yr-split-gap: var(--yr-space-2); }
+.yr-split--gap-3 { --yr-split-gap: var(--yr-space-3); }
+.yr-split--gap-4 { --yr-split-gap: var(--yr-space-4); }
+.yr-split--gap-6 { --yr-split-gap: var(--yr-space-6); }
+.yr-split--gap-8 { --yr-split-gap: var(--yr-space-8); }
+.yr-split--gap-12 { --yr-split-gap: var(--yr-space-12); }
+.yr-split--gap-16 { --yr-split-gap: var(--yr-space-16); }
+.yr-split__aside {
+  flex-basis: var(--yr-split-side);
+  flex-grow: 1;
+}
+.yr-split__main {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 50%;
+}

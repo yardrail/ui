@@ -18,9 +18,9 @@ rules:
   rule-empty-line-before: null
   comment-empty-line-before: null
 
-  # BEM-style block__element--modifier class names (e.g. .yr-button--danger):
-  # allow one --modifier suffix on top of standard kebab-case.
-  selector-class-pattern: "^[a-z][a-z0-9]*(-[a-z0-9]+)*(--[a-z0-9]+(-[a-z0-9]+)*)?$"
+  # Class names are a kebab-case block, then optionally one __element and
+  # one --modifier: .yr-split, .yr-split--gap-8, .yr-split__aside.
+  selector-class-pattern: "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$"
 
   # src/styles.css uses bare-string @import for its build-time imports.
   import-notation: string

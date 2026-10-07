@@ -40,6 +40,7 @@ func ExampleGroups() []ExampleGroup {
 		{Component: "cluster", Examples: clusterExamples()},
 		{Component: "grid", Examples: gridExamples()},
 		{Component: "center", Examples: centerExamples()},
+		{Component: "split", Examples: splitExamples()},
 		{Component: "button", Examples: buttonExamples()},
 		{Component: "pill", Examples: pillExamples()},
 		{Component: "avatar", Examples: avatarExamples()},
