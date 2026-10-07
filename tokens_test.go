@@ -13,7 +13,9 @@ import (
 
 // scaleTokenRE matches the declaration of a scale token in src/tokens.css. Control properties
 // (--yr-control-*) and font families (--yr-font-body) are not scale tokens.
-var scaleTokenRE = regexp.MustCompile(`(?m)^\s*(--yr-(?:space|font-size|radius|measure|side)-[a-z0-9-]+)\s*:`)
+var scaleTokenRE = regexp.MustCompile(
+	`(?m)^\s*(--yr-(?:space|font-size|radius|measure|side|item-width)-[a-z0-9-]+)\s*:`,
+)
 
 // TestTokensMatchCSS fails when a scale token in src/tokens.css has no Go value in tokens.go, or
 // a Go value names a token the stylesheet does not define.
@@ -26,6 +28,7 @@ func TestTokensMatchCSS(t *testing.T) {
 		"Radius":    "--yr-radius-",
 		"Measure":   "--yr-measure-",
 		"SideWidth": "--yr-side-",
+		"ItemWidth": "--yr-item-width-",
 	}
 
 	css, err := os.ReadFile("src/tokens.css")

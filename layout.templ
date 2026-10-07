@@ -1,0 +1,24 @@
+package ui
+
+// layoutBox renders the element of a layout primitive around its children: a <div>, or a
+// <ul role="list"> when as is AsList.
+templ layoutBox(component, class string, as As, attrs templ.Attributes) {
+	if as.list() {
+		<ul role="list" class={ class } { filterAttrs(component, attrs)... }>
+			{ children... }
+		</ul>
+	} else {
+		<div class={ class } { filterAttrs(component, attrs)... }>
+			{ children... }
+		</div>
+	}
+}
+
+// dividerElement renders the rule for Divider, as a list item when parent renders as a list.
+templ dividerElement(parent layoutInfo) {
+	if parent.list {
+		<li role="separator" class="yr-divider"></li>
+	} else {
+		<hr class="yr-divider"/>
+	}
+}

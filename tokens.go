@@ -86,3 +86,15 @@ var (
 	// SideWidthLg is 20rem.
 	SideWidthLg = SideWidth{v: "--yr-side-lg"}
 )
+
+// ItemWidth is the minimum width of an item in a grid. The zero value carries no token and means
+// the primitive's default.
+type ItemWidth struct{ v string }
+
+// Item widths.
+var (
+	// ItemWidthSm is 15rem.
+	ItemWidthSm = ItemWidth{v: "--yr-item-width-sm"}
+	// ItemWidthMd is 20rem.
+	ItemWidthMd = ItemWidth{v: "--yr-item-width-md"}
+)

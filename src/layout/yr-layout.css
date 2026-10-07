@@ -1,0 +1,140 @@
+/* Layout primitives — Stack, Cluster, Grid, Split, Center and Divider
+   (layout.go, layout.templ). They arrange their children and draw nothing:
+   no background, border, radius, shadow, colour or outer margin. Each block
+   sets its defaults as block-local custom properties, and each modifier
+   class overrides one of them. A primitive sets every property it reads on
+   itself, so a nested primitive never inherits its parent's modifiers. */
+
+/* AsList renders a primitive as <ul role="list">; reset the list styling. */
+ul:is(.yr-stack, .yr-cluster, .yr-grid) {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Stack — a column with a consistent gap. */
+.yr-stack {
+  --yr-stack-gap: var(--yr-space-4);
+  --yr-stack-align: stretch;
+
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-stack-gap);
+  align-items: var(--yr-stack-align);
+}
+.yr-stack--gap-1 { --yr-stack-gap: var(--yr-space-1); }
+.yr-stack--gap-2 { --yr-stack-gap: var(--yr-space-2); }
+.yr-stack--gap-3 { --yr-stack-gap: var(--yr-space-3); }
+.yr-stack--gap-4 { --yr-stack-gap: var(--yr-space-4); }
+.yr-stack--gap-6 { --yr-stack-gap: var(--yr-space-6); }
+.yr-stack--gap-8 { --yr-stack-gap: var(--yr-space-8); }
+.yr-stack--gap-12 { --yr-stack-gap: var(--yr-space-12); }
+.yr-stack--gap-16 { --yr-stack-gap: var(--yr-space-16); }
+.yr-stack--align-start { --yr-stack-align: start; }
+.yr-stack--align-center { --yr-stack-align: center; }
+.yr-stack--align-end { --yr-stack-align: end; }
+.yr-stack--align-stretch { --yr-stack-align: stretch; }
+
+/* Cluster — a row that wraps. */
+.yr-cluster {
+  --yr-cluster-gap: var(--yr-space-2);
+  --yr-cluster-justify: start;
+  --yr-cluster-align: center;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--yr-cluster-gap);
+  justify-content: var(--yr-cluster-justify);
+  align-items: var(--yr-cluster-align);
+}
+.yr-cluster--gap-1 { --yr-cluster-gap: var(--yr-space-1); }
+.yr-cluster--gap-2 { --yr-cluster-gap: var(--yr-space-2); }
+.yr-cluster--gap-3 { --yr-cluster-gap: var(--yr-space-3); }
+.yr-cluster--gap-4 { --yr-cluster-gap: var(--yr-space-4); }
+.yr-cluster--gap-6 { --yr-cluster-gap: var(--yr-space-6); }
+.yr-cluster--gap-8 { --yr-cluster-gap: var(--yr-space-8); }
+.yr-cluster--gap-12 { --yr-cluster-gap: var(--yr-space-12); }
+.yr-cluster--gap-16 { --yr-cluster-gap: var(--yr-space-16); }
+.yr-cluster--justify-start { --yr-cluster-justify: start; }
+.yr-cluster--justify-center { --yr-cluster-justify: center; }
+.yr-cluster--justify-end { --yr-cluster-justify: end; }
+.yr-cluster--justify-between { --yr-cluster-justify: space-between; }
+.yr-cluster--align-start { --yr-cluster-align: start; }
+.yr-cluster--align-center { --yr-cluster-align: center; }
+.yr-cluster--align-end { --yr-cluster-align: end; }
+.yr-cluster--align-stretch { --yr-cluster-align: stretch; }
+
+/* Grid — as many equal columns as fit at the item width, one column when
+   the container is narrower than that. */
+.yr-grid {
+  --yr-grid-item: var(--yr-item-width-md);
+  --yr-grid-gap: var(--yr-space-4);
+
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(var(--yr-grid-item), 100%), 1fr));
+  gap: var(--yr-grid-gap);
+}
+.yr-grid--item-sm { --yr-grid-item: var(--yr-item-width-sm); }
+.yr-grid--item-md { --yr-grid-item: var(--yr-item-width-md); }
+.yr-grid--gap-1 { --yr-grid-gap: var(--yr-space-1); }
+.yr-grid--gap-2 { --yr-grid-gap: var(--yr-space-2); }
+.yr-grid--gap-3 { --yr-grid-gap: var(--yr-space-3); }
+.yr-grid--gap-4 { --yr-grid-gap: var(--yr-space-4); }
+.yr-grid--gap-6 { --yr-grid-gap: var(--yr-space-6); }
+.yr-grid--gap-8 { --yr-grid-gap: var(--yr-space-8); }
+.yr-grid--gap-12 { --yr-grid-gap: var(--yr-space-12); }
+.yr-grid--gap-16 { --yr-grid-gap: var(--yr-space-16); }
+
+/* Center — caps the content width and centres it inline. margin-inline:
+   auto is the centring, not outer spacing. */
+.yr-center {
+  --yr-center-measure: var(--yr-measure-prose);
+
+  max-inline-size: var(--yr-center-measure);
+  margin-inline: auto;
+}
+.yr-center--measure-narrow { --yr-center-measure: var(--yr-measure-narrow); }
+.yr-center--measure-prose { --yr-center-measure: var(--yr-measure-prose); }
+.yr-center--measure-wide { --yr-center-measure: var(--yr-measure-wide); }
+
+/* Split — an aside and a main region side by side, in source order. The
+   main region grows far faster than the aside, and wraps under it when it
+   would be narrower than half the container, so the regions stack without
+   a media or container query. */
+.yr-split {
+  --yr-split-side: var(--yr-side-md);
+  --yr-split-gap: var(--yr-space-6);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--yr-split-gap);
+}
+.yr-split--side-sm { --yr-split-side: var(--yr-side-sm); }
+.yr-split--side-md { --yr-split-side: var(--yr-side-md); }
+.yr-split--side-lg { --yr-split-side: var(--yr-side-lg); }
+.yr-split--gap-1 { --yr-split-gap: var(--yr-space-1); }
+.yr-split--gap-2 { --yr-split-gap: var(--yr-space-2); }
+.yr-split--gap-3 { --yr-split-gap: var(--yr-space-3); }
+.yr-split--gap-4 { --yr-split-gap: var(--yr-space-4); }
+.yr-split--gap-6 { --yr-split-gap: var(--yr-space-6); }
+.yr-split--gap-8 { --yr-split-gap: var(--yr-space-8); }
+.yr-split--gap-12 { --yr-split-gap: var(--yr-space-12); }
+.yr-split--gap-16 { --yr-split-gap: var(--yr-space-16); }
+.yr-split__aside {
+  flex-basis: var(--yr-split-side);
+  flex-grow: 1;
+}
+.yr-split__main {
+  flex-basis: 0;
+  flex-grow: 999;
+  min-inline-size: 50%;
+}
+
+/* Divider — the one primitive that draws: a 1px rule across its parent. It
+   has no margin; the parent's gap spaces it. */
+.yr-divider {
+  align-self: stretch;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--yr-border);
+}
