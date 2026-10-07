@@ -436,6 +436,12 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
   flex-grow: 999;
   min-inline-size: 50%;
 }
+.yr-divider {
+  align-self: stretch;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--yr-border);
+}
 
 /* src/button/yr-button.css */
 yr-button {

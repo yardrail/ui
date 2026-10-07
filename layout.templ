@@ -13,3 +13,12 @@ templ layoutBox(component, class string, as As, attrs templ.Attributes) {
 		</div>
 	}
 }
+
+// dividerElement renders the rule for Divider, as a list item when parent renders as a list.
+templ dividerElement(parent layoutInfo) {
+	if parent.list {
+		<li role="separator" class="yr-divider"></li>
+	} else {
+		<hr class="yr-divider"/>
+	}
+}

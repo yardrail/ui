@@ -39,7 +39,7 @@ var sections = []section{
 			"page-setup",
 		}},
 		{Slug: "layout", Name: "Layout", ContextSlot: nil, Components: []string{
-			"stack", "cluster", "grid", "split", "center",
+			"stack", "cluster", "grid", "split", "center", "divider",
 		}},
 		{Slug: "regions", Name: "Regions", ContextSlot: map[string]string{
 			"navbar": "nav", sidebar: sidebar, drawer: drawer,

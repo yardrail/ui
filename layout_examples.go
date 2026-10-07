@@ -147,3 +147,20 @@ func splitExamples() []Example {
 		},
 	}
 }
+
+func dividerExamples() []Example {
+	return []Example{
+		{
+			Name: "in-stack",
+			Component: withChildren(Stack(StackProps{}),
+				placeholder(placeholderOne), Divider(), placeholder(placeholderTwo)),
+			DisplayURL: "",
+		},
+		{
+			Name: "in-list",
+			Component: withChildren(Stack(StackProps{As: AsList}),
+				placeholderItem(placeholderOne), Divider(), placeholderItem(placeholderTwo)),
+			DisplayURL: "",
+		},
+	}
+}

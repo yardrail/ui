@@ -129,3 +129,12 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
   flex-grow: 999;
   min-inline-size: 50%;
 }
+
+/* Divider — the one primitive that draws: a 1px rule across its parent. It
+   has no margin; the parent's gap spaces it. */
+.yr-divider {
+  align-self: stretch;
+  margin: 0;
+  border: 0;
+  border-block-start: 1px solid var(--yr-border);
+}

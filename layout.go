@@ -310,3 +310,12 @@ func splitRegion(component, class string, p RegionProps) templ.Component {
 		return layoutBox(component, class, As{}, p.Attrs).Render(ctx, w)
 	})
 }
+
+// Divider renders a horizontal rule between the children of a layout primitive: an <hr>, or an
+// <li role="separator"> when the enclosing primitive renders as a list. The primitive's gap spaces
+// it from its neighbours.
+func Divider() templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		return dividerElement(layoutParent(ctx)).Render(ctx, w)
+	})
+}
