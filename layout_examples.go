@@ -89,3 +89,40 @@ func clusterExamples() []Example {
 		},
 	}
 }
+
+func gridExamples() []Example {
+	six := []string{placeholderOne, placeholderTwo, placeholderThree, "Four", "Five", "Six"}
+
+	return []Example{
+		{Name: exampleDefault, Component: withChildren(Grid(GridProps{}), placeholders(six...)...), DisplayURL: ""},
+		{
+			Name:       "item-sm",
+			Component:  withChildren(Grid(GridProps{MinItemWidth: ItemWidthSm}), placeholders(six...)...),
+			DisplayURL: "",
+		},
+		{
+			Name:       exampleAsList,
+			Component:  withChildren(Grid(GridProps{As: AsList}), placeholderItems(six...)...),
+			DisplayURL: "",
+		},
+	}
+}
+
+// centerProse is the placeholder copy for Center examples.
+const centerProse = "Connect a data source to start syncing. Each connector runs on its own schedule, and " +
+	"you can pause or remove it at any time from the connector settings."
+
+func centerExamples() []Example {
+	return []Example{
+		{
+			Name:       exampleDefault,
+			Component:  withChildren(Center(CenterProps{}), placeholder(centerProse)),
+			DisplayURL: "",
+		},
+		{
+			Name:       "measure-narrow",
+			Component:  withChildren(Center(CenterProps{Measure: MeasureNarrow}), placeholder(centerProse)),
+			DisplayURL: "",
+		},
+	}
+}

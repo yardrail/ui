@@ -8,6 +8,13 @@ import (
 	"github.com/a-h/templ"
 )
 
+// Positions shared by Align and Justify.
+const (
+	posStart  = "start"
+	posCenter = "center"
+	posEnd    = "end"
+)
+
 // Align is how a layout primitive aligns its children across its main axis. The zero value means
 // the primitive's default.
 type Align struct{ v string }
@@ -15,11 +22,11 @@ type Align struct{ v string }
 // Cross-axis alignments.
 var (
 	// AlignStart packs children against the start edge.
-	AlignStart = Align{v: "start"}
+	AlignStart = Align{v: posStart}
 	// AlignCenter centres children.
-	AlignCenter = Align{v: "center"}
+	AlignCenter = Align{v: posCenter}
 	// AlignEnd packs children against the end edge.
-	AlignEnd = Align{v: "end"}
+	AlignEnd = Align{v: posEnd}
 	// AlignStretch stretches children to fill the cross axis.
 	AlignStretch = Align{v: "stretch"}
 )
@@ -31,11 +38,11 @@ type Justify struct{ v string }
 // Main-axis distributions.
 var (
 	// JustifyStart packs children against the start edge.
-	JustifyStart = Justify{v: "start"}
+	JustifyStart = Justify{v: posStart}
 	// JustifyCenter centres children.
-	JustifyCenter = Justify{v: "center"}
+	JustifyCenter = Justify{v: posCenter}
 	// JustifyEnd packs children against the end edge.
-	JustifyEnd = Justify{v: "end"}
+	JustifyEnd = Justify{v: posEnd}
 	// JustifyBetween spreads children so the first and last touch the edges.
 	JustifyBetween = Justify{v: "between"}
 )
@@ -56,6 +63,8 @@ func (a As) list() bool {
 const (
 	stackBlock   = "yr-stack"
 	clusterBlock = "yr-cluster"
+	gridBlock    = "yr-grid"
+	centerBlock  = "yr-center"
 )
 
 // Modifier names shared by several primitives.
@@ -67,6 +76,16 @@ const (
 // step returns the scale step of s, such as "4" for Space4, or "" for the zero value.
 func (s Space) step() string {
 	return strings.TrimPrefix(s.v, "--yr-space-")
+}
+
+// step returns the scale step of w, such as "sm" for ItemWidthSm, or "" for the zero value.
+func (w ItemWidth) step() string {
+	return strings.TrimPrefix(w.v, "--yr-item-width-")
+}
+
+// step returns the scale step of m, such as "narrow" for MeasureNarrow, or "" for the zero value.
+func (m Measure) step() string {
+	return strings.TrimPrefix(m.v, "--yr-measure-")
 }
 
 // modifier returns the class block--name-value, or "" when value is empty.
@@ -164,4 +183,52 @@ func (p *ClusterProps) class() string {
 func Cluster(p ClusterProps) templ.Component {
 	return asParent(layoutInfo{block: clusterBlock, list: p.As.list()},
 		layoutBox("Cluster", p.class(), p.As, p.Attrs))
+}
+
+// GridProps holds a Grid's optional settings; every zero value is the default.
+type GridProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// MinItemWidth is the narrowest a column may get before the grid drops a column; the zero
+	// value is ItemWidthMd.
+	MinItemWidth ItemWidth
+	// Gap is the space between items, in both directions; the zero value is Space4.
+	Gap Space
+	// As is the rendered element; the zero value is a <div>.
+	As As
+}
+
+// class returns the class attribute of a Grid.
+func (p *GridProps) class() string {
+	return classes(
+		gridBlock,
+		modifier(gridBlock, "item", p.MinItemWidth.step()),
+		modifier(gridBlock, modGap, p.Gap.step()),
+	)
+}
+
+// Grid lays its children out in equal-width columns, as many as fit at MinItemWidth, so it goes
+// from one column in a narrow container to several in a wide one.
+func Grid(p GridProps) templ.Component {
+	return asParent(layoutInfo{block: gridBlock, list: p.As.list()},
+		layoutBox("Grid", p.class(), p.As, p.Attrs))
+}
+
+// CenterProps holds a Center's optional settings; every zero value is the default.
+type CenterProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// Measure is the maximum width of the content; the zero value is MeasureProse.
+	Measure Measure
+}
+
+// class returns the class attribute of a Center.
+func (p *CenterProps) class() string {
+	return classes(centerBlock, modifier(centerBlock, "measure", p.Measure.step()))
+}
+
+// Center caps its children at Measure and centres them horizontally.
+func Center(p CenterProps) templ.Component {
+	return asParent(layoutInfo{block: centerBlock, list: false},
+		layoutBox("Center", p.class(), As{}, p.Attrs))
 }
