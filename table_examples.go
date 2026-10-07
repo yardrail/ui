@@ -20,7 +20,7 @@ func tableExamples() []Example {
 			withChildren(
 				Row(RowProps{Attrs: templ.Attributes{"id": "team-7"}}),
 				withChildren(Cell(CellProps{Kind: CellName}), text("Platform")),
-				withChildren(ActionsCell(), Button("Remove", ButtonProps{Variant: DangerQuiet})),
+				withChildren(ActionsCell(), Button("Remove", ButtonProps{Variant: ButtonDangerQuiet})),
 			),
 		), DisplayURL: ""},
 		{Name: "row-plain", Component: exampleTeamRow("Platform", "12"), DisplayURL: ""},

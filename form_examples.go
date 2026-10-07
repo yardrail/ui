@@ -12,7 +12,7 @@ func formExamples() []Example {
 			Form(FormProps{Action: "/signup", ID: "signup"}),
 			Field("Email", "email", FieldProps{Type: FieldEmail, Autocomplete: AutocompleteEmail}),
 			Field("Password", "password", FieldProps{Type: FieldPassword, Autocomplete: AutocompleteNewPassword}),
-			Button("Create account", ButtonProps{Type: Submit}),
+			Button("Create account", ButtonProps{Type: ButtonSubmit}),
 		), DisplayURL: ""},
 		{Name: "inline", Component: exampleRenameForm(""), DisplayURL: ""},
 	}
@@ -33,6 +33,6 @@ func exampleRenameForm(errMsg string) templ.Component {
 			},
 		}),
 		Field("Team name", "name", FieldProps{Value: "Platform", HideLabel: true, Error: errMsg, Focus: errMsg != ""}),
-		Button("Save", ButtonProps{Type: Submit}),
+		Button("Save", ButtonProps{Type: ButtonSubmit}),
 	)
 }
