@@ -81,6 +81,10 @@
   --yr-side-md: 17.5rem;
   --yr-side-lg: 20rem;
 
+  /* Item width — minimum column width of a grid item */
+  --yr-item-width-sm: 15rem;
+  --yr-item-width-md: 20rem;
+
   /* Layout — sidebar and drawer defaults */
   --yr-sidebar-width: 220px;
   --yr-sidebar-width-collapsed: 48px;

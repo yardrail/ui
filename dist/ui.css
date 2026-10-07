@@ -162,6 +162,8 @@
   --yr-side-sm: 15rem;
   --yr-side-md: 17.5rem;
   --yr-side-lg: 20rem;
+  --yr-item-width-sm: 15rem;
+  --yr-item-width-md: 20rem;
   --yr-sidebar-width: 220px;
   --yr-sidebar-width-collapsed: 48px;
   --yr-drawer-width: 360px;
