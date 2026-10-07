@@ -11,6 +11,6 @@ func ratingExamples() []Example {
 				`<yr-rating value="3"></yr-rating>` +
 				`<yr-rating value="1"></yr-rating>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

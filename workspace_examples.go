@@ -25,7 +25,7 @@ func workspaceExamples() []Example {
 				`</yr-content-main>` +
 				`</yr-content>` +
 				`</yr-page-workspace>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-drawer", Component: templ.Raw(
 			workspaceBase +
 				`<yr-page-workspace>` +
@@ -46,8 +46,8 @@ func workspaceExamples() []Example {
 				`</yr-drawer>` +
 				`</yr-content>` +
 				`</yr-page-workspace>`,
-		)},
-		{Name: "collapsed", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleCollapsed, Component: templ.Raw(
 			workspaceBase +
 				`<yr-page-workspace>` +
 				`<yr-nav-shell>` +
@@ -63,6 +63,6 @@ func workspaceExamples() []Example {
 				`</yr-content-main>` +
 				`</yr-content>` +
 				`</yr-page-workspace>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

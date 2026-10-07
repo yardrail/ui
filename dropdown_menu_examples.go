@@ -24,7 +24,7 @@ func dropdownMenuExamples() []Example {
 				`</div>` +
 				`</yr-dropdown-menu>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "open", Component: templ.Raw(
 			`<div style="display:flex;justify-content:flex-end;min-height:20rem">` +
 				`<yr-dropdown-menu open>` +
@@ -44,7 +44,7 @@ func dropdownMenuExamples() []Example {
 				`</div>` +
 				`</yr-dropdown-menu>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "account-menu", Component: templ.Raw(
 			`<div style="display:flex;justify-content:flex-end;min-height:20rem">` +
 				`<yr-account-menu open name="Jordan Ellery" email="jordan@ellerylogistics.com">` +
@@ -55,6 +55,6 @@ func dropdownMenuExamples() []Example {
 				`<button type="button" class="yr-dropdown-menu-item">Log out</button>` +
 				`</yr-account-menu>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

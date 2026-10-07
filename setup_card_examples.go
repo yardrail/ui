@@ -10,9 +10,25 @@ const setupSlotStyle = `<style>.demo-slot{background:var(--yr-bg);` +
 	`font-family:var(--yr-font-mono);` +
 	`font-size:var(--yr-font-size-xs)}</style>`
 
+const setupOptionStyle = `<style>.setup-option{display:flex;align-items:center;` +
+	`gap:var(--yr-space-3);padding:var(--yr-space-3)` +
+	` var(--yr-space-4);border:1px solid var(--yr-border);` +
+	`border-radius:var(--yr-radius-md);cursor:pointer;` +
+	`font-family:var(--yr-font-ui);` +
+	`font-size:var(--yr-font-size-sm);` +
+	`color:var(--yr-text)}` +
+	`.setup-option:hover{border-color:var(--yr-accent);` +
+	`background:var(--yr-accent-subtle)}` +
+	`.setup-option input{margin:0}` +
+	`.setup-option-text{display:flex;flex-direction:column;` +
+	`gap:var(--yr-space-1)}` +
+	`.setup-option-label{font-weight:500}` +
+	`.setup-option-desc{font-size:var(--yr-font-size-xs);` +
+	`color:var(--yr-text-muted)}</style>`
+
 func setupCardExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			setupSlotStyle +
 				`<yr-setup-card>` +
 				`<yr-setup-card-progress steps="4" current="1">` +
@@ -27,7 +43,7 @@ func setupCardExamples() []Example {
 				`<div class="demo-slot">footer</div>` +
 				`</yr-setup-card-footer>` +
 				`</yr-setup-card>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "form-step", Component: templ.Raw(
 			`<yr-setup-card>` +
 				`<yr-setup-card-progress steps="4" current="1">` +
@@ -51,23 +67,9 @@ func setupCardExamples() []Example {
 				`Continue</yr-button>` +
 				`</yr-setup-card-footer>` +
 				`</yr-setup-card>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "selection-step", Component: templ.Raw(
-			`<style>.setup-option{display:flex;align-items:center;` +
-				`gap:var(--yr-space-3);padding:var(--yr-space-3)` +
-				` var(--yr-space-4);border:1px solid var(--yr-border);` +
-				`border-radius:var(--yr-radius-md);cursor:pointer;` +
-				`font-family:var(--yr-font-ui);` +
-				`font-size:var(--yr-font-size-sm);` +
-				`color:var(--yr-text)}` +
-				`.setup-option:hover{border-color:var(--yr-accent);` +
-				`background:var(--yr-accent-subtle)}` +
-				`.setup-option input{margin:0}` +
-				`.setup-option-text{display:flex;flex-direction:column;` +
-				`gap:var(--yr-space-1)}` +
-				`.setup-option-label{font-weight:500}` +
-				`.setup-option-desc{font-size:var(--yr-font-size-xs);` +
-				`color:var(--yr-text-muted)}</style>` +
+			setupOptionStyle +
 				`<yr-setup-card>` +
 				`<yr-setup-card-progress steps="4" current="2">` +
 				`</yr-setup-card-progress>` +
@@ -99,7 +101,7 @@ func setupCardExamples() []Example {
 				`<yr-button variant="primary">Continue</yr-button>` +
 				`</yr-setup-card-footer>` +
 				`</yr-setup-card>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "confirmation", Component: templ.Raw(
 			`<yr-setup-card>` +
 				`<yr-setup-card-progress steps="4" current="4">` +
@@ -121,6 +123,6 @@ func setupCardExamples() []Example {
 				`Go to dashboard</yr-button>` +
 				`</yr-setup-card-footer>` +
 				`</yr-setup-card>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

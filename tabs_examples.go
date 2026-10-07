@@ -13,6 +13,6 @@ func tabsExamples() []Example {
 				`<div slot="panel" data-tab="documentation"><p>Connect Slack and HubSpot, then install.</p></div>` +
 				`<div slot="panel" data-tab="reviews"><p>12 reviews, 4.5 average.</p></div>` +
 				`</yr-tabs>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

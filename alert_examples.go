@@ -15,7 +15,7 @@ func alertExamples() []Example {
 				`<yr-alert tone="info">A new version of this template is available.</yr-alert>` +
 				`<yr-alert>No tone falls back to info.</yr-alert>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-icon", Component: templ.Raw(
 			`<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:32rem">` +
 				`<yr-alert tone="success">` + exampleIcon("check-circle", "", alertIconSize) +
@@ -23,6 +23,6 @@ func alertExamples() []Example {
 				`<yr-alert tone="danger">` + exampleIcon("circle-x", "", alertIconSize) +
 				`<strong>Run failed.</strong> The webhook returned 500.</yr-alert>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

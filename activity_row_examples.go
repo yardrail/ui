@@ -40,6 +40,6 @@ func activityRowExamples() []Example {
 				`</div>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

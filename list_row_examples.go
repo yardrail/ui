@@ -40,6 +40,6 @@ func listRowExamples() []Example {
 				`</div>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

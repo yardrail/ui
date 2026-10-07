@@ -34,6 +34,6 @@ func templateCardExamples() []Example {
 				`</div>` +
 				`</a>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

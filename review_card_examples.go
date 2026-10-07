@@ -22,6 +22,6 @@ func reviewCardExamples() []Example {
 				`<p class="yr-review-card-body">Works, but the Slack step needs a manual channel ID.</p>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

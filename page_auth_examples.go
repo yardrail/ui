@@ -9,7 +9,7 @@ const pageAuthBase = `<style>html,body{margin:0;height:100%}` +
 
 func pageAuthExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			pageAuthBase +
 				`<yr-page-auth>` +
 				`<div class="demo-region" style="width:320px;height:200px;` +
@@ -18,7 +18,7 @@ func pageAuthExamples() []Example {
 				`content` +
 				`</div>` +
 				`</yr-page-auth>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-auth-card", Component: templ.Raw(
 			pageAuthBase +
 				`<yr-page-auth>` +
@@ -37,6 +37,6 @@ func pageAuthExamples() []Example {
 				`No account? <a href="#">Sign up</a></p>` +
 				`</div>` +
 				`</yr-page-auth>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

@@ -10,6 +10,6 @@ func statExamples() []Example {
 				`<yr-stat number="200+" label="Authors"></yr-stat>` +
 				`<yr-stat number="10k+" label="Installs"></yr-stat>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

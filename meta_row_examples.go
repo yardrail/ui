@@ -18,6 +18,6 @@ func metaRowExamples() []Example {
 				`</div>` +
 				`<div class="yr-meta-row"><span>A single fragment has no separator</span></div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

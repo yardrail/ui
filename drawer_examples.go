@@ -14,7 +14,7 @@ const drawerSlotStyle = `<style>.demo-slot{background:var(--yr-bg);` +
 
 func drawerExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			drawerSlotStyle +
 				`<yr-drawer open style="height:100vh">` +
 				`<yr-drawer-header>` +
@@ -27,8 +27,8 @@ func drawerExamples() []Example {
 				`<div class="demo-slot">body</div>` +
 				`</yr-drawer-body>` +
 				`</yr-drawer>`,
-		)},
-		{Name: "with-content", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleWithContent, Component: templ.Raw(
 			`<yr-drawer open style="height:100vh">` +
 				`<yr-drawer-header>` +
 				`<h3 class="yr-drawer-title">Details</h3>` +
@@ -48,7 +48,7 @@ func drawerExamples() []Example {
 				`</div>` +
 				`</yr-drawer-body>` +
 				`</yr-drawer>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "with-form", Component: templ.Raw(
 			`<yr-drawer open style="height:100vh">` +
 				`<yr-drawer-header>` +
@@ -75,6 +75,6 @@ func drawerExamples() []Example {
 				`Save</button>` +
 				`</yr-drawer-body>` +
 				`</yr-drawer>`,
-		)},
+		), DisplayURL: ""},
 	}
 }
