@@ -1,0 +1,68 @@
+package ui
+
+// shellDocument renders the document of a Shell around its children.
+templ shellDocument(title string, p *ShellProps) {
+	<!doctype html>
+	<html lang={ p.lang() }>
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ title }</title>
+			<link rel="stylesheet" href="/static/ui/ui.css"/>
+			<script src="/static/ui/htmx.min.js" defer></script>
+			<script type="module" src="/static/ui/ui.js"></script>
+			if p.Head != nil {
+				@p.Head
+			}
+		</head>
+		<body class="yr-shell" { filterAttrs("Shell", p.Attrs)... }>
+			<a class="yr-shell__skip" href={ templ.SafeURL("#" + shellMainID) }>Skip to main content</a>
+			{ children... }
+		</body>
+	</html>
+}
+
+// shellTopBar renders the element of a ShellTopBar around its children.
+templ shellTopBar(p *RegionProps) {
+	<header class="yr-shell__topbar" { filterAttrs("ShellTopBar", p.Attrs)... }>
+		{ children... }
+	</header>
+}
+
+// shellNav renders the element of a ShellNav around its children.
+templ shellNav(p *RegionProps) {
+	<div class="yr-shell__nav">
+		<button type="button" class="yr-shell__nav-toggle" popovertarget={ shellNavID }>Menu</button>
+		<nav id={ shellNavID } class="yr-shell__nav-panel" popover { withoutFixedID("ShellNav", p.Attrs)... }>
+			{ children... }
+		</nav>
+	</div>
+}
+
+// shellMain renders the element of a ShellMain around its children.
+templ shellMain(p *ShellMainProps) {
+	<main id={ shellMainID } class={ p.class() } { withoutFixedID("ShellMain", p.Attrs)... }>
+		if p.Messages != nil {
+			<div class="yr-shell__messages">
+				@p.Messages
+			</div>
+		}
+		{ children... }
+	</main>
+}
+
+// shellBand renders the element of a ShellBand around its children.
+templ shellBand(p *RegionProps) {
+	<div class="yr-shell__band" { filterAttrs("ShellBand", p.Attrs)... }>
+		<div class="yr-shell__band-inner">
+			{ children... }
+		</div>
+	</div>
+}
+
+// shellFooter renders the element of a ShellFooter around its children.
+templ shellFooter(p *RegionProps) {
+	<footer class="yr-shell__footer" { filterAttrs("ShellFooter", p.Attrs)... }>
+		{ children... }
+	</footer>
+}
