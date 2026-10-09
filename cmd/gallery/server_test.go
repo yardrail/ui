@@ -14,6 +14,13 @@ import (
 // testCSS is the stylesheet the test gallery serves.
 const testCSS = ".yr-button { color: red; }\n"
 
+// Paths the tests request.
+const (
+	pathButtonPrimary = "/button/primary"
+	pathShellAppPage  = "/shell/app-page"
+	pathStaticUICSS   = "/static/ui/ui.css"
+)
+
 func TestGalleryIndex(t *testing.T) {
 	t.Parallel()
 
@@ -42,7 +49,7 @@ func TestGalleryExample(t *testing.T) {
 
 	handler := newTestHandler(t)
 
-	status, body := get(t, handler, "/button/primary")
+	status, body := get(t, handler, pathButtonPrimary)
 	if status != http.StatusOK {
 		t.Fatalf("status = %d, want %d", status, http.StatusOK)
 	}
@@ -103,6 +110,51 @@ func TestGalleryStylesheet(t *testing.T) {
 
 	if !strings.Contains(rec.Body.String(), ".browser-frame") {
 		t.Errorf("stylesheet is missing .browser-frame:\n%s", rec.Body.String())
+	}
+}
+
+func TestGalleryShellExample(t *testing.T) {
+	t.Parallel()
+
+	handler := newTestHandler(t)
+
+	status, body := get(t, handler, pathShellAppPage)
+	if status != http.StatusOK {
+		t.Fatalf("GET %s = %d, want %d", pathShellAppPage, status, http.StatusOK)
+	}
+
+	if !strings.HasPrefix(body, "<!doctype html>") {
+		t.Errorf("body does not start with <!doctype html>:\n%s", body)
+	}
+
+	if n := strings.Count(body, "<html"); n != 1 {
+		t.Errorf("body holds %d <html elements, want 1:\n%s", n, body)
+	}
+
+	_, wrapped := get(t, handler, pathButtonPrimary)
+	if !strings.Contains(wrapped, `href="/ui.css"`) {
+		t.Errorf("GET %s is not wrapped by the example page:\n%s", pathButtonPrimary, wrapped)
+	}
+}
+
+func TestGalleryStaticAssets(t *testing.T) {
+	t.Parallel()
+
+	handler := newTestHandler(t)
+
+	rec := httptest.NewRecorder()
+	handler.ServeHTTP(rec, httptest.NewRequestWithContext(t.Context(), http.MethodGet, pathStaticUICSS, nil))
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("GET %s = %d, want %d", pathStaticUICSS, rec.Code, http.StatusOK)
+	}
+
+	if got := rec.Header().Get("Content-Type"); !strings.HasPrefix(got, "text/css") {
+		t.Errorf("Content-Type = %q, want text/css", got)
+	}
+
+	if rec.Body.String() != testCSS {
+		t.Errorf("body = %q, want %q", rec.Body.String(), testCSS)
 	}
 }
 

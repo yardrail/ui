@@ -36,6 +36,7 @@ type ExampleGroup struct {
 // ExampleGroups returns every component's examples, in a fixed order.
 func ExampleGroups() []ExampleGroup {
 	return []ExampleGroup{
+		{Component: "shell", Examples: shellExamples()},
 		{Component: "stack", Examples: stackExamples()},
 		{Component: "cluster", Examples: clusterExamples()},
 		{Component: "grid", Examples: gridExamples()},

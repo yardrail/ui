@@ -8,6 +8,7 @@ import (
 	"log/slog"
 	"net/http"
 	"path"
+	"unicode"
 
 	"github.com/a-h/templ"
 
@@ -44,6 +45,7 @@ var sections = []section{
 	}},
 	{Name: "Structure", Categories: []category{
 		{Slug: "page-shell", Name: "Page Shell", ContextSlot: nil, Components: []string{
+			"shell",
 			"page-workspace",
 			"page-auth",
 			"page-setup",
@@ -378,6 +380,7 @@ func newHandler(assets fs.FS) http.Handler {
 	mux.HandleFunc("GET /ui.js", g.js)
 	mux.HandleFunc("GET /fonts/{file}", g.font)
 	mux.HandleFunc("GET /logo.png", g.logo)
+	mux.Handle("GET /static/ui/", http.StripPrefix("/static/ui/", http.FileServerFS(g.assets)))
 	mux.HandleFunc("GET /{component}/{name}", g.example)
 
 	return mux
@@ -436,7 +439,8 @@ func (g *gallery) logo(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, g.assets, "logo.png")
 }
 
-// example renders one example inside a page, or 404s for an unknown component or name.
+// example renders one example inside a page, serves an example that renders a whole document
+// as it is, or 404s for an unknown component or name.
 func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 	component, name := r.PathValue("component"), r.PathValue("name")
 
@@ -457,6 +461,17 @@ func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if isDocument(buf.Bytes()) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+		_, err = w.Write(buf.Bytes())
+		if err != nil {
+			slog.Warn("write example document", "component", component, "name", name, "err", err)
+		}
+
+		return
+	}
+
 	//nolint:gosec // The markup is the ui package's own escaped render output.
 	html := template.HTML(buf.String())
 
@@ -467,6 +482,16 @@ func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 	}
 
 	g.write(w, exampleTemplate, examplePage{Component: component, Name: name, HTML: html})
+}
+
+// isDocument reports whether html is a whole document, one that begins with a doctype once
+// leading whitespace is trimmed.
+func isDocument(html []byte) bool {
+	const doctype = "<!doctype html>"
+
+	trimmed := bytes.TrimLeftFunc(html, unicode.IsSpace)
+
+	return len(trimmed) >= len(doctype) && bytes.EqualFold(trimmed[:len(doctype)], []byte(doctype))
 }
 
 // write executes t with data into a buffer, so a template error becomes a 500 instead of a
