@@ -2,6 +2,7 @@
 @import "./tokens.css";
 @import "./base.css";
 @import "./layout/yr-layout.css";
+@import "./shell/yr-shell.css";
 @import "./button/yr-button.css";
 @import "./pill/yr-pill.css";
 @import "./avatar/yr-avatar.css";
