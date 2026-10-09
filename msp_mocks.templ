@@ -1,0 +1,260 @@
+package ui
+
+// Nav links of the MSP portal mocks, naming the active one.
+const (
+	mspNavDashboard = "dashboard"
+	mspNavClients   = "clients"
+	mspNavYardrail  = "yardrail"
+	mspNavAccount   = "account"
+)
+
+// mspHead links the mock stylesheet, served by the gallery at /mocks.css.
+templ mspHead() {
+	<link rel="stylesheet" href="/mocks.css"/>
+}
+
+// mspShell is the page frame shared by the MSP portal mocks: a top bar with the brand and the
+// account menu, nav as the navigation, and the children in a Standard main.
+templ mspShell(title string, nav templ.Component) {
+	@Shell(title, ShellProps{Head: mspHead()}) {
+		@ShellTopBar(RegionProps{}) {
+			<div class="mock-topbar">
+				@Cluster(ClusterProps{Justify: JustifyBetween}) {
+					<a href="#" class="yr-brand"><img src="/logo.png" alt=""/>Yardrail</a>
+					<yr-account-menu name="Brahm Lower" email="brahm@yardrail.com">
+						<span slot="avatar">BL</span>
+						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
+						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
+					</yr-account-menu>
+				}
+			</div>
+		}
+		@ShellNav(RegionProps{}) {
+			@nav
+		}
+		@ShellMain(ShellMainProps{}) {
+			{ children... }
+		}
+	}
+}
+
+// mspNav is the MSP portal navigation with the link named active marked as the current page.
+templ mspNav(active string) {
+	<div class="mock-nav">
+		@Stack(StackProps{Gap: Space6}) {
+			<p class="mock-nav-title">MSP Portal</p>
+			@Stack(StackProps{As: AsList, Gap: Space1}) {
+				@mspNavLink("layout-dashboard", "Dashboard", mspNavDashboard, active)
+				@mspNavLink("building-2", "Clients", mspNavClients, active)
+			}
+			@Stack(StackProps{As: AsList, Gap: Space1}) {
+				@mspNavLink("train-front", "Yardrail", mspNavYardrail, active)
+				@mspNavLink("user", "Account", mspNavAccount, active)
+			}
+			<p class="mock-nav-version">v0.1.0</p>
+		}
+	</div>
+}
+
+// mspNavLink is the nav link named link, marked as the current page when it is the active one.
+templ mspNavLink(icon, label, link, active string) {
+	<li>
+		<a href="#" class="mock-nav-link" { mspCurrent(link, active)... }>
+			@Cluster(ClusterProps{}) {
+				@mspIcon(icon)
+				<span>{ label }</span>
+			}
+		</a>
+	</li>
+}
+
+// mspPageTitle is the h1 of an MSP portal mock.
+templ mspPageTitle(title string) {
+	<h1 class="mock-page-title">{ title }</h1>
+}
+
+// mspSection is a titled section of an MSP portal mock, holding a feed of the children.
+templ mspSection(title string) {
+	@Stack(StackProps{Gap: Space3}) {
+		<p class="mock-section-title">{ title }</p>
+		@Stack(StackProps{Gap: Space2}) {
+			{ children... }
+		}
+	}
+}
+
+// mspStatCard is a stat card showing value over label, with an optional tone modifier on its
+// left border ("success", "warning" or "danger").
+templ mspStatCard(value, label, tone string) {
+	<div class={ "mock-stat-card", templ.KV("mock-stat-card--"+tone, tone != "") }>
+		@Stack(StackProps{Gap: Space1}) {
+			<p class="mock-stat-value">{ value }</p>
+			<p class="mock-stat-label">{ label }</p>
+		}
+	</div>
+}
+
+// mspCredentialStat is one figure of the credential health card, with an optional tone colour
+// ("warning" or "danger").
+templ mspCredentialStat(value, label, tone string) {
+	@Stack(StackProps{Gap: Space1}) {
+		<p class={ "mock-stat-value", "mock-stat-value--compact", templ.KV("mock-stat-value--"+tone, tone != "") }>{ value }</p>
+		<p class="mock-stat-label">{ label }</p>
+	}
+}
+
+// mspFeedItem is one row of a feed: the children, then time at the far end when it is set.
+templ mspFeedItem(time string) {
+	<div class="mock-feed-item">
+		@Cluster(ClusterProps{Justify: JustifyBetween, Gap: Space3}) {
+			@Cluster(ClusterProps{Gap: Space3}) {
+				{ children... }
+			}
+			if time != "" {
+				<span class="mock-feed-time">{ time }</span>
+			}
+		}
+	</div>
+}
+
+// mspClientRow is one client in a list: the children at the start, meta at the far end when it
+// is set.
+templ mspClientRow(meta string) {
+	<div class="mock-client-row">
+		@Cluster(ClusterProps{Justify: JustifyBetween, Gap: Space4}) {
+			@Cluster(ClusterProps{Gap: Space4}) {
+				{ children... }
+			}
+			if meta != "" {
+				<span class="mock-client-meta">{ meta }</span>
+			}
+		}
+	</div>
+}
+
+// mspDashboard is the MSP portal dashboard mock.
+templ mspDashboard() {
+	@mspShell("Dashboard · MSP Portal", mspNav(mspNavDashboard)) {
+		@Stack(StackProps{Gap: Space8}) {
+			@mspPageTitle("Dashboard")
+			@Grid(GridProps{MinItemWidth: ItemWidthSm}) {
+				@mspStatCard("12", "Total Clients", "")
+				@mspStatCard("9", "Healthy", "success")
+				@mspStatCard("2", "Needs Attention", "warning")
+				@mspStatCard("1", "Critical", "danger")
+			}
+			@Grid(GridProps{Gap: Space8}) {
+				@mspSection("Alerts") {
+					@mspFeedItem("2m ago") {
+						<yr-pill tone="danger">critical</yr-pill>
+						<span>Workflow failed — Acme Corp</span>
+					}
+					@mspFeedItem("18m ago") {
+						<yr-pill tone="warning">warning</yr-pill>
+						<span>Connector unhealthy — Beta LLC</span>
+					}
+					@mspFeedItem("1h ago") {
+						<yr-pill tone="warning">warning</yr-pill>
+						<span>API key expires in 7d — Gamma Inc</span>
+					}
+					@mspFeedItem("3h ago") {
+						<yr-pill tone="info">info</yr-pill>
+						<span>New user joined — Delta Co</span>
+					}
+				}
+				@mspSection("Credential Health") {
+					<div class="mock-stat-card">
+						@Cluster(ClusterProps{Justify: JustifyBetween}) {
+							@mspCredentialStat("42", "Healthy", "")
+							@mspCredentialStat("3", "Expiring <30d", "warning")
+							@mspCredentialStat("1", "Expired", "danger")
+						}
+					</div>
+					@mspFeedItem("") {
+						<yr-pill tone="danger">expired</yr-pill>
+						<span>Slack OAuth — Acme Corp</span>
+					}
+					@mspFeedItem("") {
+						<yr-pill tone="warning">14d</yr-pill>
+						<span>HubSpot API — Beta LLC</span>
+					}
+					@mspFeedItem("") {
+						<yr-pill tone="warning">22d</yr-pill>
+						<span>Stripe key — Gamma Inc</span>
+					}
+				}
+			}
+			@Grid(GridProps{Gap: Space8}) {
+				@mspSection("Recent Activity") {
+					@mspFeedItem("10m ago") {
+						@mspIcon("user-plus")
+						<span>User invited to Acme Corp</span>
+					}
+					@mspFeedItem("45m ago") {
+						@mspIcon("play")
+						<span>Workflow deployed to Beta LLC</span>
+					}
+					@mspFeedItem("2h ago") {
+						@mspIcon("refresh-cw")
+						<span>Credential rotated — Gamma Inc</span>
+					}
+					@mspFeedItem("5h ago") {
+						@mspIcon("shield")
+						<span>2FA enforced on Delta Co</span>
+					}
+				}
+				@mspSection("Onboarding Progress") {
+					@mspClientRow("") {
+						<span class="mock-client-name">NewCo Industries</span>
+						<yr-pill>2 of 4 steps</yr-pill>
+					}
+					@mspClientRow("") {
+						<span class="mock-client-name">FreshOrg Ltd</span>
+						<yr-pill>Users invited</yr-pill>
+					}
+				}
+			}
+		}
+	}
+}
+
+// mspClients is the MSP portal client list mock.
+templ mspClients() {
+	@mspShell("Clients · MSP Portal", mspNav(mspNavClients)) {
+		@Stack(StackProps{Gap: Space6}) {
+			@Cluster(ClusterProps{Justify: JustifyBetween}) {
+				@mspPageTitle("Clients")
+				<yr-button variant="primary">
+					@mspIcon("plus")
+					Add Client
+				</yr-button>
+			}
+			@Stack(StackProps{Gap: Space2}) {
+				@mspClientRow("8 users · 3 connectors · 12 workflows") {
+					<yr-pill tone="success">healthy</yr-pill>
+					<span class="mock-client-name">Acme Corp</span>
+				}
+				@mspClientRow("4 users · 2 connectors · 6 workflows") {
+					<yr-pill tone="success">healthy</yr-pill>
+					<span class="mock-client-name">Beta LLC</span>
+				}
+				@mspClientRow("12 users · 5 connectors · 18 workflows") {
+					<yr-pill tone="warning">attention</yr-pill>
+					<span class="mock-client-name">Gamma Inc</span>
+				}
+				@mspClientRow("3 users · 1 connector · 4 workflows") {
+					<yr-pill tone="success">healthy</yr-pill>
+					<span class="mock-client-name">Delta Co</span>
+				}
+				@mspClientRow("6 users · 4 connectors · 9 workflows") {
+					<yr-pill tone="danger">critical</yr-pill>
+					<span class="mock-client-name">Epsilon Group</span>
+				}
+				@mspClientRow("5 users · 2 connectors · 7 workflows") {
+					<yr-pill tone="success">healthy</yr-pill>
+					<span class="mock-client-name">Zeta Partners</span>
+				}
+			}
+		}
+	}
+}

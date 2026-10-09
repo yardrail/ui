@@ -1,8 +1,27 @@
 package ui
 
-import "strings"
+import (
+	"strings"
+
+	"github.com/a-h/templ"
+)
 
 const mspIconSize = 16
+
+// mspIcon returns the named icon at the MSP mocks' icon size.
+func mspIcon(name string) templ.Component {
+	return templ.Raw(exampleIcon(name, "", mspIconSize))
+}
+
+// mspCurrent returns aria-current="page" for the nav link named link when it is the active one,
+// and no attributes otherwise.
+func mspCurrent(link, active string) templ.Attributes {
+	if link != active {
+		return templ.Attributes{}
+	}
+
+	return templ.Attributes{"aria-current": "page"}
+}
 
 const mspMockStyle = `<style>` +
 	`html,body{margin:0;height:100%}` +
@@ -84,44 +103,6 @@ func mspSidebarFooter() string {
 		`<span style="font-size:var(--yr-font-size-xs);` +
 		`color:var(--yr-text-subtle)">v0.1.0</span>` +
 		`</yr-sidebar-footer>`
-}
-
-func mspSidebar() string {
-	return `<yr-sidebar>` +
-		`<yr-sidebar-header>` +
-		`<span style="font-family:var(--yr-font-body);` +
-		`font-weight:600;font-size:var(--yr-font-size-sm)">` +
-		`MSP Portal</span>` +
-		`</yr-sidebar-header>` +
-		`<yr-sidebar-nav>` +
-		`<yr-sidebar-link href="#" active>` +
-		exampleIcon("layout-dashboard", "", mspIconSize) +
-		` Dashboard</yr-sidebar-link>` +
-		`<yr-sidebar-link href="#">` +
-		exampleIcon("building-2", "", mspIconSize) +
-		` Clients</yr-sidebar-link>` +
-		`</yr-sidebar-nav>` +
-		mspSidebarFooter() +
-		`</yr-sidebar>`
-}
-
-func mspSidebarClients() string {
-	return `<yr-sidebar>` +
-		`<yr-sidebar-header>` +
-		`<span style="font-family:var(--yr-font-body);` +
-		`font-weight:600;font-size:var(--yr-font-size-sm)">` +
-		`MSP Portal</span>` +
-		`</yr-sidebar-header>` +
-		`<yr-sidebar-nav>` +
-		`<yr-sidebar-link href="#">` +
-		exampleIcon("layout-dashboard", "", mspIconSize) +
-		` Dashboard</yr-sidebar-link>` +
-		`<yr-sidebar-link href="#" active>` +
-		exampleIcon("building-2", "", mspIconSize) +
-		` Clients</yr-sidebar-link>` +
-		`</yr-sidebar-nav>` +
-		mspSidebarFooter() +
-		`</yr-sidebar>`
 }
 
 func mspSidebarClientDetail(activePage string) string {

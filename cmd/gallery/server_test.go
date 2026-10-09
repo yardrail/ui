@@ -113,6 +113,32 @@ func TestGalleryStylesheet(t *testing.T) {
 	}
 }
 
+func TestGalleryMocksStylesheet(t *testing.T) {
+	t.Parallel()
+
+	handler := newTestHandler(t)
+
+	_, mock := get(t, handler, "/msp-dashboard/default")
+	if !strings.Contains(mock, `href="/mocks.css"`) {
+		t.Errorf("mock does not link /mocks.css:\n%s", mock)
+	}
+
+	rec := httptest.NewRecorder()
+	handler.ServeHTTP(rec, httptest.NewRequestWithContext(t.Context(), http.MethodGet, "/mocks.css", nil))
+
+	if rec.Code != http.StatusOK {
+		t.Fatalf("status = %d, want %d", rec.Code, http.StatusOK)
+	}
+
+	if got := rec.Header().Get("Content-Type"); !strings.HasPrefix(got, "text/css") {
+		t.Errorf("Content-Type = %q, want text/css", got)
+	}
+
+	if !strings.Contains(rec.Body.String(), ".mock-stat-card") {
+		t.Errorf("stylesheet is missing .mock-stat-card:\n%s", rec.Body.String())
+	}
+}
+
 func TestGalleryShellExample(t *testing.T) {
 	t.Parallel()
 

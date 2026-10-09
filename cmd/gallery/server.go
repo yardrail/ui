@@ -148,6 +148,12 @@ type indexPage struct {
 //go:embed gallery.css
 var galleryCSS embed.FS
 
+// mocksCSS holds mocks.css, the mock-only typography and decoration of the UI mocks. The mocks
+// are whole documents that link it through their Shell head and do not load gallery.css.
+//
+//go:embed mocks.css
+var mocksCSS embed.FS
+
 // indexTemplate renders the sidebar + main content layout with browser-frame preview.
 var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 <html lang="en">
@@ -377,6 +383,7 @@ func newHandler(assets fs.FS) http.Handler {
 	mux.HandleFunc("GET /{$}", g.index)
 	mux.HandleFunc("GET /ui.css", g.css)
 	mux.HandleFunc("GET /gallery.css", g.galleryStyles)
+	mux.HandleFunc("GET /mocks.css", g.mockStyles)
 	mux.HandleFunc("GET /ui.js", g.js)
 	mux.HandleFunc("GET /fonts/{file}", g.font)
 	mux.HandleFunc("GET /logo.png", g.logo)
@@ -422,6 +429,11 @@ func (g *gallery) css(w http.ResponseWriter, r *http.Request) {
 // galleryStyles serves the index page's own stylesheet.
 func (*gallery) galleryStyles(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, galleryCSS, "gallery.css")
+}
+
+// mockStyles serves the UI mocks' own stylesheet.
+func (*gallery) mockStyles(w http.ResponseWriter, r *http.Request) {
+	http.ServeFileFS(w, r, mocksCSS, "mocks.css")
 }
 
 // js serves the library JS bundle.
