@@ -160,6 +160,7 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
       href="/{{$comp}}/{{$ex.Name}}">{{$ex.Name}}</a>
     {{end}}
   </div>{{end}}
+  <a class="browser-open" href="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}" target="_blank">Open page ↗</a>
   {{if .HasContext}}<div class="view-toggle">
     <button class="view-toggle-btn" data-view="isolated">Isolated</button>
     <button class="view-toggle-btn active" data-view="in-shell">In Shell</button>
@@ -197,6 +198,7 @@ function updateFrame(component) {
   var displayUrl = activeChip && activeChip.dataset.displayUrl ? activeChip.dataset.displayUrl : url;
   frame.querySelector('.browser-url').textContent = displayUrl;
   frame.querySelector('iframe').src = url;
+  component.querySelector('.browser-open').href = url;
 }
 document.addEventListener('click', function(e) {
   var chip = e.target.closest('.example-chip');

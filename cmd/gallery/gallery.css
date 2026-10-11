@@ -178,6 +178,14 @@ body { display: flex; background: var(--yr-bg); }
   padding: var(--yr-space-1) var(--yr-space-2);
   margin-left: var(--yr-space-2);
 }
+.browser-open {
+  margin-left: auto;
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-muted);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.browser-open:hover { color: var(--yr-text); text-decoration: underline; }
 .browser-body { background: var(--yr-surface); height: calc(100% - 34px); }
 .browser-body iframe {
   display: block;

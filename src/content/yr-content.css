@@ -19,4 +19,5 @@ yr-content-main {
   min-width: 0;
   padding: var(--yr-space-8) var(--yr-space-12);
   overflow-y: auto;
+  background: var(--yr-surface);
 }
