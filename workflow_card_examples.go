@@ -21,7 +21,7 @@ func workflowCardExamples() []Example {
 				`</div>` +
 				`</yr-workflow-card>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "paused", Component: templ.Raw(
 			`<div style="max-width:22rem">` +
 				`<yr-workflow-card>` +
@@ -39,6 +39,6 @@ func workflowCardExamples() []Example {
 				`</div>` +
 				`</yr-workflow-card>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

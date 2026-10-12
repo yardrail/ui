@@ -8,7 +8,11 @@ func buttonExamples() []Example {
 		{Name: "primary", Component: Button("Save", ButtonProps{}), DisplayURL: ""},
 		{Name: "secondary", Component: Button("Cancel", ButtonProps{Variant: ButtonSecondary}), DisplayURL: ""},
 		{Name: "link", Component: Button("Show details", ButtonProps{Variant: ButtonLink}), DisplayURL: ""},
-		{Name: "danger", Component: Button("Delete organization", ButtonProps{Variant: ButtonDanger}), DisplayURL: ""},
+		{
+			Name:       exampleDanger,
+			Component:  Button("Delete organization", ButtonProps{Variant: ButtonDanger}),
+			DisplayURL: "",
+		},
 		{Name: "danger-quiet", Component: Button("Remove", ButtonProps{Variant: ButtonDangerQuiet}), DisplayURL: ""},
 		{Name: "disabled", Component: Button("Publish", ButtonProps{Disabled: true}), DisplayURL: ""},
 		{

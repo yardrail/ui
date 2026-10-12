@@ -14,7 +14,7 @@ func statusBannerExamples() []Example {
 				`</div>` +
 				`</yr-status-banner>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "paused", Component: templ.Raw(
 			`<div style="max-width:44rem">` +
 				`<yr-status-banner tone="warning">` +
@@ -25,7 +25,7 @@ func statusBannerExamples() []Example {
 				`</div>` +
 				`</yr-status-banner>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 		{Name: "failed", Component: templ.Raw(
 			`<div style="max-width:44rem">` +
 				`<yr-status-banner tone="danger">` +
@@ -36,6 +36,6 @@ func statusBannerExamples() []Example {
 				`</div>` +
 				`</yr-status-banner>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

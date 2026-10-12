@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func connectorBindingRowExamples() []Example {
 	return []Example{
-		{Name: "rows", Component: templ.Raw(
+		{Name: exampleRows, Component: templ.Raw(
 			`<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:36rem">` +
 
 				`<div class="yr-meta-row">` +
@@ -22,10 +22,11 @@ func connectorBindingRowExamples() []Example {
 				`<div class="yr-meta-row">` +
 				`<span>chat.post</span>` +
 				`<yr-pill tone="danger" shape="pill">Not connected</yr-pill>` +
-				`<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-accent)">Set up</a>` +
+				`<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);` +
+				`color:var(--yr-accent)">Set up</a>` +
 				`</div>` +
 
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

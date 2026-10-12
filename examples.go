@@ -12,6 +12,8 @@ const (
 	exampleDefault     = "default"
 	exampleWithContent = "with-content"
 	exampleCollapsed   = "collapsed"
+	exampleRows        = "rows"
+	exampleDanger      = "danger"
 )
 
 // Example is one named rendering of a component. The snapshot tests compare it against
@@ -36,6 +38,7 @@ type ExampleGroup struct {
 // ExampleGroups returns every component's examples, in a fixed order.
 func ExampleGroups() []ExampleGroup {
 	return []ExampleGroup{
+		{Component: "shell", Examples: shellExamples()},
 		{Component: "stack", Examples: stackExamples()},
 		{Component: "cluster", Examples: clusterExamples()},
 		{Component: "grid", Examples: gridExamples()},

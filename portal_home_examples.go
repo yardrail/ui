@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func portalHomeExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com", Component: templ.Raw(
 			portalMockStyle +
 				`<yr-page-workspace>` +
 				portalNavbar() +
@@ -66,66 +66,70 @@ func portalHomeExamples() []Example {
 				`</div></div>` +
 				`</div>` +
 
-				// Recent Activity
-				`<yr-section-header>Recent Activity <a href="#">See more</a></yr-section-header>` +
-				`<yr-timeline-entries>` +
-
-				`<a class="yr-activity-row" href="#">` +
-				`<div>` +
-				`<div class="yr-activity-row-desc">Newsletter Digest</div>` +
-				`<div class="yr-activity-row-meta">` +
-				`<span class="yr-activity-row-id-badge">R-48</span>` +
-				`<yr-pill tone="success">Completed</yr-pill>` +
-				`<span>3 outputs</span></div></div>` +
-				`<div class="yr-activity-row-duration">1m 23s</div>` +
-				`</a>` +
-
-				`<a class="yr-activity-row" href="#">` +
-				`<div>` +
-				`<div class="yr-activity-row-desc">Lead Scoring</div>` +
-				`<div class="yr-activity-row-meta">` +
-				`<span class="yr-activity-row-id-badge">R-47</span>` +
-				`<yr-pill tone="warning">Waiting</yr-pill>` +
-				`<span>Approve budget &gt;$5k</span></div></div>` +
-				`<div class="yr-activity-row-duration">` +
-				`<span class="yr-activity-row-duration-label">Waiting</span>` +
-				`<yr-live-duration started-at="2026-10-01T09:00:00Z"></yr-live-duration>` +
-				`</div></a>` +
-
-				`<div class="yr-activity-row is-error">` +
-				`<div>` +
-				`<div class="yr-activity-row-desc">Social Scheduler</div>` +
-				`<div class="yr-activity-row-meta">` +
-				`<span class="yr-activity-row-id-badge">R-46</span>` +
-				`<yr-pill tone="danger">Failed</yr-pill>` +
-				`<span>Rate limit exceeded</span></div></div>` +
-				`<div class="yr-activity-row-duration">12s</div>` +
-				`</div>` +
-
-				`<a class="yr-activity-row" href="#">` +
-				`<div>` +
-				`<div class="yr-activity-row-desc">Contact Sync</div>` +
-				`<div class="yr-activity-row-meta">` +
-				`<span class="yr-activity-row-id-badge">R-45</span>` +
-				`<yr-pill tone="success">Completed</yr-pill>` +
-				`<span>24 records synced</span></div></div>` +
-				`<div class="yr-activity-row-duration">4m 8s</div>` +
-				`</a>` +
-
-				`<a class="yr-activity-row" href="#">` +
-				`<div>` +
-				`<div class="yr-activity-row-desc">Invoice Processor</div>` +
-				`<div class="yr-activity-row-meta">` +
-				`<span class="yr-activity-row-id-badge">R-44</span>` +
-				`<yr-pill tone="success">Completed</yr-pill>` +
-				`<span>12 invoices</span></div></div>` +
-				`<div class="yr-activity-row-duration">2m 51s</div>` +
-				`</a>` +
-
-				`</yr-timeline-entries>` +
+				portalHomeRecentActivity() +
 
 				`</yr-content-main></yr-content>` +
 				`</yr-page-workspace>`,
 		)},
 	}
+}
+
+func portalHomeRecentActivity() string {
+	// Recent Activity
+	return `<yr-section-header>Recent Activity <a href="#">See more</a></yr-section-header>` +
+		`<yr-timeline-entries>` +
+
+		`<a class="yr-activity-row" href="#">` +
+		`<div>` +
+		`<div class="yr-activity-row-desc">Newsletter Digest</div>` +
+		`<div class="yr-activity-row-meta">` +
+		`<span class="yr-activity-row-id-badge">R-48</span>` +
+		`<yr-pill tone="success">Completed</yr-pill>` +
+		`<span>3 outputs</span></div></div>` +
+		`<div class="yr-activity-row-duration">1m 23s</div>` +
+		`</a>` +
+
+		`<a class="yr-activity-row" href="#">` +
+		`<div>` +
+		`<div class="yr-activity-row-desc">Lead Scoring</div>` +
+		`<div class="yr-activity-row-meta">` +
+		`<span class="yr-activity-row-id-badge">R-47</span>` +
+		`<yr-pill tone="warning">Waiting</yr-pill>` +
+		`<span>Approve budget &gt;$5k</span></div></div>` +
+		`<div class="yr-activity-row-duration">` +
+		`<span class="yr-activity-row-duration-label">Waiting</span>` +
+		`<yr-live-duration started-at="2026-10-01T09:00:00Z"></yr-live-duration>` +
+		`</div></a>` +
+
+		`<div class="yr-activity-row is-error">` +
+		`<div>` +
+		`<div class="yr-activity-row-desc">Social Scheduler</div>` +
+		`<div class="yr-activity-row-meta">` +
+		`<span class="yr-activity-row-id-badge">R-46</span>` +
+		`<yr-pill tone="danger">Failed</yr-pill>` +
+		`<span>Rate limit exceeded</span></div></div>` +
+		`<div class="yr-activity-row-duration">12s</div>` +
+		`</div>` +
+
+		`<a class="yr-activity-row" href="#">` +
+		`<div>` +
+		`<div class="yr-activity-row-desc">Contact Sync</div>` +
+		`<div class="yr-activity-row-meta">` +
+		`<span class="yr-activity-row-id-badge">R-45</span>` +
+		`<yr-pill tone="success">Completed</yr-pill>` +
+		`<span>24 records synced</span></div></div>` +
+		`<div class="yr-activity-row-duration">4m 8s</div>` +
+		`</a>` +
+
+		`<a class="yr-activity-row" href="#">` +
+		`<div>` +
+		`<div class="yr-activity-row-desc">Invoice Processor</div>` +
+		`<div class="yr-activity-row-meta">` +
+		`<span class="yr-activity-row-id-badge">R-44</span>` +
+		`<yr-pill tone="success">Completed</yr-pill>` +
+		`<span>12 invoices</span></div></div>` +
+		`<div class="yr-activity-row-duration">2m 51s</div>` +
+		`</a>` +
+
+		`</yr-timeline-entries>`
 }

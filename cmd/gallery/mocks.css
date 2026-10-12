@@ -1,0 +1,169 @@
+/* Mock-only styles for the MSP portal mocks (msp_mocks.templ), served at
+   /mocks.css and linked through ShellProps.Head. Typography and decoration
+   only: the layout primitives and the shell arrange the mocks. */
+
+/* Top bar — the brand and account menu, inset from the edges and centred
+   in the bar's height. */
+.mock-topbar {
+  box-sizing: border-box;
+  height: 100%;
+  display: grid;
+  align-content: center;
+  padding-inline: var(--yr-space-4);
+  border-block-end: 1px solid var(--yr-border);
+  background: var(--yr-surface);
+}
+
+/* Nav — the portal navigation panel. */
+.mock-nav {
+  padding: var(--yr-space-4);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+}
+.mock-nav-title {
+  margin: 0;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  color: var(--yr-text);
+}
+.mock-nav-link {
+  display: block;
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border-radius: var(--yr-radius-sm);
+  color: var(--yr-text-muted);
+  text-decoration: none;
+}
+.mock-nav-link:hover { background: var(--yr-surface-muted); }
+.mock-nav-link[aria-current="page"] {
+  background: var(--yr-accent-subtle);
+  color: var(--yr-accent);
+  font-weight: 600;
+}
+.mock-nav-version {
+  margin: 0;
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-subtle);
+}
+
+/* Org block — the client whose pages the nav lists. */
+.mock-nav-org {
+  padding-block-start: var(--yr-space-3);
+  border-block-start: 1px solid var(--yr-border);
+}
+.mock-nav-org-initial {
+  display: grid;
+  place-items: center;
+  inline-size: var(--yr-space-6);
+  block-size: var(--yr-space-6);
+  border-radius: var(--yr-radius-sm);
+  background: var(--yr-accent);
+  color: var(--yr-on-accent);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-xs);
+  font-weight: 600;
+}
+.mock-nav-org-name {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  color: var(--yr-text);
+}
+
+/* Icon — an inline icon at the mocks' icon size. */
+.mock-icon { display: inline-flex; }
+.mock-icon > * {
+  inline-size: var(--yr-space-4);
+  block-size: var(--yr-space-4);
+}
+
+/* Page and section titles. */
+.mock-page-title {
+  font-family: var(--yr-font-display);
+  font-size: var(--yr-font-size-xl);
+  font-weight: 600;
+  color: var(--yr-text);
+}
+.mock-section-title {
+  margin: 0;
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yr-text-subtle);
+}
+
+/* Setting — a setting's name, or a policy's value, in a card. */
+.mock-setting-name {
+  margin: 0;
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 500;
+  color: var(--yr-text);
+}
+
+/* Stat card — a figure over its label, with a tone on its left border. */
+.mock-stat-card {
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-4) var(--yr-space-6);
+}
+.mock-stat-card--success { border-left: 3px solid var(--yr-success); }
+.mock-stat-card--warning { border-left: 3px solid var(--yr-warning); }
+.mock-stat-card--danger { border-left: 3px solid var(--yr-danger); }
+.mock-stat-value {
+  margin: 0;
+  font-family: var(--yr-font-display);
+  font-size: var(--yr-font-size-2xl);
+  font-weight: 600;
+  color: var(--yr-text);
+}
+.mock-stat-value--compact { font-size: var(--yr-font-size-lg); }
+.mock-stat-value--warning { color: var(--yr-warning); }
+.mock-stat-value--danger { color: var(--yr-danger); }
+.mock-stat-label {
+  margin: 0;
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-muted);
+}
+
+/* Feed item — one row of an alert or activity feed. */
+.mock-feed-item {
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border-radius: var(--yr-radius-sm);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+}
+.mock-feed-item:hover { background: var(--yr-surface-muted); }
+.mock-feed-time {
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+  white-space: nowrap;
+}
+
+/* Client row — one client in a list. */
+.mock-client-row {
+  padding: var(--yr-space-3) var(--yr-space-4);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  background: var(--yr-surface);
+  cursor: pointer;
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+}
+.mock-client-row:hover {
+  border-color: var(--yr-accent);
+  background: var(--yr-accent-subtle);
+}
+.mock-client-name {
+  font-weight: 600;
+  color: var(--yr-text);
+}
+.mock-client-meta {
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-muted);
+}

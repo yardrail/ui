@@ -1,0 +1,102 @@
+package ui
+
+// shellExampleTopBar is the top bar shared by the shell examples: a brand and an account link.
+templ shellExampleTopBar() {
+	@ShellTopBar(RegionProps{}) {
+		<a href="/" class="yr-brand">Yardrail</a>
+		<a href="/account">Account</a>
+	}
+}
+
+// shellExampleNotice is the system message of the app-page example.
+templ shellExampleNotice() {
+	<div role="status">Client “Northwind” was archived.</div>
+}
+
+// shellAppPage is an app page with a top bar, primary navigation and a system message.
+templ shellAppPage() {
+	@Shell("Clients · Yardrail", ShellProps{}) {
+		@shellExampleTopBar()
+		@ShellNav(RegionProps{}) {
+			<ul>
+				<li><a href="/dashboard">Dashboard</a></li>
+				<li><a href="/clients" aria-current="page">Clients</a></li>
+				<li><a href="/connectors">Connectors</a></li>
+				<li><a href="/settings">Settings</a></li>
+			</ul>
+		}
+		@ShellMain(ShellMainProps{Messages: shellExampleNotice()}) {
+			<h1>Clients</h1>
+			@Stack(StackProps{}) {
+				<p>Every client your team manages, with its connectors and users.</p>
+				<div class="yr-card">Contoso Ltd</div>
+				<div class="yr-card">Fabrikam Inc</div>
+				<div class="yr-card">Tailspin Toys</div>
+			}
+		}
+	}
+}
+
+// shellSettingsPage is a settings page with a section navigation beside the content.
+templ shellSettingsPage() {
+	@Shell("Settings · Yardrail", ShellProps{}) {
+		@shellExampleTopBar()
+		@ShellMain(ShellMainProps{}) {
+			<h1>Settings</h1>
+			@Split(SplitProps{}) {
+				@SplitAside(RegionProps{}) {
+					<nav aria-label="Settings">
+						<ul>
+							<li><a href="/settings/profile" aria-current="page">Profile</a></li>
+							<li><a href="/settings/team">Team</a></li>
+							<li><a href="/settings/billing">Billing</a></li>
+						</ul>
+					</nav>
+				}
+				@SplitMain(RegionProps{}) {
+					<h2>Profile</h2>
+					<p>Your name and email address, as your team sees them.</p>
+				}
+			}
+		}
+	}
+}
+
+// shellFocusPage is a single-task page with no navigation: a narrow sign-in form.
+templ shellFocusPage() {
+	@Shell("Sign in · Yardrail", ShellProps{}) {
+		@ShellMain(ShellMainProps{}) {
+			@Center(CenterProps{Measure: MeasureNarrow}) {
+				<h1>Sign in</h1>
+				@Form(FormProps{Action: "/login", ID: "login"}) {
+					@Field("Email", "email", FieldProps{Type: FieldEmail, Autocomplete: AutocompleteEmail})
+					@Field("Password", "password", FieldProps{Type: FieldPassword, Autocomplete: AutocompleteCurrentPassword})
+					@Button("Sign in", ButtonProps{Type: ButtonSubmit})
+				}
+			}
+		}
+	}
+}
+
+// shellPublicPage is a public page with a hero band, content, a closing band and a footer.
+templ shellPublicPage() {
+	@Shell("Yardrail", ShellProps{}) {
+		@shellExampleTopBar()
+		@ShellMain(ShellMainProps{}) {
+			@ShellBand(RegionProps{}) {
+				<h1>Run your clients’ IT from one place</h1>
+				<p>Connect every tenant once, then manage users and devices together.</p>
+			}
+			@Stack(StackProps{}) {
+				<h2>How it works</h2>
+				<p>Add a client, connect its services and invite your team.</p>
+			}
+			@ShellBand(RegionProps{}) {
+				<p><a href="/signup">Create an account</a></p>
+			}
+		}
+		@ShellFooter(RegionProps{}) {
+			<p>© Yardrail</p>
+		}
+	}
+}

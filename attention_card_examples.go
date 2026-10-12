@@ -6,7 +6,7 @@ const attentionIconSize = 20
 
 func attentionCardExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			`<div style="max-width:40rem">` +
 				`<div class="yr-action-card yr-action-card--urgent">` +
 				`<div class="yr-icon-badge yr-icon-badge--amber">` +
@@ -20,8 +20,8 @@ func attentionCardExamples() []Example {
 				`</div>` +
 				`</div>` +
 				`</div>`,
-		)},
-		{Name: "danger", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleDanger, Component: templ.Raw(
 			`<div style="max-width:40rem">` +
 				`<div class="yr-action-card yr-action-card--urgent-danger">` +
 				`<div class="yr-icon-badge yr-icon-badge--danger">` +
@@ -35,6 +35,6 @@ func attentionCardExamples() []Example {
 				`</div>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

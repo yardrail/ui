@@ -8,6 +8,7 @@ import (
 	"log/slog"
 	"net/http"
 	"path"
+	"unicode"
 
 	"github.com/a-h/templ"
 
@@ -44,6 +45,7 @@ var sections = []section{
 	}},
 	{Name: "Structure", Categories: []category{
 		{Slug: "page-shell", Name: "Page Shell", ContextSlot: nil, Components: []string{
+			"shell",
 			"page-workspace",
 			"page-auth",
 			"page-setup",
@@ -146,6 +148,12 @@ type indexPage struct {
 //go:embed gallery.css
 var galleryCSS embed.FS
 
+// mocksCSS holds mocks.css, the mock-only typography and decoration of the UI mocks. The mocks
+// are whole documents that link it through their Shell head and do not load gallery.css.
+//
+//go:embed mocks.css
+var mocksCSS embed.FS
+
 // indexTemplate renders the sidebar + main content layout with browser-frame preview.
 var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
 <html lang="en">
@@ -176,7 +184,8 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
       href="/{{$comp}}/{{$ex.Name}}">{{$ex.Name}}</a>
     {{end}}
   </div>{{end}}
-  <a class="browser-open" href="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}" target="_blank">Open page ↗</a>
+  <a class="browser-open" href="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}"
+    target="_blank">Open page ↗</a>
   {{if .HasContext}}<div class="view-toggle">
     <button class="view-toggle-btn" data-view="isolated">Isolated</button>
     <button class="view-toggle-btn active" data-view="in-shell">In Shell</button>
@@ -375,9 +384,11 @@ func newHandler(assets fs.FS) http.Handler {
 	mux.HandleFunc("GET /{$}", g.index)
 	mux.HandleFunc("GET /ui.css", g.css)
 	mux.HandleFunc("GET /gallery.css", g.galleryStyles)
+	mux.HandleFunc("GET /mocks.css", g.mockStyles)
 	mux.HandleFunc("GET /ui.js", g.js)
 	mux.HandleFunc("GET /fonts/{file}", g.font)
 	mux.HandleFunc("GET /logo.png", g.logo)
+	mux.Handle("GET /static/ui/", http.StripPrefix("/static/ui/", http.FileServerFS(g.assets)))
 	mux.HandleFunc("GET /{component}/{name}", g.example)
 
 	return mux
@@ -421,6 +432,11 @@ func (*gallery) galleryStyles(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, galleryCSS, "gallery.css")
 }
 
+// mockStyles serves the UI mocks' own stylesheet.
+func (*gallery) mockStyles(w http.ResponseWriter, r *http.Request) {
+	http.ServeFileFS(w, r, mocksCSS, "mocks.css")
+}
+
 // js serves the library JS bundle.
 func (g *gallery) js(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, g.assets, "ui.js")
@@ -436,7 +452,8 @@ func (g *gallery) logo(w http.ResponseWriter, r *http.Request) {
 	http.ServeFileFS(w, r, g.assets, "logo.png")
 }
 
-// example renders one example inside a page, or 404s for an unknown component or name.
+// example renders one example inside a page, serves an example that renders a whole document
+// as it is, or 404s for an unknown component or name.
 func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 	component, name := r.PathValue("component"), r.PathValue("name")
 
@@ -457,6 +474,17 @@ func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	if isDocument(buf.Bytes()) {
+		w.Header().Set("Content-Type", "text/html; charset=utf-8")
+
+		_, err = w.Write(buf.Bytes())
+		if err != nil {
+			slog.Warn("write example document", "component", component, "name", name, "err", err)
+		}
+
+		return
+	}
+
 	//nolint:gosec // The markup is the ui package's own escaped render output.
 	html := template.HTML(buf.String())
 
@@ -467,6 +495,16 @@ func (g *gallery) example(w http.ResponseWriter, r *http.Request) {
 	}
 
 	g.write(w, exampleTemplate, examplePage{Component: component, Name: name, HTML: html})
+}
+
+// isDocument reports whether html is a whole document, one that begins with a doctype once
+// leading whitespace is trimmed.
+func isDocument(html []byte) bool {
+	const doctype = "<!doctype html>"
+
+	trimmed := bytes.TrimLeftFunc(html, unicode.IsSpace)
+
+	return len(trimmed) >= len(doctype) && bytes.EqualFold(trimmed[:len(doctype)], []byte(doctype))
 }
 
 // write executes t with data into a buffer, so a template error becomes a 500 instead of a

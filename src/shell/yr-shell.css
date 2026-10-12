@@ -1,0 +1,174 @@
+/* Shell — the page document (shell.go, shell.templ). .yr-shell is the
+   <body>: a grid of top bar, nav, main and footer areas. Below 48rem every
+   shell is a single column and the nav folds into a popover opened by
+   .yr-shell__nav-toggle. Main and band content sits in a full-bleed grid
+   whose content track is the Standard page width. */
+
+/* Body grid — single column below 48rem. */
+.yr-shell {
+  margin: 0;
+  min-height: 100dvh;
+  display: grid;
+  grid-template:
+    "topbar" auto
+    "nav" auto
+    "main" 1fr
+    "footer" auto
+    / minmax(0, 1fr);
+}
+
+/* Nav beside main from 48rem up; a shell without a nav keeps one column. */
+@media (width >= 48rem) {
+  .yr-shell {
+    grid-template:
+      "topbar topbar" auto
+      "nav main" 1fr
+      "footer footer" auto
+      / var(--yr-side-sm) minmax(0, 1fr);
+  }
+  .yr-shell:not(:has(> .yr-shell__nav)) {
+    grid-template:
+      "topbar" auto
+      "main" 1fr
+      "footer" auto
+      / minmax(0, 1fr);
+  }
+}
+
+/* Skip link — visually hidden until focused, then shown top left above the
+   top bar. */
+.yr-shell__skip {
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  z-index: 3;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+.yr-shell__skip:focus-visible {
+  inset-block-start: var(--yr-space-2);
+  inset-inline-start: var(--yr-space-2);
+  width: auto;
+  height: auto;
+  overflow: visible;
+  clip-path: none;
+  padding: var(--yr-space-2) var(--yr-space-4);
+  border-radius: var(--yr-radius-md);
+  background: var(--yr-surface);
+  color: var(--yr-accent);
+  font-size: var(--yr-font-size-sm);
+}
+
+/* Top bar — sticks to the top of the viewport, above main. */
+.yr-shell__topbar {
+  grid-area: topbar;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  height: var(--yr-topbar-height);
+  background: var(--yr-bg);
+}
+
+/* Nav — the region holding the toggle and the panel. */
+.yr-shell__nav {
+  grid-area: nav;
+}
+
+/* Narrow nav — the toggle opens the panel as a popover under the top bar.
+   The UA popover rules place it in the top layer. */
+.yr-shell__nav-toggle {
+  display: inline-block;
+}
+.yr-shell__nav-panel {
+  inset: var(--yr-topbar-height) 0 auto;
+  margin: 0;
+  width: auto;
+  max-height: calc(100dvh - var(--yr-topbar-height));
+  overflow-y: auto;
+  border: 0;
+  border-block-end: 1px solid var(--yr-border);
+  padding: var(--yr-space-4);
+  background: var(--yr-bg);
+  color: var(--yr-text);
+}
+
+/* Wide nav — sticks below the top bar and scrolls on its own; the toggle
+   is hidden and the panel is shown in place. */
+@media (width >= 48rem) {
+  .yr-shell__nav {
+    position: sticky;
+    top: var(--yr-topbar-height);
+    align-self: start;
+    max-height: calc(100dvh - var(--yr-topbar-height));
+    overflow-y: auto;
+  }
+  .yr-shell:not(:has(> .yr-shell__topbar)) > .yr-shell__nav {
+    top: 0;
+    max-height: 100dvh;
+  }
+  .yr-shell__nav-toggle {
+    display: none;
+  }
+  .yr-shell__nav-panel {
+    display: block;
+    position: static;
+    inset: auto;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    width: auto;
+    height: auto;
+    max-height: none;
+    background: none;
+    overflow: visible;
+  }
+}
+
+/* Main and band inner — full-bleed grid; content track at the Standard
+   page width, gutters at least --yr-page-gutter wide. */
+.yr-shell__main,
+.yr-shell__band-inner {
+  display: grid;
+  grid-template-columns:
+    [full-start] minmax(var(--yr-page-gutter), 1fr)
+    [content-start] min(100% - 2 * var(--yr-page-gutter), var(--yr-page-standard))
+    [content-end] minmax(var(--yr-page-gutter), 1fr)
+    [full-end];
+  align-content: start;
+}
+.yr-shell__main {
+  grid-area: main;
+}
+.yr-shell__main > *,
+.yr-shell__band-inner > * {
+  grid-column: content;
+}
+
+/* Full width — the content track fills main between fixed gutters. Three
+   flexible tracks would split main into equal thirds. */
+.yr-shell__main--width-full {
+  grid-template-columns:
+    [full-start] var(--yr-page-gutter)
+    [content-start] minmax(0, 1fr)
+    [content-end] var(--yr-page-gutter)
+    [full-end];
+}
+
+/* Band — spans main edge to edge; its inner grid keeps content at the page
+   width. */
+.yr-shell__main > .yr-shell__band {
+  grid-column: full;
+}
+
+/* Messages — first child of main, in the content track above the page. */
+.yr-shell__messages {
+  grid-column: content;
+}
+
+/* Footer — spans the full shell width. */
+.yr-shell__footer {
+  grid-area: footer;
+}

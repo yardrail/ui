@@ -6,7 +6,7 @@ const outputRowIconSize = 20
 
 func outputRowExamples() []Example {
 	return []Example{
-		{Name: "rows", Component: templ.Raw(
+		{Name: exampleRows, Component: templ.Raw(
 			`<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:44rem">` +
 
 				`<div class="yr-list-row">` +
@@ -46,6 +46,6 @@ func outputRowExamples() []Example {
 				`</div>` +
 
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

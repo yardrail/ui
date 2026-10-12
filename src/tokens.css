@@ -85,6 +85,11 @@
   --yr-item-width-sm: 15rem;
   --yr-item-width-md: 20rem;
 
+  /* Page — the shell's Standard width, side gutter and top bar height */
+  --yr-page-standard: 75rem;
+  --yr-page-gutter: var(--yr-space-4);
+  --yr-topbar-height: 3.5rem;
+
   /* Layout — sidebar and drawer defaults */
   --yr-sidebar-width: 220px;
   --yr-sidebar-width-collapsed: 48px;
@@ -105,4 +110,11 @@
   --yr-font-body: "DM Sans", sans-serif;
   --yr-font-ui: "Inter", system-ui, sans-serif;
   --yr-font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Page gutter from 48rem up, where the shell shows its nav in place. */
+@media (width >= 48rem) {
+  :root {
+    --yr-page-gutter: var(--yr-space-8);
+  }
 }
