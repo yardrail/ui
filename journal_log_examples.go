@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func journalLogExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			`<div style="max-width:44rem">` +
 				`<yr-journal-log>` +
 
@@ -55,6 +55,6 @@ func journalLogExamples() []Example {
 
 				`</yr-journal-log>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

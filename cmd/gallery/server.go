@@ -184,7 +184,8 @@ var indexTemplate = template.Must(template.New("index").Parse(`<!doctype html>
       href="/{{$comp}}/{{$ex.Name}}">{{$ex.Name}}</a>
     {{end}}
   </div>{{end}}
-  <a class="browser-open" href="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}" target="_blank">Open page ↗</a>
+  <a class="browser-open" href="/{{.Name}}/{{(index .Examples 0).Name}}{{if .HasContext}}?ctx=1{{end}}"
+    target="_blank">Open page ↗</a>
   {{if .HasContext}}<div class="view-toggle">
     <button class="view-toggle-btn" data-view="isolated">Isolated</button>
     <button class="view-toggle-btn active" data-view="in-shell">In Shell</button>

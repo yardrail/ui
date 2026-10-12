@@ -54,6 +54,6 @@ func runSummaryRowExamples() []Example {
 				`</a>` +
 
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

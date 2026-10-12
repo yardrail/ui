@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func portalTemplatesExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/automations/templates", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/automations/templates", Component: templ.Raw(
 			portalMockStyle +
 				`<yr-page-workspace>` +
 				portalNavbar() +
@@ -84,61 +84,65 @@ func portalTemplatesExamples() []Example {
 				`</div>` +
 				`</a>` +
 
-				// Lead Enrichment
-				`<a href="#" class="yr-card yr-card--interactive yr-template-card">` +
-				`<h3 class="yr-template-card-name">Lead enrichment</h3>` +
-				`<p class="yr-template-card-desc">Enriches inbound leads with firmographic data and` +
-				` scores them for sales readiness.</p>` +
-				`<div class="yr-template-card-connectors">` +
-				`<div class="yr-connector-pill--icon" title="HubSpot">HS</div>` +
-				`</div>` +
-				`<div class="yr-card-footer">` +
-				`<div class="yr-template-card-footer-left">` +
-				`<yr-pill tone="purple">Community</yr-pill>` +
-				`<span class="yr-template-card-install-count">890 installs</span>` +
-				`</div>` +
-				`<span class="yr-template-card-price">Free</span>` +
-				`</div>` +
-				`</a>` +
-
-				// Invoice Reconciliation
-				`<a href="#" class="yr-card yr-card--interactive yr-template-card">` +
-				`<h3 class="yr-template-card-name">Invoice reconciliation</h3>` +
-				`<p class="yr-template-card-desc">Matches invoices against purchase orders and flags` +
-				` discrepancies for review.</p>` +
-				`<div class="yr-template-card-connectors">` +
-				`<div class="yr-connector-pill--icon" title="Stripe">ST</div>` +
-				`<div class="yr-connector-pill--icon" title="Google Sheets">GS</div>` +
-				`</div>` +
-				`<div class="yr-card-footer">` +
-				`<div class="yr-template-card-footer-left">` +
-				`<yr-pill tone="accent">Verified</yr-pill>` +
-				`<yr-rating value="4.2" reviews="31"></yr-rating>` +
-				`</div>` +
-				`<span class="yr-template-card-price">$36</span>` +
-				`</div>` +
-				`</a>` +
-
-				// Social Listening Digest
-				`<a href="#" class="yr-card yr-card--interactive yr-template-card">` +
-				`<h3 class="yr-template-card-name">Social listening digest</h3>` +
-				`<p class="yr-template-card-desc">Aggregates brand mentions across social platforms` +
-				` into a weekly Slack summary.</p>` +
-				`<div class="yr-template-card-connectors">` +
-				`<div class="yr-connector-pill--icon" title="Slack"><img src="` + exampleLogo + `" alt="Slack"></div>` +
-				`</div>` +
-				`<div class="yr-card-footer">` +
-				`<div class="yr-template-card-footer-left">` +
-				`<yr-pill tone="purple">Community</yr-pill>` +
-				`<span class="yr-template-card-install-count">2.1k installs</span>` +
-				`</div>` +
-				`<span class="yr-template-card-price">Free</span>` +
-				`</div>` +
-				`</a>` +
+				portalTemplatesMoreCards() +
 
 				`</div>` + // close portal-grid
 				`</yr-content-main></yr-content>` +
 				`</yr-page-workspace>`,
 		)},
 	}
+}
+
+func portalTemplatesMoreCards() string {
+	// Lead Enrichment
+	return `<a href="#" class="yr-card yr-card--interactive yr-template-card">` +
+		`<h3 class="yr-template-card-name">Lead enrichment</h3>` +
+		`<p class="yr-template-card-desc">Enriches inbound leads with firmographic data and` +
+		` scores them for sales readiness.</p>` +
+		`<div class="yr-template-card-connectors">` +
+		`<div class="yr-connector-pill--icon" title="HubSpot">HS</div>` +
+		`</div>` +
+		`<div class="yr-card-footer">` +
+		`<div class="yr-template-card-footer-left">` +
+		`<yr-pill tone="purple">Community</yr-pill>` +
+		`<span class="yr-template-card-install-count">890 installs</span>` +
+		`</div>` +
+		`<span class="yr-template-card-price">Free</span>` +
+		`</div>` +
+		`</a>` +
+
+		// Invoice Reconciliation
+		`<a href="#" class="yr-card yr-card--interactive yr-template-card">` +
+		`<h3 class="yr-template-card-name">Invoice reconciliation</h3>` +
+		`<p class="yr-template-card-desc">Matches invoices against purchase orders and flags` +
+		` discrepancies for review.</p>` +
+		`<div class="yr-template-card-connectors">` +
+		`<div class="yr-connector-pill--icon" title="Stripe">ST</div>` +
+		`<div class="yr-connector-pill--icon" title="Google Sheets">GS</div>` +
+		`</div>` +
+		`<div class="yr-card-footer">` +
+		`<div class="yr-template-card-footer-left">` +
+		`<yr-pill tone="accent">Verified</yr-pill>` +
+		`<yr-rating value="4.2" reviews="31"></yr-rating>` +
+		`</div>` +
+		`<span class="yr-template-card-price">$36</span>` +
+		`</div>` +
+		`</a>` +
+
+		// Social Listening Digest
+		`<a href="#" class="yr-card yr-card--interactive yr-template-card">` +
+		`<h3 class="yr-template-card-name">Social listening digest</h3>` +
+		`<p class="yr-template-card-desc">Aggregates brand mentions across social platforms` +
+		` into a weekly Slack summary.</p>` +
+		`<div class="yr-template-card-connectors">` +
+		`<div class="yr-connector-pill--icon" title="Slack"><img src="` + exampleLogo + `" alt="Slack"></div>` +
+		`</div>` +
+		`<div class="yr-card-footer">` +
+		`<div class="yr-template-card-footer-left">` +
+		`<yr-pill tone="purple">Community</yr-pill>` +
+		`<span class="yr-template-card-install-count">2.1k installs</span>` +
+		`</div>` +
+		`<span class="yr-template-card-price">Free</span>` +
+		`</div>` +
+		`</a>`
 }

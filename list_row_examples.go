@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func listRowExamples() []Example {
 	return []Example{
-		{Name: "rows", Component: templ.Raw(
+		{Name: exampleRows, Component: templ.Raw(
 			`<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:44rem">` +
 				`<div class="yr-list-row">` +
 				`<div class="yr-list-row-icon"><img src="` + exampleLogo + `" alt="Slack" width="40" height="40"></div>` +

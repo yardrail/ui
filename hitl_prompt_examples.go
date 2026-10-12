@@ -16,8 +16,8 @@ func hitlPromptExamples() []Example {
 				`</div>` +
 				`</yr-hitl-prompt>` +
 				`</div>`,
-		)},
-		{Name: "danger", Component: templ.Raw(
+		), DisplayURL: ""},
+		{Name: exampleDanger, Component: templ.Raw(
 			`<div style="max-width:36rem">` +
 				`<yr-hitl-prompt tone="danger">` +
 				`<div class="yr-hitl-prompt-title">Critical: Slack API key expired</div>` +
@@ -28,6 +28,6 @@ func hitlPromptExamples() []Example {
 				`</div>` +
 				`</yr-hitl-prompt>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

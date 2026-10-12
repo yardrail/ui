@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func activityRowExamples() []Example {
 	return []Example{
-		{Name: "rows", Component: templ.Raw(
+		{Name: exampleRows, Component: templ.Raw(
 			`<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:40rem">` +
 				`<a class="yr-activity-row" href="#">` +
 				`<div>` +
@@ -68,6 +68,6 @@ func activityRowExamples() []Example {
 				`<time class="yr-activity-row-timestamp" datetime="2026-10-11T14:30:15Z">14:30:15</time>` +
 				`</div>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

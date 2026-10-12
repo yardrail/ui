@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func portalAutomationsExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/automations", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/automations", Component: templ.Raw(
 			portalMockStyle +
 				`<yr-page-workspace>` +
 				portalNavbar() +
@@ -50,7 +50,8 @@ func portalAutomationsExamples() []Example {
 				// Connected Tools
 				`<yr-section-header>Connected Tools <a href="#">Manage</a></yr-section-header>` +
 				`<div style="display:flex;gap:var(--yr-space-3);margin-bottom:var(--yr-space-8)">` +
-				`<div class="yr-connector-pill--icon" title="Slack"><img src="` + exampleLogo + `" alt="Slack" width="24" height="24"></div>` +
+				`<div class="yr-connector-pill--icon" title="Slack">` +
+				`<img src="` + exampleLogo + `" alt="Slack" width="24" height="24"></div>` +
 				`<div class="yr-connector-pill--icon" title="HubSpot">HS</div>` +
 				`<div class="yr-connector-pill--icon" title="Google Sheets">GS</div>` +
 				`<div class="yr-connector-pill--icon" title="Stripe">ST</div>` +

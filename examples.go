@@ -12,6 +12,8 @@ const (
 	exampleDefault     = "default"
 	exampleWithContent = "with-content"
 	exampleCollapsed   = "collapsed"
+	exampleRows        = "rows"
+	exampleDanger      = "danger"
 )
 
 // Example is one named rendering of a component. The snapshot tests compare it against

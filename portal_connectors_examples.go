@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func portalConnectorsExamples() []Example {
 	return []Example{
-		{Name: "default", DisplayURL: "platform.yardrail.com/automations/connectors", Component: templ.Raw(
+		{Name: exampleDefault, DisplayURL: "platform.yardrail.com/automations/connectors", Component: templ.Raw(
 			portalMockStyle +
 				`<yr-page-workspace>` +
 				portalNavbar() +
@@ -78,50 +78,54 @@ func portalConnectorsExamples() []Example {
 
 				`</div>` +
 
-				// Available section
-				`<yr-section-header>Available</yr-section-header>` +
-				`<div style="display:flex;flex-direction:column;gap:var(--yr-space-3)">` +
-
-				`<div class="yr-list-row">` +
-				`<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);` +
-				`font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);` +
-				`color:var(--yr-text-muted)">JI</div>` +
-				`<div class="yr-list-row-main">` +
-				`<div class="yr-list-row-name">Jira</div>` +
-				`<div class="yr-list-row-desc">Project management and issue tracking</div>` +
-				`</div>` +
-				`<div class="yr-list-row-actions">` +
-				`<button class="yr-button">Connect</button>` +
-				`</div></div>` +
-
-				`<div class="yr-list-row">` +
-				`<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);` +
-				`font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);` +
-				`color:var(--yr-text-muted)">SF</div>` +
-				`<div class="yr-list-row-main">` +
-				`<div class="yr-list-row-name">Salesforce</div>` +
-				`<div class="yr-list-row-desc">CRM and sales pipeline management</div>` +
-				`</div>` +
-				`<div class="yr-list-row-actions">` +
-				`<button class="yr-button">Connect</button>` +
-				`</div></div>` +
-
-				`<div class="yr-list-row">` +
-				`<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);` +
-				`font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);` +
-				`color:var(--yr-text-muted)">ZD</div>` +
-				`<div class="yr-list-row-main">` +
-				`<div class="yr-list-row-name">Zendesk</div>` +
-				`<div class="yr-list-row-desc">Customer support and ticketing</div>` +
-				`</div>` +
-				`<div class="yr-list-row-actions">` +
-				`<button class="yr-button">Connect</button>` +
-				`</div></div>` +
-
-				`</div>` +
+				portalConnectorsAvailable() +
 
 				`</yr-content-main></yr-content>` +
 				`</yr-page-workspace>`,
 		)},
 	}
+}
+
+func portalConnectorsAvailable() string {
+	// Available section
+	return `<yr-section-header>Available</yr-section-header>` +
+		`<div style="display:flex;flex-direction:column;gap:var(--yr-space-3)">` +
+
+		`<div class="yr-list-row">` +
+		`<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);` +
+		`font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);` +
+		`color:var(--yr-text-muted)">JI</div>` +
+		`<div class="yr-list-row-main">` +
+		`<div class="yr-list-row-name">Jira</div>` +
+		`<div class="yr-list-row-desc">Project management and issue tracking</div>` +
+		`</div>` +
+		`<div class="yr-list-row-actions">` +
+		`<button class="yr-button">Connect</button>` +
+		`</div></div>` +
+
+		`<div class="yr-list-row">` +
+		`<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);` +
+		`font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);` +
+		`color:var(--yr-text-muted)">SF</div>` +
+		`<div class="yr-list-row-main">` +
+		`<div class="yr-list-row-name">Salesforce</div>` +
+		`<div class="yr-list-row-desc">CRM and sales pipeline management</div>` +
+		`</div>` +
+		`<div class="yr-list-row-actions">` +
+		`<button class="yr-button">Connect</button>` +
+		`</div></div>` +
+
+		`<div class="yr-list-row">` +
+		`<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);` +
+		`font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);` +
+		`color:var(--yr-text-muted)">ZD</div>` +
+		`<div class="yr-list-row-main">` +
+		`<div class="yr-list-row-name">Zendesk</div>` +
+		`<div class="yr-list-row-desc">Customer support and ticketing</div>` +
+		`</div>` +
+		`<div class="yr-list-row-actions">` +
+		`<button class="yr-button">Connect</button>` +
+		`</div></div>` +
+
+		`</div>`
 }

@@ -4,7 +4,7 @@ import "github.com/a-h/templ"
 
 func timelineGroupExamples() []Example {
 	return []Example{
-		{Name: "default", Component: templ.Raw(
+		{Name: exampleDefault, Component: templ.Raw(
 			`<div style="max-width:44rem">` +
 				`<yr-timeline-group aria-label="Today">` +
 				`<time datetime="2026-10-11">Today</time>` +
@@ -53,6 +53,6 @@ func timelineGroupExamples() []Example {
 				`</yr-timeline-entries>` +
 				`</yr-timeline-group>` +
 				`</div>`,
-		)},
+		), DisplayURL: ""},
 	}
 }

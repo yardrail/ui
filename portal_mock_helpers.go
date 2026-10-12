@@ -2,7 +2,10 @@ package ui
 
 import "strings"
 
-const portalIconSize = 16
+const (
+	portalIconSize = 16
+	portalHome     = "home"
+)
 
 const portalMockStyle = `<style>` +
 	`html,body{margin:0;height:100%}` +
@@ -44,7 +47,25 @@ const portalMockStyle = `<style>` +
 	`</style>`
 
 func portalNavbar() string {
-	return mspNavbar()
+	return `<yr-navbar-std logo="/logo.png" brand="Yardrail" authed>` +
+		`<div class="yr-search yr-search--compact"` +
+		` slot="center" style="max-width:320px">` +
+		exampleIcon("search",
+			`class="yr-search-icon" style="left:0.5rem"`,
+			navSearchIconSize) +
+		`<input class="yr-search-input" type="search"` +
+		` placeholder="Search…"` +
+		` style="padding:var(--yr-space-1) var(--yr-space-2)` +
+		` var(--yr-space-1) 1.75rem;` +
+		`font-size:var(--yr-font-size-sm)">` +
+		`</div>` +
+		`<yr-account-menu name="Brahm Lower"` +
+		` email="brahm@yardrail.com">` +
+		`<span slot="avatar">BL</span>` +
+		`<a class="yr-dropdown-menu-item" href="#">Account settings</a>` +
+		`<a class="yr-dropdown-menu-item" href="#">Sign out</a>` +
+		`</yr-account-menu>` +
+		`</yr-navbar-std>`
 }
 
 func portalSidebarFooter() string {
@@ -59,135 +80,90 @@ func portalSidebarFooter() string {
 		`</yr-sidebar-footer>`
 }
 
-func portalSidebar(activePage string) string {
-	type link struct {
-		icon, label, slug string
-	}
+// portalLink is one sidebar link in the portal mocks.
+type portalLink struct {
+	icon, label, slug string
+}
 
-	topLinks := []link{
-		{"home", "Home", "home"},
-		{"zap", "Automations", "automations"},
-	}
-
-	spaceLinks := []link{
+// portalSpaceLinks returns the Spaces section links shared by every portal sidebar.
+func portalSpaceLinks() []portalLink {
+	return []portalLink{
 		{"star", "Marketing Ops", "space-marketing"},
 		{"star", "Client Onboarding", "space-onboarding"},
 		{"folder", "My Space", "space-personal"},
 		{"folder", "Sales Ops", "space-sales"},
 	}
+}
 
-	var b strings.Builder
+func portalSidebarHeader() string {
+	return `<yr-sidebar>` +
+		`<yr-sidebar-header>` +
+		`<span style="font-family:var(--yr-font-body);` +
+		`font-weight:600;font-size:var(--yr-font-size-sm)">` +
+		`Yardrail</span>` +
+		`</yr-sidebar-header>`
+}
 
-	b.WriteString(`<yr-sidebar>`)
-	b.WriteString(`<yr-sidebar-header>`)
-	b.WriteString(`<span style="font-family:var(--yr-font-body);`)
-	b.WriteString(`font-weight:600;font-size:var(--yr-font-size-sm)">`)
-	b.WriteString(`Yardrail</span>`)
-	b.WriteString(`</yr-sidebar-header>`)
-
-	b.WriteString(`<yr-sidebar-nav>`)
-	for _, l := range topLinks {
-		active := ""
-		if l.slug == activePage {
-			active = " active"
-		}
-		b.WriteString(`<yr-sidebar-link href="#"`)
-		b.WriteString(active)
-		b.WriteString(`>`)
-		b.WriteString(exampleIcon(l.icon, "", portalIconSize))
-		b.WriteString(` `)
-		b.WriteString(l.label)
-		b.WriteString(`</yr-sidebar-link>`)
+func portalSidebarLink(l portalLink, activePage string) string {
+	active := ""
+	if l.slug == activePage {
+		active = " active"
 	}
-	b.WriteString(`</yr-sidebar-nav>`)
 
-	b.WriteString(`<yr-sidebar-nav label="Spaces">`)
-	for _, l := range spaceLinks {
-		active := ""
-		if l.slug == activePage {
-			active = " active"
-		}
-		b.WriteString(`<yr-sidebar-link href="#"`)
-		b.WriteString(active)
-		b.WriteString(`>`)
-		b.WriteString(exampleIcon(l.icon, "", portalIconSize))
-		b.WriteString(` `)
-		b.WriteString(l.label)
-		b.WriteString(`</yr-sidebar-link>`)
+	return `<yr-sidebar-link href="#"` + active + `>` +
+		exampleIcon(l.icon, "", portalIconSize) +
+		` ` + l.label +
+		`</yr-sidebar-link>`
+}
+
+func portalSidebarLinks(links []portalLink, activePage string) string {
+	parts := make([]string, 0, len(links))
+	for _, l := range links {
+		parts = append(parts, portalSidebarLink(l, activePage))
 	}
-	b.WriteString(`</yr-sidebar-nav>`)
 
-	b.WriteString(portalSidebarFooter())
-	b.WriteString(`</yr-sidebar>`)
+	return strings.Join(parts, "")
+}
 
-	return b.String()
+func portalSidebar(activePage string) string {
+	topLinks := []portalLink{
+		{portalHome, "Home", portalHome},
+		{"zap", "Automations", "automations"},
+	}
+
+	return portalSidebarHeader() +
+		`<yr-sidebar-nav>` +
+		portalSidebarLinks(topLinks, activePage) +
+		`</yr-sidebar-nav>` +
+		`<yr-sidebar-nav label="Spaces">` +
+		portalSidebarLinks(portalSpaceLinks(), activePage) +
+		`</yr-sidebar-nav>` +
+		portalSidebarFooter() +
+		`</yr-sidebar>`
 }
 
 func portalSidebarAutomations(activePage string) string {
-	type link struct {
-		icon, label, slug string
+	topLinks := []portalLink{
+		{portalHome, "Home", ""},
+		{"zap", "Automations", "automations"},
 	}
 
-	autoSubLinks := []link{
+	autoSubLinks := []portalLink{
 		{"git-branch", "Workflows", "workflows"},
 		{"layout-grid", "Templates", "templates"},
 		{"plug", "Connectors", "connectors"},
 	}
 
-	spaceLinks := []link{
-		{"star", "Marketing Ops", "space-marketing"},
-		{"star", "Client Onboarding", "space-onboarding"},
-		{"folder", "My Space", "space-personal"},
-		{"folder", "Sales Ops", "space-sales"},
-	}
-
-	var b strings.Builder
-
-	b.WriteString(`<yr-sidebar>`)
-	b.WriteString(`<yr-sidebar-header>`)
-	b.WriteString(`<span style="font-family:var(--yr-font-body);`)
-	b.WriteString(`font-weight:600;font-size:var(--yr-font-size-sm)">`)
-	b.WriteString(`Yardrail</span>`)
-	b.WriteString(`</yr-sidebar-header>`)
-
-	b.WriteString(`<yr-sidebar-nav>`)
-	b.WriteString(`<yr-sidebar-link href="#">`)
-	b.WriteString(exampleIcon("home", "", portalIconSize))
-	b.WriteString(` Home</yr-sidebar-link>`)
-
-	b.WriteString(`<yr-sidebar-link href="#" active>`)
-	b.WriteString(exampleIcon("zap", "", portalIconSize))
-	b.WriteString(` Automations</yr-sidebar-link>`)
-	b.WriteString(`</yr-sidebar-nav>`)
-
-	b.WriteString(`<yr-sidebar-nav>`)
-	for _, l := range autoSubLinks {
-		active := ""
-		if l.slug == activePage {
-			active = " active"
-		}
-		b.WriteString(`<yr-sidebar-link href="#"`)
-		b.WriteString(active)
-		b.WriteString(`>`)
-		b.WriteString(exampleIcon(l.icon, "", portalIconSize))
-		b.WriteString(` `)
-		b.WriteString(l.label)
-		b.WriteString(`</yr-sidebar-link>`)
-	}
-	b.WriteString(`</yr-sidebar-nav>`)
-
-	b.WriteString(`<yr-sidebar-nav label="Spaces">`)
-	for _, l := range spaceLinks {
-		b.WriteString(`<yr-sidebar-link href="#">`)
-		b.WriteString(exampleIcon(l.icon, "", portalIconSize))
-		b.WriteString(` `)
-		b.WriteString(l.label)
-		b.WriteString(`</yr-sidebar-link>`)
-	}
-	b.WriteString(`</yr-sidebar-nav>`)
-
-	b.WriteString(portalSidebarFooter())
-	b.WriteString(`</yr-sidebar>`)
-
-	return b.String()
+	return portalSidebarHeader() +
+		`<yr-sidebar-nav>` +
+		portalSidebarLinks(topLinks, "automations") +
+		`</yr-sidebar-nav>` +
+		`<yr-sidebar-nav>` +
+		portalSidebarLinks(autoSubLinks, activePage) +
+		`</yr-sidebar-nav>` +
+		`<yr-sidebar-nav label="Spaces">` +
+		portalSidebarLinks(portalSpaceLinks(), "") +
+		`</yr-sidebar-nav>` +
+		portalSidebarFooter() +
+		`</yr-sidebar>`
 }
