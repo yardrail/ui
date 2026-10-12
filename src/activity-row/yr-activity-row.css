@@ -55,3 +55,28 @@ a.yr-activity-row:hover {
 .yr-activity-row-duration-label {
   display: block;
 }
+
+.yr-activity-row-timestamp {
+  font-family: var(--yr-font-mono);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-subtle);
+  white-space: nowrap;
+}
+
+yr-timeline-entries .yr-activity-row {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border-bottom: 1px solid var(--yr-border);
+}
+yr-timeline-entries .yr-activity-row:last-child {
+  border-bottom: none;
+}
+yr-timeline-entries .yr-activity-row.is-error {
+  border-bottom-color: var(--yr-border);
+  color: var(--yr-danger);
+}
+yr-timeline-entries a.yr-activity-row:hover {
+  background: var(--yr-surface-muted);
+}

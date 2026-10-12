@@ -1,0 +1,39 @@
+/* yr-workflow-card — card for an installed workflow in a space. Shows
+   name + status pill, stats (runs, success rate), and a footer with
+   last-run time and trigger button. */
+
+yr-workflow-card {
+  display: block;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-lg);
+  padding: var(--yr-space-6);
+}
+yr-workflow-card .yr-workflow-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--yr-space-3);
+}
+yr-workflow-card .yr-workflow-card-name {
+  font-family: var(--yr-font-body);
+  font-weight: 600;
+  font-size: var(--yr-font-size-md);
+  color: var(--yr-text);
+  margin: 0;
+}
+yr-workflow-card .yr-workflow-card-stats {
+  display: flex;
+  gap: var(--yr-space-4);
+  margin-bottom: var(--yr-space-3);
+}
+yr-workflow-card .yr-workflow-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--yr-border);
+  padding-top: var(--yr-space-3);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-subtle);
+}

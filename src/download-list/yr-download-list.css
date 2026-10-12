@@ -1,0 +1,31 @@
+/* yr-download-list — compact file listing for workflow run outputs.
+   Each child <a> is a downloadable file row: icon + name + size. */
+
+yr-download-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-1);
+}
+yr-download-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--yr-space-2);
+  padding: var(--yr-space-1) var(--yr-space-2);
+  border-radius: var(--yr-radius-sm);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-accent);
+  text-decoration: none;
+}
+yr-download-list a:hover {
+  background: var(--yr-surface-muted);
+  text-decoration: underline;
+}
+yr-download-list a svg {
+  flex-shrink: 0;
+  color: var(--yr-text-subtle);
+}
+yr-download-list .yr-download-size {
+  color: var(--yr-text-disabled);
+  font-size: var(--yr-font-size-xs);
+}

@@ -1,0 +1,10 @@
+/* yr-journal-log — scrollable container for workflow run journal entries
+   (activity-rows with absolute timestamps). Used on Workflow Run page. */
+
+yr-journal-log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-2);
+  overflow-y: auto;
+  max-height: 32rem;
+}

@@ -1,0 +1,27 @@
+/* yr-timeline-group — date-labeled container with a vertical time rail
+   connecting child entries. Used on Space and Workflow Detail pages. */
+
+yr-timeline-group {
+  display: block;
+}
+yr-timeline-group + yr-timeline-group {
+  margin-top: var(--yr-space-6);
+}
+yr-timeline-group > :first-child:not(yr-timeline-entries) {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yr-text-subtle);
+  margin-bottom: var(--yr-space-3);
+  padding-left: var(--yr-space-6);
+}
+yr-timeline-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-3);
+  padding-left: var(--yr-space-6);
+  border-left: 2px solid var(--yr-border);
+  margin-left: var(--yr-space-2);
+}

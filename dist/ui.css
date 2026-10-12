@@ -1501,6 +1501,29 @@ a.yr-activity-row:hover {
 .yr-activity-row-duration-label {
   display: block;
 }
+.yr-activity-row-timestamp {
+  font-family: var(--yr-font-mono);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-subtle);
+  white-space: nowrap;
+}
+yr-timeline-entries .yr-activity-row {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border-bottom: 1px solid var(--yr-border);
+}
+yr-timeline-entries .yr-activity-row:last-child {
+  border-bottom: none;
+}
+yr-timeline-entries .yr-activity-row.is-error {
+  border-bottom-color: var(--yr-border);
+  color: var(--yr-danger);
+}
+yr-timeline-entries a.yr-activity-row:hover {
+  background: var(--yr-surface-muted);
+}
 
 /* src/copy-field/yr-copy-field.css */
 yr-copy-field {
@@ -1777,6 +1800,12 @@ yr-author-link[size=lg] .yr-author-link-name {
 }
 .yr-action-card-action {
   flex-shrink: 0;
+}
+.yr-action-card--urgent {
+  border-left: 4px solid var(--yr-warning);
+}
+.yr-action-card--urgent-danger {
+  border-left: 4px solid var(--yr-danger);
 }
 
 /* src/sidebar/yr-sidebar.css */
@@ -2199,6 +2228,210 @@ yr-setup-card-footer {
 }
 .yr-setup-card-back:hover {
   color: var(--yr-text);
+}
+
+/* src/section-header/yr-section-header.css */
+yr-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--yr-space-4);
+  margin-bottom: var(--yr-space-3);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yr-text-subtle);
+}
+yr-section-header a {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--yr-accent);
+  text-decoration: none;
+}
+yr-section-header a:hover {
+  text-decoration: underline;
+}
+
+/* src/timeline-group/yr-timeline-group.css */
+yr-timeline-group {
+  display: block;
+}
+yr-timeline-group + yr-timeline-group {
+  margin-top: var(--yr-space-6);
+}
+yr-timeline-group > :first-child:not(yr-timeline-entries) {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yr-text-subtle);
+  margin-bottom: var(--yr-space-3);
+  padding-left: var(--yr-space-6);
+}
+yr-timeline-entries {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-3);
+  padding-left: var(--yr-space-6);
+  border-left: 2px solid var(--yr-border);
+  margin-left: var(--yr-space-2);
+}
+
+/* src/hitl-prompt/yr-hitl-prompt.css */
+yr-hitl-prompt {
+  display: block;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-lg);
+  padding: var(--yr-space-6);
+  border-left-width: 4px;
+  border-left-color: var(--yr-warning);
+}
+yr-hitl-prompt[tone=danger] {
+  border-left-color: var(--yr-danger);
+}
+yr-hitl-prompt[tone=info] {
+  border-left-color: var(--yr-info);
+}
+yr-hitl-prompt .yr-hitl-prompt-title {
+  font-family: var(--yr-font-body);
+  font-weight: 600;
+  font-size: var(--yr-font-size-md);
+  color: var(--yr-text);
+  margin: 0 0 var(--yr-space-2);
+}
+yr-hitl-prompt .yr-hitl-prompt-desc {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+  margin: 0 0 var(--yr-space-4);
+}
+yr-hitl-prompt .yr-hitl-prompt-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+}
+
+/* src/journal-log/yr-journal-log.css */
+yr-journal-log {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-2);
+  overflow-y: auto;
+  max-height: 32rem;
+}
+
+/* src/workflow-card/yr-workflow-card.css */
+yr-workflow-card {
+  display: block;
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-lg);
+  padding: var(--yr-space-6);
+}
+yr-workflow-card .yr-workflow-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--yr-space-3);
+}
+yr-workflow-card .yr-workflow-card-name {
+  font-family: var(--yr-font-body);
+  font-weight: 600;
+  font-size: var(--yr-font-size-md);
+  color: var(--yr-text);
+  margin: 0;
+}
+yr-workflow-card .yr-workflow-card-stats {
+  display: flex;
+  gap: var(--yr-space-4);
+  margin-bottom: var(--yr-space-3);
+}
+yr-workflow-card .yr-workflow-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--yr-border);
+  padding-top: var(--yr-space-3);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-subtle);
+}
+
+/* src/status-banner/yr-status-banner.css */
+yr-status-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-3) var(--yr-space-4);
+  border: 1px solid transparent;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
+}
+yr-status-banner[tone=success] {
+  background: var(--yr-success-subtle);
+  border-color: var(--yr-success);
+  color: var(--yr-success);
+}
+yr-status-banner[tone=warning] {
+  background: var(--yr-warning-subtle);
+  border-color: var(--yr-warning);
+  color: var(--yr-warning);
+}
+yr-status-banner[tone=danger] {
+  background: var(--yr-danger-subtle);
+  border-color: var(--yr-danger);
+  color: var(--yr-danger);
+}
+yr-status-banner:not([tone]),
+yr-status-banner[tone=info] {
+  background: var(--yr-info-subtle);
+  border-color: var(--yr-info);
+  color: var(--yr-info);
+}
+yr-status-banner .yr-status-banner-message {
+  flex: 1;
+  color: var(--yr-text);
+}
+yr-status-banner .yr-status-banner-actions {
+  display: flex;
+  gap: var(--yr-space-3);
+  flex-shrink: 0;
+}
+
+/* src/download-list/yr-download-list.css */
+yr-download-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-1);
+}
+yr-download-list a {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--yr-space-2);
+  padding: var(--yr-space-1) var(--yr-space-2);
+  border-radius: var(--yr-radius-sm);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-accent);
+  text-decoration: none;
+}
+yr-download-list a:hover {
+  background: var(--yr-surface-muted);
+  text-decoration: underline;
+}
+yr-download-list a svg {
+  flex-shrink: 0;
+  color: var(--yr-text-subtle);
+}
+yr-download-list .yr-download-size {
+  color: var(--yr-text-disabled);
+  font-size: var(--yr-font-size-xs);
 }
 
 /* src/styles.css */

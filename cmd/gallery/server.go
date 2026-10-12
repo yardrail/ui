@@ -23,6 +23,16 @@ const (
 // sections defines the two-tier grouping shown in the gallery sidebar.
 var sections = []section{
 	{Name: "UI Mocks", Categories: []category{
+		{Slug: "portal", Name: "Portal", ContextSlot: nil, Components: []string{
+			"portal-home",
+			"portal-automations",
+			"portal-workflows",
+			"portal-templates",
+			"portal-connectors",
+			"portal-space",
+			"portal-workflow-detail",
+			"portal-workflow-run",
+		}},
 		{Slug: "msp-portal", Name: "MSP Portal", ContextSlot: nil, Components: []string{
 			"msp-dashboard",
 			"msp-clients",
@@ -59,6 +69,9 @@ var sections = []section{
 		}},
 		{Slug: "data", Name: "Data", ContextSlot: nil, Components: []string{
 			"table", "row-edit", "list-row", "activity-row", "meta-row",
+			"section-header", "timeline-group", "journal-log",
+			"run-summary-row", "workflow-row", "connector-row",
+			"connector-binding-row", "output-row", "download-list", "timeline",
 		}},
 		{Slug: "cards", Name: "Cards", ContextSlot: nil, Components: []string{
 			"card",
@@ -69,9 +82,12 @@ var sections = []section{
 			"template-card",
 			"create-panel",
 			"settings-section",
+			"hitl-prompt",
+			"attention-card",
+			"workflow-card",
 		}},
 		{Slug: "feedback", Name: "Feedback", ContextSlot: nil, Components: []string{
-			"alert", "empty-state",
+			"alert", "empty-state", "status-banner",
 		}},
 		{Slug: "misc", Name: "Misc", ContextSlot: nil, Components: []string{
 			"author-link", "connector-pill", "live-duration",

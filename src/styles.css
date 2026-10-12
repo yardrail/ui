@@ -42,3 +42,10 @@
 @import "./page-auth/yr-page-auth.css";
 @import "./page-setup/yr-page-setup.css";
 @import "./setup-card/yr-setup-card.css";
+@import "./section-header/yr-section-header.css";
+@import "./timeline-group/yr-timeline-group.css";
+@import "./hitl-prompt/yr-hitl-prompt.css";
+@import "./journal-log/yr-journal-log.css";
+@import "./workflow-card/yr-workflow-card.css";
+@import "./status-banner/yr-status-banner.css";
+@import "./download-list/yr-download-list.css";

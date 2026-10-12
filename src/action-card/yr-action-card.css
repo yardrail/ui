@@ -34,3 +34,10 @@
 .yr-action-card-action {
   flex-shrink: 0;
 }
+
+.yr-action-card--urgent {
+  border-left: 4px solid var(--yr-warning);
+}
+.yr-action-card--urgent-danger {
+  border-left: 4px solid var(--yr-danger);
+}

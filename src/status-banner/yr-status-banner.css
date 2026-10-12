@@ -1,0 +1,44 @@
+/* yr-status-banner — persistent status display for workflow state.
+   Tone attribute sets the color scheme. Contains a pill, message text,
+   and action buttons (pause/resume/trigger). */
+
+yr-status-banner {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-3) var(--yr-space-4);
+  border: 1px solid transparent;
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-md);
+}
+yr-status-banner[tone="success"] {
+  background: var(--yr-success-subtle);
+  border-color: var(--yr-success);
+  color: var(--yr-success);
+}
+yr-status-banner[tone="warning"] {
+  background: var(--yr-warning-subtle);
+  border-color: var(--yr-warning);
+  color: var(--yr-warning);
+}
+yr-status-banner[tone="danger"] {
+  background: var(--yr-danger-subtle);
+  border-color: var(--yr-danger);
+  color: var(--yr-danger);
+}
+yr-status-banner:not([tone]),
+yr-status-banner[tone="info"] {
+  background: var(--yr-info-subtle);
+  border-color: var(--yr-info);
+  color: var(--yr-info);
+}
+yr-status-banner .yr-status-banner-message {
+  flex: 1;
+  color: var(--yr-text);
+}
+yr-status-banner .yr-status-banner-actions {
+  display: flex;
+  gap: var(--yr-space-3);
+  flex-shrink: 0;
+}

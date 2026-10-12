@@ -804,4 +804,51 @@ customElements.define("yr-setup-card-progress", YrSetupCardProgress);
 customElements.define("yr-setup-card-header", YrSetupCardHeader);
 customElements.define("yr-setup-card-body", YrSetupCardBody);
 customElements.define("yr-setup-card-footer", YrSetupCardFooter);
+
+// src/section-header/yr-section-header.ts
+var YrSectionHeader = class extends HTMLElement {
+};
+customElements.define("yr-section-header", YrSectionHeader);
+
+// src/timeline-group/yr-timeline-group.ts
+var YrTimelineGroup = class extends HTMLElement {
+};
+var YrTimelineEntries = class extends HTMLElement {
+};
+customElements.define("yr-timeline-group", YrTimelineGroup);
+customElements.define("yr-timeline-entries", YrTimelineEntries);
+
+// src/hitl-prompt/yr-hitl-prompt.ts
+var YrHitlPrompt = class extends HTMLElement {
+  static observedAttributes = ["tone"];
+  connectedCallback() {
+    if (!this.getAttribute("role")) this.setAttribute("role", "alert");
+  }
+};
+customElements.define("yr-hitl-prompt", YrHitlPrompt);
+
+// src/journal-log/yr-journal-log.ts
+var YrJournalLog = class extends HTMLElement {
+  connectedCallback() {
+    if (!this.getAttribute("role")) this.setAttribute("role", "log");
+    if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", "Run journal");
+  }
+};
+customElements.define("yr-journal-log", YrJournalLog);
+
+// src/workflow-card/yr-workflow-card.ts
+var YrWorkflowCard = class extends HTMLElement {
+};
+customElements.define("yr-workflow-card", YrWorkflowCard);
+
+// src/status-banner/yr-status-banner.ts
+var YrStatusBanner = class extends HTMLElement {
+  static observedAttributes = ["tone"];
+};
+customElements.define("yr-status-banner", YrStatusBanner);
+
+// src/download-list/yr-download-list.ts
+var YrDownloadList = class extends HTMLElement {
+};
+customElements.define("yr-download-list", YrDownloadList);
 //# sourceMappingURL=ui.js.map

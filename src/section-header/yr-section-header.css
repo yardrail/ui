@@ -1,0 +1,26 @@
+/* yr-section-header — titled section divider with optional trailing action
+   link. Replaces the raw styled <p> section titles used in mock pages. */
+
+yr-section-header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--yr-space-4);
+  margin-bottom: var(--yr-space-3);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yr-text-subtle);
+}
+yr-section-header a {
+  font-weight: 400;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--yr-accent);
+  text-decoration: none;
+}
+yr-section-header a:hover {
+  text-decoration: underline;
+}
