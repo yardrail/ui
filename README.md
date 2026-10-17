@@ -9,7 +9,8 @@ The Yardrail name and logo are not licensed for reuse.
 
 Prerequisites: Go (version in `go.mod`), Node.js with `corepack enable` (pnpm), [Task](https://taskfile.dev),
 [templ](https://templ.guide) (`go install github.com/a-h/templ/cmd/templ@<version in go.mod>`),
-[golangci-lint](https://golangci-lint.run) v2, [lefthook](https://github.com/evilmartians/lefthook) and
+[golangci-lint](https://golangci-lint.run) v2.14.0, the version pinned in `.github/workflows/ci.yml`
+(`curl -sSfL https://golangci-lint.run/install.sh | sh -s -- -b "$(go env GOPATH)/bin" v2.14.0`), [lefthook](https://github.com/evilmartians/lefthook) and
 [commitlint](https://commitlint.js.org) (`npm install -g @commitlint/cli @commitlint/config-conventional`).
 
 Run `lefthook install` once after cloning. Pre-commit runs `task gen:check`, `task lint` and
