@@ -1,24 +1,9 @@
 import { YrDropdownMenu } from './dropdown_menu';
 
-// <yr-account-menu name="Jordan Ellery" email="jordan@ellerylogistics.com">
-//   <span slot="avatar">JE</span>
-//   <a class="yr-dropdown-menu-item" href="/account">Account settings</a>
-//   ...
-// </yr-account-menu>
-//
-// A higher-level wrapper around yr-dropdown-menu: auto-builds the trigger
-// (small avatar + chevron) and panel header (large avatar + name + email)
-// from a flat attribute contract, instead of every service hand-assembling
-// the identical trigger/header markup + exact class names independently.
-// `[slot="avatar"]` supplies the avatar's light-DOM content (initials text
-// or an <img>) — cloned into both the small trigger avatar and the large
-// header avatar. An optional `[slot="trigger-extra"]` child renders inside
-// the trigger button before the avatar (e.g. yardrail-ui's inline
-// name/role text) for services that want more than depot's compact
-// avatar-only trigger. Everything else passed as children (links, a
-// divider) renders below the header, inside the panel. Reuses
-// yr-dropdown-menu's open/close/outside-click/Escape behavior via
-// inheritance — only the initial DOM restructuring here is new.
+// <yr-account-menu> — a higher-level wrapper around yr-dropdown-menu that
+// auto-builds the trigger (avatar + chevron) and panel header (avatar + name
+// + email) from attributes. The chevron SVG is server-rendered in a
+// [slot="chevron"] child by the templ component.
 export class YrAccountMenu extends YrDropdownMenu {
   connectedCallback() {
     this.restructure();
@@ -31,8 +16,11 @@ export class YrAccountMenu extends YrDropdownMenu {
     const name = this.getAttribute('name') ?? '';
     const email = this.getAttribute('email') ?? '';
     const avatarSlot = this.querySelector('[slot="avatar"]');
+    const chevronSlot = this.querySelector('[slot="chevron"]');
     const triggerExtra = this.querySelector('[slot="trigger-extra"]');
-    const items = Array.from(this.childNodes).filter((node) => node !== avatarSlot && node !== triggerExtra);
+    const items = Array.from(this.childNodes).filter(
+      (node) => node !== avatarSlot && node !== chevronSlot && node !== triggerExtra,
+    );
 
     const trigger = document.createElement('button');
     trigger.setAttribute('slot', 'trigger');
@@ -40,7 +28,8 @@ export class YrAccountMenu extends YrDropdownMenu {
     if (triggerExtra) trigger.append(triggerExtra.cloneNode(true));
     const triggerAvatar = document.createElement('yr-avatar');
     if (avatarSlot) triggerAvatar.append(avatarSlot.cloneNode(true));
-    trigger.append(triggerAvatar, this.buildChevron());
+    trigger.append(triggerAvatar);
+    if (chevronSlot) trigger.append(chevronSlot);
 
     const header = document.createElement('div');
     header.className = 'yr-dropdown-menu-header';
@@ -71,23 +60,6 @@ export class YrAccountMenu extends YrDropdownMenu {
     panel.append(header, ...items);
 
     this.replaceChildren(trigger, panel);
-  }
-
-  private buildChevron(): SVGSVGElement {
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('class', 'yr-dropdown-menu-chevron');
-    svg.setAttribute('width', '12');
-    svg.setAttribute('height', '12');
-    svg.setAttribute('viewBox', '0 0 24 24');
-    svg.setAttribute('fill', 'none');
-    svg.setAttribute('stroke', 'currentColor');
-    svg.setAttribute('stroke-width', '2.5');
-    svg.setAttribute('stroke-linecap', 'round');
-    svg.setAttribute('stroke-linejoin', 'round');
-    const poly = document.createElementNS('http://www.w3.org/2000/svg', 'polyline');
-    poly.setAttribute('points', '6 9 12 15 18 9');
-    svg.append(poly);
-    return svg;
   }
 }
 

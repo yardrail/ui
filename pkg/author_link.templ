@@ -1,5 +1,7 @@
 package ui
 
+const verifiedBadgePath = "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
+
 // AuthorLinkProps configures an AuthorLink.
 type AuthorLinkProps struct {
 	Href     string
@@ -11,24 +13,69 @@ type AuthorLinkProps struct {
 	Attrs    templ.Attributes
 }
 
+func authorLinkBadgeSize(size string) string {
+	if size == "lg" {
+		return "16"
+	}
+
+	return "12"
+}
+
 // AuthorLink renders an author identity: avatar, name, handle, and verified badge.
 func AuthorLink(name string, p *AuthorLinkProps) templ.Component {
 	return authorLink(name, p)
 }
 
 templ authorLink(name string, p *AuthorLinkProps) {
-	<yr-author-link
-		name={ name }
-		href={ p.Href }
-		handle={ p.Handle }
-		avatar={ p.Avatar }
-		size={ p.Size }
-		if p.Verified {
-			verified
+	<yr-author-link { filterAttrs("AuthorLink", p.Attrs)... }>
+		if p.Href != "" {
+			<a class="yr-author-link-inner" href={ templ.SafeURL(p.Href) }>
+				@authorLinkContent(name, p)
+			</a>
+		} else {
+			<span class="yr-author-link-inner">
+				@authorLinkContent(name, p)
+			</span>
 		}
+	</yr-author-link>
+}
+
+templ authorLinkContent(name string, p *AuthorLinkProps) {
+	if p.Avatar != "" {
+		<yr-avatar size={ p.Size }>{ p.Avatar }</yr-avatar>
+	}
+	if p.Size == "lg" && name != "" && p.Handle != "" {
+		<div class="yr-author-link-text">
+			<div class="yr-author-link-name-row">
+				if p.Heading {
+					<h1 class="yr-author-link-name">{ name }</h1>
+				} else {
+					<strong class="yr-author-link-name">{ name }</strong>
+				}
+				if p.Verified {
+					@authorLinkBadge(p.Size)
+				}
+			</div>
+			<p class="yr-author-link-handle">{ "@" + p.Handle }</p>
+		</div>
+	} else if name != "" {
 		if p.Heading {
-			heading
+			<h1 class="yr-author-link-name">{ name }</h1>
+		} else {
+			<strong class="yr-author-link-name">{ name }</strong>
 		}
-		{ filterAttrs("AuthorLink", p.Attrs)... }
-	></yr-author-link>
+		if p.Verified {
+			@authorLinkBadge(p.Size)
+		}
+	} else if p.Handle != "" {
+		{ "@" + p.Handle }
+	}
+}
+
+templ authorLinkBadge(size string) {
+	<span class="yr-author-link-badge" title="Verified author">
+		<svg width={ authorLinkBadgeSize(size) } height={ authorLinkBadgeSize(size) } viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+			<path d={ verifiedBadgePath }></path>
+		</svg>
+	</span>
 }
