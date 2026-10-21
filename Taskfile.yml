@@ -11,7 +11,7 @@ tasks:
     cmd: pnpm install --frozen-lockfile
 
   build:
-    desc: Build src/ to dist/ (ui.js, ui.css and their source maps)
+    desc: Build CSS/JS to pkg/dist/ (ui.js, ui.css and their source maps)
     deps: [install]
     cmd: pnpm build
 
@@ -26,8 +26,8 @@ tasks:
       - task: build
       # -N (intent-to-add) surfaces newly generated, untracked files to git diff
       # so a new .templ file whose output was never committed fails the check too.
-      - git add -N -- '*_templ.go' dist/
-      - git diff --exit-code -- '*_templ.go' dist/
+      - git add -N -- 'pkg/*_templ.go' pkg/dist/
+      - git diff --exit-code -- 'pkg/*_templ.go' pkg/dist/
 
   test:
     desc: Run Go tests
@@ -47,9 +47,9 @@ tasks:
       - golangci-lint run --fix --max-same-issues 50 ./...
 
   lint:css:
-    desc: Lint hand-written CSS in src/ and the gallery's stylesheets
+    desc: Lint hand-written CSS in pkg/ and the gallery's stylesheets
     deps: [install]
-    cmd: pnpm exec stylelint "src/**/*.css" "cmd/gallery/gallery.css" "cmd/gallery/mocks.css"
+    cmd: pnpm exec stylelint "*.css" "pkg/**/*.css" "!pkg/dist/**" "cmd/gallery/gallery.css" "cmd/gallery/mocks.css"
 
   gallery:
     desc: Serve every component example on :6007 with live reload via air
