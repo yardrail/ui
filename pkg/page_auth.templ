@@ -1,0 +1,7 @@
+package ui
+
+templ pageAuth(p *PageAuthProps) {
+	<yr-page-auth { filterAttrs("PageAuth", p.Attrs)... }>
+		{ children... }
+	</yr-page-auth>
+}

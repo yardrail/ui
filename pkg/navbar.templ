@@ -1,0 +1,20 @@
+package ui
+
+templ navbar(p *NavbarProps) {
+	<yr-navbar { filterAttrs("Navbar", p.Attrs)... }>
+		{ children... }
+	</yr-navbar>
+}
+
+templ navbarStd(p *NavbarStdProps) {
+	<yr-navbar-std
+		logo={ p.Logo }
+		brand={ p.Brand }
+		if p.Authed {
+			authed
+		}
+		{ filterAttrs("NavbarStd", p.Attrs)... }
+	>
+		{ children... }
+	</yr-navbar-std>
+}

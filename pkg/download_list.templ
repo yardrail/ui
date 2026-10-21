@@ -1,0 +1,7 @@
+package ui
+
+templ downloadList(p *DownloadListProps) {
+	<yr-download-list { filterAttrs("DownloadList", p.Attrs)... }>
+		{ children... }
+	</yr-download-list>
+}

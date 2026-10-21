@@ -1,0 +1,5 @@
+package ui
+
+templ resizeHandle(p *ResizeHandleProps) {
+	<yr-resize-handle target={ p.Target } { filterAttrs("ResizeHandle", p.Attrs)... }></yr-resize-handle>
+}

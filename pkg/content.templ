@@ -1,0 +1,13 @@
+package ui
+
+templ content(p *ContentProps) {
+	<yr-content { filterAttrs("Content", p.Attrs)... }>
+		{ children... }
+	</yr-content>
+}
+
+templ contentMain(p *ContentMainProps) {
+	<yr-content-main { filterAttrs("ContentMain", p.Attrs)... }>
+		{ children... }
+	</yr-content-main>
+}

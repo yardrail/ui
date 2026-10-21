@@ -1,0 +1,7 @@
+package ui
+
+templ hitlPrompt(p *HitlPromptProps) {
+	<yr-hitl-prompt tone={ p.Tone } { filterAttrs("HitlPrompt", p.Attrs)... }>
+		{ children... }
+	</yr-hitl-prompt>
+}

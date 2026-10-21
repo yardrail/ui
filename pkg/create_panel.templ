@@ -1,0 +1,7 @@
+package ui
+
+templ createPanel(p *CreatePanelProps) {
+	<details class="yr-create-panel" { filterAttrs("CreatePanel", p.Attrs)... }>
+		{ children... }
+	</details>
+}

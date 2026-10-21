@@ -1,0 +1,7 @@
+package ui
+
+templ navShell(p *NavShellProps) {
+	<yr-nav-shell { filterAttrs("NavShell", p.Attrs)... }>
+		{ children... }
+	</yr-nav-shell>
+}

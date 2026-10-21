@@ -1,0 +1,13 @@
+package ui
+
+templ tabs(p *TabsProps) {
+	<yr-tabs
+		label={ p.Label }
+		if p.SyncHash {
+			sync-hash
+		}
+		{ filterAttrs("Tabs", p.Attrs)... }
+	>
+		{ children... }
+	</yr-tabs>
+}

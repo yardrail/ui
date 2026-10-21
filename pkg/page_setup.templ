@@ -1,0 +1,13 @@
+package ui
+
+templ pageSetup(p *PageSetupProps) {
+	<yr-page-setup { filterAttrs("PageSetup", p.Attrs)... }>
+		{ children... }
+	</yr-page-setup>
+}
+
+templ pageSetupContent(p *PageSetupContentProps) {
+	<yr-page-setup-content { filterAttrs("PageSetupContent", p.Attrs)... }>
+		{ children... }
+	</yr-page-setup-content>
+}

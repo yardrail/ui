@@ -1,0 +1,7 @@
+package ui
+
+templ listRow(p *ListRowProps) {
+	<div class="yr-list-row" { filterAttrs("ListRow", p.Attrs)... }>
+		{ children... }
+	</div>
+}

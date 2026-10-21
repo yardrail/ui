@@ -1,0 +1,7 @@
+package ui
+
+templ journalLog(p *JournalLogProps) {
+	<yr-journal-log { filterAttrs("JournalLog", p.Attrs)... }>
+		{ children... }
+	</yr-journal-log>
+}

@@ -1,0 +1,7 @@
+package ui
+
+templ brand(p *BrandProps) {
+	<a href={ templ.SafeURL(p.href()) } class="yr-brand" { filterAttrs("Brand", p.Attrs)... }>
+		{ children... }
+	</a>
+}

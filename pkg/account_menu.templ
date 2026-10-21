@@ -1,0 +1,7 @@
+package ui
+
+templ accountMenu(p *AccountMenuProps) {
+	<yr-account-menu name={ p.Name } email={ p.Email } { filterAttrs("AccountMenu", p.Attrs)... }>
+		{ children... }
+	</yr-account-menu>
+}

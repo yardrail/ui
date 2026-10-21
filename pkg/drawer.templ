@@ -1,0 +1,13 @@
+package ui
+
+templ drawer(p *DrawerProps) {
+	<yr-drawer
+		position={ p.Position }
+		if p.Open {
+			open
+		}
+		{ filterAttrs("Drawer", p.Attrs)... }
+	>
+		{ children... }
+	</yr-drawer>
+}

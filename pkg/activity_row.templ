@@ -1,0 +1,13 @@
+package ui
+
+templ activityRow(p *ActivityRowProps) {
+	if p.Href != "" {
+		<a class={ "yr-activity-row", templ.KV("is-error", p.IsError) } href={ templ.SafeURL(p.Href) } { filterAttrs("ActivityRow", p.Attrs)... }>
+			{ children... }
+		</a>
+	} else {
+		<div class={ "yr-activity-row", templ.KV("is-error", p.IsError) } { filterAttrs("ActivityRow", p.Attrs)... }>
+			{ children... }
+		</div>
+	}
+}

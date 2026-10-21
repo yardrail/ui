@@ -1,0 +1,29 @@
+package ui
+
+templ setupCard(p *SetupCardProps) {
+	<yr-setup-card { filterAttrs("SetupCard", p.Attrs)... }>
+		{ children... }
+	</yr-setup-card>
+}
+
+templ setupCardProgress(p *SetupCardProgressProps) {
+	<yr-setup-card-progress steps={ p.Steps } current={ p.Current } { filterAttrs("SetupCardProgress", p.Attrs)... }></yr-setup-card-progress>
+}
+
+templ setupCardHeader(p *SetupCardHeaderProps) {
+	<yr-setup-card-header { filterAttrs("SetupCardHeader", p.Attrs)... }>
+		{ children... }
+	</yr-setup-card-header>
+}
+
+templ setupCardBody(p *SetupCardBodyProps) {
+	<yr-setup-card-body { filterAttrs("SetupCardBody", p.Attrs)... }>
+		{ children... }
+	</yr-setup-card-body>
+}
+
+templ setupCardFooter(p *SetupCardFooterProps) {
+	<yr-setup-card-footer { filterAttrs("SetupCardFooter", p.Attrs)... }>
+		{ children... }
+	</yr-setup-card-footer>
+}
