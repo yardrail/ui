@@ -6,7 +6,7 @@ templ attentionCardDefault() {
 	<div style="max-width:40rem">
 		@ui.ActionCard(&ui.ActionCardProps{Urgent: true}) {
 			@ui.IconBadge("amber", &ui.IconBadgeProps{}) {
-				@ui.Icon("clock")
+				@ui.IconClock()
 			}
 			<div class="yr-action-card-body">
 				<h3 class="yr-action-card-title">Approve refund for order #1042</h3>
@@ -23,7 +23,7 @@ templ attentionCardDanger() {
 	<div style="max-width:40rem">
 		@ui.ActionCard(&ui.ActionCardProps{UrgentDanger: true}) {
 			@ui.IconBadge("danger", &ui.IconBadgeProps{}) {
-				@ui.Icon("alert-triangle")
+				@ui.IconAlertTriangle()
 			}
 			<div class="yr-action-card-body">
 				<h3 class="yr-action-card-title">Sync contacts failed</h3>

@@ -163,13 +163,145 @@ Grid lays its children out in equal-width columns, as many as fit at MinItemWidt
 
 HitlPrompt renders a human-in-the-loop prompt card. Children are the prompt content.
 
-### Icon
+### IconAlertTriangle
 
-Icon returns the named Lucide icon as a templ component. The name is the icon's file stem (e.g. "pencil", "mail", "check-circle"). Panics if the icon does not exist in dist/icons/.
+IconAlertTriangle renders the Lucide alert-triangle icon.
 
 ### IconBadge
 
 IconBadge renders a circular icon container with the given tone. Children are the icon.
+
+### IconBuilding2
+
+IconBuilding2 renders the Lucide building-2 icon.
+
+### IconCheckCircle
+
+IconCheckCircle renders the Lucide check-circle icon.
+
+### IconChevronDown
+
+IconChevronDown renders the Lucide chevron-down icon.
+
+### IconCircleX
+
+IconCircleX renders the Lucide circle-x icon.
+
+### IconClock
+
+IconClock renders the Lucide clock icon.
+
+### IconCreditCard
+
+IconCreditCard renders the Lucide credit-card icon.
+
+### IconDatabase
+
+IconDatabase renders the Lucide database icon.
+
+### IconFile
+
+IconFile renders the Lucide file icon.
+
+### IconFileImage
+
+IconFileImage renders the Lucide file-image icon.
+
+### IconFileSpreadsheet
+
+IconFileSpreadsheet renders the Lucide file-spreadsheet icon.
+
+### IconFileText
+
+IconFileText renders the Lucide file-text icon.
+
+### IconFolder
+
+IconFolder renders the Lucide folder icon.
+
+### IconGitBranch
+
+IconGitBranch renders the Lucide git-branch icon.
+
+### IconHome
+
+IconHome renders the Lucide home icon.
+
+### IconLayoutDashboard
+
+IconLayoutDashboard renders the Lucide layout-dashboard icon.
+
+### IconLayoutGrid
+
+IconLayoutGrid renders the Lucide layout-grid icon.
+
+### IconList
+
+IconList renders the Lucide list icon.
+
+### IconMail
+
+IconMail renders the Lucide mail icon.
+
+### IconMessageSquare
+
+IconMessageSquare renders the Lucide message-square icon.
+
+### IconPencil
+
+IconPencil renders the Lucide pencil icon.
+
+### IconPlay
+
+IconPlay renders the Lucide play icon.
+
+### IconPlug
+
+IconPlug renders the Lucide plug icon.
+
+### IconRefreshCw
+
+IconRefreshCw renders the Lucide refresh-cw icon.
+
+### IconSearch
+
+IconSearch renders the Lucide search icon.
+
+### IconSettings
+
+IconSettings renders the Lucide settings icon.
+
+### IconShield
+
+IconShield renders the Lucide shield icon.
+
+### IconStar
+
+IconStar renders the Lucide star icon.
+
+### IconTrainFront
+
+IconTrainFront renders the Lucide train-front icon.
+
+### IconUser
+
+IconUser renders the Lucide user icon.
+
+### IconUserPlus
+
+IconUserPlus renders the Lucide user-plus icon.
+
+### IconUsers
+
+IconUsers renders the Lucide users icon.
+
+### IconX
+
+IconX renders the Lucide x icon.
+
+### IconZap
+
+IconZap renders the Lucide zap icon.
 
 ### JournalLog
 

@@ -46,8 +46,8 @@ templ portalNav(active string) {
 			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{}) {
-			@portalNavLink("home", "Home", portalHome, active)
-			@portalNavLink("zap", "Automations", "automations", active)
+			@portalNavLink(ui.IconHome(), "Home", portalHome, active)
+			@portalNavLink(ui.IconZap(), "Automations", "automations", active)
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{Label: "Spaces"}) {
 			for _, l := range portalSpaceLinks() {
@@ -55,7 +55,7 @@ templ portalNav(active string) {
 			}
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{Bottom: true}) {
-			@portalNavLink("settings", "Settings", "settings", active)
+			@portalNavLink(ui.IconSettings(), "Settings", "settings", active)
 		}
 		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
 			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
@@ -70,13 +70,13 @@ templ portalNavAutomations(active string) {
 			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{}) {
-			@portalNavLink("home", "Home", "", active)
-			@portalNavLink("zap", "Automations", "automations", active)
+			@portalNavLink(ui.IconHome(), "Home", "", active)
+			@portalNavLink(ui.IconZap(), "Automations", "automations", active)
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{}) {
-			@portalNavLink("git-branch", "Workflows", "workflows", active)
-			@portalNavLink("layout-grid", "Templates", "templates", active)
-			@portalNavLink("plug", "Connectors", "connectors", active)
+			@portalNavLink(ui.IconGitBranch(), "Workflows", "workflows", active)
+			@portalNavLink(ui.IconLayoutGrid(), "Templates", "templates", active)
+			@portalNavLink(ui.IconPlug(), "Connectors", "connectors", active)
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{Label: "Spaces"}) {
 			for _, l := range portalSpaceLinks() {
@@ -84,7 +84,7 @@ templ portalNavAutomations(active string) {
 			}
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{Bottom: true}) {
-			@portalNavLink("settings", "Settings", "settings", active)
+			@portalNavLink(ui.IconSettings(), "Settings", "settings", active)
 		}
 		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
 			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
@@ -93,9 +93,9 @@ templ portalNavAutomations(active string) {
 }
 
 // portalNavLink is one link in the portal sidebar, highlighted when link equals active.
-templ portalNavLink(icon, label, link, active string) {
+templ portalNavLink(icon templ.Component, label, link, active string) {
 	@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#", Active: link == active}) {
-		@ui.Icon(icon)
+		@icon
 		{ label }
 	}
 }
@@ -127,26 +127,26 @@ templ portalHomePage() {
 			Needs You <a href="#">View all</a>
 		}
 		<div style="margin-bottom:var(--yr-space-8)">
-			@portalUrgentCard("clock", "amber", "Approve budget over $5k for Acme lead",
+			@portalUrgentCard(ui.IconClock(), "amber", "Approve budget over $5k for Acme lead",
 				"Waiting 2h 14m · Lead Scoring · Marketing Ops", "warning", "Waiting")
-			@portalUrgentCard("clock", "amber", "Review generated newsletter draft",
+			@portalUrgentCard(ui.IconClock(), "amber", "Review generated newsletter draft",
 				"Waiting 45m · Newsletter Digest · Marketing Ops", "warning", "Waiting")
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
 			Problems
 		}
 		<div style="margin-bottom:var(--yr-space-8)">
-			@portalDangerCard("alert-triangle", "danger", "Social Scheduler failed",
+			@portalDangerCard(ui.IconAlertTriangle(), "danger", "Social Scheduler failed",
 				"Rate limit exceeded · 3 consecutive failures · 1h ago", "danger", "Failed")
 		</div>
 		@portalHomeActivity()
 	}
 }
 
-templ portalUrgentCard(icon, badgeTone, title, desc, pillTone, pillText string) {
+templ portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pillText string) {
 	@ui.ActionCard(&ui.ActionCardProps{Urgent: true}) {
 		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
-			@ui.Icon(icon)
+			@icon
 		}
 		<div class="yr-action-card-body">
 			<h3 class="yr-action-card-title">{ title }</h3>
@@ -158,10 +158,10 @@ templ portalUrgentCard(icon, badgeTone, title, desc, pillTone, pillText string) 
 	}
 }
 
-templ portalDangerCard(icon, badgeTone, title, desc, pillTone, pillText string) {
+templ portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, pillText string) {
 	@ui.ActionCard(&ui.ActionCardProps{UrgentDanger: true}) {
 		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
-			@ui.Icon(icon)
+			@icon
 		}
 		<div class="yr-action-card-body">
 			<h3 class="yr-action-card-title">{ title }</h3>
@@ -221,9 +221,9 @@ templ portalAutomationsPage() {
 	@portalShell("Automations · Yardrail", portalNav("automations")) {
 		<h1 class="portal-page-title">Automations</h1>
 		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
-			@portalAutoTile("git-branch", "accent", "Workflows", "7 active workflows across 4 spaces", "View all")
-			@portalAutoTile("layout-grid", "purple", "Template Catalog", "Browse 500+ pre-built automation templates", "Browse")
-			@portalAutoTile("plug", "amber", "Connectors", "4 tools connected to your organization", "Manage")
+			@portalAutoTile(ui.IconGitBranch(), "accent", "Workflows", "7 active workflows across 4 spaces", "View all")
+			@portalAutoTile(ui.IconLayoutGrid(), "purple", "Template Catalog", "Browse 500+ pre-built automation templates", "Browse")
+			@portalAutoTile(ui.IconPlug(), "amber", "Connectors", "4 tools connected to your organization", "Manage")
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
 			Connected Tools <a href="#">Manage</a>
@@ -260,10 +260,10 @@ templ portalAutomationsPage() {
 	}
 }
 
-templ portalAutoTile(icon, badgeTone, title, desc, action string) {
+templ portalAutoTile(icon templ.Component, badgeTone, title, desc, action string) {
 	@ui.ActionCard(&ui.ActionCardProps{}) {
 		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
-			@ui.Icon(icon)
+			@icon
 		}
 		<div class="yr-action-card-body">
 			<h3 class="yr-action-card-title">{ title }</h3>
@@ -319,7 +319,7 @@ templ portalWorkflowsPage() {
 templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
 	@ui.ListRow(&ui.ListRowProps{}) {
 		<div class="yr-list-row-icon">
-			@ui.Icon("git-branch")
+			@ui.IconGitBranch()
 		</div>
 		<div class="yr-list-row-main">
 			<div class="yr-list-row-name">{ name }</div>
@@ -654,12 +654,12 @@ templ portalWorkflowRunPage() {
 		}
 		@ui.DownloadList(&ui.DownloadListProps{}) {
 			<a href="#" download>
-				@ui.Icon("file-text")
+				@ui.IconFileText()
 				{ " newsletter-draft.html" }
 				<span class="yr-download-size">84 KB</span>
 			</a>
 			<a href="#" download>
-				@ui.Icon("file-spreadsheet")
+				@ui.IconFileSpreadsheet()
 				{ " recipient-list.csv" }
 				<span class="yr-download-size">156 KB</span>
 			</a>

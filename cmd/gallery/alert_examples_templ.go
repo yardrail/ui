@@ -190,7 +190,7 @@ func alertWithIconExample() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Icon("check-circle").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconCheckCircle().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -216,7 +216,7 @@ func alertWithIconExample() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Icon("circle-x").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconCircleX().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

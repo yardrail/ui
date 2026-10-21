@@ -51,7 +51,7 @@ func outputRowExampleRows() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Icon("file-text").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconFileText().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -81,7 +81,7 @@ func outputRowExampleRows() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Icon("file-spreadsheet").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconFileSpreadsheet().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -111,7 +111,7 @@ func outputRowExampleRows() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Icon("file").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconFile().Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

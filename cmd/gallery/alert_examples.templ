@@ -25,11 +25,11 @@ templ alertTonesExample() {
 templ alertWithIconExample() {
 	<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:32rem">
 		@ui.Alert(&ui.AlertProps{Tone: "success"}) {
-			@ui.Icon("check-circle")
+			@ui.IconCheckCircle()
 			<strong>Added!</strong> The template is in your library.
 		}
 		@ui.Alert(&ui.AlertProps{Tone: "danger"}) {
-			@ui.Icon("circle-x")
+			@ui.IconCircleX()
 			<strong>Run failed.</strong> The webhook returned 500.
 		}
 	</div>

@@ -6,6 +6,8 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/a-h/templ"
+
 	ui "github.com/yardrail/ui/pkg"
 )
 
@@ -16,12 +18,23 @@ const exampleLogo = `data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg
 // exampleIconSize is the width and height the icon files are drawn at.
 const exampleIconSize = 24
 
+// exampleIconFuncs maps icon names to their typed icon component constructors.
+var exampleIconFuncs = map[string]func() templ.Component{
+	"search":       ui.IconSearch,
+	"chevron-down": ui.IconChevronDown,
+}
+
 // exampleIcon returns the named icon's SVG markup at size pixels. A non-empty attrs replaces the
 // icon's own class attribute, for markup that styles the <svg> element itself.
 func exampleIcon(name, attrs string, size int) string {
+	fn, ok := exampleIconFuncs[name]
+	if !ok {
+		panic("exampleIcon: unknown icon " + name)
+	}
+
 	var buf bytes.Buffer
 
-	err := ui.Icon(name).Render(context.Background(), &buf)
+	err := fn().Render(context.Background(), &buf)
 	if err != nil {
 		panic("render icon " + name + ": " + err.Error())
 	}
