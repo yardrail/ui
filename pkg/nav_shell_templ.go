@@ -10,10 +10,13 @@ import templruntime "github.com/a-h/templ/runtime"
 
 // NavShellProps configures a NavShell.
 type NavShellProps struct {
-	Attrs templ.Attributes
+	Left   templ.Component
+	Center templ.Component
+	Attrs  templ.Attributes
 }
 
-// NavShell renders the top navigation shell.
+// NavShell renders the top navigation shell with left, center, and right sections.
+// Left and Center are component props; children go into the right section.
 func NavShell(p *NavShellProps) templ.Component {
 	return navShell(p)
 }
@@ -39,7 +42,7 @@ func navShell(p *NavShellProps) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<yr-nav-shell")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<yr-nav-shell role=\"navigation\"")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -47,7 +50,27 @@ func navShell(p *NavShellProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, ">")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 2, "><yr-nav-shell-left>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if p.Left != nil {
+			templ_7745c5c3_Err = p.Left.Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</yr-nav-shell-left> <yr-nav-shell-center>")
+		if templ_7745c5c3_Err != nil {
+			return templ_7745c5c3_Err
+		}
+		if p.Center != nil {
+			templ_7745c5c3_Err = p.Center.Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return templ_7745c5c3_Err
+			}
+		}
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 4, "</yr-nav-shell-center> <yr-nav-shell-right>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -55,7 +78,7 @@ func navShell(p *NavShellProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 3, "</yr-nav-shell>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 5, "</yr-nav-shell-right></yr-nav-shell>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

@@ -2,16 +2,31 @@ package ui
 
 // NavShellProps configures a NavShell.
 type NavShellProps struct {
-	Attrs templ.Attributes
+	Left   templ.Component
+	Center templ.Component
+	Attrs  templ.Attributes
 }
 
-// NavShell renders the top navigation shell.
+// NavShell renders the top navigation shell with left, center, and right sections.
+// Left and Center are component props; children go into the right section.
 func NavShell(p *NavShellProps) templ.Component {
 	return navShell(p)
 }
 
 templ navShell(p *NavShellProps) {
-	<yr-nav-shell { filterAttrs("NavShell", p.Attrs)... }>
-		{ children... }
+	<yr-nav-shell role="navigation" { filterAttrs("NavShell", p.Attrs)... }>
+		<yr-nav-shell-left>
+			if p.Left != nil {
+				@p.Left
+			}
+		</yr-nav-shell-left>
+		<yr-nav-shell-center>
+			if p.Center != nil {
+				@p.Center
+			}
+		</yr-nav-shell-center>
+		<yr-nav-shell-right>
+			{ children... }
+		</yr-nav-shell-right>
 	</yr-nav-shell>
 }
