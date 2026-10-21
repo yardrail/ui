@@ -13,61 +13,68 @@ templ mspHead() {
 	<link rel="stylesheet" href="/mocks.css"/>
 }
 
-// mspShell is the page frame shared by the MSP portal mocks: a top bar with the brand and the
-// account menu, nav as the navigation, and the children in a Standard main.
+// mspShell is the page frame shared by the MSP portal mocks: a navbar, sidebar navigation,
+// and the children in the content area.
 templ mspShell(title string, nav templ.Component) {
-	@Shell(title, ShellProps{Head: mspHead()}) {
-		@ShellTopBar(RegionProps{}) {
-			<div class="mock-topbar">
-				@Cluster(ClusterProps{Justify: JustifyBetween}) {
-					<a href="#" class="yr-brand"><img src="/logo.png" alt=""/>Yardrail</a>
+	<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ title }</title>
+			<link rel="stylesheet" href="/static/ui/ui.css"/>
+			<script type="module" src="/static/ui/ui.js"></script>
+			@mspHead()
+		</head>
+		<body style="margin:0;height:100%">
+			<yr-page-workspace>
+				<yr-navbar-std logo="/logo.png" brand="Yardrail" authed>
 					<yr-account-menu name="Brahm Lower" email="brahm@yardrail.com">
 						<span slot="avatar">BL</span>
 						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
 					</yr-account-menu>
-				}
-			</div>
-		}
-		@ShellNav(RegionProps{}) {
-			@nav
-		}
-		@ShellMain(ShellMainProps{}) {
-			{ children... }
-		}
-	}
+				</yr-navbar-std>
+				@nav
+				<yr-resize-handle target="sidebar"></yr-resize-handle>
+				<yr-content>
+					<yr-content-main>
+						{ children... }
+					</yr-content-main>
+				</yr-content>
+			</yr-page-workspace>
+		</body>
+	</html>
 }
 
-// mspNav is the MSP portal navigation with the link named active marked as the current page.
-// The children, such as a client's own links, go between the portal links and the bottom links.
+// mspNav is the MSP portal sidebar with the link named active highlighted.
+// The children, such as a client's org and sub-links, go between the top and bottom nav groups.
 templ mspNav(active string) {
-	<div class="mock-nav">
-		@Stack(StackProps{Gap: Space6}) {
-			<p class="mock-nav-title">MSP Portal</p>
-			@Stack(StackProps{As: AsList, Gap: Space1}) {
-				@mspNavLink("layout-dashboard", "Dashboard", mspNavDashboard, active)
-				@mspNavLink("building-2", "Clients", mspNavClients, active)
-			}
-			{ children... }
-			@Stack(StackProps{As: AsList, Gap: Space1}) {
-				@mspNavLink("train-front", "Yardrail", mspNavYardrail, active)
-				@mspNavLink("user", "Account", mspNavAccount, active)
-			}
-			<p class="mock-nav-version">v0.1.0</p>
-		}
-	</div>
+	<yr-sidebar>
+		<yr-sidebar-header>
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">MSP Portal</span>
+		</yr-sidebar-header>
+		<yr-sidebar-nav>
+			@mspNavLink("layout-dashboard", "Dashboard", mspNavDashboard, active)
+			@mspNavLink("building-2", "Clients", mspNavClients, active)
+		</yr-sidebar-nav>
+		{ children... }
+		<yr-sidebar-nav bottom>
+			@mspNavLink("train-front", "Yardrail", mspNavYardrail, active)
+			@mspNavLink("user", "Account", mspNavAccount, active)
+		</yr-sidebar-nav>
+		<yr-sidebar-footer>
+			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
+		</yr-sidebar-footer>
+	</yr-sidebar>
 }
 
-// mspNavLink is the nav link named link, marked as the current page when it is the active one.
+// mspNavLink is one link in the MSP sidebar, highlighted when link equals active.
 templ mspNavLink(icon, label, link, active string) {
-	<li>
-		<a href="#" class="mock-nav-link" { mspCurrent(link, active)... }>
-			@Cluster(ClusterProps{}) {
-				@mspIcon(icon)
-				<span>{ label }</span>
-			}
-		</a>
-	</li>
+	<yr-sidebar-link href="#" { mspActive(link, active)... }>
+		@Icon(icon)
+		{ label }
+	</yr-sidebar-link>
 }
 
 // mspIcon is the named icon, sized by mocks.css to the mocks' icon size.
@@ -277,25 +284,18 @@ const (
 	mspClientSettings   = "settings"
 )
 
-// mspClientNav is the MSP portal navigation for a client's pages: the portal links, then the
-// client's org block and its links, with the page named active marked as the current page.
+// mspClientNav is the MSP portal sidebar for a client's pages: the portal links, then the
+// client's org block and its links, with the page named active highlighted.
 templ mspClientNav(active string) {
 	@mspNav("") {
-		@Stack(StackProps{Gap: Space2}) {
-			<div class="mock-nav-org">
-				@Cluster(ClusterProps{Gap: Space3}) {
-					<span class="mock-nav-org-initial">A</span>
-					<span class="mock-nav-org-name">Acme Corp</span>
-				}
-			</div>
-			@Stack(StackProps{As: AsList, Gap: Space1}) {
-				@mspNavLink("layout-dashboard", "Overview", mspClientOverview, active)
-				@mspNavLink("users", "Users", mspClientUsers, active)
-				@mspNavLink("plug", "Connectors", mspClientConnectors, active)
-				@mspNavLink("play", "Workflows", mspClientWorkflows, active)
-				@mspNavLink("settings", "Settings", mspClientSettings, active)
-			}
-		}
+		<yr-sidebar-org name="Acme Corp" initial="A"></yr-sidebar-org>
+		<yr-sidebar-nav>
+			@mspNavLink("layout-dashboard", "Overview", mspClientOverview, active)
+			@mspNavLink("users", "Users", mspClientUsers, active)
+			@mspNavLink("plug", "Connectors", mspClientConnectors, active)
+			@mspNavLink("play", "Workflows", mspClientWorkflows, active)
+			@mspNavLink("settings", "Settings", mspClientSettings, active)
+		</yr-sidebar-nav>
 	}
 }
 

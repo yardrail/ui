@@ -1,74 +1,8 @@
-/* Mock-only styles for the MSP portal mocks (msp_mocks.templ), served at
-   /mocks.css and linked through ShellProps.Head. Typography and decoration
-   only: the layout primitives and the shell arrange the mocks. */
+/* Mock-only styles for the UI mocks (msp_mocks.templ, portal_mocks.templ),
+   served at /mocks.css. Typography and decoration only: the layout comes
+   from yr-page-workspace and yr-sidebar. */
 
-/* Top bar — the brand and account menu, inset from the edges and centred
-   in the bar's height. */
-.mock-topbar {
-  box-sizing: border-box;
-  height: 100%;
-  display: grid;
-  align-content: center;
-  padding-inline: var(--yr-space-4);
-  border-block-end: 1px solid var(--yr-border);
-  background: var(--yr-surface);
-}
-
-/* Nav — the portal navigation panel. */
-.mock-nav {
-  padding: var(--yr-space-4);
-  font-family: var(--yr-font-ui);
-  font-size: var(--yr-font-size-sm);
-}
-.mock-nav-title {
-  margin: 0;
-  font-family: var(--yr-font-body);
-  font-size: var(--yr-font-size-sm);
-  font-weight: 600;
-  color: var(--yr-text);
-}
-.mock-nav-link {
-  display: block;
-  padding: var(--yr-space-2) var(--yr-space-3);
-  border-radius: var(--yr-radius-sm);
-  color: var(--yr-text-muted);
-  text-decoration: none;
-}
-.mock-nav-link:hover { background: var(--yr-surface-muted); }
-.mock-nav-link[aria-current="page"] {
-  background: var(--yr-accent-subtle);
-  color: var(--yr-accent);
-  font-weight: 600;
-}
-.mock-nav-version {
-  margin: 0;
-  font-size: var(--yr-font-size-xs);
-  color: var(--yr-text-subtle);
-}
-
-/* Org block — the client whose pages the nav lists. */
-.mock-nav-org {
-  padding-block-start: var(--yr-space-3);
-  border-block-start: 1px solid var(--yr-border);
-}
-.mock-nav-org-initial {
-  display: grid;
-  place-items: center;
-  inline-size: var(--yr-space-6);
-  block-size: var(--yr-space-6);
-  border-radius: var(--yr-radius-sm);
-  background: var(--yr-accent);
-  color: var(--yr-on-accent);
-  font-family: var(--yr-font-ui);
-  font-size: var(--yr-font-size-xs);
-  font-weight: 600;
-}
-.mock-nav-org-name {
-  font-family: var(--yr-font-body);
-  font-size: var(--yr-font-size-sm);
-  font-weight: 600;
-  color: var(--yr-text);
-}
+/* MSP portal mock styles */
 
 /* Icon — an inline icon at the mocks' icon size. */
 .mock-icon { display: inline-flex; }
@@ -166,4 +100,122 @@
 .mock-client-meta {
   font-size: var(--yr-font-size-xs);
   color: var(--yr-text-muted);
+}
+
+/* Portal mock styles (portal_mocks.templ) — typography and grid helpers for
+   the portal UI mocks. */
+
+/* Page and section titles. */
+.portal-page-title {
+  font-family: var(--yr-font-display);
+  font-size: var(--yr-font-size-xl);
+  font-weight: 600;
+  color: var(--yr-text);
+  margin: 0 0 var(--yr-space-6);
+}
+.portal-section {
+  margin-bottom: var(--yr-space-8);
+}
+.portal-section-title {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--yr-text-subtle);
+  margin: 0 0 var(--yr-space-3);
+}
+
+/* Grid helpers. */
+.portal-grid {
+  display: grid;
+  gap: var(--yr-space-4);
+}
+.portal-grid-2 { grid-template-columns: 1fr 1fr; }
+.portal-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+.portal-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+
+/* Stat card — a figure over its label. */
+.portal-stat-card {
+  background: var(--yr-surface);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  padding: var(--yr-space-4) var(--yr-space-6);
+}
+.portal-stat-value {
+  font-family: var(--yr-font-display);
+  font-size: var(--yr-font-size-2xl);
+  font-weight: 600;
+  color: var(--yr-text);
+  margin: 0;
+}
+.portal-stat-label {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-muted);
+  margin: var(--yr-space-1) 0 0;
+}
+
+/* Feed — a vertical list of activity items. */
+.portal-feed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-2);
+}
+.portal-feed-item {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+  padding: var(--yr-space-2) var(--yr-space-3);
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-muted);
+  border-radius: var(--yr-radius-sm);
+}
+.portal-feed-item:hover { background: var(--yr-surface-muted); }
+.portal-feed-time {
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+  margin-left: auto;
+  white-space: nowrap;
+}
+
+/* Placeholder — dashed border empty state. */
+.portal-placeholder {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-sm);
+  color: var(--yr-text-disabled);
+  padding: var(--yr-space-8);
+  text-align: center;
+  border: 2px dashed var(--yr-border);
+  border-radius: var(--yr-radius-md);
+}
+
+/* Space detail header. */
+.space-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: var(--yr-space-6);
+}
+.space-header-title {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+}
+.space-header-meta {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-4);
+}
+.space-header-members {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-1);
+}
+.space-header-member-count {
+  font-family: var(--yr-font-ui);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-muted);
+  margin-left: var(--yr-space-2);
 }
