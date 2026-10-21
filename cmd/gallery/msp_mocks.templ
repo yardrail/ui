@@ -57,13 +57,13 @@ templ mspNav(active string) {
 			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">MSP Portal</span>
 		}
 		@ui.SidebarNav(&ui.SidebarNavProps{}) {
-			@mspNavLink("layout-dashboard", "Dashboard", mspNavDashboard, active)
-			@mspNavLink("building-2", "Clients", mspNavClients, active)
+			@mspNavLink(ui.IconLayoutDashboard(), "Dashboard", mspNavDashboard, active)
+			@mspNavLink(ui.IconBuilding2(), "Clients", mspNavClients, active)
 		}
 		{ children... }
 		@ui.SidebarNav(&ui.SidebarNavProps{Bottom: true}) {
-			@mspNavLink("train-front", "Yardrail", mspNavYardrail, active)
-			@mspNavLink("user", "Account", mspNavAccount, active)
+			@mspNavLink(ui.IconTrainFront(), "Yardrail", mspNavYardrail, active)
+			@mspNavLink(ui.IconUser(), "Account", mspNavAccount, active)
 		}
 		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
 			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
@@ -72,9 +72,9 @@ templ mspNav(active string) {
 }
 
 // mspNavLink is one link in the MSP sidebar, highlighted when link equals active.
-templ mspNavLink(icon, label, link, active string) {
+templ mspNavLink(icon templ.Component, label, link, active string) {
 	@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#", Active: link == active}) {
-		@ui.Icon(icon)
+		@icon
 		{ label }
 	}
 }
@@ -198,19 +198,19 @@ templ mspDashboard() {
 			@ui.Grid(ui.GridProps{Gap: ui.Space8}) {
 				@mspSection("Recent Activity") {
 					@mspFeedItem("10m ago") {
-						@ui.Icon("user-plus")
+						@ui.IconUserPlus()
 						<span>User invited to Acme Corp</span>
 					}
 					@mspFeedItem("45m ago") {
-						@ui.Icon("play")
+						@ui.IconPlay()
 						<span>Workflow deployed to Beta LLC</span>
 					}
 					@mspFeedItem("2h ago") {
-						@ui.Icon("refresh-cw")
+						@ui.IconRefreshCw()
 						<span>Credential rotated — Gamma Inc</span>
 					}
 					@mspFeedItem("5h ago") {
-						@ui.Icon("shield")
+						@ui.IconShield()
 						<span>2FA enforced on Delta Co</span>
 					}
 				}
@@ -282,11 +282,11 @@ templ mspClientNav(active string) {
 	@mspNav("") {
 		@ui.SidebarOrg(&ui.SidebarOrgProps{Name: "Acme Corp", Initial: "A"})
 		@ui.SidebarNav(&ui.SidebarNavProps{}) {
-			@mspNavLink("layout-dashboard", "Overview", mspClientOverview, active)
-			@mspNavLink("users", "Users", mspClientUsers, active)
-			@mspNavLink("plug", "Connectors", mspClientConnectors, active)
-			@mspNavLink("play", "Workflows", mspClientWorkflows, active)
-			@mspNavLink("settings", "Settings", mspClientSettings, active)
+			@mspNavLink(ui.IconLayoutDashboard(), "Overview", mspClientOverview, active)
+			@mspNavLink(ui.IconUsers(), "Users", mspClientUsers, active)
+			@mspNavLink(ui.IconPlug(), "Connectors", mspClientConnectors, active)
+			@mspNavLink(ui.IconPlay(), "Workflows", mspClientWorkflows, active)
+			@mspNavLink(ui.IconSettings(), "Settings", mspClientSettings, active)
 		}
 	}
 }
@@ -324,11 +324,11 @@ templ mspPolicy(label, value string) {
 
 // mspConnectorRow is one connector in a list: its icon, name and meta, with the children, such as
 // its health, at the far end.
-templ mspConnectorRow(icon, name, meta string) {
+templ mspConnectorRow(icon templ.Component, name, meta string) {
 	<div class="mock-client-row">
 		@ui.Cluster(ui.ClusterProps{Justify: ui.JustifyBetween, Gap: ui.Space4}) {
 			@ui.Cluster(ui.ClusterProps{Gap: ui.Space3}) {
-				@ui.Icon(icon)
+				@icon
 				@ui.Stack(ui.StackProps{Gap: ui.Space1}) {
 					<span class="mock-client-name">{ name }</span>
 					<span class="mock-client-meta">{ meta }</span>
@@ -352,15 +352,15 @@ templ mspClientOverviewPage() {
 			@ui.Grid(ui.GridProps{Gap: ui.Space8}) {
 				@mspSection("Recent Activity") {
 					@mspFeedItem("2h ago") {
-						@ui.Icon("user-plus")
+						@ui.IconUserPlus()
 						<span>Jane Smith invited</span>
 					}
 					@mspFeedItem("1d ago") {
-						@ui.Icon("play")
+						@ui.IconPlay()
 						<span>Invoice sync deployed</span>
 					}
 					@mspFeedItem("3d ago") {
-						@ui.Icon("refresh-cw")
+						@ui.IconRefreshCw()
 						<span>Slack credential rotated</span>
 					}
 				}
@@ -440,13 +440,13 @@ templ mspClientConnectorsPage() {
 				@ui.Button("Add Connector", ui.ButtonProps{Variant: ui.ButtonPrimary})
 			}
 			@ui.Stack(ui.StackProps{Gap: ui.Space2}) {
-				@mspConnectorRow("message-square", "Slack", "OAuth · Used by 4 workflows") {
+				@mspConnectorRow(ui.IconMessageSquare(), "Slack", "OAuth · Used by 4 workflows") {
 					@ui.Pill("Expired", &ui.PillProps{Tone: "danger"})
 				}
-				@mspConnectorRow("database", "HubSpot", "API Key · Used by 6 workflows") {
+				@mspConnectorRow(ui.IconDatabase(), "HubSpot", "API Key · Used by 6 workflows") {
 					@ui.Pill("Healthy", &ui.PillProps{Tone: "success"})
 				}
-				@mspConnectorRow("credit-card", "Stripe", "API Key · Used by 2 workflows") {
+				@mspConnectorRow(ui.IconCreditCard(), "Stripe", "API Key · Used by 2 workflows") {
 					@ui.Pill("Healthy", &ui.PillProps{Tone: "success"})
 				}
 			}

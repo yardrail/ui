@@ -295,7 +295,7 @@ func mspNav(active string) templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = mspNavLink("layout-dashboard", "Dashboard", mspNavDashboard, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconLayoutDashboard(), "Dashboard", mspNavDashboard, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -303,7 +303,7 @@ func mspNav(active string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = mspNavLink("building-2", "Clients", mspNavClients, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconBuilding2(), "Clients", mspNavClients, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -337,7 +337,7 @@ func mspNav(active string) templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = mspNavLink("train-front", "Yardrail", mspNavYardrail, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconTrainFront(), "Yardrail", mspNavYardrail, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -345,7 +345,7 @@ func mspNav(active string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = mspNavLink("user", "Account", mspNavAccount, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconUser(), "Account", mspNavAccount, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -392,7 +392,7 @@ func mspNav(active string) templ.Component {
 }
 
 // mspNavLink is one link in the MSP sidebar, highlighted when link equals active.
-func mspNavLink(icon, label, link, active string) templ.Component {
+func mspNavLink(icon templ.Component, label, link, active string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -425,7 +425,7 @@ func mspNavLink(icon, label, link, active string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Icon(icon).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icon.Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1417,7 +1417,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("user-plus").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconUserPlus().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1447,7 +1447,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("play").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconPlay().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1477,7 +1477,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("refresh-cw").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconRefreshCw().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1507,7 +1507,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("shield").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconShield().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1981,7 +1981,7 @@ func mspClientNav(active string) templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = mspNavLink("layout-dashboard", "Overview", mspClientOverview, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconLayoutDashboard(), "Overview", mspClientOverview, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -1989,7 +1989,7 @@ func mspClientNav(active string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = mspNavLink("users", "Users", mspClientUsers, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconUsers(), "Users", mspClientUsers, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -1997,7 +1997,7 @@ func mspClientNav(active string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = mspNavLink("plug", "Connectors", mspClientConnectors, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconPlug(), "Connectors", mspClientConnectors, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2005,7 +2005,7 @@ func mspClientNav(active string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = mspNavLink("play", "Workflows", mspClientWorkflows, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconPlay(), "Workflows", mspClientWorkflows, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2013,7 +2013,7 @@ func mspClientNav(active string) templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = mspNavLink("settings", "Settings", mspClientSettings, active).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = mspNavLink(ui.IconSettings(), "Settings", mspClientSettings, active).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2275,7 +2275,7 @@ func mspPolicy(label, value string) templ.Component {
 
 // mspConnectorRow is one connector in a list: its icon, name and meta, with the children, such as
 // its health, at the far end.
-func mspConnectorRow(icon, name, meta string) templ.Component {
+func mspConnectorRow(icon templ.Component, name, meta string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -2324,7 +2324,7 @@ func mspConnectorRow(icon, name, meta string) templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = ui.Icon(icon).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = icon.Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2540,7 +2540,7 @@ func mspClientOverviewPage() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("user-plus").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconUserPlus().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -2570,7 +2570,7 @@ func mspClientOverviewPage() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("play").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconPlay().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -2600,7 +2600,7 @@ func mspClientOverviewPage() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Icon("refresh-cw").Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.IconRefreshCw().Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -3036,7 +3036,7 @@ func mspClientConnectorsPage() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = mspConnectorRow("message-square", "Slack", "OAuth · Used by 4 workflows").Render(templ.WithChildren(ctx, templ_7745c5c3_Var123), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = mspConnectorRow(ui.IconMessageSquare(), "Slack", "OAuth · Used by 4 workflows").Render(templ.WithChildren(ctx, templ_7745c5c3_Var123), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -3062,7 +3062,7 @@ func mspClientConnectorsPage() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = mspConnectorRow("database", "HubSpot", "API Key · Used by 6 workflows").Render(templ.WithChildren(ctx, templ_7745c5c3_Var124), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = mspConnectorRow(ui.IconDatabase(), "HubSpot", "API Key · Used by 6 workflows").Render(templ.WithChildren(ctx, templ_7745c5c3_Var124), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -3088,7 +3088,7 @@ func mspClientConnectorsPage() templ.Component {
 						}
 						return nil
 					})
-					templ_7745c5c3_Err = mspConnectorRow("credit-card", "Stripe", "API Key · Used by 2 workflows").Render(templ.WithChildren(ctx, templ_7745c5c3_Var125), templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = mspConnectorRow(ui.IconCreditCard(), "Stripe", "API Key · Used by 2 workflows").Render(templ.WithChildren(ctx, templ_7745c5c3_Var125), templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}

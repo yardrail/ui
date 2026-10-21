@@ -35,31 +35,31 @@ func iconBadgeTonesExample() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("accent", "pencil").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("accent", ui.IconPencil()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("amber", "mail").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("amber", ui.IconMail()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("blue", "star").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("blue", ui.IconStar()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("green", "check-circle").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("green", ui.IconCheckCircle()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("purple", "shield").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("purple", ui.IconShield()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("pink", "user").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("pink", ui.IconUser()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = iconBadgeExampleItem("danger", "zap").Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = iconBadgeExampleItem("danger", ui.IconZap()).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -71,7 +71,7 @@ func iconBadgeTonesExample() templ.Component {
 	})
 }
 
-func iconBadgeExampleItem(tone, iconName string) templ.Component {
+func iconBadgeExampleItem(tone string, icon templ.Component) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -108,7 +108,7 @@ func iconBadgeExampleItem(tone, iconName string) templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Icon(iconName).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = icon.Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

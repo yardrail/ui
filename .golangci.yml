@@ -116,8 +116,9 @@ linters:
           - exhaustruct_v5
         path: "^cmd/gallery/"
       - linters:
-          - exhaustruct_v5
-        path: "^cmd/gallery/"
+          - lll
+          - gosec
+        path: "icons\\.go$"
       - linters:
           - godoclint
         text: "symbol should have a godoc"
