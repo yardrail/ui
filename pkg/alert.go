@@ -9,6 +9,6 @@ type AlertProps struct {
 }
 
 // Alert renders a banner/flash message. Children are the message content.
-func Alert(p AlertProps) templ.Component {
-	return alert(&p)
+func Alert(p *AlertProps) templ.Component {
+	return alert(p)
 }

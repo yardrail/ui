@@ -15,6 +15,6 @@ type PillProps struct {
 }
 
 // Pill renders a colored label.
-func Pill(text string, p PillProps) templ.Component {
-	return pill(text, &p)
+func Pill(text string, p *PillProps) templ.Component {
+	return pill(text, p)
 }

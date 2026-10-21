@@ -9,6 +9,6 @@ type StatProps struct {
 }
 
 // Stat renders a number + label pair.
-func Stat(number string, p StatProps) templ.Component {
-	return stat(number, &p)
+func Stat(number string, p *StatProps) templ.Component {
+	return stat(number, p)
 }

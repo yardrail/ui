@@ -8,6 +8,6 @@ type IconBadgeProps struct {
 }
 
 // IconBadge renders a circular icon container with the given tone. Children are the icon.
-func IconBadge(tone string, p IconBadgeProps) templ.Component {
-	return iconBadge(tone, &p)
+func IconBadge(tone string, p *IconBadgeProps) templ.Component {
+	return iconBadge(tone, p)
 }

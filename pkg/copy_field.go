@@ -8,6 +8,6 @@ type CopyFieldProps struct {
 }
 
 // CopyField renders a code display with a copy-to-clipboard button.
-func CopyField(value string, p CopyFieldProps) templ.Component {
-	return copyField(value, &p)
+func CopyField(value string, p *CopyFieldProps) templ.Component {
+	return copyField(value, p)
 }
