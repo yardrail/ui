@@ -8,7 +8,7 @@ import (
 	"testing"
 	"testing/fstest"
 
-	"github.com/yardrail/ui"
+	ui "github.com/yardrail/ui/pkg"
 )
 
 // testCSS is the stylesheet the test gallery serves.

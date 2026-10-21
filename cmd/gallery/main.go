@@ -9,7 +9,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/yardrail/ui"
+	ui "github.com/yardrail/ui/pkg"
 )
 
 // readHeaderTimeout bounds how long a client may take to send request headers.

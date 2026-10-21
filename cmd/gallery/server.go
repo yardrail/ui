@@ -12,7 +12,7 @@ import (
 
 	"github.com/a-h/templ"
 
-	"github.com/yardrail/ui"
+	ui "github.com/yardrail/ui/pkg"
 )
 
 // Region component slugs that double as the name of the shell slot each fills.
