@@ -1,6 +1,6 @@
-@import "./fonts.css";
-@import "./tokens.css";
-@import "./base.css";
+@import "./styles/fonts.css";
+@import "./styles/tokens.css";
+@import "./styles/base.css";
 @import "./pkg/layout.css";
 @import "./pkg/shell.css";
 @import "./pkg/button.css";

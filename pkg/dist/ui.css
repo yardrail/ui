@@ -1,4 +1,4 @@
-/* fonts.css */
+/* styles/fonts.css */
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
@@ -104,7 +104,7 @@
     U+FFFD;
 }
 
-/* tokens.css */
+/* styles/tokens.css */
 :root {
   --yr-bg: #F5F2EB;
   --yr-surface: #FFF;
@@ -195,7 +195,7 @@
   }
 }
 
-/* base.css */
+/* styles/base.css */
 * {
   box-sizing: border-box;
 }
