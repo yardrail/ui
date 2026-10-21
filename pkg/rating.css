@@ -13,6 +13,10 @@ yr-rating .yr-rating-stars {
   gap: 2px;
   color: var(--yr-rating);
 }
+yr-rating .yr-rating-stars svg {
+  width: 16px;
+  height: 16px;
+}
 
 yr-rating .yr-rating-count {
   color: var(--yr-text-subtle);

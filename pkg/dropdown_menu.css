@@ -87,6 +87,10 @@ yr-account-menu[open] [slot="panel"] {
   color: var(--yr-text-muted);
   transition: transform 0.15s;
 }
+.yr-dropdown-menu-chevron svg {
+  width: 12px;
+  height: 12px;
+}
 yr-dropdown-menu[open] .yr-dropdown-menu-chevron,
 yr-account-menu[open] .yr-dropdown-menu-chevron {
   transform: rotate(180deg);

@@ -866,6 +866,10 @@ yr-rating .yr-rating-stars {
   gap: 2px;
   color: var(--yr-rating);
 }
+yr-rating .yr-rating-stars svg {
+  width: 16px;
+  height: 16px;
+}
 yr-rating .yr-rating-count {
   color: var(--yr-text-subtle);
 }
@@ -1757,6 +1761,10 @@ yr-account-menu[open] [slot=panel] {
   color: var(--yr-text-muted);
   transition: transform 0.15s;
 }
+.yr-dropdown-menu-chevron svg {
+  width: 12px;
+  height: 12px;
+}
 yr-dropdown-menu[open] .yr-dropdown-menu-chevron,
 yr-account-menu[open] .yr-dropdown-menu-chevron {
   transform: rotate(180deg);
@@ -1897,6 +1905,14 @@ yr-author-link[size=lg] .yr-author-link-name {
 .yr-author-link-badge {
   color: var(--yr-accent);
   display: inline-flex;
+}
+.yr-author-link-badge svg {
+  width: 12px;
+  height: 12px;
+}
+yr-author-link[size=lg] .yr-author-link-badge svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* pkg/action_card.css */
