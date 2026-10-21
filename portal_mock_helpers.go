@@ -25,5 +25,5 @@ func portalActive(link, active string) templ.Attributes {
 		return templ.Attributes{}
 	}
 
-	return templ.Attributes{"active": true}
+	return templ.Attributes{attrActive: true}
 }
