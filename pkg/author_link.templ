@@ -1,7 +1,5 @@
 package ui
 
-const verifiedBadgePath = "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"
-
 // AuthorLinkProps configures an AuthorLink.
 type AuthorLinkProps struct {
 	Href     string
@@ -11,14 +9,6 @@ type AuthorLinkProps struct {
 	Size     string
 	Heading  bool
 	Attrs    templ.Attributes
-}
-
-func authorLinkBadgeSize(size string) string {
-	if size == "lg" {
-		return "16"
-	}
-
-	return "12"
 }
 
 // AuthorLink renders an author identity: avatar, name, handle, and verified badge.
@@ -53,7 +43,7 @@ templ authorLinkContent(name string, p *AuthorLinkProps) {
 					<strong class="yr-author-link-name">{ name }</strong>
 				}
 				if p.Verified {
-					@authorLinkBadge(p.Size)
+					@authorLinkBadge()
 				}
 			</div>
 			<p class="yr-author-link-handle">{ "@" + p.Handle }</p>
@@ -65,17 +55,15 @@ templ authorLinkContent(name string, p *AuthorLinkProps) {
 			<strong class="yr-author-link-name">{ name }</strong>
 		}
 		if p.Verified {
-			@authorLinkBadge(p.Size)
+			@authorLinkBadge()
 		}
 	} else if p.Handle != "" {
 		{ "@" + p.Handle }
 	}
 }
 
-templ authorLinkBadge(size string) {
+templ authorLinkBadge() {
 	<span class="yr-author-link-badge" title="Verified author">
-		<svg width={ authorLinkBadgeSize(size) } height={ authorLinkBadgeSize(size) } viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-			<path d={ verifiedBadgePath }></path>
-		</svg>
+		@IconShield()
 	</span>
 }
