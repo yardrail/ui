@@ -11,13 +11,13 @@ import (
 	"testing"
 )
 
-// scaleTokenRE matches the declaration of a scale token in ../styles/tokens.css. Control properties
+// scaleTokenRE matches the declaration of a scale token in ../src/styles/tokens.css. Control properties
 // (--yr-control-*) and font families (--yr-font-body) are not scale tokens.
 var scaleTokenRE = regexp.MustCompile(
 	`(?m)^\s*(--yr-(?:space|font-size|radius|measure|side|item-width)-[a-z0-9-]+)\s*:`,
 )
 
-// TestTokensMatchCSS fails when a scale token in ../styles/tokens.css has no Go value in tokens.go, or
+// TestTokensMatchCSS fails when a scale token in ../src/styles/tokens.css has no Go value in tokens.go, or
 // a Go value names a token the stylesheet does not define.
 func TestTokensMatchCSS(t *testing.T) {
 	t.Parallel()
@@ -31,7 +31,7 @@ func TestTokensMatchCSS(t *testing.T) {
 		"ItemWidth": "--yr-item-width-",
 	}
 
-	css, err := os.ReadFile("../styles/tokens.css")
+	css, err := os.ReadFile("../src/styles/tokens.css")
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,13 +62,13 @@ func TestTokensMatchCSS(t *testing.T) {
 		inGo[v.property] = v.name
 
 		if !inCSS[v.property] {
-			t.Errorf("%s carries %s, which ../styles/tokens.css does not define", v.name, v.property)
+			t.Errorf("%s carries %s, which ../src/styles/tokens.css does not define", v.name, v.property)
 		}
 	}
 
 	for property := range inCSS {
 		if _, ok := inGo[property]; !ok {
-			t.Errorf("../styles/tokens.css defines %s, which has no Go value in tokens.go", property)
+			t.Errorf("../src/styles/tokens.css defines %s, which has no Go value in tokens.go", property)
 		}
 	}
 }

@@ -5,8 +5,8 @@
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "build": "pnpm run build:js && pnpm run build:css",
-    "build:js": "esbuild index.ts --bundle --format=esm --target=es2022 --outfile=pkg/dist/ui.js --sourcemap",
-    "build:css": "esbuild styles.css --bundle --outfile=pkg/dist/ui.css --sourcemap --external:/fonts/*",
+    "build:js": "esbuild src/index.ts --bundle --format=esm --target=es2022 --outfile=pkg/dist/ui.js --sourcemap",
+    "build:css": "esbuild src/styles.css --bundle --outfile=pkg/dist/ui.css --sourcemap --external:/fonts/*",
     "watch": "pnpm run watch:js & pnpm run watch:css",
     "watch:js": "pnpm run build:js -- --watch",
     "watch:css": "pnpm run build:css -- --watch"
