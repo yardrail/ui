@@ -41,6 +41,9 @@ jobs:
 
       - run: corepack enable
 
+      - name: Install templ
+        run: go install github.com/a-h/templ/cmd/templ@v0.3.1020
+
       - uses: go-task/setup-task@v1
 
       - run: task lint
