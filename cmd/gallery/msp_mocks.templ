@@ -18,7 +18,7 @@ templ mspHead() {
 // mspShell is the page frame shared by the MSP portal mocks: a navbar, sidebar navigation,
 // and the children in the content area.
 templ mspShell(title string, nav templ.Component) {
-	<!doctype html>
+	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<meta charset="utf-8"/>
@@ -394,30 +394,46 @@ templ mspClientUsersPage() {
 						<tr>
 							<td>Alex Johnson</td>
 							<td>alex@acme.com</td>
-							<td>@ui.Pill("Admin", &ui.PillProps{})</td>
+							<td>
+								@ui.Pill("Admin", &ui.PillProps{})
+							</td>
 							<td>All spaces</td>
-							<td>@ui.Pill("Active", &ui.PillProps{Tone: "success"})</td>
+							<td>
+								@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+							</td>
 						</tr>
 						<tr>
 							<td>Maria Chen</td>
 							<td>maria@acme.com</td>
-							<td>@ui.Pill("Editor", &ui.PillProps{})</td>
+							<td>
+								@ui.Pill("Editor", &ui.PillProps{})
+							</td>
 							<td>Sales, Support</td>
-							<td>@ui.Pill("Active", &ui.PillProps{Tone: "success"})</td>
+							<td>
+								@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+							</td>
 						</tr>
 						<tr>
 							<td>Sam Patel</td>
 							<td>sam@acme.com</td>
-							<td>@ui.Pill("Viewer", &ui.PillProps{})</td>
+							<td>
+								@ui.Pill("Viewer", &ui.PillProps{})
+							</td>
 							<td>Sales</td>
-							<td>@ui.Pill("Active", &ui.PillProps{Tone: "success"})</td>
+							<td>
+								@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+							</td>
 						</tr>
 						<tr>
 							<td>Taylor Kim</td>
 							<td>taylor@acme.com</td>
-							<td>@ui.Pill("Editor", &ui.PillProps{})</td>
+							<td>
+								@ui.Pill("Editor", &ui.PillProps{})
+							</td>
 							<td>Ops, Finance</td>
-							<td>@ui.Pill("Invited", &ui.PillProps{})</td>
+							<td>
+								@ui.Pill("Invited", &ui.PillProps{})
+							</td>
 						</tr>
 					</tbody>
 				</table>

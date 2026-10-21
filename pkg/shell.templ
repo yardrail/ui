@@ -204,7 +204,7 @@ func withoutFixedID(component string, attrs templ.Attributes) templ.Attributes {
 
 // shellDocument renders the document of a Shell around its children.
 templ shellDocument(title string, p *ShellProps) {
-	<!doctype html>
+	<!DOCTYPE html>
 	<html lang={ p.lang() }>
 		<head>
 			<meta charset="utf-8"/>

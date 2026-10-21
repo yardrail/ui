@@ -3,7 +3,21 @@ package main
 import ui "github.com/yardrail/ui/pkg"
 
 templ pageSetupExampleDefault() {
-	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	<style>
+		html,
+		body {
+			margin: 0;
+			height: 100%;
+		}
+		.demo-region {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: var(--yr-font-mono);
+			font-size: var(--yr-font-size-xs);
+			color: var(--yr-text-subtle);
+		}
+	</style>
 	@ui.PageSetup(&ui.PageSetupProps{}) {
 		@ui.Navbar(&ui.NavbarProps{}) {
 			<div class="demo-region" style="width:100%">nav</div>
@@ -15,7 +29,13 @@ templ pageSetupExampleDefault() {
 }
 
 templ pageSetupExampleWithSetupCard() {
-	<style>html,body{margin:0;height:100%}</style>
+	<style>
+		html,
+		body {
+			margin: 0;
+			height: 100%;
+		}
+	</style>
 	@ui.PageSetup(&ui.PageSetupProps{}) {
 		@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail"}) {
 		}

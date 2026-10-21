@@ -4,7 +4,7 @@ import ui "github.com/yardrail/ui/pkg"
 
 // portalShell is the page frame shared by the portal mocks: a navbar, sidebar, and content area.
 templ portalShell(title string, nav templ.Component) {
-	<!doctype html>
+	<!DOCTYPE html>
 	<html lang="en">
 		<head>
 			<meta charset="utf-8"/>
@@ -103,7 +103,6 @@ templ portalNavLink(icon templ.Component, label, link, active string) {
 }
 
 // --- Portal Home ---
-
 templ portalHomePage() {
 	@portalShell("Home · Yardrail", portalNav(portalHome)) {
 		<h1 class="portal-page-title">Home</h1>
@@ -218,7 +217,6 @@ templ portalActivityRowContent(name, runID, tone, status, detail, duration, wait
 }
 
 // --- Portal Automations ---
-
 templ portalAutomationsPage() {
 	@portalShell("Automations · Yardrail", portalNav("automations")) {
 		<h1 class="portal-page-title">Automations</h1>
@@ -278,7 +276,6 @@ templ portalAutoTile(icon templ.Component, badgeTone, title, desc, action string
 }
 
 // --- Portal Workflows ---
-
 templ portalWorkflowsPage() {
 	@portalShell("Workflows · Yardrail", portalNavAutomations("workflows")) {
 		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)">
@@ -340,7 +337,6 @@ templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
 }
 
 // --- Portal Templates ---
-
 templ portalTemplatesPage() {
 	@portalShell("Template Catalog · Yardrail", portalNavAutomations("templates")) {
 		<h1 class="portal-page-title">Template Catalog</h1>
@@ -390,7 +386,6 @@ templ portalCommunityInstalls(installs string) {
 }
 
 // --- Portal Connectors ---
-
 templ portalConnectorsPage() {
 	@portalShell("Connectors · Yardrail", portalNavAutomations("connectors")) {
 		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)">
@@ -457,7 +452,6 @@ templ portalAvailableConnector(initials, name, desc string) {
 }
 
 // --- Portal Space ---
-
 templ portalSpacePage() {
 	@portalShell("Marketing Ops · Yardrail", portalNav("space-marketing")) {
 		<div class="space-header">
@@ -480,17 +474,17 @@ templ portalSpacePage() {
 		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
 			@ui.WorkflowCard("Lead Scoring", "Waiting for input", &ui.WorkflowCardProps{
 				Status: ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}),
-				Runs: "42", SuccessRate: "91%",
+				Runs:   "42", SuccessRate: "91%",
 				Action: ui.Button("View", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			})
 			@ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
 				Status: ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
-				Runs: "127", SuccessRate: "98%",
+				Runs:   "127", SuccessRate: "98%",
 				Action: ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			})
 			@ui.WorkflowCard("Social Scheduler", "Last run 1d ago", &ui.WorkflowCardProps{
 				Status: ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
-				Runs: "18", SuccessRate: "85%",
+				Runs:   "18", SuccessRate: "85%",
 				Action: ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			})
 		</div>
@@ -508,7 +502,6 @@ templ portalSpacePage() {
 }
 
 // --- Portal Workflow Detail ---
-
 templ portalWorkflowDetailPage() {
 	@portalShell("Newsletter Digest · Yardrail", portalNav("space-marketing")) {
 		@ui.Breadcrumb(&ui.BreadcrumbProps{}) {
@@ -622,7 +615,6 @@ templ portalWorkflowDetailConfig() {
 }
 
 // --- Portal Workflow Run ---
-
 templ portalWorkflowRunPage() {
 	@portalShell("Run #42 · Newsletter Digest · Yardrail", portalNav("space-marketing")) {
 		@ui.Breadcrumb(&ui.BreadcrumbProps{}) {

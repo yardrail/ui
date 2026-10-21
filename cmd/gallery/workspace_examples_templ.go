@@ -31,7 +31,7 @@ func workspaceExampleExpanded() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<style>\n\t\thtml,\n\t\tbody {\n\t\t\tmargin: 0;\n\t\t\theight: 100%;\n\t\t}\n\t\t.demo-region {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tfont-family: var(--yr-font-mono);\n\t\t\tfont-size: var(--yr-font-size-xs);\n\t\t\tcolor: var(--yr-text-subtle);\n\t\t}\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -178,7 +178,7 @@ func workspaceExampleWithDrawer() templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 8, "<style>\n\t\thtml,\n\t\tbody {\n\t\t\tmargin: 0;\n\t\t\theight: 100%;\n\t\t}\n\t\t.demo-region {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tfont-family: var(--yr-font-mono);\n\t\t\tfont-size: var(--yr-font-size-xs);\n\t\t\tcolor: var(--yr-text-subtle);\n\t\t}\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -359,7 +359,7 @@ func workspaceExampleCollapsed() templ.Component {
 			templ_7745c5c3_Var14 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 18, "<style>\n\t\thtml,\n\t\tbody {\n\t\t\tmargin: 0;\n\t\t\theight: 100%;\n\t\t}\n\t\t.demo-region {\n\t\t\tdisplay: flex;\n\t\t\talign-items: center;\n\t\t\tjustify-content: center;\n\t\t\tfont-family: var(--yr-font-mono);\n\t\t\tfont-size: var(--yr-font-size-xs);\n\t\t\tcolor: var(--yr-text-subtle);\n\t\t}\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

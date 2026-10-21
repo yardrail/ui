@@ -3,14 +3,34 @@ package main
 import ui "github.com/yardrail/ui/pkg"
 
 templ pageAuthExampleDefault() {
-	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	<style>
+		html,
+		body {
+			margin: 0;
+			height: 100%;
+		}
+		.demo-region {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-family: var(--yr-font-mono);
+			font-size: var(--yr-font-size-xs);
+			color: var(--yr-text-subtle);
+		}
+	</style>
 	@ui.PageAuth(&ui.PageAuthProps{}) {
 		<div class="demo-region" style="width:320px;height:200px;border:1px dashed var(--yr-border);border-radius:var(--yr-radius-md)">content</div>
 	}
 }
 
 templ pageAuthExampleWithAuthCard() {
-	<style>html,body{margin:0;height:100%}</style>
+	<style>
+		html,
+		body {
+			margin: 0;
+			height: 100%;
+		}
+	</style>
 	@ui.PageAuth(&ui.PageAuthProps{}) {
 		@ui.AuthCard(&ui.AuthCardProps{}) {
 			<p class="yr-auth-card-brand">Yardrail</p>

@@ -5,10 +5,10 @@ import ui "github.com/yardrail/ui/pkg"
 templ workflowCardActive() {
 	<div style="max-width:22rem">
 		@ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
-			Status: ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
-			Runs: "127",
+			Status:      ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
+			Runs:        "127",
 			SuccessRate: "98%",
-			Action: ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
+			Action:      ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 		})
 	</div>
 }
@@ -16,10 +16,10 @@ templ workflowCardActive() {
 templ workflowCardPaused() {
 	<div style="max-width:22rem">
 		@ui.WorkflowCard("Lead Scoring", "Last run 3d ago", &ui.WorkflowCardProps{
-			Status: ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
-			Runs: "42",
+			Status:      ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
+			Runs:        "42",
 			SuccessRate: "91%",
-			Action: ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),
+			Action:      ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 		})
 	</div>
 }

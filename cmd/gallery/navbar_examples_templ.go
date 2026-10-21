@@ -31,7 +31,7 @@ func navbarExampleDefault() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<style>.demo-slot{background:var(--yr-bg);border:1px dashed var(--yr-border);border-radius:var(--yr-radius-sm);padding:var(--yr-space-1) var(--yr-space-3);color:var(--yr-text-disabled);font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs)}</style>")
+		templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 1, "<style>\n\t\t.demo-slot {\n\t\t\tbackground: var(--yr-bg);\n\t\t\tborder: 1px dashed var(--yr-border);\n\t\t\tborder-radius: var(--yr-radius-sm);\n\t\t\tpadding: var(--yr-space-1) var(--yr-space-3);\n\t\t\tcolor: var(--yr-text-disabled);\n\t\t\tfont-family: var(--yr-font-mono);\n\t\t\tfont-size: var(--yr-font-size-xs);\n\t\t}\n\t</style>")
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -92,7 +92,7 @@ func navbarDemoSlot(label string) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/navbar_examples.templ`, Line: 16, Col: 31}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/navbar_examples.templ`, Line: 26, Col: 31}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
