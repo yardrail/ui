@@ -1,0 +1,32 @@
+package ui
+
+templ pillTonesExample() {
+	<div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+		@Pill("Accent", &PillProps{Tone: "accent"})
+		@Pill("Amber", &PillProps{Tone: "amber"})
+		@Pill("Blue", &PillProps{Tone: "blue"})
+		@Pill("Green", &PillProps{Tone: "green"})
+		@Pill("Purple", &PillProps{Tone: "purple"})
+		@Pill("Pink", &PillProps{Tone: "pink"})
+		@Pill("Danger", &PillProps{Tone: "danger"})
+		@Pill("No tone", &PillProps{})
+	</div>
+}
+
+templ pillStatusExample() {
+	<div style="display:flex;flex-wrap:wrap;gap:0.75rem;align-items:center">
+		@Pill("Running", &PillProps{Tone: "success", Shape: ShapePill})
+		@Pill("Deploying", &PillProps{Tone: "warning", Shape: ShapePill})
+		@Pill("Failed", &PillProps{Tone: "danger", Shape: ShapePill})
+		@Pill("Idle", &PillProps{Shape: ShapePill})
+	</div>
+}
+
+templ pillInteractiveExample() {
+	<div style="display:flex;flex-wrap:wrap;gap:0.5rem">
+		<a href="#" class="yr-pill yr-pill--pill yr-pill--tone-accent is-active">All</a>
+		<a href="#" class="yr-pill yr-pill--pill">Marketing</a>
+		<a href="#" class="yr-pill yr-pill--pill">Analytics</a>
+		<a href="#" class="yr-pill yr-pill--pill">Sales</a>
+	</div>
+}

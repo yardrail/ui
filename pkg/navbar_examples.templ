@@ -1,0 +1,44 @@
+package ui
+
+templ navbarExampleDefault() {
+	<style>.demo-slot{background:var(--yr-bg);border:1px dashed var(--yr-border);border-radius:var(--yr-radius-sm);padding:var(--yr-space-1) var(--yr-space-3);color:var(--yr-text-disabled);font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs)}</style>
+	@Navbar(&NavbarProps{}) {
+		<div class="demo-slot" slot="left">left</div>
+		<div class="demo-slot" slot="center">center</div>
+		<div class="demo-slot">right</div>
+	}
+}
+
+templ navbarExampleWithContent() {
+	@Navbar(&NavbarProps{}) {
+		<a href="#" class="yr-brand" slot="left">
+			<img src="/logo.png" alt="Yardrail"/>
+		</a>
+		<div class="yr-search yr-search--compact" slot="center" style="max-width:320px">
+			@templ.Raw(exampleIcon("search", `class="yr-search-icon" style="left:0.5rem"`, navSearchIconSize))
+			<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
+		</div>
+		<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);text-decoration:none">Docs</a>
+		@AccountMenu(&AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
+			<span slot="avatar">BL</span>
+			<a class="yr-dropdown-menu-item" href="#">Account settings</a>
+			<a class="yr-dropdown-menu-item" href="#">Sign out</a>
+		}
+	}
+}
+
+templ navbarExampleStandardUnauthed() {
+	@NavbarStd(&NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail"}) {
+	}
+}
+
+templ navbarExampleStandardAuthed() {
+	@NavbarStd(&NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
+		<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);text-decoration:none">Docs</a>
+		@AccountMenu(&AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
+			<span slot="avatar">BL</span>
+			<a class="yr-dropdown-menu-item" href="#">Account settings</a>
+			<a class="yr-dropdown-menu-item" href="#">Sign out</a>
+		}
+	}
+}

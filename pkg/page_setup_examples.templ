@@ -1,0 +1,40 @@
+package ui
+
+templ pageSetupExampleDefault() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@PageSetup(&PageSetupProps{}) {
+		@Navbar(&NavbarProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@PageSetupContent(&PageSetupContentProps{}) {
+			<div class="demo-region" style="width:720px;height:400px;border:1px dashed var(--yr-border);border-radius:var(--yr-radius-md)">content</div>
+		}
+	}
+}
+
+templ pageSetupExampleWithSetupCard() {
+	<style>html,body{margin:0;height:100%}</style>
+	@PageSetup(&PageSetupProps{}) {
+		@NavbarStd(&NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail"}) {
+		}
+		@PageSetupContent(&PageSetupContentProps{}) {
+			@SetupCard(&SetupCardProps{}) {
+				@SetupCardProgress(&SetupCardProgressProps{Steps: "3", Current: "1"})
+				@SetupCardHeader(&SetupCardHeaderProps{}) {
+					<h2 class="yr-setup-card-title">Create your organization</h2>
+					<p class="yr-setup-card-subtitle">This is the workspace where your team will collaborate.</p>
+				}
+				@SetupCardBody(&SetupCardBodyProps{}) {
+					<div class="yr-field">
+						<label for="ps-name">Organization name</label>
+						<input type="text" id="ps-name" name="name" placeholder="Acme Corp"/>
+					</div>
+				}
+				@SetupCardFooter(&SetupCardFooterProps{}) {
+					<span></span>
+					@Button("Continue", ButtonProps{Variant: ButtonPrimary})
+				}
+			}
+		}
+	}
+}

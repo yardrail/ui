@@ -1,0 +1,10 @@
+package ui
+
+templ ratingValuesExample() {
+	<div style="display:flex;flex-direction:column;gap:0.75rem">
+		@Rating("5", &RatingProps{Reviews: "128"})
+		@Rating("4.5", &RatingProps{Reviews: "42"})
+		@Rating("3", &RatingProps{})
+		@Rating("1", &RatingProps{})
+	</div>
+}

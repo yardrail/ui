@@ -81,7 +81,7 @@ func ExampleGroups() []ExampleGroup {
 		{Component: "page-auth", Examples: pageAuthExamples()},
 		{Component: "page-setup", Examples: pageSetupExamples()},
 		{Component: "navbar", Examples: navbarExamples()},
-		{Component: "sidebar", Examples: sidebarExamples()},
+		{Component: "sidebar", Examples: sidebarExamples()}, //nolint:goconst // component name, not a reusable constant
 		{Component: "drawer", Examples: drawerExamples()},
 		{Component: "setup-card", Examples: setupCardExamples()},
 		{Component: "msp-dashboard", Examples: mspDashboardExamples()},

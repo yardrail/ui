@@ -1,0 +1,59 @@
+package ui
+
+templ workspaceExampleExpanded() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@PageWorkspace(&PageWorkspaceProps{}) {
+		@NavShell(&NavShellProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@Sidebar(&SidebarProps{}) {
+			<div class="demo-region" style="height:100%">sidebar</div>
+		}
+		@ResizeHandle(&ResizeHandleProps{Target: "sidebar"})
+		@Content(&ContentProps{}) {
+			@ContentMain(&ContentMainProps{}) {
+				<div class="demo-region" style="height:100%">main</div>
+			}
+		}
+	}
+}
+
+templ workspaceExampleWithDrawer() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@PageWorkspace(&PageWorkspaceProps{}) {
+		@NavShell(&NavShellProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@Sidebar(&SidebarProps{}) {
+			<div class="demo-region" style="height:100%">sidebar</div>
+		}
+		@ResizeHandle(&ResizeHandleProps{Target: "sidebar"})
+		@Content(&ContentProps{}) {
+			@ContentMain(&ContentMainProps{}) {
+				<div class="demo-region" style="height:100%">main</div>
+			}
+			@ResizeHandle(&ResizeHandleProps{Target: "drawer"})
+			@Drawer(&DrawerProps{Open: true}) {
+				<div class="demo-region" style="height:100%">drawer</div>
+			}
+		}
+	}
+}
+
+templ workspaceExampleCollapsed() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@PageWorkspace(&PageWorkspaceProps{}) {
+		@NavShell(&NavShellProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@Sidebar(&SidebarProps{Collapsed: true}) {
+			<div class="demo-region" style="height:100%">sidebar</div>
+		}
+		@ResizeHandle(&ResizeHandleProps{Target: "sidebar"})
+		@Content(&ContentProps{}) {
+			@ContentMain(&ContentMainProps{}) {
+				<div class="demo-region" style="height:100%">main</div>
+			}
+		}
+	}
+}

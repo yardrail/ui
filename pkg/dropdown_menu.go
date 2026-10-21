@@ -4,6 +4,7 @@ import "github.com/a-h/templ"
 
 // DropdownMenuProps configures a DropdownMenu.
 type DropdownMenuProps struct {
+	Open  bool
 	Attrs templ.Attributes
 }
 

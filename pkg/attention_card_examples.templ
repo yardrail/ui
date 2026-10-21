@@ -1,0 +1,35 @@
+package ui
+
+templ attentionCardDefault() {
+	<div style="max-width:40rem">
+		@ActionCard(&ActionCardProps{Urgent: true}) {
+			@IconBadge("amber", &IconBadgeProps{}) {
+				@Icon("clock")
+			}
+			<div class="yr-action-card-body">
+				<h3 class="yr-action-card-title">Approve refund for order #1042</h3>
+				<p class="yr-action-card-desc">Waiting since 2h ago · Refund triage</p>
+			</div>
+			<div class="yr-action-card-action">
+				@Pill("Waiting", &PillProps{Tone: "warning", Shape: ShapePill})
+			</div>
+		}
+	</div>
+}
+
+templ attentionCardDanger() {
+	<div style="max-width:40rem">
+		@ActionCard(&ActionCardProps{UrgentDanger: true}) {
+			@IconBadge("danger", &IconBadgeProps{}) {
+				@Icon("alert-triangle")
+			}
+			<div class="yr-action-card-body">
+				<h3 class="yr-action-card-title">Sync contacts failed</h3>
+				<p class="yr-action-card-desc">Connector returned 401 · 3h ago</p>
+			</div>
+			<div class="yr-action-card-action">
+				@Pill("Failed", &PillProps{Tone: "danger", Shape: ShapePill})
+			</div>
+		}
+	</div>
+}

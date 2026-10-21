@@ -1,0 +1,54 @@
+package ui
+
+templ dropdownMenuExampleClosed() {
+	<div style="display:flex;justify-content:flex-end;min-height:12rem">
+		@DropdownMenu(&DropdownMenuProps{}) {
+			<button slot="trigger" type="button">
+				Actions
+				@templ.Raw(exampleIcon("chevron-down", `class="yr-dropdown-menu-chevron"`, dropdownMenuChevronSize))
+			</button>
+			<div slot="panel">
+				<a href="#" class="yr-dropdown-menu-item">Rename</a>
+				<a href="#" class="yr-dropdown-menu-item">Duplicate</a>
+				<div class="yr-dropdown-menu-divider"></div>
+				<button type="button" class="yr-dropdown-menu-item">Delete</button>
+			</div>
+		}
+	</div>
+}
+
+templ dropdownMenuExampleOpen() {
+	<div style="display:flex;justify-content:flex-end;min-height:20rem">
+		@DropdownMenu(&DropdownMenuProps{Open: true}) {
+			<button slot="trigger" type="button">
+				Actions
+				@templ.Raw(exampleIcon("chevron-down", `class="yr-dropdown-menu-chevron"`, dropdownMenuChevronSize))
+			</button>
+			<div slot="panel">
+				<div class="yr-dropdown-menu-header">
+					@Avatar("JE", &AvatarProps{Size: "lg"})
+					<div>
+						<div class="yr-dropdown-menu-header-name">Jordan Ellery</div>
+						<div class="yr-dropdown-menu-header-email">jordan@ellerylogistics.com</div>
+					</div>
+				</div>
+				<a href="#" class="yr-dropdown-menu-item">Organization</a>
+				<a href="#" class="yr-dropdown-menu-item">Account settings</a>
+				<div class="yr-dropdown-menu-divider"></div>
+				<button type="button" class="yr-dropdown-menu-item">Log out</button>
+			</div>
+		}
+	</div>
+}
+
+templ dropdownMenuExampleAccountMenu() {
+	<div style="display:flex;justify-content:flex-end;min-height:20rem">
+		@AccountMenu(&AccountMenuProps{Name: "Jordan Ellery", Email: "jordan@ellerylogistics.com"}) {
+			<span slot="avatar">JE</span>
+			<a href="#" class="yr-dropdown-menu-item">Organization</a>
+			<a href="#" class="yr-dropdown-menu-item">Account settings</a>
+			<div class="yr-dropdown-menu-divider"></div>
+			<button type="button" class="yr-dropdown-menu-item">Log out</button>
+		}
+	</div>
+}

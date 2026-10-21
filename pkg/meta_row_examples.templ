@@ -1,0 +1,19 @@
+package ui
+
+templ metaRowExampleFragments() {
+	<div style="display:flex;flex-direction:column;gap:1rem">
+		@MetaRow(&MetaRowProps{}) {
+			<span>12 templates published</span>
+			<span>4.2k installs</span>
+			<span>Joined 3 Mar 2026</span>
+		}
+		@MetaRow(&MetaRowProps{}) {
+			@Pill("Analytics", &PillProps{Tone: "blue"})
+			@Rating("4.5", &RatingProps{Reviews: "42"})
+			<span>OAuth 2.0</span>
+		}
+		@MetaRow(&MetaRowProps{}) {
+			<span>A single fragment has no separator</span>
+		}
+	</div>
+}
