@@ -1,0 +1,23 @@
+package ui
+
+templ downloadListDefault() {
+	<div style="max-width:28rem">
+		@DownloadList(&DownloadListProps{}) {
+			<a href="#" download>
+				@Icon("file-text")
+				{ " newsletter-draft.html" }
+				<span class="yr-download-size">84 KB</span>
+			</a>
+			<a href="#" download>
+				@Icon("file-spreadsheet")
+				{ " recipient-list.csv" }
+				<span class="yr-download-size">156 KB</span>
+			</a>
+			<a href="#" download>
+				@Icon("file-image")
+				{ " hero-banner.png" }
+				<span class="yr-download-size">2.4 MB</span>
+			</a>
+		}
+	</div>
+}

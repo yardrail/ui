@@ -24,6 +24,7 @@ linters:
         - "^net/http\\..*$"
         # ui component Props: every zero-value field is the component's default.
         - "^github\\.com/yardrail/ui/pkg\\..*Props$"
+        - "^github\\.com/yardrail/ui/pkg\\.Example$"
     tagalign:
       align: true
       sort: true

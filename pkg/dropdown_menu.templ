@@ -1,7 +1,12 @@
 package ui
 
 templ dropdownMenu(p *DropdownMenuProps) {
-	<yr-dropdown-menu { filterAttrs("DropdownMenu", p.Attrs)... }>
+	<yr-dropdown-menu
+		if p.Open {
+			open
+		}
+		{ filterAttrs("DropdownMenu", p.Attrs)... }
+	>
 		{ children... }
 	</yr-dropdown-menu>
 }

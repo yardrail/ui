@@ -1,0 +1,71 @@
+package ui
+
+templ sidebarExampleDefault() {
+	<style>.demo-slot{background:var(--yr-bg);border:1px dashed var(--yr-border);border-radius:var(--yr-radius-sm);padding:var(--yr-space-1) var(--yr-space-3);color:var(--yr-text-disabled);font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs)}</style>
+	@Sidebar(&SidebarProps{}) {
+		@SidebarHeader(&SidebarHeaderProps{}) {
+			<div class="demo-slot">header</div>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
+			<div class="demo-slot">nav</div>
+		}
+		@SidebarFooter(&SidebarFooterProps{}) {
+			<div class="demo-slot">footer</div>
+		}
+	}
+}
+
+templ sidebarExampleWithContent() {
+	@Sidebar(&SidebarProps{}) {
+		@SidebarHeader(&SidebarHeaderProps{}) {
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Workspace</span>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
+			@SidebarLink(&SidebarLinkProps{Href: "#", Active: true}) {
+				@Icon("layout-dashboard")
+				Dashboard
+			}
+			@SidebarLink(&SidebarLinkProps{Href: "#"}) {
+				@Icon("list")
+				Sessions
+			}
+			@SidebarLink(&SidebarLinkProps{Href: "#"}) {
+				@Icon("file-text")
+				Templates
+			}
+			@SidebarLink(&SidebarLinkProps{Href: "#"}) {
+				@Icon("settings")
+				Settings
+			}
+		}
+		@SidebarFooter(&SidebarFooterProps{}) {
+			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
+		}
+	}
+}
+
+templ sidebarExampleCollapsed() {
+	@Sidebar(&SidebarProps{Collapsed: true}) {
+		@SidebarHeader(&SidebarHeaderProps{}) {
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">W</span>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
+			@SidebarLink(&SidebarLinkProps{Href: "#", Active: true}) {
+				@Icon("layout-dashboard")
+				Dashboard
+			}
+			@SidebarLink(&SidebarLinkProps{Href: "#"}) {
+				@Icon("list")
+				Sessions
+			}
+			@SidebarLink(&SidebarLinkProps{Href: "#"}) {
+				@Icon("file-text")
+				Templates
+			}
+			@SidebarLink(&SidebarLinkProps{Href: "#"}) {
+				@Icon("settings")
+				Settings
+			}
+		}
+	}
+}

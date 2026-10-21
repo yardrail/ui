@@ -1,0 +1,37 @@
+package ui
+
+templ statusBannerActiveExample() {
+	<div style="max-width:44rem">
+		@StatusBanner(&StatusBannerProps{Tone: "success"}) {
+			@Pill("Active", &PillProps{Tone: "success", Shape: ShapePill})
+			<span class="yr-status-banner-message">Workflow is running. Last triggered 2h ago.</span>
+			<div class="yr-status-banner-actions">
+				@Button("Pause", ButtonProps{Variant: ButtonSecondary})
+			</div>
+		}
+	</div>
+}
+
+templ statusBannerPausedExample() {
+	<div style="max-width:44rem">
+		@StatusBanner(&StatusBannerProps{Tone: "warning"}) {
+			@Pill("Paused", &PillProps{Tone: "warning", Shape: ShapePill})
+			<span class="yr-status-banner-message">Workflow is paused. No runs will be triggered.</span>
+			<div class="yr-status-banner-actions">
+				@Button("Resume", ButtonProps{Variant: ButtonSecondary})
+			</div>
+		}
+	</div>
+}
+
+templ statusBannerFailedExample() {
+	<div style="max-width:44rem">
+		@StatusBanner(&StatusBannerProps{Tone: "danger"}) {
+			@Pill("Failed", &PillProps{Tone: "danger", Shape: ShapePill})
+			<span class="yr-status-banner-message">Last run failed: connector returned 401.</span>
+			<div class="yr-status-banner-actions">
+				@Button("Retry", ButtonProps{Variant: ButtonSecondary})
+			</div>
+		}
+	</div>
+}

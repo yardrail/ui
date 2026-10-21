@@ -1,0 +1,28 @@
+package ui
+
+templ authCardSignIn() {
+	@AuthCard(&AuthCardProps{}) {
+		<p class="yr-auth-card-brand">Yardrail</p>
+		<form class="yr-auth-card-form" method="post" action="#">
+			@Field("Username", "auth-username", FieldProps{Autocomplete: AutocompleteUsername})
+			@Field("Password", "auth-password", FieldProps{Type: FieldPassword, Autocomplete: AutocompleteCurrentPassword})
+			@Button("Log in", ButtonProps{Variant: ButtonPrimary, Type: ButtonSubmit})
+		</form>
+		<p class="yr-auth-card-footer">No account? <a href="#">Sign up</a></p>
+	}
+}
+
+templ authCardWithError() {
+	@AuthCard(&AuthCardProps{}) {
+		<p class="yr-auth-card-brand">Yardrail</p>
+		<form class="yr-auth-card-form" method="post" action="#">
+			@Alert(&AlertProps{Tone: "danger"}) {
+				Wrong username or password.
+			}
+			@Field("Username", "auth-error-username", FieldProps{Value: "pat"})
+			@Field("Password", "auth-error-password", FieldProps{Type: FieldPassword})
+			@Button("Log in", ButtonProps{Variant: ButtonPrimary, Type: ButtonSubmit})
+		</form>
+		<p class="yr-auth-card-footer">No account? <a href="#">Sign up</a></p>
+	}
+}

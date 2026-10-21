@@ -1,0 +1,23 @@
+package ui
+
+templ workflowCardActive() {
+	<div style="max-width:22rem">
+		@WorkflowCard("Newsletter Digest", "Last run 2h ago", &WorkflowCardProps{
+			Status: Pill("Active", &PillProps{Tone: "success", Shape: ShapePill}),
+			Runs: "127",
+			SuccessRate: "98%",
+			Action: Button("Trigger", ButtonProps{Variant: ButtonSecondary}),
+		})
+	</div>
+}
+
+templ workflowCardPaused() {
+	<div style="max-width:22rem">
+		@WorkflowCard("Lead Scoring", "Last run 3d ago", &WorkflowCardProps{
+			Status: Pill("Paused", &PillProps{Shape: ShapePill}),
+			Runs: "42",
+			SuccessRate: "91%",
+			Action: Button("Resume", ButtonProps{Variant: ButtonSecondary}),
+		})
+	</div>
+}
