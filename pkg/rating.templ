@@ -1,5 +1,38 @@
 package ui
 
+import (
+	"math"
+	"strconv"
+)
+
+const starPath = "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z"
+
+func ratingFilled(value string) int {
+	v, err := strconv.ParseFloat(value, 64)
+	if err != nil {
+		return 0
+	}
+
+	n := int(math.Round(v))
+	if n < 0 {
+		return 0
+	}
+
+	if n > 5 {
+		return 5
+	}
+
+	return n
+}
+
+func starFill(index, filled int) string {
+	if index < filled {
+		return "currentColor"
+	}
+
+	return "none"
+}
+
 // RatingProps configures a Rating.
 type RatingProps struct {
 	Reviews string
@@ -12,5 +45,16 @@ func Rating(value string, p *RatingProps) templ.Component {
 }
 
 templ rating(value string, p *RatingProps) {
-	<yr-rating value={ value } reviews={ p.Reviews } { filterAttrs("Rating", p.Attrs)... }></yr-rating>
+	<yr-rating { filterAttrs("Rating", p.Attrs)... }>
+		<span class="yr-rating-stars">
+			for i := range 5 {
+				<svg width="16" height="16" viewBox="0 0 24 24" fill={ starFill(i, ratingFilled(value)) } stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d={ starPath }></path>
+				</svg>
+			}
+		</span>
+		if p.Reviews != "" {
+			<span class="yr-rating-count">({ p.Reviews } reviews)</span>
+		}
+	</yr-rating>
 }

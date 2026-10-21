@@ -78,49 +78,7 @@ var YrStat = class extends HTMLElement {
 customElements.define("yr-stat", YrStat);
 
 // pkg/rating.ts
-var STAR_PATH = "M11.525 2.295a.53.53 0 0 1 .95 0l2.31 4.679a2.123 2.123 0 0 0 1.595 1.16l5.166.756a.53.53 0 0 1 .294.904l-3.736 3.638a2.123 2.123 0 0 0-.611 1.878l.882 5.14a.53.53 0 0 1-.771.56l-4.618-2.428a2.122 2.122 0 0 0-1.973 0L6.396 21.01a.53.53 0 0 1-.77-.56l.881-5.139a2.122 2.122 0 0 0-.611-1.879L2.16 9.795a.53.53 0 0 1 .294-.906l5.165-.755a2.122 2.122 0 0 0 1.597-1.16z";
-function starSVG(filled) {
-  const ns = "http://www.w3.org/2000/svg";
-  const svg = document.createElementNS(ns, "svg");
-  svg.setAttribute("width", "16");
-  svg.setAttribute("height", "16");
-  svg.setAttribute("viewBox", "0 0 24 24");
-  svg.setAttribute("fill", filled ? "currentColor" : "none");
-  svg.setAttribute("stroke", "currentColor");
-  svg.setAttribute("stroke-width", "2");
-  svg.setAttribute("stroke-linecap", "round");
-  svg.setAttribute("stroke-linejoin", "round");
-  const path = document.createElementNS(ns, "path");
-  path.setAttribute("d", STAR_PATH);
-  svg.appendChild(path);
-  return svg;
-}
 var YrRating = class extends HTMLElement {
-  static observedAttributes = ["value", "reviews"];
-  connectedCallback() {
-    this.render();
-  }
-  attributeChangedCallback() {
-    this.render();
-  }
-  render() {
-    const raw = parseFloat(this.getAttribute("value") ?? "0");
-    const filled = Math.max(0, Math.min(5, Math.round(raw)));
-    const reviews = this.getAttribute("reviews");
-    this.replaceChildren();
-    const stars = document.createElement("span");
-    stars.className = "yr-rating-stars";
-    for (let i = 0; i < 5; i++) {
-      stars.appendChild(starSVG(i < filled));
-    }
-    this.append(stars);
-    if (reviews) {
-      const count = document.createElement("span");
-      count.className = "yr-rating-count";
-      count.textContent = `(${reviews} reviews)`;
-      this.append(count);
-    }
-  }
 };
 customElements.define("yr-rating", YrRating);
 
@@ -210,15 +168,19 @@ var YrAccountMenu = class extends YrDropdownMenu {
     const name = this.getAttribute("name") ?? "";
     const email = this.getAttribute("email") ?? "";
     const avatarSlot = this.querySelector('[slot="avatar"]');
+    const chevronSlot = this.querySelector('[slot="chevron"]');
     const triggerExtra = this.querySelector('[slot="trigger-extra"]');
-    const items = Array.from(this.childNodes).filter((node) => node !== avatarSlot && node !== triggerExtra);
+    const items = Array.from(this.childNodes).filter(
+      (node) => node !== avatarSlot && node !== chevronSlot && node !== triggerExtra
+    );
     const trigger = document.createElement("button");
     trigger.setAttribute("slot", "trigger");
     trigger.className = "yr-account-menu-trigger";
     if (triggerExtra) trigger.append(triggerExtra.cloneNode(true));
     const triggerAvatar = document.createElement("yr-avatar");
     if (avatarSlot) triggerAvatar.append(avatarSlot.cloneNode(true));
-    trigger.append(triggerAvatar, this.buildChevron());
+    trigger.append(triggerAvatar);
+    if (chevronSlot) trigger.append(chevronSlot);
     const header = document.createElement("div");
     header.className = "yr-dropdown-menu-header";
     const headerAvatar = document.createElement("yr-avatar");
@@ -245,22 +207,6 @@ var YrAccountMenu = class extends YrDropdownMenu {
     panel.setAttribute("slot", "panel");
     panel.append(header, ...items);
     this.replaceChildren(trigger, panel);
-  }
-  buildChevron() {
-    const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg.setAttribute("class", "yr-dropdown-menu-chevron");
-    svg.setAttribute("width", "12");
-    svg.setAttribute("height", "12");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("fill", "none");
-    svg.setAttribute("stroke", "currentColor");
-    svg.setAttribute("stroke-width", "2.5");
-    svg.setAttribute("stroke-linecap", "round");
-    svg.setAttribute("stroke-linejoin", "round");
-    const poly = document.createElementNS("http://www.w3.org/2000/svg", "polyline");
-    poly.setAttribute("points", "6 9 12 15 18 9");
-    svg.append(poly);
-    return svg;
   }
 };
 customElements.define("yr-account-menu", YrAccountMenu);
@@ -390,68 +336,7 @@ var YrTabs = class extends HTMLElement {
 customElements.define("yr-tabs", YrTabs);
 
 // pkg/author_link.ts
-var VERIFIED_BADGE_PATH = "M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z";
 var YrAuthorLink = class extends HTMLElement {
-  static observedAttributes = ["href", "name", "handle", "verified", "avatar", "size", "heading"];
-  connectedCallback() {
-    this.render();
-  }
-  attributeChangedCallback() {
-    this.render();
-  }
-  render() {
-    this.replaceChildren();
-    const name = this.getAttribute("name");
-    const handle = this.getAttribute("handle");
-    const verified = this.hasAttribute("verified");
-    const avatarInitials = this.getAttribute("avatar");
-    const href = this.getAttribute("href");
-    const isLarge = this.getAttribute("size") === "lg";
-    const inner = document.createElement(href ? "a" : "span");
-    inner.className = "yr-author-link-inner";
-    if (href) inner.href = href;
-    if (avatarInitials) {
-      const avatar = document.createElement("yr-avatar");
-      if (isLarge) avatar.setAttribute("size", "lg");
-      avatar.textContent = avatarInitials;
-      inner.appendChild(avatar);
-    }
-    const badge = () => {
-      const el = document.createElement("span");
-      el.className = "yr-author-link-badge";
-      el.title = "Verified author";
-      const svgSize = isLarge ? 16 : 12;
-      el.innerHTML = `<svg width="${svgSize}" height="${svgSize}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="${VERIFIED_BADGE_PATH}"></path></svg>`;
-      return el;
-    };
-    const nameTag = this.hasAttribute("heading") ? "h1" : "strong";
-    if (isLarge && name && handle) {
-      const text = document.createElement("div");
-      text.className = "yr-author-link-text";
-      const nameRow = document.createElement("div");
-      nameRow.className = "yr-author-link-name-row";
-      const nameEl = document.createElement(nameTag);
-      nameEl.className = "yr-author-link-name";
-      nameEl.textContent = name;
-      nameRow.appendChild(nameEl);
-      if (verified) nameRow.appendChild(badge());
-      text.appendChild(nameRow);
-      const handleEl = document.createElement("p");
-      handleEl.className = "yr-author-link-handle";
-      handleEl.textContent = `@${handle}`;
-      text.appendChild(handleEl);
-      inner.appendChild(text);
-    } else if (name) {
-      const nameEl = document.createElement(nameTag);
-      nameEl.className = "yr-author-link-name";
-      nameEl.textContent = name;
-      inner.appendChild(nameEl);
-      if (verified) inner.appendChild(badge());
-    } else if (handle) {
-      inner.appendChild(document.createTextNode(`@${handle}`));
-    }
-    this.appendChild(inner);
-  }
 };
 customElements.define("yr-author-link", YrAuthorLink);
 
