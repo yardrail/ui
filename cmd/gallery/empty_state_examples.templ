@@ -1,0 +1,16 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ emptyStateTextExample() {
+	@ui.EmptyState(&ui.EmptyStateProps{}) {
+		No teams yet. Add one above.
+	}
+}
+
+templ emptyStateWithIconExample() {
+	@ui.EmptyState(&ui.EmptyStateProps{}) {
+		@templ.Raw(exampleIcon("search", `slot="icon"`, emptyStateIconSize))
+		No templates match your search.
+	}
+}

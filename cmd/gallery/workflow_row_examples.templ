@@ -1,0 +1,71 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ workflowRowExampleRows() {
+	<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:44rem">
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				@ui.Icon("git-branch")
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">Newsletter Digest</div>
+				<div class="yr-list-row-meta">
+					<span>Marketing Ops</span>
+					@ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+					<span>Last run 2h ago</span>
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				@ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				@ui.Icon("git-branch")
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">Lead Scoring</div>
+				<div class="yr-list-row-meta">
+					<span>Sales Ops</span>
+					@ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill})
+					<span>Last run 3d ago</span>
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				@ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				@ui.Icon("git-branch")
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">Social Scheduler</div>
+				<div class="yr-list-row-meta">
+					<span>Marketing Ops</span>
+					@ui.Pill("Error", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+					<span>Failed 1h ago</span>
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				@ui.Button("View", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				@ui.Icon("git-branch")
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">Onboarding Flow</div>
+				<div class="yr-list-row-meta">
+					<span>Client Onboarding</span>
+					@ui.Pill("Draft", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				@ui.Button("Edit", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+	</div>
+}

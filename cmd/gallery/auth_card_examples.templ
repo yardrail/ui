@@ -1,0 +1,30 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ authCardSignIn() {
+	@ui.AuthCard(&ui.AuthCardProps{}) {
+		<p class="yr-auth-card-brand">Yardrail</p>
+		<form class="yr-auth-card-form" method="post" action="#">
+			@ui.Field("Username", "auth-username", ui.FieldProps{Autocomplete: ui.AutocompleteUsername})
+			@ui.Field("Password", "auth-password", ui.FieldProps{Type: ui.FieldPassword, Autocomplete: ui.AutocompleteCurrentPassword})
+			@ui.Button("Log in", ui.ButtonProps{Variant: ui.ButtonPrimary, Type: ui.ButtonSubmit})
+		</form>
+		<p class="yr-auth-card-footer">No account? <a href="#">Sign up</a></p>
+	}
+}
+
+templ authCardWithError() {
+	@ui.AuthCard(&ui.AuthCardProps{}) {
+		<p class="yr-auth-card-brand">Yardrail</p>
+		<form class="yr-auth-card-form" method="post" action="#">
+			@ui.Alert(&ui.AlertProps{Tone: "danger"}) {
+				Wrong username or password.
+			}
+			@ui.Field("Username", "auth-error-username", ui.FieldProps{Value: "pat"})
+			@ui.Field("Password", "auth-error-password", ui.FieldProps{Type: ui.FieldPassword})
+			@ui.Button("Log in", ui.ButtonProps{Variant: ui.ButtonPrimary, Type: ui.ButtonSubmit})
+		</form>
+		<p class="yr-auth-card-footer">No account? <a href="#">Sign up</a></p>
+	}
+}

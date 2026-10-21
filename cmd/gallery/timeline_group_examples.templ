@@ -1,0 +1,63 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ timelineGroupDefault() {
+	<div style="max-width:44rem">
+		@ui.TimelineGroup(&ui.TimelineGroupProps{}) {
+			<time datetime="2026-10-11">Today</time>
+			@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+				@ui.ActivityRow(&ui.ActivityRowProps{}) {
+					<div>
+						<div class="yr-activity-row-desc">Newsletter Digest</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-45</span>
+							{ " Completed in 1m 23s" }
+						</div>
+					</div>
+				}
+				@ui.ActivityRow(&ui.ActivityRowProps{Href: "#"}) {
+					<div>
+						<div class="yr-activity-row-desc">Lead Scoring</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-44</span>
+							{ " Waiting for input" }
+						</div>
+					</div>
+				}
+			}
+		}
+		@ui.TimelineGroup(&ui.TimelineGroupProps{}) {
+			<time datetime="2026-10-10">Yesterday</time>
+			@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+				@ui.ActivityRow(&ui.ActivityRowProps{}) {
+					<div>
+						<div class="yr-activity-row-desc">Newsletter Digest</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-43</span>
+							{ " Completed in 58s" }
+						</div>
+					</div>
+				}
+				@ui.ActivityRow(&ui.ActivityRowProps{IsError: true}) {
+					<div>
+						<div class="yr-activity-row-desc">Social Scheduler</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-42</span>
+							{ " Rate limit exceeded" }
+						</div>
+					</div>
+				}
+				@ui.ActivityRow(&ui.ActivityRowProps{}) {
+					<div>
+						<div class="yr-activity-row-desc">Lead Scoring</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-41</span>
+							{ " Completed in 4m 12s" }
+						</div>
+					</div>
+				}
+			}
+		}
+	</div>
+}

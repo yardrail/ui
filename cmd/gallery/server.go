@@ -11,8 +11,6 @@ import (
 	"unicode"
 
 	"github.com/a-h/templ"
-
-	ui "github.com/yardrail/ui/pkg"
 )
 
 // Region component slugs that double as the name of the shell slot each fills.
@@ -335,9 +333,9 @@ type gallery struct {
 // newHandler returns the gallery handler, serving ui.css from assets as /ui.css and the
 // embedded gallery.css as /gallery.css.
 func newHandler(assets fs.FS) http.Handler {
-	groups := ui.ExampleGroups()
+	groups := ExampleGroups()
 
-	byComponent := make(map[string][]ui.Example, len(groups))
+	byComponent := make(map[string][]Example, len(groups))
 	for _, g := range groups {
 		byComponent[g.Component] = g.Examples
 	}

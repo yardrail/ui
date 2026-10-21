@@ -1,0 +1,61 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ workspaceExampleExpanded() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
+		@ui.NavShell(&ui.NavShellProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@ui.Sidebar(&ui.SidebarProps{}) {
+			<div class="demo-region" style="height:100%">sidebar</div>
+		}
+		@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "sidebar"})
+		@ui.Content(&ui.ContentProps{}) {
+			@ui.ContentMain(&ui.ContentMainProps{}) {
+				<div class="demo-region" style="height:100%">main</div>
+			}
+		}
+	}
+}
+
+templ workspaceExampleWithDrawer() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
+		@ui.NavShell(&ui.NavShellProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@ui.Sidebar(&ui.SidebarProps{}) {
+			<div class="demo-region" style="height:100%">sidebar</div>
+		}
+		@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "sidebar"})
+		@ui.Content(&ui.ContentProps{}) {
+			@ui.ContentMain(&ui.ContentMainProps{}) {
+				<div class="demo-region" style="height:100%">main</div>
+			}
+			@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "drawer"})
+			@ui.Drawer(&ui.DrawerProps{Open: true}) {
+				<div class="demo-region" style="height:100%">drawer</div>
+			}
+		}
+	}
+}
+
+templ workspaceExampleCollapsed() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
+		@ui.NavShell(&ui.NavShellProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@ui.Sidebar(&ui.SidebarProps{Collapsed: true}) {
+			<div class="demo-region" style="height:100%">sidebar</div>
+		}
+		@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "sidebar"})
+		@ui.Content(&ui.ContentProps{}) {
+			@ui.ContentMain(&ui.ContentMainProps{}) {
+				<div class="demo-region" style="height:100%">main</div>
+			}
+		}
+	}
+}

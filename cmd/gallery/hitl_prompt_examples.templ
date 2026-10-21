@@ -1,0 +1,28 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ hitlPromptApproveReject() {
+	<div style="max-width:36rem">
+		@ui.HitlPrompt(&ui.HitlPromptProps{Tone: "warning"}) {
+			<div class="yr-hitl-prompt-title">Approve the refund for order #1042?</div>
+			<p class="yr-hitl-prompt-desc">Customer requested a $84.50 refund. Order was delivered 3 days ago with no reported issues.</p>
+			<div class="yr-hitl-prompt-actions">
+				@ui.Button("Approve", ui.ButtonProps{})
+				@ui.Button("Reject", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+	</div>
+}
+
+templ hitlPromptDanger() {
+	<div style="max-width:36rem">
+		@ui.HitlPrompt(&ui.HitlPromptProps{Tone: "danger"}) {
+			<div class="yr-hitl-prompt-title">Critical: Slack API key expired</div>
+			<p class="yr-hitl-prompt-desc">The Slack connector for Marketing Bot lost authentication. 3 workflows are blocked until reconnected.</p>
+			<div class="yr-hitl-prompt-actions">
+				@ui.Button("Reconnect", ui.ButtonProps{})
+			</div>
+		}
+	</div>
+}

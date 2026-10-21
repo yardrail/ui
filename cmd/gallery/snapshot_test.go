@@ -7,8 +7,6 @@ import (
 	"path/filepath"
 	"strings"
 	"testing"
-
-	ui "github.com/yardrail/ui/pkg"
 )
 
 // update rewrites the golden files: go test ./cmd/gallery -update.
@@ -18,7 +16,7 @@ var update = flag.Bool("update", false, "rewrite testdata golden files from the 
 func TestSnapshots(t *testing.T) {
 	t.Parallel()
 
-	for _, group := range ui.ExampleGroups() {
+	for _, group := range ExampleGroups() {
 		t.Run(group.Component, func(t *testing.T) {
 			t.Parallel()
 
@@ -37,7 +35,7 @@ func TestSnapshots(t *testing.T) {
 }
 
 // renderExample renders ex, with a trailing newline so golden files end like text files.
-func renderExample(t *testing.T, ex ui.Example) []byte {
+func renderExample(t *testing.T, ex Example) []byte {
 	t.Helper()
 
 	var buf bytes.Buffer

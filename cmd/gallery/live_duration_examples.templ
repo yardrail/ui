@@ -1,0 +1,16 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ liveDurationStatesExample() {
+	<div style="display:flex;flex-direction:column;gap:0.75rem">
+		<div style="display:flex;gap:1rem;align-items:baseline">
+			@ui.LiveDuration("2026-10-01T09:00:00Z", &ui.LiveDurationProps{})
+			<code style="font-size:0.75rem;color:#5C5A59">started-at="2026-10-01T09:00:00Z"</code>
+		</div>
+		<div style="display:flex;gap:1rem;align-items:baseline">
+			@ui.LiveDuration("", &ui.LiveDurationProps{})
+			<code style="font-size:0.75rem;color:#5C5A59">no started-at</code>
+		</div>
+	</div>
+}

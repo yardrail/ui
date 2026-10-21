@@ -1,0 +1,39 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ statusBannerActiveExample() {
+	<div style="max-width:44rem">
+		@ui.StatusBanner(&ui.StatusBannerProps{Tone: "success"}) {
+			@ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			<span class="yr-status-banner-message">Workflow is running. Last triggered 2h ago.</span>
+			<div class="yr-status-banner-actions">
+				@ui.Button("Pause", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+	</div>
+}
+
+templ statusBannerPausedExample() {
+	<div style="max-width:44rem">
+		@ui.StatusBanner(&ui.StatusBannerProps{Tone: "warning"}) {
+			@ui.Pill("Paused", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+			<span class="yr-status-banner-message">Workflow is paused. No runs will be triggered.</span>
+			<div class="yr-status-banner-actions">
+				@ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+	</div>
+}
+
+templ statusBannerFailedExample() {
+	<div style="max-width:44rem">
+		@ui.StatusBanner(&ui.StatusBannerProps{Tone: "danger"}) {
+			@ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+			<span class="yr-status-banner-message">Last run failed: connector returned 401.</span>
+			<div class="yr-status-banner-actions">
+				@ui.Button("Retry", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+	</div>
+}

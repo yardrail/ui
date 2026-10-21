@@ -1,0 +1,84 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ timelineDefault() {
+	<div style="max-width:44rem">
+		@ui.TimelineGroup(&ui.TimelineGroupProps{}) {
+			<time datetime="2026-10-11">Today</time>
+			@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+				@ui.ActivityRow(&ui.ActivityRowProps{Href: "#"}) {
+					<div>
+						<div class="yr-activity-row-desc">Newsletter Digest</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-45</span>
+							@ui.Pill("Completed", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+							<span>3 outputs</span>
+						</div>
+					</div>
+					<div class="yr-activity-row-duration">
+						<span class="yr-activity-row-duration-label">1m 23s</span>
+					</div>
+				}
+				@ui.ActivityRow(&ui.ActivityRowProps{Href: "#"}) {
+					<div>
+						<div class="yr-activity-row-desc">Lead Scoring</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-44</span>
+							@ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+							<span>Approve budget &gt;$5k</span>
+						</div>
+					</div>
+					<div class="yr-activity-row-duration">
+						<span class="yr-activity-row-duration-label">Waiting</span>
+						@ui.LiveDuration("2026-10-11T08:00:00Z", &ui.LiveDurationProps{})
+					</div>
+				}
+			}
+		}
+		@ui.TimelineGroup(&ui.TimelineGroupProps{}) {
+			<time datetime="2026-10-10">Yesterday</time>
+			@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+				@ui.ActivityRow(&ui.ActivityRowProps{Href: "#"}) {
+					<div>
+						<div class="yr-activity-row-desc">Newsletter Digest</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-43</span>
+							@ui.Pill("Completed", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+							<span>2 outputs</span>
+						</div>
+					</div>
+					<div class="yr-activity-row-duration">
+						<span class="yr-activity-row-duration-label">58s</span>
+					</div>
+				}
+				@ui.ActivityRow(&ui.ActivityRowProps{Href: "#", IsError: true}) {
+					<div>
+						<div class="yr-activity-row-desc">Social Scheduler</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-42</span>
+							@ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+							<span>Rate limit exceeded</span>
+						</div>
+					</div>
+					<div class="yr-activity-row-duration">
+						<span class="yr-activity-row-duration-label">12s</span>
+					</div>
+				}
+				@ui.ActivityRow(&ui.ActivityRowProps{Href: "#"}) {
+					<div>
+						<div class="yr-activity-row-desc">Lead Scoring</div>
+						<div class="yr-activity-row-meta">
+							<span class="yr-activity-row-id-badge">R-41</span>
+							@ui.Pill("Completed", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+							<span>1 output</span>
+						</div>
+					</div>
+					<div class="yr-activity-row-duration">
+						<span class="yr-activity-row-duration-label">4m 12s</span>
+					</div>
+				}
+			}
+		}
+	</div>
+}

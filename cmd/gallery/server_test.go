@@ -7,8 +7,6 @@ import (
 	"strings"
 	"testing"
 	"testing/fstest"
-
-	ui "github.com/yardrail/ui/pkg"
 )
 
 // testCSS is the stylesheet the test gallery serves.
@@ -32,7 +30,7 @@ func TestGalleryIndex(t *testing.T) {
 	}
 
 	// Every example must be reachable as a standalone page.
-	for _, group := range ui.ExampleGroups() {
+	for _, group := range ExampleGroups() {
 		for _, ex := range group.Examples {
 			path := "/" + group.Component + "/" + ex.Name
 

@@ -1,0 +1,14 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ brandDefaultExample() {
+	<div style="display:flex;flex-direction:column;gap:1.5rem">
+		@ui.Brand(&ui.BrandProps{}) {
+			Yardrail
+		}
+		@ui.Brand(&ui.BrandProps{}) {
+			Yardrail <span class="yr-brand-sub">Depot</span>
+		}
+	</div>
+}
