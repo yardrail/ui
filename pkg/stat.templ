@@ -1,0 +1,5 @@
+package ui
+
+templ stat(number string, p *StatProps) {
+	<yr-stat number={ number } label={ p.Label } { filterAttrs("Stat", p.Attrs)... }></yr-stat>
+}

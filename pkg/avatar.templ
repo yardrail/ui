@@ -1,0 +1,5 @@
+package ui
+
+templ avatar(text string, p *AvatarProps) {
+	<yr-avatar size={ p.Size } { filterAttrs("Avatar", p.Attrs)... }>{ text }</yr-avatar>
+}

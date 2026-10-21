@@ -1,0 +1,7 @@
+package ui
+
+templ iconBadge(tone string, p *IconBadgeProps) {
+	<div class={ "yr-icon-badge", "yr-icon-badge--" + tone } { filterAttrs("IconBadge", p.Attrs)... }>
+		{ children... }
+	</div>
+}

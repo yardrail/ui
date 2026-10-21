@@ -1,0 +1,7 @@
+package ui
+
+templ sectionHeader(p *SectionHeaderProps) {
+	<yr-section-header { filterAttrs("SectionHeader", p.Attrs)... }>
+		{ children... }
+	</yr-section-header>
+}

@@ -1,0 +1,18 @@
+package ui
+
+templ authorLink(name string, p *AuthorLinkProps) {
+	<yr-author-link
+		name={ name }
+		href={ p.Href }
+		handle={ p.Handle }
+		avatar={ p.Avatar }
+		size={ p.Size }
+		if p.Verified {
+			verified
+		}
+		if p.Heading {
+			heading
+		}
+		{ filterAttrs("AuthorLink", p.Attrs)... }
+	></yr-author-link>
+}
