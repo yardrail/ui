@@ -25,6 +25,20 @@ rules:
   # styles.css uses bare-string @import for its build-time imports.
   import-notation: string
 
+  # All colors must come from tokens — no named colors or hex values in
+  # component CSS.
+  color-named: never
+  color-no-hex: true
+
+  # Components must not use !important — it makes overrides unpredictable.
+  declaration-no-important: true
+
+  # ID selectors are too specific for a component library.
+  selector-max-id: 0
+
+  # Catch accidental selector repetition.
+  no-duplicate-selectors: true
+
   # State selectors deliberately follow the base rules they override
   # (.yr-field--invalid input after .yr-field input:focus), which this rule
   # reports as descending specificity.
@@ -57,6 +71,24 @@ rules:
 # merges the base list (<<) and adds one key; a declaration passes when any
 # key matching its property allows the value.
 overrides:
+  # tokens.css is where hex color values are defined — they're the source
+  # of truth that component CSS references via var().
+  - files: [src/styles/tokens.css]
+    rules:
+      color-no-hex: null
+
+  # page-workspace overrides sidebar's fixed positioning when inside the
+  # grid, requiring !important to win the specificity battle.
+  - files: [pkg/page_workspace.css]
+    rules:
+      declaration-no-important: null
+
+  # Gallery chrome uses its own colors for the browser-frame decoration
+  # (traffic-light dots, borders) — not part of the component token system.
+  - files: [cmd/gallery/gallery.css]
+    rules:
+      color-no-hex: null
+
   # The search input's left padding clears the absolutely positioned icon
   # (2.5rem, 2.75rem in --hero), which no spacing step equals. Only the fourth
   # value of the padding shorthand may be one of those two.
