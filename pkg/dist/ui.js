@@ -57,23 +57,6 @@ customElements.define("yr-alert", YrAlert);
 
 // pkg/stat.ts
 var YrStat = class extends HTMLElement {
-  static observedAttributes = ["number", "label"];
-  connectedCallback() {
-    this.render();
-  }
-  attributeChangedCallback() {
-    this.render();
-  }
-  render() {
-    this.replaceChildren();
-    const numberEl = document.createElement("span");
-    numberEl.className = "yr-stat-number";
-    numberEl.textContent = this.getAttribute("number") ?? "";
-    const labelEl = document.createElement("span");
-    labelEl.className = "yr-stat-label";
-    labelEl.textContent = this.getAttribute("label") ?? "";
-    this.append(numberEl, labelEl);
-  }
 };
 customElements.define("yr-stat", YrStat);
 
