@@ -509,25 +509,6 @@ customElements.define("yr-page-setup-content", YrPageSetupContent);
 var YrSetupCard = class extends HTMLElement {
 };
 var YrSetupCardProgress = class extends HTMLElement {
-  static observedAttributes = ["steps", "current"];
-  connectedCallback() {
-    this.render();
-  }
-  attributeChangedCallback() {
-    this.render();
-  }
-  render() {
-    const steps = parseInt(this.getAttribute("steps") || "0", 10);
-    const current = parseInt(this.getAttribute("current") || "1", 10);
-    this.innerHTML = "";
-    for (let i = 1; i <= steps; i++) {
-      const dot = document.createElement("span");
-      dot.className = "yr-setup-card-dot";
-      if (i < current) dot.classList.add("yr-setup-card-dot--done");
-      if (i === current) dot.classList.add("yr-setup-card-dot--active");
-      this.appendChild(dot);
-    }
-  }
 };
 var YrSetupCardHeader = class extends HTMLElement {
 };

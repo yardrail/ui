@@ -12,9 +12,22 @@ func SetupCard(p *SetupCardProps) templ.Component {
 
 // SetupCardProgressProps configures a SetupCardProgress.
 type SetupCardProgressProps struct {
-	Steps   string
-	Current string
+	Steps   int
+	Current int
 	Attrs   templ.Attributes
+}
+
+func progressDotClass(i, current int) string {
+	base := "yr-setup-card-dot"
+	if i < current {
+		return base + " yr-setup-card-dot--done"
+	}
+
+	if i == current {
+		return base + " yr-setup-card-dot--active"
+	}
+
+	return base
 }
 
 // SetupCardProgress renders a step progress indicator.
@@ -59,7 +72,11 @@ templ setupCard(p *SetupCardProps) {
 }
 
 templ setupCardProgress(p *SetupCardProgressProps) {
-	<yr-setup-card-progress steps={ p.Steps } current={ p.Current } { filterAttrs("SetupCardProgress", p.Attrs)... }></yr-setup-card-progress>
+	<yr-setup-card-progress { filterAttrs("SetupCardProgress", p.Attrs)... }>
+		for i := 1; i <= p.Steps; i++ {
+			<span class={ progressDotClass(i, p.Current) }></span>
+		}
+	</yr-setup-card-progress>
 }
 
 templ setupCardHeader(p *SetupCardHeaderProps) {

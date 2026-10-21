@@ -1,33 +1,10 @@
+// <yr-setup-card> and sub-elements — all structure is server-rendered by
+// the templ component. These classes exist only to register the custom
+// element tags.
 export class YrSetupCard extends HTMLElement {}
-
-export class YrSetupCardProgress extends HTMLElement {
-  static observedAttributes = ['steps', 'current'];
-
-  connectedCallback() {
-    this.render();
-  }
-
-  attributeChangedCallback() {
-    this.render();
-  }
-
-  private render() {
-    const steps = parseInt(this.getAttribute('steps') || '0', 10);
-    const current = parseInt(this.getAttribute('current') || '1', 10);
-    this.innerHTML = '';
-    for (let i = 1; i <= steps; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'yr-setup-card-dot';
-      if (i < current) dot.classList.add('yr-setup-card-dot--done');
-      if (i === current) dot.classList.add('yr-setup-card-dot--active');
-      this.appendChild(dot);
-    }
-  }
-}
-
+export class YrSetupCardProgress extends HTMLElement {}
 export class YrSetupCardHeader extends HTMLElement {}
 export class YrSetupCardBody extends HTMLElement {}
-
 export class YrSetupCardFooter extends HTMLElement {}
 
 customElements.define('yr-setup-card', YrSetupCard);
