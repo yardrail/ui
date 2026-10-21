@@ -16,11 +16,7 @@ templ portalShell(title string, nav templ.Component) {
 		</head>
 		<body style="margin:0;height:100%">
 			@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
-				@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
-					<div class="yr-search yr-search--compact" slot="center" style="max-width:320px">
-						@templ.Raw(exampleIcon("search", `class="yr-search-icon" style="left:0.5rem"`, navSearchIconSize))
-						<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
-					</div>
+				@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true, Center: portalNavbarSearch()}) {
 					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com", Avatar: "BL"}) {
 						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
@@ -36,6 +32,13 @@ templ portalShell(title string, nav templ.Component) {
 			}
 		</body>
 	</html>
+}
+
+templ portalNavbarSearch() {
+	<div class="yr-search yr-search--compact" style="max-width:320px">
+		@templ.Raw(exampleIcon("search", `class="yr-search-icon" style="left:0.5rem"`, navSearchIconSize))
+		<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
+	</div>
 }
 
 // portalNav is the portal sidebar with the link named active highlighted.

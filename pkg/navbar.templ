@@ -2,42 +2,101 @@ package ui
 
 // NavbarProps configures a Navbar.
 type NavbarProps struct {
-	Attrs templ.Attributes
+	Left   templ.Component
+	Center templ.Component
+	Attrs  templ.Attributes
 }
 
-// Navbar renders a generic navigation bar.
+// Navbar renders a generic navigation bar. Children go into the right section.
 func Navbar(p *NavbarProps) templ.Component {
 	return navbar(p)
 }
 
 // NavbarStdProps configures a NavbarStd.
 type NavbarStdProps struct {
-	Logo   string
-	Brand  string
-	Authed bool
-	Attrs  templ.Attributes
+	Logo       string
+	Brand      string
+	Authed     bool
+	Center     templ.Component
+	LoginHref  string
+	SignupHref string
+	Attrs      templ.Attributes
+}
+
+func (p *NavbarStdProps) loginHref() string {
+	if p.LoginHref != "" {
+		return p.LoginHref
+	}
+
+	return "/login"
+}
+
+func (p *NavbarStdProps) signupHref() string {
+	if p.SignupHref != "" {
+		return p.SignupHref
+	}
+
+	return "/signup"
+}
+
+func (p *NavbarStdProps) logoSrc() string {
+	if p.Logo != "" {
+		return p.Logo
+	}
+
+	return "/logo.png"
+}
+
+func (p *NavbarStdProps) brandName() string {
+	if p.Brand != "" {
+		return p.Brand
+	}
+
+	return "Yardrail"
 }
 
 // NavbarStd renders the standard navigation bar with logo, brand, and account menu.
+// Children go into the right section (typically an account menu).
 func NavbarStd(p *NavbarStdProps) templ.Component {
 	return navbarStd(p)
 }
 
 templ navbar(p *NavbarProps) {
-	<yr-navbar { filterAttrs("Navbar", p.Attrs)... }>
-		{ children... }
+	<yr-navbar role="navigation" { filterAttrs("Navbar", p.Attrs)... }>
+		<div class="yr-navbar-left">
+			if p.Left != nil {
+				@p.Left
+			}
+		</div>
+		<div class="yr-navbar-center">
+			if p.Center != nil {
+				@p.Center
+			}
+		</div>
+		<div class="yr-navbar-right">
+			{ children... }
+		</div>
 	</yr-navbar>
 }
 
 templ navbarStd(p *NavbarStdProps) {
-	<yr-navbar-std
-		logo={ p.Logo }
-		brand={ p.Brand }
-		if p.Authed {
-			authed
-		}
-		{ filterAttrs("NavbarStd", p.Attrs)... }
-	>
-		{ children... }
+	<yr-navbar-std role="navigation" { filterAttrs("NavbarStd", p.Attrs)... }>
+		<div class="yr-navbar-left">
+			<a href="/" class="yr-brand">
+				<img src={ p.logoSrc() } alt={ p.brandName() }/>
+			</a>
+		</div>
+		<div class="yr-navbar-center">
+			if p.Center != nil {
+				@p.Center
+			}
+		</div>
+		<div class="yr-navbar-right">
+			{ children... }
+			if !p.Authed {
+				<a href={ templ.SafeURL(p.loginHref()) } class="yr-navbar-login">Log in</a>
+				<a href={ templ.SafeURL(p.signupHref()) } class="yr-navbar-signup">Sign up</a>
+			}
+		</div>
 	</yr-navbar-std>
 }
