@@ -15,7 +15,9 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - run: go test ./...
+      - uses: arduino/setup-task@v3
+
+      - run: task test
 
   lint:
     runs-on: ubuntu-latest
@@ -26,34 +28,21 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - name: golangci-lint
+      - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
           version: v2.14.0
-          args: --max-same-issues 50
-
-      - run: golangci-lint config verify
+          install-only: true
 
       - uses: actions/setup-node@v5
         with:
           node-version: 24
-          # The pnpm cache needs pnpm on PATH, which corepack only provides in the next step.
           package-manager-cache: false
 
-      # corepack installs the pnpm version pinned by packageManager in package.json.
       - run: corepack enable
 
-      - run: pnpm install --frozen-lockfile
+      - uses: arduino/setup-task@v3
 
-      - name: TypeScript
-        run: |
-          pnpm exec tsc --noEmit
-          pnpm exec eslint .
+      - run: task lint
 
-      - name: stylelint
-        run: pnpm exec stylelint "src/**/*.css" "pkg/**/*.css" "!pkg/dist/**" "cmd/gallery/gallery.css" "cmd/gallery/mocks.css"
-
-      - name: dist staleness check
-        run: |
-          pnpm build
-          git diff --exit-code pkg/dist/
+      - run: task gen:check
