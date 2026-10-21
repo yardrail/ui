@@ -11,5 +11,8 @@ func CopyField(value string, p *CopyFieldProps) templ.Component {
 }
 
 templ copyField(value string, p *CopyFieldProps) {
-	<yr-copy-field value={ value } { filterAttrs("CopyField", p.Attrs)... }></yr-copy-field>
+	<yr-copy-field { filterAttrs("CopyField", p.Attrs)... }>
+		<code class="yr-copy-field-code">{ value }</code>
+		<button type="button" class="yr-copy-field-button" data-value={ value }>Copy</button>
+	</yr-copy-field>
 }
