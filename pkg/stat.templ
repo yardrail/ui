@@ -12,5 +12,8 @@ func Stat(number string, p *StatProps) templ.Component {
 }
 
 templ stat(number string, p *StatProps) {
-	<yr-stat number={ number } label={ p.Label } { filterAttrs("Stat", p.Attrs)... }></yr-stat>
+	<yr-stat { filterAttrs("Stat", p.Attrs)... }>
+		<span class="yr-stat-number">{ number }</span>
+		<span class="yr-stat-label">{ p.Label }</span>
+	</yr-stat>
 }
