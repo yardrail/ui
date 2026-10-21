@@ -1,7 +1,5 @@
 package ui
 
-import "github.com/a-h/templ"
-
 const portalHome = "home"
 
 // portalLink is one sidebar link in the portal mocks.
@@ -17,13 +15,4 @@ func portalSpaceLinks() []portalLink {
 		{"folder", "My Space", "space-personal"},
 		{"folder", "Sales Ops", "space-sales"},
 	}
-}
-
-// portalActive returns the active boolean attribute for a sidebar link when link matches active.
-func portalActive(link, active string) templ.Attributes {
-	if link != active {
-		return templ.Attributes{}
-	}
-
-	return templ.Attributes{attrActive: true}
 }

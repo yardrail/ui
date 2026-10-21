@@ -13,89 +13,89 @@ templ portalShell(title string, nav templ.Component) {
 			<link rel="stylesheet" href="/mocks.css"/>
 		</head>
 		<body style="margin:0;height:100%">
-			<yr-page-workspace>
-				<yr-navbar-std logo="/logo.png" brand="Yardrail" authed>
+			@PageWorkspace(&PageWorkspaceProps{}) {
+				@NavbarStd(&NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
 					<div class="yr-search yr-search--compact" slot="center" style="max-width:320px">
 						@templ.Raw(exampleIcon("search", `class="yr-search-icon" style="left:0.5rem"`, navSearchIconSize))
 						<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
 					</div>
-					<yr-account-menu name="Brahm Lower" email="brahm@yardrail.com">
+					@AccountMenu(&AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
 						<span slot="avatar">BL</span>
 						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
-					</yr-account-menu>
-				</yr-navbar-std>
+					}
+				}
 				@nav
-				<yr-resize-handle target="sidebar"></yr-resize-handle>
-				<yr-content>
-					<yr-content-main>
+				@ResizeHandle(&ResizeHandleProps{Target: "sidebar"})
+				@Content(&ContentProps{}) {
+					@ContentMain(&ContentMainProps{}) {
 						{ children... }
-					</yr-content-main>
-				</yr-content>
-			</yr-page-workspace>
+					}
+				}
+			}
 		</body>
 	</html>
 }
 
 // portalNav is the portal sidebar with the link named active highlighted.
 templ portalNav(active string) {
-	<yr-sidebar>
-		<yr-sidebar-header>
+	@Sidebar(&SidebarProps{}) {
+		@SidebarHeader(&SidebarHeaderProps{}) {
 			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
-		</yr-sidebar-header>
-		<yr-sidebar-nav>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
 			@portalNavLink("home", "Home", portalHome, active)
 			@portalNavLink("zap", "Automations", "automations", active)
-		</yr-sidebar-nav>
-		<yr-sidebar-nav label="Spaces">
+		}
+		@SidebarNav(&SidebarNavProps{Label: "Spaces"}) {
 			for _, l := range portalSpaceLinks() {
 				@portalNavLink(l.icon, l.label, l.slug, active)
 			}
-		</yr-sidebar-nav>
-		<yr-sidebar-nav bottom>
+		}
+		@SidebarNav(&SidebarNavProps{Bottom: true}) {
 			@portalNavLink("settings", "Settings", "settings", active)
-		</yr-sidebar-nav>
-		<yr-sidebar-footer>
+		}
+		@SidebarFooter(&SidebarFooterProps{}) {
 			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
-		</yr-sidebar-footer>
-	</yr-sidebar>
+		}
+	}
 }
 
 // portalNavAutomations is the portal sidebar with the Automations sub-links expanded.
 templ portalNavAutomations(active string) {
-	<yr-sidebar>
-		<yr-sidebar-header>
+	@Sidebar(&SidebarProps{}) {
+		@SidebarHeader(&SidebarHeaderProps{}) {
 			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
-		</yr-sidebar-header>
-		<yr-sidebar-nav>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
 			@portalNavLink("home", "Home", "", active)
 			@portalNavLink("zap", "Automations", "automations", active)
-		</yr-sidebar-nav>
-		<yr-sidebar-nav>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
 			@portalNavLink("git-branch", "Workflows", "workflows", active)
 			@portalNavLink("layout-grid", "Templates", "templates", active)
 			@portalNavLink("plug", "Connectors", "connectors", active)
-		</yr-sidebar-nav>
-		<yr-sidebar-nav label="Spaces">
+		}
+		@SidebarNav(&SidebarNavProps{Label: "Spaces"}) {
 			for _, l := range portalSpaceLinks() {
 				@portalNavLink(l.icon, l.label, l.slug, active)
 			}
-		</yr-sidebar-nav>
-		<yr-sidebar-nav bottom>
+		}
+		@SidebarNav(&SidebarNavProps{Bottom: true}) {
 			@portalNavLink("settings", "Settings", "settings", active)
-		</yr-sidebar-nav>
-		<yr-sidebar-footer>
+		}
+		@SidebarFooter(&SidebarFooterProps{}) {
 			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
-		</yr-sidebar-footer>
-	</yr-sidebar>
+		}
+	}
 }
 
 // portalNavLink is one link in the portal sidebar, highlighted when link equals active.
 templ portalNavLink(icon, label, link, active string) {
-	<yr-sidebar-link href="#" { portalActive(link, active)... }>
+	@SidebarLink(&SidebarLinkProps{Href: "#", Active: link == active}) {
 		@Icon(icon)
 		{ label }
-	</yr-sidebar-link>
+	}
 }
 
 // --- Portal Home ---
@@ -121,76 +121,95 @@ templ portalHomePage() {
 				<p class="portal-stat-label">Success Rate</p>
 			</div>
 		</div>
-		<yr-section-header>Needs You <a href="#">View all</a></yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Needs You <a href="#">View all</a>
+		}
 		<div style="margin-bottom:var(--yr-space-8)">
-			@portalActionCard("clock", "amber", "Approve budget over $5k for Acme lead",
+			@portalUrgentCard("clock", "amber", "Approve budget over $5k for Acme lead",
 				"Waiting 2h 14m · Lead Scoring · Marketing Ops", "warning", "Waiting")
-			@portalActionCard("clock", "amber", "Review generated newsletter draft",
+			@portalUrgentCard("clock", "amber", "Review generated newsletter draft",
 				"Waiting 45m · Newsletter Digest · Marketing Ops", "warning", "Waiting")
 		</div>
-		<yr-section-header>Problems</yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Problems
+		}
 		<div style="margin-bottom:var(--yr-space-8)">
-			@portalActionCard("alert-triangle", "danger", "Social Scheduler failed",
+			@portalDangerCard("alert-triangle", "danger", "Social Scheduler failed",
 				"Rate limit exceeded · 3 consecutive failures · 1h ago", "danger", "Failed")
 		</div>
 		@portalHomeActivity()
 	}
 }
 
-templ portalActionCard(icon, badgeTone, title, desc, pillTone, pillText string) {
-	<div class={ "yr-action-card", templ.KV("yr-action-card--urgent", pillTone == "warning"), templ.KV("yr-action-card--urgent-danger", pillTone == "danger") }>
-		<div class={ "yr-icon-badge", "yr-icon-badge--" + badgeTone }>
+templ portalUrgentCard(icon, badgeTone, title, desc, pillTone, pillText string) {
+	@ActionCard(&ActionCardProps{Urgent: true}) {
+		@IconBadge(badgeTone, &IconBadgeProps{}) {
 			@Icon(icon)
-		</div>
+		}
 		<div class="yr-action-card-body">
 			<h3 class="yr-action-card-title">{ title }</h3>
 			<p class="yr-action-card-desc">{ desc }</p>
 		</div>
 		<div class="yr-action-card-action">
-			<yr-pill tone={ pillTone } shape="pill">{ pillText }</yr-pill>
+			@Pill(pillText, &PillProps{Tone: pillTone, Shape: ShapePill})
 		</div>
-	</div>
+	}
+}
+
+templ portalDangerCard(icon, badgeTone, title, desc, pillTone, pillText string) {
+	@ActionCard(&ActionCardProps{UrgentDanger: true}) {
+		@IconBadge(badgeTone, &IconBadgeProps{}) {
+			@Icon(icon)
+		}
+		<div class="yr-action-card-body">
+			<h3 class="yr-action-card-title">{ title }</h3>
+			<p class="yr-action-card-desc">{ desc }</p>
+		</div>
+		<div class="yr-action-card-action">
+			@Pill(pillText, &PillProps{Tone: pillTone, Shape: ShapePill})
+		</div>
+	}
 }
 
 templ portalHomeActivity() {
-	<yr-section-header>Recent Activity <a href="#">See more</a></yr-section-header>
-	<yr-timeline-entries>
+	@SectionHeader(&SectionHeaderProps{}) {
+		Recent Activity <a href="#">See more</a>
+	}
+	@TimelineEntries(&TimelineEntriesProps{}) {
 		@portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false)
 		@portalActivityRow("Lead Scoring", "R-47", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-01T09:00:00Z", false)
 		@portalActivityRow("Social Scheduler", "R-46", "danger", "Failed", "Rate limit exceeded", "12s", "", true)
 		@portalActivityRow("Contact Sync", "R-45", "success", "Completed", "24 records synced", "4m 8s", "", false)
 		@portalActivityRow("Invoice Processor", "R-44", "success", "Completed", "12 invoices", "2m 51s", "", false)
-	</yr-timeline-entries>
+	}
 }
 
 templ portalActivityRow(name, runID, tone, status, detail, duration, waitingSince string, isError bool) {
 	if isError {
-		<div class="yr-activity-row is-error">
-			@portalActivityRowInner(name, runID, tone, status, detail, duration, waitingSince)
-		</div>
+		@portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince, &ActivityRowProps{IsError: true})
 	} else {
-		<a class="yr-activity-row" href="#">
-			@portalActivityRowInner(name, runID, tone, status, detail, duration, waitingSince)
-		</a>
+		@portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince, &ActivityRowProps{Href: "#"})
 	}
 }
 
-templ portalActivityRowInner(name, runID, tone, status, detail, duration, waitingSince string) {
-	<div>
-		<div class="yr-activity-row-desc">{ name }</div>
-		<div class="yr-activity-row-meta">
-			<span class="yr-activity-row-id-badge">{ runID }</span>
-			<yr-pill tone={ tone }>{ status }</yr-pill>
-			<span>{ detail }</span>
+templ portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince string, p *ActivityRowProps) {
+	@ActivityRow(p) {
+		<div>
+			<div class="yr-activity-row-desc">{ name }</div>
+			<div class="yr-activity-row-meta">
+				<span class="yr-activity-row-id-badge">{ runID }</span>
+				@Pill(status, &PillProps{Tone: tone})
+				<span>{ detail }</span>
+			</div>
 		</div>
-	</div>
-	if waitingSince != "" {
-		<div class="yr-activity-row-duration">
-			<span class="yr-activity-row-duration-label">Waiting</span>
-			<yr-live-duration started-at={ waitingSince }></yr-live-duration>
-		</div>
-	} else if duration != "" {
-		<div class="yr-activity-row-duration">{ duration }</div>
+		if waitingSince != "" {
+			<div class="yr-activity-row-duration">
+				<span class="yr-activity-row-duration-label">Waiting</span>
+				@LiveDuration(waitingSince, &LiveDurationProps{})
+			</div>
+		} else if duration != "" {
+			<div class="yr-activity-row-duration">{ duration }</div>
+		}
 	}
 }
 
@@ -204,40 +223,54 @@ templ portalAutomationsPage() {
 			@portalAutoTile("layout-grid", "purple", "Template Catalog", "Browse 500+ pre-built automation templates", "Browse")
 			@portalAutoTile("plug", "amber", "Connectors", "4 tools connected to your organization", "Manage")
 		</div>
-		<yr-section-header>Connected Tools <a href="#">Manage</a></yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Connected Tools <a href="#">Manage</a>
+		}
 		<div style="display:flex;gap:var(--yr-space-3);margin-bottom:var(--yr-space-8)">
-			<div class="yr-connector-pill--icon" title="Slack">
+			@ConnectorPill(&ConnectorPillProps{Title: "Slack"}) {
 				<img src={ exampleLogo } alt="Slack" width="24" height="24"/>
-			</div>
-			<div class="yr-connector-pill--icon" title="HubSpot">HS</div>
-			<div class="yr-connector-pill--icon" title="Google Sheets">GS</div>
-			<div class="yr-connector-pill--icon" title="Stripe">ST</div>
+			}
+			@ConnectorPill(&ConnectorPillProps{Title: "HubSpot"}) {
+				HS
+			}
+			@ConnectorPill(&ConnectorPillProps{Title: "Google Sheets"}) {
+				GS
+			}
+			@ConnectorPill(&ConnectorPillProps{Title: "Stripe"}) {
+				ST
+			}
 		</div>
-		<yr-section-header>Featured Templates <a href="#">View all</a></yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Featured Templates <a href="#">View all</a>
+		}
 		<div class="portal-grid portal-grid-2">
-			@portalTemplateCard("Refund triage",
+			@TemplateCard("Refund triage",
 				"Routes refund requests to the right approver and posts the decision back to the customer thread.",
-				true, "4.5", "42", "$24")
-			@portalTemplateCardCommunity("Weekly pipeline report",
+				"$24", &TemplateCardProps{
+					FooterLeft: portalVerifiedRating("4.5", "42"),
+				})
+			@TemplateCard("Weekly pipeline report",
 				"Summarizes open deals every Monday and sends a digest to the sales team channel.",
-				"1.2k installs", "Free")
+				"Free", &TemplateCardProps{
+					FooterLeft: portalCommunityInstalls("1.2k installs"),
+				})
 		</div>
 	}
 }
 
 templ portalAutoTile(icon, badgeTone, title, desc, action string) {
-	<div class="yr-action-card">
-		<div class={ "yr-icon-badge", "yr-icon-badge--" + badgeTone }>
+	@ActionCard(&ActionCardProps{}) {
+		@IconBadge(badgeTone, &IconBadgeProps{}) {
 			@Icon(icon)
-		</div>
+		}
 		<div class="yr-action-card-body">
 			<h3 class="yr-action-card-title">{ title }</h3>
 			<p class="yr-action-card-desc">{ desc }</p>
 		</div>
 		<div class="yr-action-card-action">
-			<a href="#" class="yr-button yr-button--secondary">{ action }</a>
+			@Button(action, ButtonProps{Variant: ButtonSecondary})
 		</div>
-	</div>
+	}
 }
 
 // --- Portal Workflows ---
@@ -246,7 +279,7 @@ templ portalWorkflowsPage() {
 	@portalShell("Workflows · Yardrail", portalNavAutomations("workflows")) {
 		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)">
 			<h1 class="portal-page-title" style="margin-bottom:0">Workflows</h1>
-			<button class="yr-button">+ New Workflow</button>
+			@Button("+ New Workflow", ButtonProps{})
 		</div>
 		<form class="yr-search yr-search--compact" method="get" action="#" role="search" style="max-width:24rem;margin-bottom:var(--yr-space-4)">
 			@templ.Raw(exampleIcon("search", `class="yr-search-icon"`, searchCompactIconSize))
@@ -282,7 +315,7 @@ templ portalWorkflowsPage() {
 }
 
 templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
-	<div class="yr-list-row">
+	@ListRow(&ListRowProps{}) {
 		<div class="yr-list-row-icon">
 			@Icon("git-branch")
 		</div>
@@ -290,16 +323,16 @@ templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
 			<div class="yr-list-row-name">{ name }</div>
 			<div class="yr-list-row-meta">
 				<span>{ space }</span>
-				<yr-pill tone={ tone } shape="pill">{ status }</yr-pill>
+				@Pill(status, &PillProps{Tone: tone, Shape: ShapePill})
 				if lastRun != "" {
 					<span>{ lastRun }</span>
 				}
 			</div>
 		</div>
 		<div class="yr-list-row-actions">
-			<button class="yr-button yr-button--secondary">{ action }</button>
+			@Button(action, ButtonProps{Variant: ButtonSecondary})
 		</div>
-	</div>
+	}
 }
 
 // --- Portal Templates ---
@@ -312,64 +345,44 @@ templ portalTemplatesPage() {
 			<input class="yr-search-input" type="search" name="q" placeholder="Search 500+ templates…" autocomplete="off"/>
 		</form>
 		<div style="display:flex;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
-			<yr-pill tone="accent" class="is-active">All</yr-pill>
-			<yr-pill>Marketing</yr-pill>
-			<yr-pill>Sales</yr-pill>
-			<yr-pill>Operations</yr-pill>
-			<yr-pill>HR</yr-pill>
-			<yr-pill>Finance</yr-pill>
+			@Pill("All", &PillProps{Tone: "accent"})
+			@Pill("Marketing", &PillProps{})
+			@Pill("Sales", &PillProps{})
+			@Pill("Operations", &PillProps{})
+			@Pill("HR", &PillProps{})
+			@Pill("Finance", &PillProps{})
 		</div>
 		<div class="portal-grid portal-grid-3">
-			@portalTemplateCard("Refund triage",
+			@TemplateCard("Refund triage",
 				"Routes refund requests to the right approver and posts the decision back to the customer thread.",
-				true, "4.5", "42", "$24")
-			@portalTemplateCardCommunity("Weekly pipeline report",
+				"$24", &TemplateCardProps{FooterLeft: portalVerifiedRating("4.5", "42")})
+			@TemplateCard("Weekly pipeline report",
 				"Summarizes open deals and pipeline movement every Monday morning in a Slack digest.",
-				"1.2k installs", "Free")
-			@portalTemplateCard("New hire onboarding",
+				"Free", &TemplateCardProps{FooterLeft: portalCommunityInstalls("1.2k installs")})
+			@TemplateCard("New hire onboarding",
 				"Creates accounts, sends welcome emails, and schedules orientation for new team members.",
-				true, "4.8", "128", "$18")
-			@portalTemplateCardCommunity("Lead enrichment",
+				"$18", &TemplateCardProps{FooterLeft: portalVerifiedRating("4.8", "128")})
+			@TemplateCard("Lead enrichment",
 				"Enriches inbound leads with firmographic data and scores them for sales readiness.",
-				"890 installs", "Free")
-			@portalTemplateCard("Invoice reconciliation",
+				"Free", &TemplateCardProps{FooterLeft: portalCommunityInstalls("890 installs")})
+			@TemplateCard("Invoice reconciliation",
 				"Matches invoices against purchase orders and flags discrepancies for review.",
-				true, "4.2", "31", "$36")
-			@portalTemplateCardCommunity("Social listening digest",
+				"$36", &TemplateCardProps{FooterLeft: portalVerifiedRating("4.2", "31")})
+			@TemplateCard("Social listening digest",
 				"Aggregates brand mentions across social platforms into a weekly Slack summary.",
-				"2.1k installs", "Free")
+				"Free", &TemplateCardProps{FooterLeft: portalCommunityInstalls("2.1k installs")})
 		</div>
 	}
 }
 
-templ portalTemplateCard(name, desc string, verified bool, rating, reviews, price string) {
-	<a href="#" class="yr-card yr-card--interactive yr-template-card">
-		<h3 class="yr-template-card-name">{ name }</h3>
-		<p class="yr-template-card-desc">{ desc }</p>
-		<div class="yr-card-footer">
-			<div class="yr-template-card-footer-left">
-				if verified {
-					<yr-pill tone="accent">Verified</yr-pill>
-				}
-				<yr-rating value={ rating } reviews={ reviews }></yr-rating>
-			</div>
-			<span class="yr-template-card-price">{ price }</span>
-		</div>
-	</a>
+templ portalVerifiedRating(value, reviews string) {
+	@Pill("Verified", &PillProps{Tone: "accent"})
+	@Rating(value, &RatingProps{Reviews: reviews})
 }
 
-templ portalTemplateCardCommunity(name, desc, installs, price string) {
-	<a href="#" class="yr-card yr-card--interactive yr-template-card">
-		<h3 class="yr-template-card-name">{ name }</h3>
-		<p class="yr-template-card-desc">{ desc }</p>
-		<div class="yr-card-footer">
-			<div class="yr-template-card-footer-left">
-				<yr-pill tone="purple">Community</yr-pill>
-				<span class="yr-template-card-install-count">{ installs }</span>
-			</div>
-			<span class="yr-template-card-price">{ price }</span>
-		</div>
-	</a>
+templ portalCommunityInstalls(installs string) {
+	@Pill("Community", &PillProps{Tone: "purple"})
+	<span class="yr-template-card-install-count">{ installs }</span>
 }
 
 // --- Portal Connectors ---
@@ -378,16 +391,20 @@ templ portalConnectorsPage() {
 	@portalShell("Connectors · Yardrail", portalNavAutomations("connectors")) {
 		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)">
 			<h1 class="portal-page-title" style="margin-bottom:0">Connectors</h1>
-			<button class="yr-button">+ Add Connector</button>
+			@Button("+ Add Connector", ButtonProps{})
 		</div>
-		<yr-section-header>Connected</yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Connected
+		}
 		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3);margin-bottom:var(--yr-space-8)">
 			@portalConnectorRow("", "Slack", "workspace-prod", "success", "Connected", true)
 			@portalConnectorRow("HS", "HubSpot", "marketing-hub", "success", "Connected", false)
 			@portalConnectorRow("GS", "Google Sheets", "ops-shared@acme.com", "success", "Connected", false)
 			@portalConnectorRow("ST", "Stripe", "prod-account", "warning", "Expiring", false)
 		</div>
-		<yr-section-header>Available</yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Available
+		}
 		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3)">
 			@portalAvailableConnector("JI", "Jira", "Project management and issue tracking")
 			@portalAvailableConnector("SF", "Salesforce", "CRM and sales pipeline management")
@@ -397,7 +414,7 @@ templ portalConnectorsPage() {
 }
 
 templ portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool) {
-	<div class="yr-list-row">
+	@ListRow(&ListRowProps{}) {
 		if hasLogo {
 			<div class="yr-list-row-icon">
 				<img src={ exampleLogo } alt={ name } width="40" height="40"/>
@@ -411,17 +428,17 @@ templ portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool
 			<div class="yr-list-row-name">{ name }</div>
 			<div class="yr-list-row-meta">
 				<span>{ meta }</span>
-				<yr-pill tone={ tone } shape="pill">{ status }</yr-pill>
+				@Pill(status, &PillProps{Tone: tone, Shape: ShapePill})
 			</div>
 		</div>
 		<div class="yr-list-row-actions">
-			<button class="yr-button yr-button--secondary">Manage</button>
+			@Button("Manage", ButtonProps{Variant: ButtonSecondary})
 		</div>
-	</div>
+	}
 }
 
 templ portalAvailableConnector(initials, name, desc string) {
-	<div class="yr-list-row">
+	@ListRow(&ListRowProps{}) {
 		<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);color:var(--yr-text-muted)">
 			{ initials }
 		</div>
@@ -430,9 +447,9 @@ templ portalAvailableConnector(initials, name, desc string) {
 			<div class="yr-list-row-desc">{ desc }</div>
 		</div>
 		<div class="yr-list-row-actions">
-			<button class="yr-button">Connect</button>
+			@Button("Connect", ButtonProps{})
 		</div>
-	</div>
+	}
 }
 
 // --- Portal Space ---
@@ -445,151 +462,158 @@ templ portalSpacePage() {
 			</div>
 			<div class="space-header-meta">
 				<div class="space-header-members">
-					<yr-avatar>AL</yr-avatar>
-					<yr-avatar>MK</yr-avatar>
-					<yr-avatar>JS</yr-avatar>
+					@Avatar("AL", &AvatarProps{})
+					@Avatar("MK", &AvatarProps{})
+					@Avatar("JS", &AvatarProps{})
 					<span class="space-header-member-count">3 members</span>
 				</div>
-				<button class="yr-button yr-button--secondary">Settings</button>
+				@Button("Settings", ButtonProps{Variant: ButtonSecondary})
 			</div>
 		</div>
-		<yr-section-header>Installed Workflows <a href="#">Install new</a></yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Installed Workflows <a href="#">Install new</a>
+		}
 		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
-			@portalWorkflowCard("Lead Scoring", "warning", "Waiting", "42", "91%", "Waiting for input", "View")
-			@portalWorkflowCard("Newsletter Digest", "success", "Active", "127", "98%", "Last run 2h ago", "Trigger")
-			@portalWorkflowCard("Social Scheduler", "", "Paused", "18", "85%", "Last run 1d ago", "Resume")
+			@WorkflowCard("Lead Scoring", "Waiting for input", &WorkflowCardProps{
+				Status: Pill("Waiting", &PillProps{Tone: "warning", Shape: ShapePill}),
+				Runs: "42", SuccessRate: "91%",
+				Action: Button("View", ButtonProps{Variant: ButtonSecondary}),
+			})
+			@WorkflowCard("Newsletter Digest", "Last run 2h ago", &WorkflowCardProps{
+				Status: Pill("Active", &PillProps{Tone: "success", Shape: ShapePill}),
+				Runs: "127", SuccessRate: "98%",
+				Action: Button("Trigger", ButtonProps{Variant: ButtonSecondary}),
+			})
+			@WorkflowCard("Social Scheduler", "Last run 1d ago", &WorkflowCardProps{
+				Status: Pill("Paused", &PillProps{Shape: ShapePill}),
+				Runs: "18", SuccessRate: "85%",
+				Action: Button("Resume", ButtonProps{Variant: ButtonSecondary}),
+			})
 		</div>
-		<yr-section-header>Recent Activity <a href="#">View all</a></yr-section-header>
-		<yr-timeline-entries>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Recent Activity <a href="#">View all</a>
+		}
+		@TimelineEntries(&TimelineEntriesProps{}) {
 			@portalActivityRow("Newsletter Digest", "R-45", "success", "Completed", "3 outputs", "1m 23s", "", false)
 			@portalActivityRow("Lead Scoring", "R-44", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-11T08:00:00Z", false)
 			@portalActivityRow("Newsletter Digest", "R-43", "success", "Completed", "2 outputs", "58s", "", false)
 			@portalActivityRow("Social Scheduler", "R-42", "danger", "Failed", "Rate limit exceeded", "12s", "", true)
 			@portalActivityRow("Lead Scoring", "R-41", "success", "Completed", "1 output", "4m 12s", "", false)
-		</yr-timeline-entries>
+		}
 	}
-}
-
-templ portalWorkflowCard(name, tone, status, runs, success, footer, action string) {
-	<yr-workflow-card>
-		<div class="yr-workflow-card-header">
-			<span class="yr-workflow-card-name">{ name }</span>
-			<yr-pill tone={ tone } shape="pill">{ status }</yr-pill>
-		</div>
-		<div class="yr-workflow-card-stats">
-			<yr-stat number={ runs } label="Runs"></yr-stat>
-			<yr-stat number={ success } label="Success"></yr-stat>
-		</div>
-		<div class="yr-workflow-card-footer">
-			<span>{ footer }</span>
-			if action == "View" {
-				<a href="#" class="yr-button yr-button--secondary">{ action }</a>
-			} else {
-				<button class="yr-button yr-button--secondary">{ action }</button>
-			}
-		</div>
-	</yr-workflow-card>
 }
 
 // --- Portal Workflow Detail ---
 
 templ portalWorkflowDetailPage() {
 	@portalShell("Newsletter Digest · Yardrail", portalNav("space-marketing")) {
-		<nav class="yr-breadcrumb">
+		@Breadcrumb(&BreadcrumbProps{}) {
 			<a href="#">Home</a>
 			<span class="yr-breadcrumb-sep">/</span>
 			<a href="#">Marketing Ops</a>
 			<span class="yr-breadcrumb-sep">/</span>
 			<span class="yr-breadcrumb-current">Newsletter Digest</span>
-		</nav>
+		}
 		<h1 class="portal-page-title">Newsletter Digest</h1>
-		<yr-status-banner tone="success" style="margin-bottom:var(--yr-space-6)">
-			<yr-pill tone="success" shape="pill">Active</yr-pill>
+		@StatusBanner(&StatusBannerProps{Tone: "success"}) {
+			@Pill("Active", &PillProps{Tone: "success", Shape: ShapePill})
 			<span class="yr-status-banner-message">Running on schedule. Last triggered 2h ago.</span>
 			<div class="yr-status-banner-actions">
-				<button class="yr-button yr-button--secondary">Pause</button>
-				<button class="yr-button yr-button--secondary">Trigger Now</button>
+				@Button("Pause", ButtonProps{Variant: ButtonSecondary})
+				@Button("Trigger Now", ButtonProps{Variant: ButtonSecondary})
 			</div>
-		</yr-status-banner>
-		<yr-tabs label="Workflow details">
+		}
+		@Tabs(&TabsProps{Label: "Workflow details"}) {
 			<button slot="tab" data-tab="runs">Runs</button>
 			<button slot="tab" data-tab="config">Configuration</button>
 			@portalWorkflowDetailRuns()
 			@portalWorkflowDetailConfig()
-		</yr-tabs>
+		}
 	}
 }
 
 templ portalWorkflowDetailRuns() {
 	<div slot="panel" data-tab="runs">
-		<yr-section-header>Needs Attention</yr-section-header>
-		<a class="yr-activity-row" href="#" style="margin-bottom:var(--yr-space-6)">
+		@SectionHeader(&SectionHeaderProps{}) {
+			Needs Attention
+		}
+		@ActivityRow(&ActivityRowProps{Href: "#"}) {
 			<div>
 				<div class="yr-activity-row-desc">Approve newsletter content draft</div>
 				<div class="yr-activity-row-meta">
 					<span class="yr-activity-row-id-badge">R-49</span>
-					<yr-pill tone="warning">Waiting</yr-pill>
+					@Pill("Waiting", &PillProps{Tone: "warning"})
 					<span>Content review required</span>
 				</div>
 			</div>
 			<div class="yr-activity-row-duration">
 				<span class="yr-activity-row-duration-label">Waiting</span>
-				<yr-live-duration started-at="2026-10-11T12:00:00Z"></yr-live-duration>
+				@LiveDuration("2026-10-11T12:00:00Z", &LiveDurationProps{})
 			</div>
-		</a>
-		<yr-section-header>Recent Runs</yr-section-header>
-		<yr-timeline-entries>
+		}
+		@SectionHeader(&SectionHeaderProps{}) {
+			Recent Runs
+		}
+		@TimelineEntries(&TimelineEntriesProps{}) {
 			@portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false)
 			@portalActivityRow("Newsletter Digest", "R-47", "success", "Completed", "3 outputs", "58s", "", false)
 			@portalActivityRow("Newsletter Digest", "R-46", "success", "Completed", "3 outputs", "1m 05s", "", false)
 			@portalActivityRow("Newsletter Digest", "R-45", "danger", "Failed", "SendGrid 429 — rate limit exceeded", "12s", "", true)
-		</yr-timeline-entries>
+		}
 	</div>
 }
 
 templ portalWorkflowDetailConfig() {
 	<div slot="panel" data-tab="config">
-		<yr-section-header>Triggers</yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Triggers
+		}
 		<div style="display:flex;flex-direction:column;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
-			<div class="yr-meta-row">
+			@MetaRow(&MetaRowProps{}) {
 				<span>Webhook</span>
 				<code style="font-family:var(--yr-font-mono);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted)">https://api.yardrail.com/wh/abc123</code>
-			</div>
-			<div class="yr-meta-row">
+			}
+			@MetaRow(&MetaRowProps{}) {
 				<span>Manual</span>
-				<yr-pill tone="success">Enabled</yr-pill>
-			</div>
+				@Pill("Enabled", &PillProps{Tone: "success"})
+			}
 		</div>
-		<yr-section-header>Connector Bindings</yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Connector Bindings
+		}
 		<div style="display:flex;flex-direction:column;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
-			<div class="yr-meta-row">
+			@MetaRow(&MetaRowProps{}) {
 				<span>email.send</span>
 				<span>SendGrid</span>
-				<yr-pill tone="success" shape="pill">Bound</yr-pill>
-			</div>
-			<div class="yr-meta-row">
+				@Pill("Bound", &PillProps{Tone: "success", Shape: ShapePill})
+			}
+			@MetaRow(&MetaRowProps{}) {
 				<span>crm.read</span>
 				<span>HubSpot</span>
-				<yr-pill tone="success" shape="pill">Bound</yr-pill>
-			</div>
-			<div class="yr-meta-row">
+				@Pill("Bound", &PillProps{Tone: "success", Shape: ShapePill})
+			}
+			@MetaRow(&MetaRowProps{}) {
 				<span>file.store</span>
 				<span>Google Drive</span>
-				<yr-pill tone="success" shape="pill">Bound</yr-pill>
-			</div>
+				@Pill("Bound", &PillProps{Tone: "success", Shape: ShapePill})
+			}
 		</div>
-		<yr-section-header>Schedule</yr-section-header>
+		@SectionHeader(&SectionHeaderProps{}) {
+			Schedule
+		}
 		<div style="margin-bottom:var(--yr-space-6)">
-			<div class="yr-meta-row">
+			@MetaRow(&MetaRowProps{}) {
 				<span>Frequency</span>
 				<span>Every weekday at 8:00 AM UTC</span>
-			</div>
+			}
 		</div>
-		<yr-section-header>Inference Backend</yr-section-header>
-		<div class="yr-meta-row">
+		@SectionHeader(&SectionHeaderProps{}) {
+			Inference Backend
+		}
+		@MetaRow(&MetaRowProps{}) {
 			<span>Model</span>
 			<span>Claude Sonnet · temperature 0.3 · max 2048 tokens</span>
-		</div>
+		}
 	</div>
 }
 
@@ -597,7 +621,7 @@ templ portalWorkflowDetailConfig() {
 
 templ portalWorkflowRunPage() {
 	@portalShell("Run #42 · Newsletter Digest · Yardrail", portalNav("space-marketing")) {
-		<nav class="yr-breadcrumb">
+		@Breadcrumb(&BreadcrumbProps{}) {
 			<a href="#">Home</a>
 			<span class="yr-breadcrumb-sep">/</span>
 			<a href="#">Marketing Ops</a>
@@ -605,26 +629,28 @@ templ portalWorkflowRunPage() {
 			<a href="#">Newsletter Digest</a>
 			<span class="yr-breadcrumb-sep">/</span>
 			<span class="yr-breadcrumb-current">Run #42</span>
-		</nav>
+		}
 		<h1 class="portal-page-title">Run #42</h1>
-		<div class="yr-meta-row" style="margin-bottom:var(--yr-space-6)">
-			<yr-pill tone="warning" shape="pill">Waiting</yr-pill>
+		@MetaRow(&MetaRowProps{}) {
+			@Pill("Waiting", &PillProps{Tone: "warning", Shape: ShapePill})
 			<span>Started Oct 11, 2026 at 2:30 PM</span>
-			<yr-live-duration started-at="2026-10-11T14:30:00Z"></yr-live-duration>
+			@LiveDuration("2026-10-11T14:30:00Z", &LiveDurationProps{})
 			<span>Triggered by schedule</span>
-		</div>
-		<yr-hitl-prompt tone="warning" style="margin-bottom:var(--yr-space-8)">
+		}
+		@HitlPrompt(&HitlPromptProps{Tone: "warning"}) {
 			<div class="yr-hitl-prompt-title">Approve the content draft for this week's newsletter?</div>
 			<p class="yr-hitl-prompt-desc">
 				The workflow generated a newsletter draft from 12 recent blog posts and 3 product updates. Review the draft in the outputs below before approving.
 			</p>
 			<div class="yr-hitl-prompt-actions">
-				<button class="yr-button">Approve</button>
-				<button class="yr-button yr-button--secondary">Request Changes</button>
+				@Button("Approve", ButtonProps{})
+				@Button("Request Changes", ButtonProps{Variant: ButtonSecondary})
 			</div>
-		</yr-hitl-prompt>
-		<yr-section-header>Outputs</yr-section-header>
-		<yr-download-list style="margin-bottom:var(--yr-space-8)">
+		}
+		@SectionHeader(&SectionHeaderProps{}) {
+			Outputs
+		}
+		@DownloadList(&DownloadListProps{}) {
 			<a href="#" download>
 				@Icon("file-text")
 				{ " newsletter-draft.html" }
@@ -635,9 +661,11 @@ templ portalWorkflowRunPage() {
 				{ " recipient-list.csv" }
 				<span class="yr-download-size">156 KB</span>
 			</a>
-		</yr-download-list>
-		<yr-section-header>Journal</yr-section-header>
-		<yr-journal-log>
+		}
+		@SectionHeader(&SectionHeaderProps{}) {
+			Journal
+		}
+		@JournalLog(&JournalLogProps{}) {
 			@portalJournalEntry("Run started — triggered by schedule", "step-1", "trigger.schedule", "2026-10-11T14:30:00Z", "14:30:00")
 			@portalJournalEntry("Fetched 12 blog posts from CMS", "step-2", "content.fetch", "2026-10-11T14:30:04Z", "14:30:04")
 			@portalJournalEntry("Fetched 3 product updates from Notion", "step-3", "content.fetch", "2026-10-11T14:30:09Z", "14:30:09")
@@ -645,12 +673,12 @@ templ portalWorkflowRunPage() {
 			@portalJournalEntry("Queried recipient list — 2,847 subscribers", "step-5", "list.query", "2026-10-11T14:30:22Z", "14:30:22")
 			@portalJournalEntry("Wrote newsletter-draft.html", "step-6", "output.write", "2026-10-11T14:30:25Z", "14:30:25")
 			@portalJournalEntry("Waiting for approval — content review required", "wait", "input.request", "2026-10-11T14:30:26Z", "14:30:26")
-		</yr-journal-log>
+		}
 	}
 }
 
 templ portalJournalEntry(desc, stepID, stepType, datetime, display string) {
-	<div class="yr-activity-row">
+	@ActivityRow(&ActivityRowProps{}) {
 		<div>
 			<div class="yr-activity-row-desc">{ desc }</div>
 			<div class="yr-activity-row-meta">
@@ -659,5 +687,5 @@ templ portalJournalEntry(desc, stepID, stepType, datetime, display string) {
 			</div>
 		</div>
 		<time class="yr-activity-row-timestamp" datetime={ datetime }>{ display }</time>
-	</div>
+	}
 }
