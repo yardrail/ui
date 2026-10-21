@@ -8,6 +8,6 @@ type EmptyStateProps struct {
 }
 
 // EmptyState renders an empty state placeholder. Children are the message content.
-func EmptyState(p EmptyStateProps) templ.Component {
-	return emptyState(&p)
+func EmptyState(p *EmptyStateProps) templ.Component {
+	return emptyState(p)
 }

@@ -9,6 +9,6 @@ type AvatarProps struct {
 }
 
 // Avatar renders a circular initials badge. The text argument is the initials.
-func Avatar(text string, p AvatarProps) templ.Component {
-	return avatar(text, &p)
+func Avatar(text string, p *AvatarProps) templ.Component {
+	return avatar(text, p)
 }

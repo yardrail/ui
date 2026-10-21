@@ -9,6 +9,6 @@ type RatingProps struct {
 }
 
 // Rating renders a 5-star rating with optional review count.
-func Rating(value string, p RatingProps) templ.Component {
-	return rating(value, &p)
+func Rating(value string, p *RatingProps) templ.Component {
+	return rating(value, p)
 }

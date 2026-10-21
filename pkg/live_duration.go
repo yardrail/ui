@@ -8,6 +8,6 @@ type LiveDurationProps struct {
 }
 
 // LiveDuration renders a live HH:MM:SS counter from the given ISO 8601 start time.
-func LiveDuration(startedAt string, p LiveDurationProps) templ.Component {
-	return liveDuration(startedAt, &p)
+func LiveDuration(startedAt string, p *LiveDurationProps) templ.Component {
+	return liveDuration(startedAt, p)
 }

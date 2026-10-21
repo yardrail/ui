@@ -8,6 +8,6 @@ type SectionHeaderProps struct {
 }
 
 // SectionHeader renders a titled section divider. Children are the title text and optional action link.
-func SectionHeader(p SectionHeaderProps) templ.Component {
-	return sectionHeader(&p)
+func SectionHeader(p *SectionHeaderProps) templ.Component {
+	return sectionHeader(p)
 }

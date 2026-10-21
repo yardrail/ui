@@ -9,6 +9,6 @@ type StatusBannerProps struct {
 }
 
 // StatusBanner renders a persistent status display bar. Children are the banner content.
-func StatusBanner(p StatusBannerProps) templ.Component {
-	return statusBanner(&p)
+func StatusBanner(p *StatusBannerProps) templ.Component {
+	return statusBanner(p)
 }
