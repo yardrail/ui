@@ -9,7 +9,7 @@ extends: stylelint-config-standard
 # reference lets no-unknown-custom-properties resolve var() usages in the other
 # stylesheets, which never import it themselves.
 referenceFiles:
-  - files: [tokens.css]
+  - files: [styles/tokens.css]
 
 rules:
   # Components pack single-line rules (`.yr-x { gap: 4px; padding: 0; }`) and
