@@ -1,0 +1,5 @@
+package ui
+
+templ copyField(value string, p *CopyFieldProps) {
+	<yr-copy-field value={ value } { filterAttrs("CopyField", p.Attrs)... }></yr-copy-field>
+}

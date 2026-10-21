@@ -1,0 +1,5 @@
+package ui
+
+templ liveDuration(startedAt string, p *LiveDurationProps) {
+	<yr-live-duration started-at={ startedAt } { filterAttrs("LiveDuration", p.Attrs)... }></yr-live-duration>
+}

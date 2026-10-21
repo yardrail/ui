@@ -1,0 +1,5 @@
+package ui
+
+templ pill(text string, p *PillProps) {
+	<yr-pill tone={ p.Tone } shape={ p.Shape } { filterAttrs("Pill", p.Attrs)... }>{ text }</yr-pill>
+}

@@ -1,0 +1,5 @@
+package ui
+
+templ rating(value string, p *RatingProps) {
+	<yr-rating value={ value } reviews={ p.Reviews } { filterAttrs("Rating", p.Attrs)... }></yr-rating>
+}

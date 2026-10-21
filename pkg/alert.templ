@@ -1,0 +1,7 @@
+package ui
+
+templ alert(p *AlertProps) {
+	<yr-alert tone={ p.Tone } { filterAttrs("Alert", p.Attrs)... }>
+		{ children... }
+	</yr-alert>
+}

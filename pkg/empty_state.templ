@@ -1,0 +1,7 @@
+package ui
+
+templ emptyState(p *EmptyStateProps) {
+	<yr-empty-state { filterAttrs("EmptyState", p.Attrs)... }>
+		{ children... }
+	</yr-empty-state>
+}

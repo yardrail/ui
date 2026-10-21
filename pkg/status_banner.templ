@@ -1,0 +1,7 @@
+package ui
+
+templ statusBanner(p *StatusBannerProps) {
+	<yr-status-banner tone={ p.Tone } { filterAttrs("StatusBanner", p.Attrs)... }>
+		{ children... }
+	</yr-status-banner>
+}
