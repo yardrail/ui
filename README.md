@@ -57,7 +57,7 @@ ActionCard renders an action prompt card. Children include icon-badge, body, and
 
 ### ActionsCell
 
-ActionsCell renders the <td> holding a row's buttons and RowEdit disclosures.
+ActionsCell renders the `<td>` holding a row's buttons and RowEdit disclosures.
 
 ### ActivityRow
 
@@ -89,7 +89,7 @@ Breadcrumb renders a breadcrumb navigation. Children are the links, separators, 
 
 ### Button
 
-Button renders a native <button> whose text, and accessible name, is label.
+Button renders a native `<button>` whose text, and accessible name, is label.
 
 ### Card
 
@@ -97,7 +97,7 @@ Card renders a generic container card. Children are the card content.
 
 ### Cell
 
-Cell renders a <td> around its children.
+Cell renders a `<td>` around its children.
 
 ### Center
 
@@ -129,7 +129,7 @@ CreatePanel renders a collapsible creation form panel. Children are the panel co
 
 ### Divider
 
-Divider renders a horizontal rule between the children of a layout primitive: an <hr>, or an <li role="separator"> when the enclosing primitive renders as a list. The primitive's gap spaces it from its neighbours.
+Divider renders a horizontal rule between the children of a layout primitive: an `<hr>`, or an `<li role="separator">` when the enclosing primitive renders as a list. The primitive's gap spaces it from its neighbours.
 
 ### DownloadList
 
@@ -149,11 +149,11 @@ EmptyState renders an empty state placeholder. Children are the message content.
 
 ### Field
 
-Field renders a labelled <input> named name, with an optional hint and validation error.
+Field renders a labelled `<input>` named name, with an optional hint and validation error.
 
 ### Form
 
-Form renders a <form novalidate> around its children. Server-side validation reports errors through Field's Error prop, so the browser's own validation bubbles are off.
+Form renders a `<form novalidate>` around its children. Server-side validation reports errors through Field's Error prop, so the browser's own validation bubbles are off.
 
 ### Grid
 
@@ -233,11 +233,11 @@ ReviewCard renders a review card. Children are the review content.
 
 ### Row
 
-Row renders a <tr> around its children, Cell components. It renders correctly on its own, as the body of an htmx response that swaps one row.
+Row renders a `<tr>` around its children, Cell components. It renders correctly on its own, as the body of an htmx response that swaps one row.
 
 ### RowEdit
 
-RowEdit renders a native <details> disclosure whose <summary> text is summary and whose body is its children, usually an inline Form.
+RowEdit renders a native `<details>` disclosure whose `<summary>` text is summary and whose body is its children, usually an inline Form.
 
 ### Search
 
@@ -281,19 +281,19 @@ ShellBand renders an edge-to-edge band whose content keeps the page width. It mu
 
 ### ShellFooter
 
-ShellFooter renders the page's footer as a <footer>. It must be a child of a Shell.
+ShellFooter renders the page's footer as a `<footer>`. It must be a child of a Shell.
 
 ### ShellMain
 
-ShellMain renders the page's main content as a <main>, the target of the skip link. It must be a child of a Shell. Its Attrs cannot set id.
+ShellMain renders the page's main content as a `<main>`, the target of the skip link. It must be a child of a Shell. Its Attrs cannot set id.
 
 ### ShellNav
 
-ShellNav renders the page's navigation as a <nav>, folded into a popover behind a Menu button on narrow screens. It must be a child of a Shell. Its Attrs cannot set id.
+ShellNav renders the page's navigation as a `<nav>`, folded into a popover behind a Menu button on narrow screens. It must be a child of a Shell. Its Attrs cannot set id.
 
 ### ShellTopBar
 
-ShellTopBar renders the page's top bar as a <header>. It must be a child of a Shell.
+ShellTopBar renders the page's top bar as a `<header>`. It must be a child of a Shell.
 
 ### Sidebar
 
@@ -345,7 +345,7 @@ StatusBanner renders a persistent status display bar. Children are the banner co
 
 ### Table
 
-Table renders a <table> with caption as its accessible name, a header row from p.Columns, and its children, Row components, as the body.
+Table renders a `<table>` with caption as its accessible name, a header row from p.Columns, and its children, Row components, as the body.
 
 ### Tabs
 

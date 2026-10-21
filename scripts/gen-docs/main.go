@@ -258,7 +258,7 @@ func listComponents(ctx context.Context, root string) ([]componentDoc, error) {
 
 		components = append(components, componentDoc{
 			Name: name,
-			Doc:  docComment,
+			Doc:  escapeHTMLTags(docComment),
 		})
 	}
 
@@ -267,6 +267,14 @@ func listComponents(ctx context.Context, root string) ([]componentDoc, error) {
 	})
 
 	return components, nil
+}
+
+// htmlTagRE matches bare HTML tags like <td>, <button>, </footer> in doc text.
+var htmlTagRE = regexp.MustCompile(`</?[a-zA-Z][a-zA-Z0-9 ="'-]*>`)
+
+// escapeHTMLTags wraps bare HTML tags in backticks so markdown renderers don't interpret them.
+func escapeHTMLTags(s string) string {
+	return htmlTagRE.ReplaceAllString(s, "`$0`")
 }
 
 // extractFollowingDoc walks forward from line i+1 to collect the indented doc comment block.
