@@ -1,0 +1,11 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ statRowExample() {
+	<div style="display:flex;gap:1rem">
+		@ui.Stat("500+", &ui.StatProps{Label: "Templates"})
+		@ui.Stat("200+", &ui.StatProps{Label: "Authors"})
+		@ui.Stat("10k+", &ui.StatProps{Label: "Installs"})
+	</div>
+}

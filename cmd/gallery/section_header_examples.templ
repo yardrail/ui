@@ -1,0 +1,25 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ sectionHeaderDefaultExample() {
+	<div style="max-width:40rem">
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Recent Runs
+		}
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Needs You
+		}
+	</div>
+}
+
+templ sectionHeaderWithActionExample() {
+	<div style="max-width:40rem">
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Needs You <a href="#">View all</a>
+		}
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Recent Activity <a href="#">See more</a>
+		}
+	</div>
+}

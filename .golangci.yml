@@ -25,6 +25,7 @@ linters:
         # ui component Props: every zero-value field is the component's default.
         - "^github\\.com/yardrail/ui/pkg\\..*Props$"
         - "^github\\.com/yardrail/ui/pkg\\.Example$"
+        - "Example$"
     tagalign:
       align: true
       sort: true
@@ -112,6 +113,12 @@ linters:
           - exhaustruct_v5
         path: "_test\\.go$"
       - linters:
+          - exhaustruct_v5
+        path: "^cmd/gallery/"
+      - linters:
+          - exhaustruct_v5
+        path: "^cmd/gallery/"
+      - linters:
           - godoclint
         text: "symbol should have a godoc"
         path: "_test\\.go$"
@@ -120,11 +127,16 @@ linters:
       - linters:
           - godoclint
         text: "package has more than one godoc"
-        path: "doc\\.go$"
+      - linters:
+          - godoclint
+        path: "^cmd/gallery/"
       - linters:
           - contextcheck
         text: "should pass the context parameter"
         source: "\\.Render\\("
+      - linters:
+          - goconst
+        path: "^cmd/gallery/"
     paths:
       - third_party$
       - builtin$

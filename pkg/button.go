@@ -35,7 +35,7 @@ var (
 	// ButtonLink looks like a text link.
 	ButtonLink = ButtonVariant{v: "link"}
 	// ButtonDanger is a filled destructive action.
-	ButtonDanger = ButtonVariant{v: "danger"} //nolint:goconst // variant value, not the example name
+	ButtonDanger = ButtonVariant{v: "danger"}
 	// ButtonDangerQuiet is a low-emphasis destructive action, for example Remove in a table row.
 	ButtonDangerQuiet = ButtonVariant{v: "danger-quiet"}
 )

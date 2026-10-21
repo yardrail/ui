@@ -1,0 +1,73 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ sidebarExampleDefault() {
+	<style>.demo-slot{background:var(--yr-bg);border:1px dashed var(--yr-border);border-radius:var(--yr-radius-sm);padding:var(--yr-space-1) var(--yr-space-3);color:var(--yr-text-disabled);font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs)}</style>
+	@ui.Sidebar(&ui.SidebarProps{}) {
+		@ui.SidebarHeader(&ui.SidebarHeaderProps{}) {
+			<div class="demo-slot">header</div>
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{}) {
+			<div class="demo-slot">nav</div>
+		}
+		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
+			<div class="demo-slot">footer</div>
+		}
+	}
+}
+
+templ sidebarExampleWithContent() {
+	@ui.Sidebar(&ui.SidebarProps{}) {
+		@ui.SidebarHeader(&ui.SidebarHeaderProps{}) {
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Workspace</span>
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{}) {
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#", Active: true}) {
+				@ui.Icon("layout-dashboard")
+				Dashboard
+			}
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+				@ui.Icon("list")
+				Sessions
+			}
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+				@ui.Icon("file-text")
+				Templates
+			}
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+				@ui.Icon("settings")
+				Settings
+			}
+		}
+		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
+			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
+		}
+	}
+}
+
+templ sidebarExampleCollapsed() {
+	@ui.Sidebar(&ui.SidebarProps{Collapsed: true}) {
+		@ui.SidebarHeader(&ui.SidebarHeaderProps{}) {
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">W</span>
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{}) {
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#", Active: true}) {
+				@ui.Icon("layout-dashboard")
+				Dashboard
+			}
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+				@ui.Icon("list")
+				Sessions
+			}
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+				@ui.Icon("file-text")
+				Templates
+			}
+			@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+				@ui.Icon("settings")
+				Settings
+			}
+		}
+	}
+}

@@ -1,0 +1,42 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ pageSetupExampleDefault() {
+	<style>html,body{margin:0;height:100%}.demo-region{display:flex;align-items:center;justify-content:center;font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)}</style>
+	@ui.PageSetup(&ui.PageSetupProps{}) {
+		@ui.Navbar(&ui.NavbarProps{}) {
+			<div class="demo-region" style="width:100%">nav</div>
+		}
+		@ui.PageSetupContent(&ui.PageSetupContentProps{}) {
+			<div class="demo-region" style="width:720px;height:400px;border:1px dashed var(--yr-border);border-radius:var(--yr-radius-md)">content</div>
+		}
+	}
+}
+
+templ pageSetupExampleWithSetupCard() {
+	<style>html,body{margin:0;height:100%}</style>
+	@ui.PageSetup(&ui.PageSetupProps{}) {
+		@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail"}) {
+		}
+		@ui.PageSetupContent(&ui.PageSetupContentProps{}) {
+			@ui.SetupCard(&ui.SetupCardProps{}) {
+				@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "3", Current: "1"})
+				@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
+					<h2 class="yr-setup-card-title">Create your organization</h2>
+					<p class="yr-setup-card-subtitle">This is the workspace where your team will collaborate.</p>
+				}
+				@ui.SetupCardBody(&ui.SetupCardBodyProps{}) {
+					<div class="yr-field">
+						<label for="ps-name">Organization name</label>
+						<input type="text" id="ps-name" name="name" placeholder="Acme Corp"/>
+					</div>
+				}
+				@ui.SetupCardFooter(&ui.SetupCardFooterProps{}) {
+					<span></span>
+					@ui.Button("Continue", ui.ButtonProps{Variant: ui.ButtonPrimary})
+				}
+			}
+		}
+	}
+}

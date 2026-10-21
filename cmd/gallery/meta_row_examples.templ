@@ -1,0 +1,21 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ metaRowExampleFragments() {
+	<div style="display:flex;flex-direction:column;gap:1rem">
+		@ui.MetaRow(&ui.MetaRowProps{}) {
+			<span>12 templates published</span>
+			<span>4.2k installs</span>
+			<span>Joined 3 Mar 2026</span>
+		}
+		@ui.MetaRow(&ui.MetaRowProps{}) {
+			@ui.Pill("Analytics", &ui.PillProps{Tone: "blue"})
+			@ui.Rating("4.5", &ui.RatingProps{Reviews: "42"})
+			<span>OAuth 2.0</span>
+		}
+		@ui.MetaRow(&ui.MetaRowProps{}) {
+			<span>A single fragment has no separator</span>
+		}
+	</div>
+}

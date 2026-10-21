@@ -1,0 +1,25 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ downloadListDefault() {
+	<div style="max-width:28rem">
+		@ui.DownloadList(&ui.DownloadListProps{}) {
+			<a href="#" download>
+				@ui.Icon("file-text")
+				{ " newsletter-draft.html" }
+				<span class="yr-download-size">84 KB</span>
+			</a>
+			<a href="#" download>
+				@ui.Icon("file-spreadsheet")
+				{ " recipient-list.csv" }
+				<span class="yr-download-size">156 KB</span>
+			</a>
+			<a href="#" download>
+				@ui.Icon("file-image")
+				{ " hero-banner.png" }
+				<span class="yr-download-size">2.4 MB</span>
+			</a>
+		}
+	</div>
+}

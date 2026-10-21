@@ -1,0 +1,52 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ connectorRowExampleRows() {
+	<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:44rem">
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				<img src={ exampleLogo } alt="Slack" width="40" height="40"/>
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">Slack</div>
+				<div class="yr-list-row-meta">
+					<span>workspace-prod</span>
+					@ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				<a href="#" class="yr-button yr-button--secondary">Manage</a>
+			</div>
+		}
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				<img src={ exampleLogo } alt="HubSpot" width="40" height="40"/>
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">HubSpot</div>
+				<div class="yr-list-row-meta">
+					<span>marketing-hub</span>
+					@ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				<a href="#" class="yr-button yr-button--secondary">Manage</a>
+			</div>
+		}
+		@ui.ListRow(&ui.ListRowProps{}) {
+			<div class="yr-list-row-icon">
+				<img src={ exampleLogo } alt="Jira" width="40" height="40"/>
+			</div>
+			<div class="yr-list-row-main">
+				<div class="yr-list-row-name">Jira</div>
+				<div class="yr-list-row-meta">
+					@ui.Pill("Disconnected", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+				</div>
+			</div>
+			<div class="yr-list-row-actions">
+				<a href="#" class="yr-button">Connect</a>
+			</div>
+		}
+	</div>
+}

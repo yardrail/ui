@@ -1,0 +1,693 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+// portalShell is the page frame shared by the portal mocks: a navbar, sidebar, and content area.
+templ portalShell(title string, nav templ.Component) {
+	<!doctype html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>{ title }</title>
+			<link rel="stylesheet" href="/static/ui/ui.css"/>
+			<script type="module" src="/static/ui/ui.js"></script>
+			<link rel="stylesheet" href="/mocks.css"/>
+		</head>
+		<body style="margin:0;height:100%">
+			@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
+				@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
+					<div class="yr-search yr-search--compact" slot="center" style="max-width:320px">
+						@templ.Raw(exampleIcon("search", `class="yr-search-icon" style="left:0.5rem"`, navSearchIconSize))
+						<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
+					</div>
+					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
+						<span slot="avatar">BL</span>
+						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
+						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
+					}
+				}
+				@nav
+				@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "sidebar"})
+				@ui.Content(&ui.ContentProps{}) {
+					@ui.ContentMain(&ui.ContentMainProps{}) {
+						{ children... }
+					}
+				}
+			}
+		</body>
+	</html>
+}
+
+// portalNav is the portal sidebar with the link named active highlighted.
+templ portalNav(active string) {
+	@ui.Sidebar(&ui.SidebarProps{}) {
+		@ui.SidebarHeader(&ui.SidebarHeaderProps{}) {
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{}) {
+			@portalNavLink("home", "Home", portalHome, active)
+			@portalNavLink("zap", "Automations", "automations", active)
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{Label: "Spaces"}) {
+			for _, l := range portalSpaceLinks() {
+				@portalNavLink(l.icon, l.label, l.slug, active)
+			}
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{Bottom: true}) {
+			@portalNavLink("settings", "Settings", "settings", active)
+		}
+		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
+			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
+		}
+	}
+}
+
+// portalNavAutomations is the portal sidebar with the Automations sub-links expanded.
+templ portalNavAutomations(active string) {
+	@ui.Sidebar(&ui.SidebarProps{}) {
+		@ui.SidebarHeader(&ui.SidebarHeaderProps{}) {
+			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{}) {
+			@portalNavLink("home", "Home", "", active)
+			@portalNavLink("zap", "Automations", "automations", active)
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{}) {
+			@portalNavLink("git-branch", "Workflows", "workflows", active)
+			@portalNavLink("layout-grid", "Templates", "templates", active)
+			@portalNavLink("plug", "Connectors", "connectors", active)
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{Label: "Spaces"}) {
+			for _, l := range portalSpaceLinks() {
+				@portalNavLink(l.icon, l.label, l.slug, active)
+			}
+		}
+		@ui.SidebarNav(&ui.SidebarNavProps{Bottom: true}) {
+			@portalNavLink("settings", "Settings", "settings", active)
+		}
+		@ui.SidebarFooter(&ui.SidebarFooterProps{}) {
+			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
+		}
+	}
+}
+
+// portalNavLink is one link in the portal sidebar, highlighted when link equals active.
+templ portalNavLink(icon, label, link, active string) {
+	@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#", Active: link == active}) {
+		@ui.Icon(icon)
+		{ label }
+	}
+}
+
+// --- Portal Home ---
+
+templ portalHomePage() {
+	@portalShell("Home · Yardrail", portalNav(portalHome)) {
+		<h1 class="portal-page-title">Home</h1>
+		<div class="portal-grid portal-grid-4" style="margin-bottom:var(--yr-space-8)">
+			<div class="portal-stat-card">
+				<p class="portal-stat-value">8</p>
+				<p class="portal-stat-label">Active Workflows</p>
+			</div>
+			<div class="portal-stat-card" style="border-left:3px solid var(--yr-warning)">
+				<p class="portal-stat-value">3</p>
+				<p class="portal-stat-label">Waiting on You</p>
+			</div>
+			<div class="portal-stat-card">
+				<p class="portal-stat-value">127</p>
+				<p class="portal-stat-label">Runs This Week</p>
+			</div>
+			<div class="portal-stat-card">
+				<p class="portal-stat-value">96%</p>
+				<p class="portal-stat-label">Success Rate</p>
+			</div>
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Needs You <a href="#">View all</a>
+		}
+		<div style="margin-bottom:var(--yr-space-8)">
+			@portalUrgentCard("clock", "amber", "Approve budget over $5k for Acme lead",
+				"Waiting 2h 14m · Lead Scoring · Marketing Ops", "warning", "Waiting")
+			@portalUrgentCard("clock", "amber", "Review generated newsletter draft",
+				"Waiting 45m · Newsletter Digest · Marketing Ops", "warning", "Waiting")
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Problems
+		}
+		<div style="margin-bottom:var(--yr-space-8)">
+			@portalDangerCard("alert-triangle", "danger", "Social Scheduler failed",
+				"Rate limit exceeded · 3 consecutive failures · 1h ago", "danger", "Failed")
+		</div>
+		@portalHomeActivity()
+	}
+}
+
+templ portalUrgentCard(icon, badgeTone, title, desc, pillTone, pillText string) {
+	@ui.ActionCard(&ui.ActionCardProps{Urgent: true}) {
+		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
+			@ui.Icon(icon)
+		}
+		<div class="yr-action-card-body">
+			<h3 class="yr-action-card-title">{ title }</h3>
+			<p class="yr-action-card-desc">{ desc }</p>
+		</div>
+		<div class="yr-action-card-action">
+			@ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Shape: ui.ShapePill})
+		</div>
+	}
+}
+
+templ portalDangerCard(icon, badgeTone, title, desc, pillTone, pillText string) {
+	@ui.ActionCard(&ui.ActionCardProps{UrgentDanger: true}) {
+		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
+			@ui.Icon(icon)
+		}
+		<div class="yr-action-card-body">
+			<h3 class="yr-action-card-title">{ title }</h3>
+			<p class="yr-action-card-desc">{ desc }</p>
+		</div>
+		<div class="yr-action-card-action">
+			@ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Shape: ui.ShapePill})
+		</div>
+	}
+}
+
+templ portalHomeActivity() {
+	@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+		Recent Activity <a href="#">See more</a>
+	}
+	@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+		@portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false)
+		@portalActivityRow("Lead Scoring", "R-47", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-01T09:00:00Z", false)
+		@portalActivityRow("Social Scheduler", "R-46", "danger", "Failed", "Rate limit exceeded", "12s", "", true)
+		@portalActivityRow("Contact Sync", "R-45", "success", "Completed", "24 records synced", "4m 8s", "", false)
+		@portalActivityRow("Invoice Processor", "R-44", "success", "Completed", "12 invoices", "2m 51s", "", false)
+	}
+}
+
+templ portalActivityRow(name, runID, tone, status, detail, duration, waitingSince string, isError bool) {
+	if isError {
+		@portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince, &ui.ActivityRowProps{IsError: true})
+	} else {
+		@portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince, &ui.ActivityRowProps{Href: "#"})
+	}
+}
+
+templ portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince string, p *ui.ActivityRowProps) {
+	@ui.ActivityRow(p) {
+		<div>
+			<div class="yr-activity-row-desc">{ name }</div>
+			<div class="yr-activity-row-meta">
+				<span class="yr-activity-row-id-badge">{ runID }</span>
+				@ui.Pill(status, &ui.PillProps{Tone: tone})
+				<span>{ detail }</span>
+			</div>
+		</div>
+		if waitingSince != "" {
+			<div class="yr-activity-row-duration">
+				<span class="yr-activity-row-duration-label">Waiting</span>
+				@ui.LiveDuration(waitingSince, &ui.LiveDurationProps{})
+			</div>
+		} else if duration != "" {
+			<div class="yr-activity-row-duration">{ duration }</div>
+		}
+	}
+}
+
+// --- Portal Automations ---
+
+templ portalAutomationsPage() {
+	@portalShell("Automations · Yardrail", portalNav("automations")) {
+		<h1 class="portal-page-title">Automations</h1>
+		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
+			@portalAutoTile("git-branch", "accent", "Workflows", "7 active workflows across 4 spaces", "View all")
+			@portalAutoTile("layout-grid", "purple", "Template Catalog", "Browse 500+ pre-built automation templates", "Browse")
+			@portalAutoTile("plug", "amber", "Connectors", "4 tools connected to your organization", "Manage")
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Connected Tools <a href="#">Manage</a>
+		}
+		<div style="display:flex;gap:var(--yr-space-3);margin-bottom:var(--yr-space-8)">
+			@ui.ConnectorPill(&ui.ConnectorPillProps{Title: "Slack"}) {
+				<img src={ exampleLogo } alt="Slack" width="24" height="24"/>
+			}
+			@ui.ConnectorPill(&ui.ConnectorPillProps{Title: "HubSpot"}) {
+				HS
+			}
+			@ui.ConnectorPill(&ui.ConnectorPillProps{Title: "Google Sheets"}) {
+				GS
+			}
+			@ui.ConnectorPill(&ui.ConnectorPillProps{Title: "Stripe"}) {
+				ST
+			}
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Featured Templates <a href="#">View all</a>
+		}
+		<div class="portal-grid portal-grid-2">
+			@ui.TemplateCard("Refund triage",
+				"Routes refund requests to the right approver and posts the decision back to the customer thread.",
+				"$24", &ui.TemplateCardProps{
+					FooterLeft: portalVerifiedRating("4.5", "42"),
+				})
+			@ui.TemplateCard("Weekly pipeline report",
+				"Summarizes open deals every Monday and sends a digest to the sales team channel.",
+				"Free", &ui.TemplateCardProps{
+					FooterLeft: portalCommunityInstalls("1.2k installs"),
+				})
+		</div>
+	}
+}
+
+templ portalAutoTile(icon, badgeTone, title, desc, action string) {
+	@ui.ActionCard(&ui.ActionCardProps{}) {
+		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
+			@ui.Icon(icon)
+		}
+		<div class="yr-action-card-body">
+			<h3 class="yr-action-card-title">{ title }</h3>
+			<p class="yr-action-card-desc">{ desc }</p>
+		</div>
+		<div class="yr-action-card-action">
+			@ui.Button(action, ui.ButtonProps{Variant: ui.ButtonSecondary})
+		</div>
+	}
+}
+
+// --- Portal Workflows ---
+
+templ portalWorkflowsPage() {
+	@portalShell("Workflows · Yardrail", portalNavAutomations("workflows")) {
+		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)">
+			<h1 class="portal-page-title" style="margin-bottom:0">Workflows</h1>
+			@ui.Button("+ New Workflow", ui.ButtonProps{})
+		</div>
+		<form class="yr-search yr-search--compact" method="get" action="#" role="search" style="max-width:24rem;margin-bottom:var(--yr-space-4)">
+			@templ.Raw(exampleIcon("search", `class="yr-search-icon"`, searchCompactIconSize))
+			<input class="yr-search-input" type="search" name="q" placeholder="Search workflows…" autocomplete="off"/>
+		</form>
+		<div class="portal-grid portal-grid-4" style="margin-bottom:var(--yr-space-6)">
+			<div class="portal-stat-card">
+				<p class="portal-stat-value">14</p>
+				<p class="portal-stat-label">Total</p>
+			</div>
+			<div class="portal-stat-card" style="border-left:3px solid var(--yr-success)">
+				<p class="portal-stat-value">10</p>
+				<p class="portal-stat-label">Active</p>
+			</div>
+			<div class="portal-stat-card" style="border-left:3px solid var(--yr-warning)">
+				<p class="portal-stat-value">3</p>
+				<p class="portal-stat-label">Paused</p>
+			</div>
+			<div class="portal-stat-card" style="border-left:3px solid var(--yr-danger)">
+				<p class="portal-stat-value">1</p>
+				<p class="portal-stat-label">Error</p>
+			</div>
+		</div>
+		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3)">
+			@portalWorkflowRow("Newsletter Digest", "Marketing Ops", "success", "Active", "Last run 2h ago", "Trigger")
+			@portalWorkflowRow("Lead Scoring", "Sales Ops", "", "Paused", "Last run 3d ago", "Resume")
+			@portalWorkflowRow("Invoice Sync", "Client Onboarding", "success", "Active", "Last run 15m ago", "Trigger")
+			@portalWorkflowRow("Social Scheduler", "Marketing Ops", "danger", "Error", "Failed 1h ago", "View")
+			@portalWorkflowRow("Onboarding Flow", "Client Onboarding", "warning", "Draft", "", "Edit")
+			@portalWorkflowRow("Ticket Router", "My Space", "success", "Active", "Last run 30m ago", "Trigger")
+		</div>
+	}
+}
+
+templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
+	@ui.ListRow(&ui.ListRowProps{}) {
+		<div class="yr-list-row-icon">
+			@ui.Icon("git-branch")
+		</div>
+		<div class="yr-list-row-main">
+			<div class="yr-list-row-name">{ name }</div>
+			<div class="yr-list-row-meta">
+				<span>{ space }</span>
+				@ui.Pill(status, &ui.PillProps{Tone: tone, Shape: ui.ShapePill})
+				if lastRun != "" {
+					<span>{ lastRun }</span>
+				}
+			</div>
+		</div>
+		<div class="yr-list-row-actions">
+			@ui.Button(action, ui.ButtonProps{Variant: ui.ButtonSecondary})
+		</div>
+	}
+}
+
+// --- Portal Templates ---
+
+templ portalTemplatesPage() {
+	@portalShell("Template Catalog · Yardrail", portalNavAutomations("templates")) {
+		<h1 class="portal-page-title">Template Catalog</h1>
+		<form class="yr-search yr-search--hero" method="get" action="#" role="search" style="margin-bottom:var(--yr-space-4)">
+			@templ.Raw(exampleIcon("search", `class="yr-search-icon"`, searchHeroIconSize))
+			<input class="yr-search-input" type="search" name="q" placeholder="Search 500+ templates…" autocomplete="off"/>
+		</form>
+		<div style="display:flex;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
+			@ui.Pill("All", &ui.PillProps{Tone: "accent"})
+			@ui.Pill("Marketing", &ui.PillProps{})
+			@ui.Pill("Sales", &ui.PillProps{})
+			@ui.Pill("Operations", &ui.PillProps{})
+			@ui.Pill("HR", &ui.PillProps{})
+			@ui.Pill("Finance", &ui.PillProps{})
+		</div>
+		<div class="portal-grid portal-grid-3">
+			@ui.TemplateCard("Refund triage",
+				"Routes refund requests to the right approver and posts the decision back to the customer thread.",
+				"$24", &ui.TemplateCardProps{FooterLeft: portalVerifiedRating("4.5", "42")})
+			@ui.TemplateCard("Weekly pipeline report",
+				"Summarizes open deals and pipeline movement every Monday morning in a Slack digest.",
+				"Free", &ui.TemplateCardProps{FooterLeft: portalCommunityInstalls("1.2k installs")})
+			@ui.TemplateCard("New hire onboarding",
+				"Creates accounts, sends welcome emails, and schedules orientation for new team members.",
+				"$18", &ui.TemplateCardProps{FooterLeft: portalVerifiedRating("4.8", "128")})
+			@ui.TemplateCard("Lead enrichment",
+				"Enriches inbound leads with firmographic data and scores them for sales readiness.",
+				"Free", &ui.TemplateCardProps{FooterLeft: portalCommunityInstalls("890 installs")})
+			@ui.TemplateCard("Invoice reconciliation",
+				"Matches invoices against purchase orders and flags discrepancies for review.",
+				"$36", &ui.TemplateCardProps{FooterLeft: portalVerifiedRating("4.2", "31")})
+			@ui.TemplateCard("Social listening digest",
+				"Aggregates brand mentions across social platforms into a weekly Slack summary.",
+				"Free", &ui.TemplateCardProps{FooterLeft: portalCommunityInstalls("2.1k installs")})
+		</div>
+	}
+}
+
+templ portalVerifiedRating(value, reviews string) {
+	@ui.Pill("Verified", &ui.PillProps{Tone: "accent"})
+	@ui.Rating(value, &ui.RatingProps{Reviews: reviews})
+}
+
+templ portalCommunityInstalls(installs string) {
+	@ui.Pill("Community", &ui.PillProps{Tone: "purple"})
+	<span class="yr-template-card-install-count">{ installs }</span>
+}
+
+// --- Portal Connectors ---
+
+templ portalConnectorsPage() {
+	@portalShell("Connectors · Yardrail", portalNavAutomations("connectors")) {
+		<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:var(--yr-space-6)">
+			<h1 class="portal-page-title" style="margin-bottom:0">Connectors</h1>
+			@ui.Button("+ Add Connector", ui.ButtonProps{})
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Connected
+		}
+		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3);margin-bottom:var(--yr-space-8)">
+			@portalConnectorRow("", "Slack", "workspace-prod", "success", "Connected", true)
+			@portalConnectorRow("HS", "HubSpot", "marketing-hub", "success", "Connected", false)
+			@portalConnectorRow("GS", "Google Sheets", "ops-shared@acme.com", "success", "Connected", false)
+			@portalConnectorRow("ST", "Stripe", "prod-account", "warning", "Expiring", false)
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Available
+		}
+		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3)">
+			@portalAvailableConnector("JI", "Jira", "Project management and issue tracking")
+			@portalAvailableConnector("SF", "Salesforce", "CRM and sales pipeline management")
+			@portalAvailableConnector("ZD", "Zendesk", "Customer support and ticketing")
+		</div>
+	}
+}
+
+templ portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool) {
+	@ui.ListRow(&ui.ListRowProps{}) {
+		if hasLogo {
+			<div class="yr-list-row-icon">
+				<img src={ exampleLogo } alt={ name } width="40" height="40"/>
+			</div>
+		} else {
+			<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);color:var(--yr-text-muted)">
+				{ initials }
+			</div>
+		}
+		<div class="yr-list-row-main">
+			<div class="yr-list-row-name">{ name }</div>
+			<div class="yr-list-row-meta">
+				<span>{ meta }</span>
+				@ui.Pill(status, &ui.PillProps{Tone: tone, Shape: ui.ShapePill})
+			</div>
+		</div>
+		<div class="yr-list-row-actions">
+			@ui.Button("Manage", ui.ButtonProps{Variant: ui.ButtonSecondary})
+		</div>
+	}
+}
+
+templ portalAvailableConnector(initials, name, desc string) {
+	@ui.ListRow(&ui.ListRowProps{}) {
+		<div class="yr-list-row-icon" style="background:var(--yr-surface-muted);font-family:var(--yr-font-ui);font-weight:600;font-size:var(--yr-font-size-sm);color:var(--yr-text-muted)">
+			{ initials }
+		</div>
+		<div class="yr-list-row-main">
+			<div class="yr-list-row-name">{ name }</div>
+			<div class="yr-list-row-desc">{ desc }</div>
+		</div>
+		<div class="yr-list-row-actions">
+			@ui.Button("Connect", ui.ButtonProps{})
+		</div>
+	}
+}
+
+// --- Portal Space ---
+
+templ portalSpacePage() {
+	@portalShell("Marketing Ops · Yardrail", portalNav("space-marketing")) {
+		<div class="space-header">
+			<div class="space-header-title">
+				<h1 class="portal-page-title" style="margin-bottom:0">Marketing Ops</h1>
+			</div>
+			<div class="space-header-meta">
+				<div class="space-header-members">
+					@ui.Avatar("AL", &ui.AvatarProps{})
+					@ui.Avatar("MK", &ui.AvatarProps{})
+					@ui.Avatar("JS", &ui.AvatarProps{})
+					<span class="space-header-member-count">3 members</span>
+				</div>
+				@ui.Button("Settings", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Installed Workflows <a href="#">Install new</a>
+		}
+		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
+			@ui.WorkflowCard("Lead Scoring", "Waiting for input", &ui.WorkflowCardProps{
+				Status: ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}),
+				Runs: "42", SuccessRate: "91%",
+				Action: ui.Button("View", ui.ButtonProps{Variant: ui.ButtonSecondary}),
+			})
+			@ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
+				Status: ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
+				Runs: "127", SuccessRate: "98%",
+				Action: ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
+			})
+			@ui.WorkflowCard("Social Scheduler", "Last run 1d ago", &ui.WorkflowCardProps{
+				Status: ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
+				Runs: "18", SuccessRate: "85%",
+				Action: ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),
+			})
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Recent Activity <a href="#">View all</a>
+		}
+		@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+			@portalActivityRow("Newsletter Digest", "R-45", "success", "Completed", "3 outputs", "1m 23s", "", false)
+			@portalActivityRow("Lead Scoring", "R-44", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-11T08:00:00Z", false)
+			@portalActivityRow("Newsletter Digest", "R-43", "success", "Completed", "2 outputs", "58s", "", false)
+			@portalActivityRow("Social Scheduler", "R-42", "danger", "Failed", "Rate limit exceeded", "12s", "", true)
+			@portalActivityRow("Lead Scoring", "R-41", "success", "Completed", "1 output", "4m 12s", "", false)
+		}
+	}
+}
+
+// --- Portal Workflow Detail ---
+
+templ portalWorkflowDetailPage() {
+	@portalShell("Newsletter Digest · Yardrail", portalNav("space-marketing")) {
+		@ui.Breadcrumb(&ui.BreadcrumbProps{}) {
+			<a href="#">Home</a>
+			<span class="yr-breadcrumb-sep">/</span>
+			<a href="#">Marketing Ops</a>
+			<span class="yr-breadcrumb-sep">/</span>
+			<span class="yr-breadcrumb-current">Newsletter Digest</span>
+		}
+		<h1 class="portal-page-title">Newsletter Digest</h1>
+		@ui.StatusBanner(&ui.StatusBannerProps{Tone: "success"}) {
+			@ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			<span class="yr-status-banner-message">Running on schedule. Last triggered 2h ago.</span>
+			<div class="yr-status-banner-actions">
+				@ui.Button("Pause", ui.ButtonProps{Variant: ui.ButtonSecondary})
+				@ui.Button("Trigger Now", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+		@ui.Tabs(&ui.TabsProps{Label: "Workflow details"}) {
+			<button slot="tab" data-tab="runs">Runs</button>
+			<button slot="tab" data-tab="config">Configuration</button>
+			@portalWorkflowDetailRuns()
+			@portalWorkflowDetailConfig()
+		}
+	}
+}
+
+templ portalWorkflowDetailRuns() {
+	<div slot="panel" data-tab="runs">
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Needs Attention
+		}
+		@ui.ActivityRow(&ui.ActivityRowProps{Href: "#"}) {
+			<div>
+				<div class="yr-activity-row-desc">Approve newsletter content draft</div>
+				<div class="yr-activity-row-meta">
+					<span class="yr-activity-row-id-badge">R-49</span>
+					@ui.Pill("Waiting", &ui.PillProps{Tone: "warning"})
+					<span>Content review required</span>
+				</div>
+			</div>
+			<div class="yr-activity-row-duration">
+				<span class="yr-activity-row-duration-label">Waiting</span>
+				@ui.LiveDuration("2026-10-11T12:00:00Z", &ui.LiveDurationProps{})
+			</div>
+		}
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Recent Runs
+		}
+		@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
+			@portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-47", "success", "Completed", "3 outputs", "58s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-46", "success", "Completed", "3 outputs", "1m 05s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-45", "danger", "Failed", "SendGrid 429 — rate limit exceeded", "12s", "", true)
+		}
+	</div>
+}
+
+templ portalWorkflowDetailConfig() {
+	<div slot="panel" data-tab="config">
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Triggers
+		}
+		<div style="display:flex;flex-direction:column;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
+			@ui.MetaRow(&ui.MetaRowProps{}) {
+				<span>Webhook</span>
+				<code style="font-family:var(--yr-font-mono);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted)">https://api.yardrail.com/wh/abc123</code>
+			}
+			@ui.MetaRow(&ui.MetaRowProps{}) {
+				<span>Manual</span>
+				@ui.Pill("Enabled", &ui.PillProps{Tone: "success"})
+			}
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Connector Bindings
+		}
+		<div style="display:flex;flex-direction:column;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
+			@ui.MetaRow(&ui.MetaRowProps{}) {
+				<span>email.send</span>
+				<span>SendGrid</span>
+				@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			}
+			@ui.MetaRow(&ui.MetaRowProps{}) {
+				<span>crm.read</span>
+				<span>HubSpot</span>
+				@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			}
+			@ui.MetaRow(&ui.MetaRowProps{}) {
+				<span>file.store</span>
+				<span>Google Drive</span>
+				@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			}
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Schedule
+		}
+		<div style="margin-bottom:var(--yr-space-6)">
+			@ui.MetaRow(&ui.MetaRowProps{}) {
+				<span>Frequency</span>
+				<span>Every weekday at 8:00 AM UTC</span>
+			}
+		</div>
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Inference Backend
+		}
+		@ui.MetaRow(&ui.MetaRowProps{}) {
+			<span>Model</span>
+			<span>Claude Sonnet · temperature 0.3 · max 2048 tokens</span>
+		}
+	</div>
+}
+
+// --- Portal Workflow Run ---
+
+templ portalWorkflowRunPage() {
+	@portalShell("Run #42 · Newsletter Digest · Yardrail", portalNav("space-marketing")) {
+		@ui.Breadcrumb(&ui.BreadcrumbProps{}) {
+			<a href="#">Home</a>
+			<span class="yr-breadcrumb-sep">/</span>
+			<a href="#">Marketing Ops</a>
+			<span class="yr-breadcrumb-sep">/</span>
+			<a href="#">Newsletter Digest</a>
+			<span class="yr-breadcrumb-sep">/</span>
+			<span class="yr-breadcrumb-current">Run #42</span>
+		}
+		<h1 class="portal-page-title">Run #42</h1>
+		@ui.MetaRow(&ui.MetaRowProps{}) {
+			@ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+			<span>Started Oct 11, 2026 at 2:30 PM</span>
+			@ui.LiveDuration("2026-10-11T14:30:00Z", &ui.LiveDurationProps{})
+			<span>Triggered by schedule</span>
+		}
+		@ui.HitlPrompt(&ui.HitlPromptProps{Tone: "warning"}) {
+			<div class="yr-hitl-prompt-title">Approve the content draft for this week's newsletter?</div>
+			<p class="yr-hitl-prompt-desc">
+				The workflow generated a newsletter draft from 12 recent blog posts and 3 product updates. Review the draft in the outputs below before approving.
+			</p>
+			<div class="yr-hitl-prompt-actions">
+				@ui.Button("Approve", ui.ButtonProps{})
+				@ui.Button("Request Changes", ui.ButtonProps{Variant: ui.ButtonSecondary})
+			</div>
+		}
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Outputs
+		}
+		@ui.DownloadList(&ui.DownloadListProps{}) {
+			<a href="#" download>
+				@ui.Icon("file-text")
+				{ " newsletter-draft.html" }
+				<span class="yr-download-size">84 KB</span>
+			</a>
+			<a href="#" download>
+				@ui.Icon("file-spreadsheet")
+				{ " recipient-list.csv" }
+				<span class="yr-download-size">156 KB</span>
+			</a>
+		}
+		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
+			Journal
+		}
+		@ui.JournalLog(&ui.JournalLogProps{}) {
+			@portalJournalEntry("Run started — triggered by schedule", "step-1", "trigger.schedule", "2026-10-11T14:30:00Z", "14:30:00")
+			@portalJournalEntry("Fetched 12 blog posts from CMS", "step-2", "content.fetch", "2026-10-11T14:30:04Z", "14:30:04")
+			@portalJournalEntry("Fetched 3 product updates from Notion", "step-3", "content.fetch", "2026-10-11T14:30:09Z", "14:30:09")
+			@portalJournalEntry("Generated newsletter draft (1,240 words)", "step-4", "ai.generate", "2026-10-11T14:30:18Z", "14:30:18")
+			@portalJournalEntry("Queried recipient list — 2,847 subscribers", "step-5", "list.query", "2026-10-11T14:30:22Z", "14:30:22")
+			@portalJournalEntry("Wrote newsletter-draft.html", "step-6", "output.write", "2026-10-11T14:30:25Z", "14:30:25")
+			@portalJournalEntry("Waiting for approval — content review required", "wait", "input.request", "2026-10-11T14:30:26Z", "14:30:26")
+		}
+	}
+}
+
+templ portalJournalEntry(desc, stepID, stepType, datetime, display string) {
+	@ui.ActivityRow(&ui.ActivityRowProps{}) {
+		<div>
+			<div class="yr-activity-row-desc">{ desc }</div>
+			<div class="yr-activity-row-meta">
+				<span class="yr-activity-row-id-badge">{ stepID }</span>
+				{ stepType }
+			</div>
+		</div>
+		<time class="yr-activity-row-timestamp" datetime={ datetime }>{ display }</time>
+	}
+}

@@ -1,0 +1,22 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ authorLinkSizesExample() {
+	<div style="display:flex;flex-direction:column;gap:1.5rem">
+		<div style="display:flex;flex-direction:column;gap:0.5rem">
+			@ui.AuthorLink("Yardrail", &ui.AuthorLinkProps{
+				Href: "/authors/yardrail", Handle: "yardrail",
+				Avatar: "YR", Verified: true,
+			})
+			<code style="font-size:0.75rem;color:#5C5A59">default</code>
+		</div>
+		<div style="display:flex;flex-direction:column;gap:0.5rem">
+			@ui.AuthorLink("Yardrail", &ui.AuthorLinkProps{
+				Href: "/authors/yardrail", Handle: "yardrail",
+				Avatar: "YR", Verified: true, Size: "lg",
+			})
+			<code style="font-size:0.75rem;color:#5C5A59">size="lg"</code>
+		</div>
+	</div>
+}

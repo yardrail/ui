@@ -1,0 +1,110 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+const setupSlotStyle = `<style>.demo-slot{background:var(--yr-bg);` +
+	`border:1px dashed var(--yr-border);` +
+	`border-radius:var(--yr-radius-sm);` +
+	`padding:var(--yr-space-1) var(--yr-space-3);` +
+	`color:var(--yr-text-disabled);` +
+	`font-family:var(--yr-font-mono);` +
+	`font-size:var(--yr-font-size-xs)}</style>`
+
+const setupOptionStyle = `<style>.setup-option{display:flex;align-items:center;` +
+	`gap:var(--yr-space-3);padding:var(--yr-space-3)` +
+	` var(--yr-space-4);border:1px solid var(--yr-border);` +
+	`border-radius:var(--yr-radius-md);cursor:pointer;` +
+	`font-family:var(--yr-font-ui);` +
+	`font-size:var(--yr-font-size-sm);` +
+	`color:var(--yr-text)}` +
+	`.setup-option:hover{border-color:var(--yr-accent);` +
+	`background:var(--yr-accent-subtle)}` +
+	`.setup-option input{margin:0}` +
+	`.setup-option-text{display:flex;flex-direction:column;` +
+	`gap:var(--yr-space-1)}` +
+	`.setup-option-label{font-weight:500}` +
+	`.setup-option-desc{font-size:var(--yr-font-size-xs);` +
+	`color:var(--yr-text-muted)}</style>`
+
+templ setupCardDefault() {
+	@templ.Raw(setupSlotStyle)
+	@ui.SetupCard(&ui.SetupCardProps{}) {
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "1"})
+		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
+			<div class="demo-slot">header</div>
+		}
+		@ui.SetupCardBody(&ui.SetupCardBodyProps{}) {
+			<div class="demo-slot">body</div>
+		}
+		@ui.SetupCardFooter(&ui.SetupCardFooterProps{}) {
+			<div class="demo-slot">footer</div>
+		}
+	}
+}
+
+templ setupCardFormStep() {
+	@ui.SetupCard(&ui.SetupCardProps{}) {
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "1"})
+		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
+			<h2 class="yr-setup-card-title">Create your organization</h2>
+			<p class="yr-setup-card-subtitle">This is the workspace where your team will collaborate.</p>
+		}
+		@ui.SetupCardBody(&ui.SetupCardBodyProps{}) {
+			@ui.Field("Organization name", "sc-name", ui.FieldProps{})
+		}
+		@ui.SetupCardFooter(&ui.SetupCardFooterProps{}) {
+			<span></span>
+			@ui.Button("Continue", ui.ButtonProps{Variant: ui.ButtonPrimary, Type: ui.ButtonSubmit})
+		}
+	}
+}
+
+templ setupCardSelectionStep() {
+	@templ.Raw(setupOptionStyle)
+	@ui.SetupCard(&ui.SetupCardProps{}) {
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "2"})
+		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
+			<h2 class="yr-setup-card-title">Choose deployment type</h2>
+			<p class="yr-setup-card-subtitle">Select how you want to run your instance.</p>
+		}
+		@ui.SetupCardBody(&ui.SetupCardBodyProps{}) {
+			<label class="setup-option">
+				<input type="radio" name="deploy" value="saas" checked/>
+				<div class="setup-option-text">
+					<span class="setup-option-label">Cloud (SaaS)</span>
+					<span class="setup-option-desc">Managed hosting, automatic updates</span>
+				</div>
+			</label>
+			<label class="setup-option">
+				<input type="radio" name="deploy" value="self"/>
+				<div class="setup-option-text">
+					<span class="setup-option-label">Self-hosted</span>
+					<span class="setup-option-desc">Run on your own infrastructure</span>
+				</div>
+			</label>
+		}
+		@ui.SetupCardFooter(&ui.SetupCardFooterProps{}) {
+			<a class="yr-setup-card-back" href="#">Back</a>
+			@ui.Button("Continue", ui.ButtonProps{Variant: ui.ButtonPrimary})
+		}
+	}
+}
+
+templ setupCardConfirmation() {
+	@ui.SetupCard(&ui.SetupCardProps{}) {
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "4"})
+		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
+			<h2 class="yr-setup-card-title">You&#39;re all set</h2>
+			<p class="yr-setup-card-subtitle">Your workspace is ready. You can invite teammates or start exploring on your own.</p>
+		}
+		@ui.SetupCardBody(&ui.SetupCardBodyProps{}) {
+			@ui.Alert(&ui.AlertProps{Tone: "success"}) {
+				Organization created successfully.
+			}
+		}
+		@ui.SetupCardFooter(&ui.SetupCardFooterProps{}) {
+			<span></span>
+			@ui.Button("Go to dashboard", ui.ButtonProps{Variant: ui.ButtonPrimary})
+		}
+	}
+}

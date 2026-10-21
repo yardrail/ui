@@ -1,0 +1,38 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ templateCardGrid() {
+	<div style="display:grid;grid-template-columns:repeat(2,minmax(0,20rem));gap:1rem">
+		@ui.TemplateCard("Refund triage",
+			"Routes refund requests to the right approver and posts the decision back to the customer thread.",
+			"$24", &ui.TemplateCardProps{
+				Connectors: templateCardConnectors(),
+				FooterLeft: templateCardVerifiedFooter("4.5", "42"),
+			})
+		@ui.TemplateCard("Weekly pipeline report",
+			"Summarizes open deals every Monday.",
+			"Free", &ui.TemplateCardProps{
+				FooterLeft: templateCardCommunityFooter("1.2k installs"),
+			})
+	</div>
+}
+
+templ templateCardConnectors() {
+	@ui.ConnectorPill(&ui.ConnectorPillProps{Title: "Slack"}) {
+		<img src={ exampleLogo } alt="Slack"/>
+	}
+	@ui.ConnectorPill(&ui.ConnectorPillProps{Title: "HubSpot"}) {
+		HS
+	}
+}
+
+templ templateCardVerifiedFooter(value, reviews string) {
+	@ui.Pill("Verified", &ui.PillProps{Tone: "accent"})
+	@ui.Rating(value, &ui.RatingProps{Reviews: reviews})
+}
+
+templ templateCardCommunityFooter(installs string) {
+	@ui.Pill("Community", &ui.PillProps{Tone: "purple"})
+	<span class="yr-template-card-install-count">{ installs }</span>
+}
