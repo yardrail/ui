@@ -1,15 +1,15 @@
-# Lints hand-written CSS in src/ and the gallery's stylesheet for real hygiene
+# Lints hand-written CSS in pkg/ and the gallery's stylesheet for real hygiene
 # issues (duplicate/conflicting selectors, deprecated syntax, invalid values)
 # without demanding a wholesale reformat of its existing style, and holds
-# colour, spacing, text size and radius to the tokens in src/tokens.css. Run
+# colour, spacing, text size and radius to the tokens in tokens.css. Run
 # via `task lint:css`.
 extends: stylelint-config-standard
 
-# src/tokens.css defines every --yr-* custom property. Registering it as a
+# tokens.css defines every --yr-* custom property. Registering it as a
 # reference lets no-unknown-custom-properties resolve var() usages in the other
 # stylesheets, which never import it themselves.
 referenceFiles:
-  - files: [src/tokens.css]
+  - files: [tokens.css]
 
 rules:
   # Components pack single-line rules (`.yr-x { gap: 4px; padding: 0; }`) and
@@ -22,7 +22,7 @@ rules:
   # one --modifier: .yr-split, .yr-split--gap-8, .yr-split__aside.
   selector-class-pattern: "^[a-z][a-z0-9]*(-[a-z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(--[a-z0-9]+(-[a-z0-9]+)*)?$"
 
-  # src/styles.css uses bare-string @import for its build-time imports.
+  # styles.css uses bare-string @import for its build-time imports.
   import-notation: string
 
   # State selectors deliberately follow the base rules they override
@@ -60,7 +60,7 @@ overrides:
   # The search input's left padding clears the absolutely positioned icon
   # (2.5rem, 2.75rem in --hero), which no spacing step equals. Only the fourth
   # value of the padding shorthand may be one of those two.
-  - files: [src/search/yr-search.css]
+  - files: [pkg/search.css]
     rules:
       declaration-property-value-allowed-list:
         <<: *sizes
@@ -69,7 +69,7 @@ overrides:
 
   # The connector initials are two labels under 11px, below the smallest
   # text-size token.
-  - files: [src/connector-pill/*.css]
+  - files: [pkg/connector_pill.css]
     rules:
       declaration-property-value-allowed-list:
         <<: *sizes

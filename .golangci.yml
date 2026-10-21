@@ -23,7 +23,7 @@ linters:
       ignore-patterns:
         - "^net/http\\..*$"
         # ui component Props: every zero-value field is the component's default.
-        - "^github\\.com/yardrail/ui\\..*Props$"
+        - "^github\\.com/yardrail/ui/pkg\\..*Props$"
     tagalign:
       align: true
       sort: true
@@ -71,7 +71,6 @@ linters:
         - name: modifies-value-receiver
         - name: nested-structs
         - name: optimize-operands-order
-        - name: package-directory-mismatch
         - name: redundant-import-alias
         - name: redundant-test-main-exit
         - name: time-date
@@ -120,7 +119,7 @@ linters:
       - linters:
           - godoclint
         text: "package has more than one godoc"
-        path: "^doc\\.go$"
+        path: "doc\\.go$"
       - linters:
           - contextcheck
         text: "should pass the context parameter"

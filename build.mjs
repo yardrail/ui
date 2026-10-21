@@ -2,43 +2,28 @@ import { build, context } from 'esbuild';
 import { copyFile, readdir, readFile, mkdir, writeFile } from 'node:fs/promises';
 
 const jsOpts = {
-  entryPoints: ['src/index.ts'],
+  entryPoints: ['index.ts'],
   bundle: true,
   format: 'esm',
   target: 'es2022',
-  outfile: 'dist/ui.js',
+  outfile: 'pkg/dist/ui.js',
   sourcemap: true,
   logLevel: 'info',
 };
 
 const cssOpts = {
-  entryPoints: ['src/styles.css'],
+  entryPoints: ['styles.css'],
   bundle: true,
-  outfile: 'dist/ui.css',
+  outfile: 'pkg/dist/ui.css',
   sourcemap: true,
   logLevel: 'info',
   external: ['/fonts/*'],
 };
 
-// Copy vendored font files into dist/fonts/ so ui.css can reference them.
-async function copyFonts() {
-  const src = 'src/fonts';
-  const dest = 'dist/fonts';
-  await mkdir(dest, { recursive: true });
-  const files = await readdir(src);
-  let count = 0;
-  for (const f of files) {
-    if (!f.endsWith('.woff2')) continue;
-    await copyFile(`${src}/${f}`, `${dest}/${f}`);
-    count++;
-  }
-  console.log(`  dist/fonts/   ${count} woff2`);
-}
-
-// Copy Lucide SVG icons into dist/icons/ so Go can embed them.
+// Copy Lucide SVG icons into pkg/dist/icons/ so Go can embed them.
 async function copyIcons() {
   const src = 'node_modules/lucide-static/icons';
-  const dest = 'dist/icons';
+  const dest = 'pkg/dist/icons';
   await mkdir(dest, { recursive: true });
   const files = await readdir(src);
   let count = 0;
@@ -64,6 +49,5 @@ if (process.argv.includes('--watch')) {
 } else {
   await build(jsOpts);
   await build(cssOpts);
-  await copyFonts();
   await copyIcons();
 }
