@@ -1,0 +1,34 @@
+# yardrail/ui
+
+Typed templ component library for Yardrail's web UI. Go package `github.com/yardrail/ui/pkg`.
+
+## Component conventions
+
+- Each component is a single `.templ` file in `pkg/` containing the Props struct, exported constructor, and unexported render function, co-located with its `.css` and `.ts` files.
+- Constructors take `*Props` (pointer). Required args are positional.
+- `Props.Attrs` carries passthrough HTML attributes (htmx, data-*), filtered by `filterAttrs()`.
+- Compound components accept `templ.Component` fields for composable slots.
+- Templ is the source of truth for markup. Never edit `*_templ.go` — run `templ generate`.
+- Web components use the `yr-` prefix (e.g. `yr-sidebar`, `yr-pill`).
+- Icons: `Icon(name)` renders a Lucide SVG from `dist/icons/`.
+
+## Gallery
+
+`cmd/gallery/` serves all examples at `:6007`. Run with `task gallery` (uses `air` for hot reload).
+
+## Taskfile targets
+
+Run `task <name>`:
+
+{{range .Tasks}}- `{{.Name}}` — {{.Desc}}
+{{end}}
+
+## Package map
+
+{{range .Packages}}- `{{.ImportPath}}` — {{.Doc}}
+{{end}}
+
+## Git hooks (lefthook)
+
+Pre-commit runs `gen:check`, `lint`, `test` in parallel. Commit messages validated by commitlint.
+Use conventional commits (`feat:`, `fix:`, `refactor:`, `chore:`).

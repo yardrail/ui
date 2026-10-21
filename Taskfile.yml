@@ -51,6 +51,16 @@ tasks:
     deps: [install]
     cmd: pnpm exec stylelint "*.css" "pkg/**/*.css" "!pkg/dist/**" "cmd/gallery/gallery.css" "cmd/gallery/mocks.css"
 
+  docs:
+    desc: Regenerate CLAUDE.md and README.md from templates and source
+    cmd: go run ./scripts/gen-docs/
+
+  docs:check:
+    desc: Fail if CLAUDE.md or README.md is out of date
+    cmds:
+      - task: docs
+      - git diff --exit-code -- CLAUDE.md README.md
+
   gallery:
     desc: Serve every component example on :6007 with live reload via air
     deps: [build]

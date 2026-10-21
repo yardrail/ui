@@ -1,0 +1,49 @@
+# yardrail/ui
+
+Typed [templ](https://templ.guide) component library for Yardrail's web UI.
+
+```go
+import ui "github.com/yardrail/ui/pkg"
+```
+
+## Usage
+
+Serve the bundled CSS/JS:
+
+```go
+http.Handle("/static/ui/", http.StripPrefix("/static/ui/", http.FileServerFS(ui.Assets)))
+```
+
+Use components in templ templates:
+
+```templ
+import ui "github.com/yardrail/ui/pkg"
+
+templ myPage() {
+    @ui.Shell("My Page", &ui.ShellProps{}) {
+        @ui.WorkflowCard("Nightly Sync", "Last run 1h ago", &ui.WorkflowCardProps{
+            Status: ui.Pill("Active", &ui.PillProps{Tone: "success"}),
+            Runs:   "89",
+            SuccessRate: "97%",
+        })
+    }
+}
+```
+
+## Development
+
+```sh
+task gallery    # serve examples on :6007 with hot reload
+task build      # build CSS/JS
+task gen        # compile .templ files
+task test       # run Go tests
+task lint       # run all lints
+```
+
+## Components
+
+{{range .Components}}### {{.Name}}
+
+{{.Doc}}
+
+{{end}}
