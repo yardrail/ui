@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// DownloadListProps configures a DownloadList.
+type DownloadListProps struct {
+	Attrs templ.Attributes
+}
+
+// DownloadList renders a list of downloadable file links. Children are the download links.
+func DownloadList(p *DownloadListProps) templ.Component {
+	return downloadList(p)
+}
+
 func downloadList(p *DownloadListProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

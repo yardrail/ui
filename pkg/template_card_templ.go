@@ -8,6 +8,27 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// TemplateCardProps configures a TemplateCard.
+type TemplateCardProps struct {
+	Href       string
+	Connectors templ.Component
+	FooterLeft templ.Component
+	Attrs      templ.Attributes
+}
+
+func (p *TemplateCardProps) href() string {
+	if p.Href != "" {
+		return p.Href
+	}
+
+	return "#"
+}
+
+// TemplateCard renders a template catalog card with name, description, price, and optional connectors.
+func TemplateCard(name, desc, price string, p *TemplateCardProps) templ.Component {
+	return templateCard(name, desc, price, p)
+}
+
 func templateCard(name, desc, price string, p *TemplateCardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +57,7 @@ func templateCard(name, desc, price string, p *TemplateCardProps) templ.Componen
 		var templ_7745c5c3_Var2 templ.SafeURL
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(p.href()))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 4, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 25, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -57,7 +78,7 @@ func templateCard(name, desc, price string, p *TemplateCardProps) templ.Componen
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 5, Col: 42}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 26, Col: 42}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -70,7 +91,7 @@ func templateCard(name, desc, price string, p *TemplateCardProps) templ.Componen
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(desc)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 6, Col: 41}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 27, Col: 41}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -119,7 +140,7 @@ func templateCard(name, desc, price string, p *TemplateCardProps) templ.Componen
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(price)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 18, Col: 47}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/template_card.templ`, Line: 39, Col: 47}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {

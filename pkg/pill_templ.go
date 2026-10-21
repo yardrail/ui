@@ -8,6 +8,23 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// Pill shapes.
+const (
+	ShapePill = "pill"
+)
+
+// PillProps configures a Pill.
+type PillProps struct {
+	Tone  string
+	Shape string
+	Attrs templ.Attributes
+}
+
+// Pill renders a colored label.
+func Pill(text string, p *PillProps) templ.Component {
+	return pill(text, p)
+}
+
 func pill(text string, p *PillProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +53,7 @@ func pill(text string, p *PillProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Tone)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/pill.templ`, Line: 4, Col: 23}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/pill.templ`, Line: 21, Col: 23}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
@@ -49,7 +66,7 @@ func pill(text string, p *PillProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Shape)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/pill.templ`, Line: 4, Col: 41}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/pill.templ`, Line: 21, Col: 41}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -70,7 +87,7 @@ func pill(text string, p *PillProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(text)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/pill.templ`, Line: 4, Col: 86}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/pill.templ`, Line: 21, Col: 86}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {

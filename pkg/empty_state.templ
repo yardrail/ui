@@ -1,5 +1,15 @@
 package ui
 
+// EmptyStateProps configures an EmptyState.
+type EmptyStateProps struct {
+	Attrs templ.Attributes
+}
+
+// EmptyState renders an empty state placeholder. Children are the message content.
+func EmptyState(p *EmptyStateProps) templ.Component {
+	return emptyState(p)
+}
+
 templ emptyState(p *EmptyStateProps) {
 	<yr-empty-state { filterAttrs("EmptyState", p.Attrs)... }>
 		{ children... }

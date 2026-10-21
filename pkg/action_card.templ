@@ -1,5 +1,17 @@
 package ui
 
+// ActionCardProps configures an ActionCard.
+type ActionCardProps struct {
+	Urgent       bool
+	UrgentDanger bool
+	Attrs        templ.Attributes
+}
+
+// ActionCard renders an action prompt card. Children include icon-badge, body, and action sections.
+func ActionCard(p *ActionCardProps) templ.Component {
+	return actionCard(p)
+}
+
 templ actionCard(p *ActionCardProps) {
 	<div class={ "yr-action-card", templ.KV("yr-action-card--urgent", p.Urgent), templ.KV("yr-action-card--urgent-danger", p.UrgentDanger) } { filterAttrs("ActionCard", p.Attrs)... }>
 		{ children... }

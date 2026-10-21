@@ -8,6 +8,26 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// PageSetupProps configures a PageSetup.
+type PageSetupProps struct {
+	Attrs templ.Attributes
+}
+
+// PageSetup renders a setup/onboarding page layout. Children are the page content.
+func PageSetup(p *PageSetupProps) templ.Component {
+	return pageSetup(p)
+}
+
+// PageSetupContentProps configures a PageSetupContent.
+type PageSetupContentProps struct {
+	Attrs templ.Attributes
+}
+
+// PageSetupContent renders the content area of a setup page.
+func PageSetupContent(p *PageSetupContentProps) templ.Component {
+	return pageSetupContent(p)
+}
+
 func pageSetup(p *PageSetupProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

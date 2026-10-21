@@ -8,6 +8,157 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import (
+	"context"
+	"strings"
+)
+
+// FieldType is the input type of a Field. The zero value renders type="text".
+type FieldType struct{ v string }
+
+// Field types beyond the zero value.
+var (
+	// FieldEmail renders type="email".
+	FieldEmail = FieldType{v: "email"}
+	// FieldPassword renders type="password".
+	FieldPassword = FieldType{v: "password"}
+	// FieldURL renders type="url".
+	FieldURL = FieldType{v: "url"}
+	// FieldSearch renders type="search".
+	FieldSearch = FieldType{v: "search"}
+)
+
+// String returns the value of the type attribute.
+func (t FieldType) String() string {
+	if t.v == "" {
+		return "text"
+	}
+
+	return t.v
+}
+
+// Autocomplete is the autofill token of a Field. The zero value renders no autocomplete attribute.
+type Autocomplete struct{ v string }
+
+// Autocomplete tokens.
+var (
+	// AutocompleteOff turns autofill off.
+	AutocompleteOff = Autocomplete{v: "off"}
+	// AutocompleteName is a person's full name.
+	AutocompleteName = Autocomplete{v: "name"}
+	// AutocompleteEmail is an email address.
+	AutocompleteEmail = Autocomplete{v: "email"}
+	// AutocompleteUsername is a sign-in username.
+	AutocompleteUsername = Autocomplete{v: "username"}
+	// AutocompleteCurrentPassword is the user's existing password, on sign-in forms.
+	AutocompleteCurrentPassword = Autocomplete{v: "current-password"}
+	// AutocompleteNewPassword is a password being set, on sign-up and reset forms.
+	AutocompleteNewPassword = Autocomplete{v: "new-password"}
+	// AutocompleteOrganization is a company or organization name.
+	AutocompleteOrganization = Autocomplete{v: "organization"}
+)
+
+// FieldProps holds a Field's optional settings; every zero value is the default.
+type FieldProps struct {
+	// Attrs holds htmx and script hooks for the <input>, filtered by the Attrs allow-list. An
+	// aria-describedby value is merged after the hint and error ids.
+	Attrs templ.Attributes
+	// Type is the input type; the zero value is text.
+	Type FieldType
+	// Autocomplete is the autofill token; the zero value renders none.
+	Autocomplete Autocomplete
+	// Value is the input's current value.
+	Value string
+	// Hint is help text shown under the input and linked with aria-describedby.
+	Hint string
+	// Error is a validation message. Non-empty marks the input invalid, shows the message and
+	// links it with aria-describedby.
+	Error string
+	// Optional appends " (optional)" to the label.
+	Optional bool
+	// HideLabel keeps the label for screen readers only.
+	HideLabel bool
+	// Focus renders autofocus, for example on the invalid field of an error response.
+	Focus bool
+}
+
+// fieldIDs are the element ids one Field renders.
+type fieldIDs struct {
+	input string
+	hint  string
+	error string
+}
+
+// newFieldIDs derives a Field's ids: <form ID>-<name> inside a Form with an ID, otherwise <name>,
+// with -hint and -error suffixes for the hint and error.
+func newFieldIDs(ctx context.Context, name string) fieldIDs {
+	input := name
+
+	prefix := formID(ctx)
+	if prefix != "" {
+		input = prefix + "-" + name
+	}
+
+	return fieldIDs{input: input, hint: input + "-hint", error: input + "-error"}
+}
+
+// fieldLabel returns the label text, marked optional when p.Optional is set.
+func fieldLabel(label string, p *FieldProps) string {
+	if p.Optional {
+		return label + " (optional)"
+	}
+
+	return label
+}
+
+// fieldClass returns the wrapper's class attribute.
+func fieldClass(p *FieldProps) string {
+	if p.Error != "" {
+		return "yr-field yr-field--invalid"
+	}
+
+	return "yr-field"
+}
+
+// fieldDescribedBy merges the hint id, the error id and any aria-describedby from Attrs, in that
+// order, space-separated.
+func fieldDescribedBy(ids fieldIDs, p *FieldProps, fromAttrs any) string {
+	parts := make([]string, 0, 3) //nolint:mnd // hint, error, Attrs.
+	if p.Hint != "" {
+		parts = append(parts, ids.hint)
+	}
+
+	if p.Error != "" {
+		parts = append(parts, ids.error)
+	}
+
+	s, ok := fromAttrs.(string)
+	if ok && s != "" {
+		parts = append(parts, s)
+	}
+
+	return strings.Join(parts, " ")
+}
+
+// fieldInputAttrs returns the <input>'s filtered Attrs plus the library-owned aria-invalid and
+// merged aria-describedby.
+func fieldInputAttrs(ids fieldIDs, p *FieldProps) templ.Attributes {
+	attrs := filterAttrs("Field", p.Attrs)
+
+	describedBy := fieldDescribedBy(ids, p, attrs["aria-describedby"])
+	delete(attrs, "aria-describedby")
+
+	if describedBy != "" {
+		attrs["aria-describedby"] = describedBy
+	}
+
+	if p.Error != "" {
+		attrs["aria-invalid"] = "true"
+	}
+
+	return attrs
+}
+
 // Field renders a labelled <input> named name, with an optional hint and validation error.
 func Field(label, name string, p FieldProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -63,7 +214,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var4 string
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(ids.input)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 10, Col: 25}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 161, Col: 25}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 			if templ_7745c5c3_Err != nil {
@@ -76,7 +227,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fieldLabel(label, &p))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 10, Col: 78}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 161, Col: 78}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 			if templ_7745c5c3_Err != nil {
@@ -94,7 +245,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(ids.input)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 12, Col: 25}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 163, Col: 25}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 			if templ_7745c5c3_Err != nil {
@@ -107,7 +258,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fieldLabel(label, &p))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 12, Col: 51}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 163, Col: 51}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -125,7 +276,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Type.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 15, Col: 25}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 166, Col: 25}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -138,7 +289,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(ids.input)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 16, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 167, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {
@@ -151,7 +302,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 		var templ_7745c5c3_Var10 string
 		templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.ResolveAttributeValue(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 17, Col: 14}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 168, Col: 14}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var10)
 		if templ_7745c5c3_Err != nil {
@@ -169,7 +320,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var11 string
 			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 19, Col: 19}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 170, Col: 19}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 			if templ_7745c5c3_Err != nil {
@@ -188,7 +339,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var12 string
 			templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Autocomplete.v)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 22, Col: 35}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 173, Col: 35}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var12)
 			if templ_7745c5c3_Err != nil {
@@ -221,7 +372,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var13 string
 			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.ResolveAttributeValue(ids.hint)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 28, Col: 22}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 179, Col: 22}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var13)
 			if templ_7745c5c3_Err != nil {
@@ -234,7 +385,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var14 string
 			templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(p.Hint)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 28, Col: 33}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 179, Col: 33}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 			if templ_7745c5c3_Err != nil {
@@ -253,7 +404,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var15 string
 			templ_7745c5c3_Var15, templ_7745c5c3_Err = templ.ResolveAttributeValue(ids.error)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 31, Col: 46}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 182, Col: 46}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var15)
 			if templ_7745c5c3_Err != nil {
@@ -266,7 +417,7 @@ func Field(label, name string, p FieldProps) templ.Component {
 			var templ_7745c5c3_Var16 string
 			templ_7745c5c3_Var16, templ_7745c5c3_Err = templ.JoinStringErrs(p.Error)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 31, Col: 58}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/field.templ`, Line: 182, Col: 58}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var16))
 			if templ_7745c5c3_Err != nil {

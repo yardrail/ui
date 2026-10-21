@@ -8,6 +8,208 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+import (
+	"context"
+	"errors"
+	"io"
+	"strings"
+)
+
+var (
+	// errRegionOutsideShell reports a Shell region rendered with no Shell around it.
+	errRegionOutsideShell = errors.New("region rendered outside a Shell")
+	// errBandOutsideMain reports a ShellBand rendered with no ShellMain around it.
+	errBandOutsideMain = errors.New("band rendered outside a ShellMain")
+	// errDuplicateRegion reports a second instance of a region that a Shell holds at most once.
+	errDuplicateRegion = errors.New("region rendered more than once in a Shell")
+	// errMissingMain reports a Shell whose children rendered no ShellMain.
+	errMissingMain = errors.New("shell rendered no ShellMain")
+	// errFixedID reports an id in the Attrs of a region whose id is fixed by the Shell.
+	errFixedID = errors.New("id is fixed by the Shell and cannot be set in Attrs")
+)
+
+// Fixed ids of the Shell's regions, targeted by the skip link and the nav toggle.
+const (
+	shellMainID = "yr-shell-main"
+	shellNavID  = "yr-shell-nav"
+)
+
+// shellMainBlock is the class of a ShellMain's <main>.
+const shellMainBlock = "yr-shell__main"
+
+// ShellWidth is the maximum width of a ShellMain's content. The zero value is ShellWidthStandard.
+type ShellWidth struct{ v string }
+
+// Main region widths.
+var (
+	// ShellWidthStandard caps the content at the standard page width.
+	ShellWidthStandard = ShellWidth{}
+	// ShellWidthFull lets the content fill the viewport, less the page gutter.
+	ShellWidthFull = ShellWidth{v: "full"}
+)
+
+// ShellProps holds a Shell's optional settings; every zero value is the default.
+type ShellProps struct {
+	// Head holds app additions to <head>, such as stylesheets, fonts and scripts. It renders
+	// after the library's own assets.
+	Head templ.Component
+	// Attrs holds htmx and script hooks for <body>, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// Lang is the document language; the zero value is "en".
+	Lang string
+}
+
+// lang returns the document language of a Shell.
+func (p *ShellProps) lang() string {
+	if p.Lang == "" {
+		return "en"
+	}
+
+	return p.Lang
+}
+
+// ShellMainProps holds a ShellMain's optional settings; every zero value is the default.
+type ShellMainProps struct {
+	// Messages holds system messages, rendered first inside <main>, before the page's h1.
+	Messages templ.Component
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list. It cannot set id.
+	Attrs templ.Attributes
+	// Width is the maximum width of the content; the zero value is ShellWidthStandard.
+	Width ShellWidth
+}
+
+// class returns the class attribute of a ShellMain.
+func (p *ShellMainProps) class() string {
+	return classes(shellMainBlock, modifier(shellMainBlock, "width", p.Width.v))
+}
+
+// shellState records the regions a Shell's children have rendered.
+type shellState struct {
+	topBar, nav, main, footer bool
+}
+
+// shellStateKey is the context key under which a Shell passes its *shellState to its children.
+type shellStateKey struct{}
+
+// shellMainKey is the context key under which a ShellMain marks the context of its children.
+type shellMainKey struct{}
+
+// shellFromContext returns the state of the enclosing Shell, or nil outside one.
+func shellFromContext(ctx context.Context) *shellState {
+	st, ok := ctx.Value(shellStateKey{}).(*shellState)
+	if !ok {
+		return nil
+	}
+
+	return st
+}
+
+// inShellMain reports whether ctx is inside a ShellMain.
+func inShellMain(ctx context.Context) bool {
+	in, ok := ctx.Value(shellMainKey{}).(bool)
+
+	return ok && in
+}
+
+// Shell renders a whole HTML document titled title, linking the library's assets from
+// /static/ui/. Its children are the page's regions: an optional ShellTopBar, ShellNav and
+// ShellFooter, and exactly one ShellMain.
+func Shell(title string, p ShellProps) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		requireArg("Shell", "title", title)
+
+		st := &shellState{}
+
+		err := shellDocument(title, &p).Render(context.WithValue(ctx, shellStateKey{}, st), w)
+		if err != nil {
+			return err
+		}
+
+		if !st.main {
+			report("Shell", errMissingMain)
+		}
+
+		return nil
+	})
+}
+
+// ShellTopBar renders the page's top bar as a <header>. It must be a child of a Shell.
+func ShellTopBar(p RegionProps) templ.Component {
+	return shellRegion("ShellTopBar", func(st *shellState) *bool { return &st.topBar },
+		shellTopBar(&p))
+}
+
+// ShellNav renders the page's navigation as a <nav>, folded into a popover behind a Menu button
+// on narrow screens. It must be a child of a Shell. Its Attrs cannot set id.
+func ShellNav(p RegionProps) templ.Component {
+	return shellRegion("ShellNav", func(st *shellState) *bool { return &st.nav },
+		shellNav(&p))
+}
+
+// ShellMain renders the page's main content as a <main>, the target of the skip link. It must be
+// a child of a Shell. Its Attrs cannot set id.
+func ShellMain(p ShellMainProps) templ.Component {
+	inner := shellMain(&p)
+
+	return shellRegion("ShellMain", func(st *shellState) *bool { return &st.main },
+		templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+			return inner.Render(context.WithValue(ctx, shellMainKey{}, true), w)
+		}))
+}
+
+// ShellFooter renders the page's footer as a <footer>. It must be a child of a Shell.
+func ShellFooter(p RegionProps) templ.Component {
+	return shellRegion("ShellFooter", func(st *shellState) *bool { return &st.footer },
+		shellFooter(&p))
+}
+
+// ShellBand renders an edge-to-edge band whose content keeps the page width. It must be inside a
+// ShellMain; a ShellMain may hold any number of bands.
+func ShellBand(p RegionProps) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		if shellFromContext(ctx) == nil {
+			report("ShellBand", errRegionOutsideShell)
+		} else if !inShellMain(ctx) {
+			report("ShellBand", errBandOutsideMain)
+		}
+
+		return shellBand(&p).Render(ctx, w)
+	})
+}
+
+// shellRegion renders el as the region component, reporting it when it is outside a Shell or
+// when slot, the region's flag in the Shell's state, is already set.
+func shellRegion(component string, slot func(*shellState) *bool, el templ.Component) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, w io.Writer) error {
+		st := shellFromContext(ctx)
+
+		switch {
+		case st == nil:
+			report(component, errRegionOutsideShell)
+		case *slot(st):
+			report(component, errDuplicateRegion)
+		default:
+			*slot(st) = true
+		}
+
+		return el.Render(ctx, w)
+	})
+}
+
+// withoutFixedID returns attrs filtered by the allow-list, with any id key reported and dropped.
+func withoutFixedID(component string, attrs templ.Attributes) templ.Attributes {
+	kept := filterAttrs(component, attrs)
+
+	for key := range kept {
+		if strings.EqualFold(key, "id") {
+			report(component, errFixedID)
+			delete(kept, key)
+		}
+	}
+
+	return kept
+}
+
 // shellDocument renders the document of a Shell around its children.
 func shellDocument(title string, p *ShellProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -37,7 +239,7 @@ func shellDocument(title string, p *ShellProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.lang())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 6, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 208, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
@@ -50,7 +252,7 @@ func shellDocument(title string, p *ShellProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 10, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 212, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -81,7 +283,7 @@ func shellDocument(title string, p *ShellProps) templ.Component {
 		var templ_7745c5c3_Var4 templ.SafeURL
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("#" + shellMainID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 19, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 221, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -178,7 +380,7 @@ func shellNav(p *RegionProps) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(shellNavID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 35, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 237, Col: 79}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
@@ -191,7 +393,7 @@ func shellNav(p *RegionProps) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(shellNavID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 36, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 238, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -255,7 +457,7 @@ func shellMain(p *ShellMainProps) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(shellMainID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 44, Col: 23}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 246, Col: 23}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {

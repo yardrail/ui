@@ -1,5 +1,15 @@
 package ui
 
+// IconBadgeProps configures an IconBadge.
+type IconBadgeProps struct {
+	Attrs templ.Attributes
+}
+
+// IconBadge renders a circular icon container with the given tone. Children are the icon.
+func IconBadge(tone string, p *IconBadgeProps) templ.Component {
+	return iconBadge(tone, p)
+}
+
 templ iconBadge(tone string, p *IconBadgeProps) {
 	<div class={ "yr-icon-badge", "yr-icon-badge--" + tone } { filterAttrs("IconBadge", p.Attrs)... }>
 		{ children... }

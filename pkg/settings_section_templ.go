@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// SettingsSectionProps configures a SettingsSection.
+type SettingsSectionProps struct {
+	Attrs templ.Attributes
+}
+
+// SettingsSection renders a settings card with heading and fields. Children are the section content.
+func SettingsSection(p *SettingsSectionProps) templ.Component {
+	return settingsSection(p)
+}
+
 func settingsSection(p *SettingsSectionProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

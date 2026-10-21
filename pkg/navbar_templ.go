@@ -8,6 +8,29 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// NavbarProps configures a Navbar.
+type NavbarProps struct {
+	Attrs templ.Attributes
+}
+
+// Navbar renders a generic navigation bar.
+func Navbar(p *NavbarProps) templ.Component {
+	return navbar(p)
+}
+
+// NavbarStdProps configures a NavbarStd.
+type NavbarStdProps struct {
+	Logo   string
+	Brand  string
+	Authed bool
+	Attrs  templ.Attributes
+}
+
+// NavbarStd renders the standard navigation bar with logo, brand, and account menu.
+func NavbarStd(p *NavbarStdProps) templ.Component {
+	return navbarStd(p)
+}
+
 func navbar(p *NavbarProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -81,7 +104,7 @@ func navbarStd(p *NavbarStdProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Logo)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/navbar.templ`, Line: 11, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/navbar.templ`, Line: 34, Col: 15}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -94,7 +117,7 @@ func navbarStd(p *NavbarStdProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Brand)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/navbar.templ`, Line: 12, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/navbar.templ`, Line: 35, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {

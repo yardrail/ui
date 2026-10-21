@@ -1,5 +1,15 @@
 package ui
 
+// SectionHeaderProps configures a SectionHeader.
+type SectionHeaderProps struct {
+	Attrs templ.Attributes
+}
+
+// SectionHeader renders a titled section divider. Children are the title text and optional action link.
+func SectionHeader(p *SectionHeaderProps) templ.Component {
+	return sectionHeader(p)
+}
+
 templ sectionHeader(p *SectionHeaderProps) {
 	<yr-section-header { filterAttrs("SectionHeader", p.Attrs)... }>
 		{ children... }

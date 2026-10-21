@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// BreadcrumbProps configures a Breadcrumb.
+type BreadcrumbProps struct {
+	Attrs templ.Attributes
+}
+
+// Breadcrumb renders a breadcrumb navigation. Children are the links, separators, and current item.
+func Breadcrumb(p *BreadcrumbProps) templ.Component {
+	return breadcrumb(p)
+}
+
 func breadcrumb(p *BreadcrumbProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

@@ -8,6 +8,22 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// AuthorLinkProps configures an AuthorLink.
+type AuthorLinkProps struct {
+	Href     string
+	Handle   string
+	Verified bool
+	Avatar   string
+	Size     string
+	Heading  bool
+	Attrs    templ.Attributes
+}
+
+// AuthorLink renders an author identity: avatar, name, handle, and verified badge.
+func AuthorLink(name string, p *AuthorLinkProps) templ.Component {
+	return authorLink(name, p)
+}
+
 func authorLink(name string, p *AuthorLinkProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +52,7 @@ func authorLink(name string, p *AuthorLinkProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 5, Col: 13}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 21, Col: 13}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
@@ -49,7 +65,7 @@ func authorLink(name string, p *AuthorLinkProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Href)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 6, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 22, Col: 15}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -62,7 +78,7 @@ func authorLink(name string, p *AuthorLinkProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Handle)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 7, Col: 19}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 23, Col: 19}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {
@@ -75,7 +91,7 @@ func authorLink(name string, p *AuthorLinkProps) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Avatar)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 8, Col: 19}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 24, Col: 19}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
 		if templ_7745c5c3_Err != nil {
@@ -88,7 +104,7 @@ func authorLink(name string, p *AuthorLinkProps) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Size)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 9, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/author_link.templ`, Line: 25, Col: 15}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {

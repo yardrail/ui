@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// CopyFieldProps configures a CopyField.
+type CopyFieldProps struct {
+	Attrs templ.Attributes
+}
+
+// CopyField renders a code display with a copy-to-clipboard button.
+func CopyField(value string, p *CopyFieldProps) templ.Component {
+	return copyField(value, p)
+}
+
 func copyField(value string, p *CopyFieldProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +46,7 @@ func copyField(value string, p *CopyFieldProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/copy_field.templ`, Line: 4, Col: 29}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/copy_field.templ`, Line: 14, Col: 29}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {

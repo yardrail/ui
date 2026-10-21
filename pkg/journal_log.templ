@@ -1,5 +1,15 @@
 package ui
 
+// JournalLogProps configures a JournalLog.
+type JournalLogProps struct {
+	Attrs templ.Attributes
+}
+
+// JournalLog renders a scrollable container for workflow run journal entries. Children are the entries.
+func JournalLog(p *JournalLogProps) templ.Component {
+	return journalLog(p)
+}
+
 templ journalLog(p *JournalLogProps) {
 	<yr-journal-log { filterAttrs("JournalLog", p.Attrs)... }>
 		{ children... }

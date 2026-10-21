@@ -8,6 +8,58 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// SetupCardProps configures a SetupCard.
+type SetupCardProps struct {
+	Attrs templ.Attributes
+}
+
+// SetupCard renders a setup/onboarding card. Children are the card content.
+func SetupCard(p *SetupCardProps) templ.Component {
+	return setupCard(p)
+}
+
+// SetupCardProgressProps configures a SetupCardProgress.
+type SetupCardProgressProps struct {
+	Steps   string
+	Current string
+	Attrs   templ.Attributes
+}
+
+// SetupCardProgress renders a step progress indicator.
+func SetupCardProgress(p *SetupCardProgressProps) templ.Component {
+	return setupCardProgress(p)
+}
+
+// SetupCardHeaderProps configures a SetupCardHeader.
+type SetupCardHeaderProps struct {
+	Attrs templ.Attributes
+}
+
+// SetupCardHeader renders the header of a setup card.
+func SetupCardHeader(p *SetupCardHeaderProps) templ.Component {
+	return setupCardHeader(p)
+}
+
+// SetupCardBodyProps configures a SetupCardBody.
+type SetupCardBodyProps struct {
+	Attrs templ.Attributes
+}
+
+// SetupCardBody renders the body of a setup card.
+func SetupCardBody(p *SetupCardBodyProps) templ.Component {
+	return setupCardBody(p)
+}
+
+// SetupCardFooterProps configures a SetupCardFooter.
+type SetupCardFooterProps struct {
+	Attrs templ.Attributes
+}
+
+// SetupCardFooter renders the footer of a setup card.
+func SetupCardFooter(p *SetupCardFooterProps) templ.Component {
+	return setupCardFooter(p)
+}
+
 func setupCard(p *SetupCardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -81,7 +133,7 @@ func setupCardProgress(p *SetupCardProgressProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Steps)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/setup_card.templ`, Line: 10, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/setup_card.templ`, Line: 62, Col: 40}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -94,7 +146,7 @@ func setupCardProgress(p *SetupCardProgressProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Current)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/setup_card.templ`, Line: 10, Col: 62}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/setup_card.templ`, Line: 62, Col: 62}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {

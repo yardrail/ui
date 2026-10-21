@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// EmptyStateProps configures an EmptyState.
+type EmptyStateProps struct {
+	Attrs templ.Attributes
+}
+
+// EmptyState renders an empty state placeholder. Children are the message content.
+func EmptyState(p *EmptyStateProps) templ.Component {
+	return emptyState(p)
+}
+
 func emptyState(p *EmptyStateProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

@@ -1,5 +1,28 @@
 package ui
 
+// NavbarProps configures a Navbar.
+type NavbarProps struct {
+	Attrs templ.Attributes
+}
+
+// Navbar renders a generic navigation bar.
+func Navbar(p *NavbarProps) templ.Component {
+	return navbar(p)
+}
+
+// NavbarStdProps configures a NavbarStd.
+type NavbarStdProps struct {
+	Logo   string
+	Brand  string
+	Authed bool
+	Attrs  templ.Attributes
+}
+
+// NavbarStd renders the standard navigation bar with logo, brand, and account menu.
+func NavbarStd(p *NavbarStdProps) templ.Component {
+	return navbarStd(p)
+}
+
 templ navbar(p *NavbarProps) {
 	<yr-navbar { filterAttrs("Navbar", p.Attrs)... }>
 		{ children... }

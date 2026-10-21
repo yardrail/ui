@@ -8,6 +8,20 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// WorkflowCardProps configures a WorkflowCard.
+type WorkflowCardProps struct {
+	Status      templ.Component
+	Runs        string
+	SuccessRate string
+	Action      templ.Component
+	Attrs       templ.Attributes
+}
+
+// WorkflowCard renders an installed workflow summary card.
+func WorkflowCard(name, footerText string, p *WorkflowCardProps) templ.Component {
+	return workflowCard(name, footerText, p)
+}
+
 func workflowCard(name, footerText string, p *WorkflowCardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -44,7 +58,7 @@ func workflowCard(name, footerText string, p *WorkflowCardProps) templ.Component
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/workflow_card.templ`, Line: 6, Col: 45}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/workflow_card.templ`, Line: 20, Col: 45}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -79,7 +93,7 @@ func workflowCard(name, footerText string, p *WorkflowCardProps) templ.Component
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(footerText)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/workflow_card.templ`, Line: 16, Col: 21}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/workflow_card.templ`, Line: 30, Col: 21}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {

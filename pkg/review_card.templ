@@ -1,5 +1,15 @@
 package ui
 
+// ReviewCardProps configures a ReviewCard.
+type ReviewCardProps struct {
+	Attrs templ.Attributes
+}
+
+// ReviewCard renders a review card. Children are the review content.
+func ReviewCard(p *ReviewCardProps) templ.Component {
+	return reviewCard(p)
+}
+
 templ reviewCard(p *ReviewCardProps) {
 	<div class="yr-review-card" { filterAttrs("ReviewCard", p.Attrs)... }>
 		{ children... }

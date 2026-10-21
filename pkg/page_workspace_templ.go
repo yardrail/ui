@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// PageWorkspaceProps configures a PageWorkspace.
+type PageWorkspaceProps struct {
+	Attrs templ.Attributes
+}
+
+// PageWorkspace renders the grid-based workspace page shell.
+func PageWorkspace(p *PageWorkspaceProps) templ.Component {
+	return pageWorkspace(p)
+}
+
 func pageWorkspace(p *PageWorkspaceProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

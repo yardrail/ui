@@ -1,5 +1,17 @@
 package ui
 
+// DrawerProps configures a Drawer.
+type DrawerProps struct {
+	Open     bool
+	Position string
+	Attrs    templ.Attributes
+}
+
+// Drawer renders a slide-out drawer panel.
+func Drawer(p *DrawerProps) templ.Component {
+	return drawer(p)
+}
+
 templ drawer(p *DrawerProps) {
 	<yr-drawer
 		position={ p.Position }

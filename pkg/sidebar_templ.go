@@ -8,6 +8,73 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// SidebarProps configures a Sidebar.
+type SidebarProps struct {
+	Collapsed bool
+	Attrs     templ.Attributes
+}
+
+// Sidebar renders the main navigation sidebar.
+func Sidebar(p *SidebarProps) templ.Component {
+	return sidebarComponent(p)
+}
+
+// SidebarHeaderProps configures a SidebarHeader.
+type SidebarHeaderProps struct {
+	Attrs templ.Attributes
+}
+
+// SidebarHeader renders the header region of a sidebar.
+func SidebarHeader(p *SidebarHeaderProps) templ.Component {
+	return sidebarHeader(p)
+}
+
+// SidebarNavProps configures a SidebarNav.
+type SidebarNavProps struct {
+	Label  string
+	Bottom bool
+	Attrs  templ.Attributes
+}
+
+// SidebarNav renders a navigation group within a sidebar.
+func SidebarNav(p *SidebarNavProps) templ.Component {
+	return sidebarNav(p)
+}
+
+// SidebarLinkProps configures a SidebarLink.
+type SidebarLinkProps struct {
+	Href   string
+	Active bool
+	Attrs  templ.Attributes
+}
+
+// SidebarLink renders a single navigation link within a sidebar nav group.
+func SidebarLink(p *SidebarLinkProps) templ.Component {
+	return sidebarLink(p)
+}
+
+// SidebarOrgProps configures a SidebarOrg.
+type SidebarOrgProps struct {
+	Name    string
+	Initial string
+	Attrs   templ.Attributes
+}
+
+// SidebarOrg renders an organization badge within a sidebar.
+func SidebarOrg(p *SidebarOrgProps) templ.Component {
+	return sidebarOrg(p)
+}
+
+// SidebarFooterProps configures a SidebarFooter.
+type SidebarFooterProps struct {
+	Attrs templ.Attributes
+}
+
+// SidebarFooter renders the footer region of a sidebar.
+func SidebarFooter(p *SidebarFooterProps) templ.Component {
+	return sidebarFooter(p)
+}
+
 func sidebarComponent(p *SidebarProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -132,7 +199,7 @@ func sidebarNav(p *SidebarNavProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 22, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 89, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {
@@ -196,7 +263,7 @@ func sidebarLink(p *SidebarLinkProps) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Href)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 34, Col: 15}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 101, Col: 15}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
@@ -260,7 +327,7 @@ func sidebarOrg(p *SidebarOrgProps) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Name)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 45, Col: 30}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 112, Col: 30}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -273,7 +340,7 @@ func sidebarOrg(p *SidebarOrgProps) templ.Component {
 		var templ_7745c5c3_Var9 string
 		templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Initial)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 45, Col: 52}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/sidebar.templ`, Line: 112, Col: 52}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var9)
 		if templ_7745c5c3_Err != nil {

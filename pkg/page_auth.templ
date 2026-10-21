@@ -1,5 +1,15 @@
 package ui
 
+// PageAuthProps configures a PageAuth.
+type PageAuthProps struct {
+	Attrs templ.Attributes
+}
+
+// PageAuth renders a centered auth page layout. Children are the page content.
+func PageAuth(p *PageAuthProps) templ.Component {
+	return pageAuth(p)
+}
+
 templ pageAuth(p *PageAuthProps) {
 	<yr-page-auth { filterAttrs("PageAuth", p.Attrs)... }>
 		{ children... }

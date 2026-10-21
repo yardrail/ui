@@ -8,6 +8,50 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// Search variants.
+const (
+	SearchHero    = "hero"
+	SearchCompact = "compact"
+)
+
+// SearchProps configures a Search form.
+type SearchProps struct {
+	Variant     string
+	Placeholder string
+	Action      string
+	Name        string
+	Attrs       templ.Attributes
+}
+
+func (p *SearchProps) class() string {
+	if p.Variant != "" {
+		return "yr-search yr-search--" + p.Variant
+	}
+
+	return "yr-search"
+}
+
+func (p *SearchProps) action() string {
+	if p.Action != "" {
+		return p.Action
+	}
+
+	return "#"
+}
+
+func (p *SearchProps) name() string {
+	if p.Name != "" {
+		return p.Name
+	}
+
+	return "q"
+}
+
+// Search renders a search form with icon and input.
+func Search(p *SearchProps) templ.Component {
+	return search(p)
+}
+
 func search(p *SearchProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -54,7 +98,7 @@ func search(p *SearchProps) templ.Component {
 		var templ_7745c5c3_Var4 templ.SafeURL
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(p.action()))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/search.templ`, Line: 4, Col: 74}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/search.templ`, Line: 48, Col: 74}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -83,7 +127,7 @@ func search(p *SearchProps) templ.Component {
 		var templ_7745c5c3_Var5 string
 		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.name())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/search.templ`, Line: 8, Col: 62}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/search.templ`, Line: 52, Col: 62}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
 		if templ_7745c5c3_Err != nil {
@@ -96,7 +140,7 @@ func search(p *SearchProps) templ.Component {
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Placeholder)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/search.templ`, Line: 8, Col: 92}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/search.templ`, Line: 52, Col: 92}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 		if templ_7745c5c3_Err != nil {
