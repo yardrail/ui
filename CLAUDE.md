@@ -106,8 +106,8 @@ type WorkflowCardProps struct {
     Attrs       templ.Attributes
 }
 
-func WorkflowCard(name, footer string, p WorkflowCardProps) templ.Component {
-    return workflowCard(name, footer, &p)
+func WorkflowCard(name, footer string, p *WorkflowCardProps) templ.Component {
+    return workflowCard(name, footer, p)
 }
 ```
 
@@ -156,7 +156,7 @@ customElements.define('yr-workflow-card', YrWorkflowCard);
 
 ## Component conventions
 
-- Required args are positional (usually the accessible name). Optional config goes in a `Props` struct with zero-value defaults.
+- Required args are positional (usually the accessible name). Optional config goes in a `Props` struct with zero-value defaults. Constructors take `*Props` (pointer).
 - `Props.Attrs` carries passthrough HTML attributes (htmx, data-*), filtered by `filterAttrs()` before rendering.
 - Compound components accept `templ.Component` fields for composable slots (e.g. `Status`, `Action`).
 - Templ is the source of truth for markup. Never edit `*_templ.go` — run `templ generate`.
@@ -169,11 +169,11 @@ customElements.define('yr-workflow-card', YrWorkflowCard);
 templ portalSpacePage() {
     @portalShell("Marketing Ops · Yardrail", portalNav("space-marketing")) {
         <div class="portal-grid portal-grid-3">
-            @WorkflowCard("Lead Scoring", "Waiting for input", WorkflowCardProps{
-                Status: Pill("Waiting", PillProps{Tone: "warning", Shape: ShapePill}),
+            @WorkflowCard("Lead Scoring", "Waiting for input", &WorkflowCardProps{
+                Status: Pill("Waiting", &PillProps{Tone: "warning", Shape: ShapePill}),
                 Runs:   "42",
                 SuccessRate: "91%",
-                Action: Button("View", ButtonProps{Variant: VariantSecondary}),
+                Action: Button("View", &ButtonProps{Variant: VariantSecondary}),
             })
         </div>
     }
@@ -193,9 +193,9 @@ http.Handle("/static/ui/", http.StripPrefix("/static/ui/", http.FileServerFS(ui.
 import ui "github.com/yardrail/ui/pkg"
 
 templ myPage() {
-    @ui.Shell("My Page", ui.ShellProps{}) {
-        @ui.WorkflowCard("Nightly Sync", "Last run 1h ago", ui.WorkflowCardProps{
-            Status: ui.Pill("Active", ui.PillProps{Tone: "success"}),
+    @ui.Shell("My Page", &ui.ShellProps{}) {
+        @ui.WorkflowCard("Nightly Sync", "Last run 1h ago", &ui.WorkflowCardProps{
+            Status: ui.Pill("Active", &ui.PillProps{Tone: "success"}),
             Runs:   "89",
             SuccessRate: "97%",
         })
