@@ -6,7 +6,7 @@ tmp_dir = ".air"
   cmd = "pnpm build && go build -o .air/gallery ./cmd/gallery"
   args_bin = ["--addr", "localhost:6007"]
   delay = 200
-  include_ext = ["go", "templ", "css", "js", "mjs"]
+  include_ext = ["go", "templ", "css", "js", "ts"]
   exclude_dir = ["node_modules", "dist", ".air", ".git", "testdata"]
   kill_delay = 500
 
