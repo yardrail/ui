@@ -8,6 +8,18 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// ActionCardProps configures an ActionCard.
+type ActionCardProps struct {
+	Urgent       bool
+	UrgentDanger bool
+	Attrs        templ.Attributes
+}
+
+// ActionCard renders an action prompt card. Children include icon-badge, body, and action sections.
+func ActionCard(p *ActionCardProps) templ.Component {
+	return actionCard(p)
+}
+
 func actionCard(p *ActionCardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

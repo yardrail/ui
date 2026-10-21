@@ -1,5 +1,16 @@
 package ui
 
+// DropdownMenuProps configures a DropdownMenu.
+type DropdownMenuProps struct {
+	Open  bool
+	Attrs templ.Attributes
+}
+
+// DropdownMenu renders a dropdown menu with trigger and panel slots.
+func DropdownMenu(p *DropdownMenuProps) templ.Component {
+	return dropdownMenu(p)
+}
+
 templ dropdownMenu(p *DropdownMenuProps) {
 	<yr-dropdown-menu
 		if p.Open {

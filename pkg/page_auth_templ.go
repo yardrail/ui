@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// PageAuthProps configures a PageAuth.
+type PageAuthProps struct {
+	Attrs templ.Attributes
+}
+
+// PageAuth renders a centered auth page layout. Children are the page content.
+func PageAuth(p *PageAuthProps) templ.Component {
+	return pageAuth(p)
+}
+
 func pageAuth(p *PageAuthProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

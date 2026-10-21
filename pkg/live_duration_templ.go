@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// LiveDurationProps configures a LiveDuration.
+type LiveDurationProps struct {
+	Attrs templ.Attributes
+}
+
+// LiveDuration renders a live HH:MM:SS counter from the given ISO 8601 start time.
+func LiveDuration(startedAt string, p *LiveDurationProps) templ.Component {
+	return liveDuration(startedAt, p)
+}
+
 func liveDuration(startedAt string, p *LiveDurationProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +46,7 @@ func liveDuration(startedAt string, p *LiveDurationProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(startedAt)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/live_duration.templ`, Line: 4, Col: 41}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/live_duration.templ`, Line: 14, Col: 41}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {

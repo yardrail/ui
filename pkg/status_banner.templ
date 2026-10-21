@@ -1,5 +1,16 @@
 package ui
 
+// StatusBannerProps configures a StatusBanner.
+type StatusBannerProps struct {
+	Tone  string
+	Attrs templ.Attributes
+}
+
+// StatusBanner renders a persistent status display bar. Children are the banner content.
+func StatusBanner(p *StatusBannerProps) templ.Component {
+	return statusBanner(p)
+}
+
 templ statusBanner(p *StatusBannerProps) {
 	<yr-status-banner tone={ p.Tone } { filterAttrs("StatusBanner", p.Attrs)... }>
 		{ children... }

@@ -1,5 +1,15 @@
 package ui
 
+// BreadcrumbProps configures a Breadcrumb.
+type BreadcrumbProps struct {
+	Attrs templ.Attributes
+}
+
+// Breadcrumb renders a breadcrumb navigation. Children are the links, separators, and current item.
+func Breadcrumb(p *BreadcrumbProps) templ.Component {
+	return breadcrumb(p)
+}
+
 templ breadcrumb(p *BreadcrumbProps) {
 	<nav class="yr-breadcrumb" { filterAttrs("Breadcrumb", p.Attrs)... }>
 		{ children... }

@@ -8,6 +8,17 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// HitlPromptProps configures a HitlPrompt.
+type HitlPromptProps struct {
+	Tone  string
+	Attrs templ.Attributes
+}
+
+// HitlPrompt renders a human-in-the-loop prompt card. Children are the prompt content.
+func HitlPrompt(p *HitlPromptProps) templ.Component {
+	return hitlPrompt(p)
+}
+
 func hitlPrompt(p *HitlPromptProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +47,7 @@ func hitlPrompt(p *HitlPromptProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Tone)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/hitl_prompt.templ`, Line: 4, Col: 30}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/hitl_prompt.templ`, Line: 15, Col: 30}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {

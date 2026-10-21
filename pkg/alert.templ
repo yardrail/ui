@@ -1,5 +1,16 @@
 package ui
 
+// AlertProps configures an Alert.
+type AlertProps struct {
+	Tone  string
+	Attrs templ.Attributes
+}
+
+// Alert renders a banner/flash message. Children are the message content.
+func Alert(p *AlertProps) templ.Component {
+	return alert(p)
+}
+
 templ alert(p *AlertProps) {
 	<yr-alert tone={ p.Tone } { filterAttrs("Alert", p.Attrs)... }>
 		{ children... }

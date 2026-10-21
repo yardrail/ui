@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// MetaRowProps configures a MetaRow.
+type MetaRowProps struct {
+	Attrs templ.Attributes
+}
+
+// MetaRow renders a middot-joined row of metadata fragments.
+func MetaRow(p *MetaRowProps) templ.Component {
+	return metaRow(p)
+}
+
 func metaRow(p *MetaRowProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

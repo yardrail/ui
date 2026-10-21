@@ -8,6 +8,19 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// ActivityRowProps configures an ActivityRow.
+type ActivityRowProps struct {
+	Href    string
+	IsError bool
+	Attrs   templ.Attributes
+}
+
+// ActivityRow renders a run/activity entry. When Href is set it renders as a link;
+// otherwise as a div. IsError adds the is-error modifier.
+func ActivityRow(p *ActivityRowProps) templ.Component {
+	return activityRow(p)
+}
+
 func activityRow(p *ActivityRowProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -55,7 +68,7 @@ func activityRow(p *ActivityRowProps) templ.Component {
 			var templ_7745c5c3_Var4 templ.SafeURL
 			templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(p.Href))
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/activity_row.templ`, Line: 5, Col: 94}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/activity_row.templ`, Line: 18, Col: 94}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 			if templ_7745c5c3_Err != nil {

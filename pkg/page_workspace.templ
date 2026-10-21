@@ -1,5 +1,15 @@
 package ui
 
+// PageWorkspaceProps configures a PageWorkspace.
+type PageWorkspaceProps struct {
+	Attrs templ.Attributes
+}
+
+// PageWorkspace renders the grid-based workspace page shell.
+func PageWorkspace(p *PageWorkspaceProps) templ.Component {
+	return pageWorkspace(p)
+}
+
 templ pageWorkspace(p *PageWorkspaceProps) {
 	<yr-page-workspace { filterAttrs("PageWorkspace", p.Attrs)... }>
 		{ children... }

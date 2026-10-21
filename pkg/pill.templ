@@ -1,5 +1,22 @@
 package ui
 
+// Pill shapes.
+const (
+	ShapePill = "pill"
+)
+
+// PillProps configures a Pill.
+type PillProps struct {
+	Tone  string
+	Shape string
+	Attrs templ.Attributes
+}
+
+// Pill renders a colored label.
+func Pill(text string, p *PillProps) templ.Component {
+	return pill(text, p)
+}
+
 templ pill(text string, p *PillProps) {
 	<yr-pill tone={ p.Tone } shape={ p.Shape } { filterAttrs("Pill", p.Attrs)... }>{ text }</yr-pill>
 }

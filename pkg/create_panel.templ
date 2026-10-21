@@ -1,5 +1,15 @@
 package ui
 
+// CreatePanelProps configures a CreatePanel.
+type CreatePanelProps struct {
+	Attrs templ.Attributes
+}
+
+// CreatePanel renders a collapsible creation form panel. Children are the panel content.
+func CreatePanel(p *CreatePanelProps) templ.Component {
+	return createPanel(p)
+}
+
 templ createPanel(p *CreatePanelProps) {
 	<details class="yr-create-panel" { filterAttrs("CreatePanel", p.Attrs)... }>
 		{ children... }

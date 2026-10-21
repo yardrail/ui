@@ -8,6 +8,74 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// ButtonType is the native type of a Button. The zero value renders type="button", so a Button
+// inside a form submits only when it asks to.
+type ButtonType struct{ v string }
+
+// Button types beyond the zero value.
+var (
+	// ButtonSubmit renders type="submit".
+	ButtonSubmit = ButtonType{v: "submit"}
+	// ButtonReset renders type="reset".
+	ButtonReset = ButtonType{v: "reset"}
+)
+
+// String returns the value of the type attribute.
+func (t ButtonType) String() string {
+	if t.v == "" {
+		return "button"
+	}
+
+	return t.v
+}
+
+// ButtonVariant is the visual style of a Button. The zero value is ButtonPrimary.
+type ButtonVariant struct{ v string }
+
+// Button variants.
+var (
+	// ButtonPrimary is the filled default action.
+	ButtonPrimary = ButtonVariant{}
+	// ButtonSecondary is the outlined alternative action.
+	ButtonSecondary = ButtonVariant{v: "secondary"}
+	// ButtonLink looks like a text link.
+	ButtonLink = ButtonVariant{v: "link"}
+	// ButtonDanger is a filled destructive action.
+	ButtonDanger = ButtonVariant{v: "danger"}
+	// ButtonDangerQuiet is a low-emphasis destructive action, for example Remove in a table row.
+	ButtonDangerQuiet = ButtonVariant{v: "danger-quiet"}
+)
+
+// buttonClass is the base class every Button carries.
+const buttonClass = "yr-button"
+
+// class returns the class attribute for the variant.
+func (v ButtonVariant) class() string {
+	if v.v == "" {
+		return buttonClass
+	}
+
+	return buttonClass + " " + buttonClass + "--" + v.v
+}
+
+// ButtonProps holds a Button's optional settings; every zero value is the default.
+type ButtonProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// Type is the native button type; the zero value is type="button".
+	Type ButtonType
+	// Variant is the visual style; the zero value is ButtonPrimary.
+	Variant ButtonVariant
+	// Name is the name submitted with the form, when set.
+	Name string
+	// Value is the value submitted with the form, when set.
+	Value string
+	// Confirm, when set, asks the user to confirm before the htmx request is sent.
+	Confirm string
+	// Disabled renders the button disabled.
+	Disabled bool
+}
+
 // Button renders a native <button> whose text, and accessible name, is label.
 func Button(label string, p ButtonProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
@@ -43,7 +111,7 @@ func Button(label string, p ButtonProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Type.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 7, Col: 24}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 75, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -74,7 +142,7 @@ func Button(label string, p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 10, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 78, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
 			if templ_7745c5c3_Err != nil {
@@ -93,7 +161,7 @@ func Button(label string, p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 13, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 81, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 			if templ_7745c5c3_Err != nil {
@@ -112,7 +180,7 @@ func Button(label string, p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Confirm)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 16, Col: 25}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 84, Col: 25}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 			if templ_7745c5c3_Err != nil {
@@ -140,7 +208,7 @@ func Button(label string, p ButtonProps) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 20, Col: 9}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 88, Col: 9}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {

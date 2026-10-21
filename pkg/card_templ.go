@@ -8,6 +8,17 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// CardProps configures a Card.
+type CardProps struct {
+	Interactive bool
+	Attrs       templ.Attributes
+}
+
+// Card renders a generic container card. Children are the card content.
+func Card(p *CardProps) templ.Component {
+	return card(p)
+}
+
 func card(p *CardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

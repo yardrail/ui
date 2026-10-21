@@ -1,5 +1,26 @@
 package ui
 
+// TemplateCardProps configures a TemplateCard.
+type TemplateCardProps struct {
+	Href       string
+	Connectors templ.Component
+	FooterLeft templ.Component
+	Attrs      templ.Attributes
+}
+
+func (p *TemplateCardProps) href() string {
+	if p.Href != "" {
+		return p.Href
+	}
+
+	return "#"
+}
+
+// TemplateCard renders a template catalog card with name, description, price, and optional connectors.
+func TemplateCard(name, desc, price string, p *TemplateCardProps) templ.Component {
+	return templateCard(name, desc, price, p)
+}
+
 templ templateCard(name, desc, price string, p *TemplateCardProps) {
 	<a href={ templ.SafeURL(p.href()) } class="yr-card yr-card--interactive yr-template-card" { filterAttrs("TemplateCard", p.Attrs)... }>
 		<h3 class="yr-template-card-name">{ name }</h3>

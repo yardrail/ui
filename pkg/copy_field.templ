@@ -1,5 +1,15 @@
 package ui
 
+// CopyFieldProps configures a CopyField.
+type CopyFieldProps struct {
+	Attrs templ.Attributes
+}
+
+// CopyField renders a code display with a copy-to-clipboard button.
+func CopyField(value string, p *CopyFieldProps) templ.Component {
+	return copyField(value, p)
+}
+
 templ copyField(value string, p *CopyFieldProps) {
 	<yr-copy-field value={ value } { filterAttrs("CopyField", p.Attrs)... }></yr-copy-field>
 }

@@ -1,5 +1,16 @@
 package ui
 
+// CardProps configures a Card.
+type CardProps struct {
+	Interactive bool
+	Attrs       templ.Attributes
+}
+
+// Card renders a generic container card. Children are the card content.
+func Card(p *CardProps) templ.Component {
+	return card(p)
+}
+
 templ card(p *CardProps) {
 	<div class={ "yr-card", templ.KV("yr-card--interactive", p.Interactive) } { filterAttrs("Card", p.Attrs)... }>
 		{ children... }

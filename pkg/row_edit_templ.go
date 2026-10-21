@@ -8,6 +8,12 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// RowEditProps holds a RowEdit's optional settings; every zero value is the default.
+type RowEditProps struct {
+	// Open renders the disclosure expanded, for example to show a validation error.
+	Open bool
+}
+
 // RowEdit renders a native <details> disclosure whose <summary> text is summary and whose body is
 // its children, usually an inline Form.
 func RowEdit(summary string, p RowEditProps) templ.Component {
@@ -49,7 +55,7 @@ func RowEdit(summary string, p RowEditProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(summary)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/row_edit.templ`, Line: 8, Col: 20}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/row_edit.templ`, Line: 14, Col: 20}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {

@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// AuthCardProps configures an AuthCard.
+type AuthCardProps struct {
+	Attrs templ.Attributes
+}
+
+// AuthCard renders a centered auth card (login, signup, invite). Children are the card content.
+func AuthCard(p *AuthCardProps) templ.Component {
+	return authCard(p)
+}
+
 func authCard(p *AuthCardProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

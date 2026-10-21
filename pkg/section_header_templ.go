@@ -8,6 +8,16 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// SectionHeaderProps configures a SectionHeader.
+type SectionHeaderProps struct {
+	Attrs templ.Attributes
+}
+
+// SectionHeader renders a titled section divider. Children are the title text and optional action link.
+func SectionHeader(p *SectionHeaderProps) templ.Component {
+	return sectionHeader(p)
+}
+
 func sectionHeader(p *SectionHeaderProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context

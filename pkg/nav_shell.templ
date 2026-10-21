@@ -1,5 +1,15 @@
 package ui
 
+// NavShellProps configures a NavShell.
+type NavShellProps struct {
+	Attrs templ.Attributes
+}
+
+// NavShell renders the top navigation shell.
+func NavShell(p *NavShellProps) templ.Component {
+	return navShell(p)
+}
+
 templ navShell(p *NavShellProps) {
 	<yr-nav-shell { filterAttrs("NavShell", p.Attrs)... }>
 		{ children... }

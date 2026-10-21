@@ -1,5 +1,15 @@
 package ui
 
+// SettingsSectionProps configures a SettingsSection.
+type SettingsSectionProps struct {
+	Attrs templ.Attributes
+}
+
+// SettingsSection renders a settings card with heading and fields. Children are the section content.
+func SettingsSection(p *SettingsSectionProps) templ.Component {
+	return settingsSection(p)
+}
+
 templ settingsSection(p *SettingsSectionProps) {
 	<div class="yr-settings-section" { filterAttrs("SettingsSection", p.Attrs)... }>
 		{ children... }

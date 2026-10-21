@@ -1,5 +1,16 @@
 package ui
 
+// RatingProps configures a Rating.
+type RatingProps struct {
+	Reviews string
+	Attrs   templ.Attributes
+}
+
+// Rating renders a 5-star rating with optional review count.
+func Rating(value string, p *RatingProps) templ.Component {
+	return rating(value, p)
+}
+
 templ rating(value string, p *RatingProps) {
 	<yr-rating value={ value } reviews={ p.Reviews } { filterAttrs("Rating", p.Attrs)... }></yr-rating>
 }

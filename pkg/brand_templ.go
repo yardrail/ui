@@ -8,6 +8,25 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// BrandProps configures a Brand link.
+type BrandProps struct {
+	Href  string
+	Attrs templ.Attributes
+}
+
+func (p *BrandProps) href() string {
+	if p.Href != "" {
+		return p.Href
+	}
+
+	return "#"
+}
+
+// Brand renders a branded logo link. Children are the logo content.
+func Brand(p *BrandProps) templ.Component {
+	return brand(p)
+}
+
 func brand(p *BrandProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +55,7 @@ func brand(p *BrandProps) templ.Component {
 		var templ_7745c5c3_Var2 templ.SafeURL
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL(p.href()))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/brand.templ`, Line: 4, Col: 34}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/brand.templ`, Line: 23, Col: 34}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {

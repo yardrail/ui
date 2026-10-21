@@ -8,6 +8,17 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// ResizeHandleProps configures a ResizeHandle.
+type ResizeHandleProps struct {
+	Target string
+	Attrs  templ.Attributes
+}
+
+// ResizeHandle renders a draggable resize handle between layout regions.
+func ResizeHandle(p *ResizeHandleProps) templ.Component {
+	return resizeHandle(p)
+}
+
 func resizeHandle(p *ResizeHandleProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +47,7 @@ func resizeHandle(p *ResizeHandleProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Target)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/resize_handle.templ`, Line: 4, Col: 36}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/resize_handle.templ`, Line: 15, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {

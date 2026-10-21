@@ -8,6 +8,17 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// StatusBannerProps configures a StatusBanner.
+type StatusBannerProps struct {
+	Tone  string
+	Attrs templ.Attributes
+}
+
+// StatusBanner renders a persistent status display bar. Children are the banner content.
+func StatusBanner(p *StatusBannerProps) templ.Component {
+	return statusBanner(p)
+}
+
 func statusBanner(p *StatusBannerProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
@@ -36,7 +47,7 @@ func statusBanner(p *StatusBannerProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Tone)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/status_banner.templ`, Line: 4, Col: 32}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/status_banner.templ`, Line: 15, Col: 32}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
