@@ -80,6 +80,10 @@ templ sidebarComponent(p *SidebarProps) {
 
 templ sidebarHeader(p *SidebarHeaderProps) {
 	<yr-sidebar-header { filterAttrs("SidebarHeader", p.Attrs)... }>
+		<button type="button" class="yr-sidebar-toggle" aria-label="Toggle sidebar">
+			@IconPanelLeftClose()
+			@IconPanelLeftOpen()
+		</button>
 		{ children... }
 	</yr-sidebar-header>
 }
@@ -109,7 +113,22 @@ templ sidebarLink(p *SidebarLinkProps) {
 }
 
 templ sidebarOrg(p *SidebarOrgProps) {
-	<yr-sidebar-org name={ p.Name } initial={ p.Initial } { filterAttrs("SidebarOrg", p.Attrs)... }></yr-sidebar-org>
+	<yr-sidebar-org { filterAttrs("SidebarOrg", p.Attrs)... }>
+		<span class="yr-sidebar-org-pfp">{ sidebarOrgInitial(p) }</span>
+		<span class="yr-sidebar-org-name">{ p.Name }</span>
+	</yr-sidebar-org>
+}
+
+func sidebarOrgInitial(p *SidebarOrgProps) string {
+	if p.Initial != "" {
+		return p.Initial
+	}
+
+	if p.Name != "" {
+		return string([]rune(p.Name)[0])
+	}
+
+	return ""
 }
 
 templ sidebarFooter(p *SidebarFooterProps) {
