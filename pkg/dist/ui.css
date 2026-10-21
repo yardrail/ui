@@ -1,4 +1,4 @@
-/* styles/fonts.css */
+/* src/styles/fonts.css */
 @font-face {
   font-family: "DM Sans";
   font-style: normal;
@@ -104,7 +104,7 @@
     U+FFFD;
 }
 
-/* styles/tokens.css */
+/* src/styles/tokens.css */
 :root {
   --yr-bg: #F5F2EB;
   --yr-surface: #FFF;
@@ -195,7 +195,7 @@
   }
 }
 
-/* styles/base.css */
+/* src/styles/base.css */
 * {
   box-sizing: border-box;
 }
@@ -2562,5 +2562,5 @@ yr-download-list .yr-download-size {
   font-size: var(--yr-font-size-xs);
 }
 
-/* styles.css */
+/* src/styles.css */
 /*# sourceMappingURL=ui.css.map */
