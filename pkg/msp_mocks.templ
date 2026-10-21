@@ -27,22 +27,22 @@ templ mspShell(title string, nav templ.Component) {
 			@mspHead()
 		</head>
 		<body style="margin:0;height:100%">
-			<yr-page-workspace>
-				<yr-navbar-std logo="/logo.png" brand="Yardrail" authed>
-					<yr-account-menu name="Brahm Lower" email="brahm@yardrail.com">
+			@PageWorkspace(&PageWorkspaceProps{}) {
+				@NavbarStd(&NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
+					@AccountMenu(&AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
 						<span slot="avatar">BL</span>
 						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
-					</yr-account-menu>
-				</yr-navbar-std>
+					}
+				}
 				@nav
-				<yr-resize-handle target="sidebar"></yr-resize-handle>
-				<yr-content>
-					<yr-content-main>
+				@ResizeHandle(&ResizeHandleProps{Target: "sidebar"})
+				@Content(&ContentProps{}) {
+					@ContentMain(&ContentMainProps{}) {
 						{ children... }
-					</yr-content-main>
-				</yr-content>
-			</yr-page-workspace>
+					}
+				}
+			}
 		</body>
 	</html>
 }
@@ -50,38 +50,31 @@ templ mspShell(title string, nav templ.Component) {
 // mspNav is the MSP portal sidebar with the link named active highlighted.
 // The children, such as a client's org and sub-links, go between the top and bottom nav groups.
 templ mspNav(active string) {
-	<yr-sidebar>
-		<yr-sidebar-header>
+	@Sidebar(&SidebarProps{}) {
+		@SidebarHeader(&SidebarHeaderProps{}) {
 			<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">MSP Portal</span>
-		</yr-sidebar-header>
-		<yr-sidebar-nav>
+		}
+		@SidebarNav(&SidebarNavProps{}) {
 			@mspNavLink("layout-dashboard", "Dashboard", mspNavDashboard, active)
 			@mspNavLink("building-2", "Clients", mspNavClients, active)
-		</yr-sidebar-nav>
+		}
 		{ children... }
-		<yr-sidebar-nav bottom>
+		@SidebarNav(&SidebarNavProps{Bottom: true}) {
 			@mspNavLink("train-front", "Yardrail", mspNavYardrail, active)
 			@mspNavLink("user", "Account", mspNavAccount, active)
-		</yr-sidebar-nav>
-		<yr-sidebar-footer>
+		}
+		@SidebarFooter(&SidebarFooterProps{}) {
 			<span style="font-size:var(--yr-font-size-xs);color:var(--yr-text-subtle)">v0.1.0</span>
-		</yr-sidebar-footer>
-	</yr-sidebar>
+		}
+	}
 }
 
 // mspNavLink is one link in the MSP sidebar, highlighted when link equals active.
 templ mspNavLink(icon, label, link, active string) {
-	<yr-sidebar-link href="#" { mspActive(link, active)... }>
+	@SidebarLink(&SidebarLinkProps{Href: "#", Active: link == active}) {
 		@Icon(icon)
 		{ label }
-	</yr-sidebar-link>
-}
-
-// mspIcon is the named icon, sized by mocks.css to the mocks' icon size.
-templ mspIcon(name string) {
-	<span class="mock-icon">
-		@Icon(name)
-	</span>
+	}
 }
 
 // mspPageTitle is the h1 of an MSP portal mock.
@@ -162,19 +155,19 @@ templ mspDashboard() {
 			@Grid(GridProps{Gap: Space8}) {
 				@mspSection("Alerts") {
 					@mspFeedItem("2m ago") {
-						<yr-pill tone="danger">critical</yr-pill>
+						@Pill("critical", &PillProps{Tone: "danger"})
 						<span>Workflow failed — Acme Corp</span>
 					}
 					@mspFeedItem("18m ago") {
-						<yr-pill tone="warning">warning</yr-pill>
+						@Pill("warning", &PillProps{Tone: "warning"})
 						<span>Connector unhealthy — Beta LLC</span>
 					}
 					@mspFeedItem("1h ago") {
-						<yr-pill tone="warning">warning</yr-pill>
+						@Pill("warning", &PillProps{Tone: "warning"})
 						<span>API key expires in 7d — Gamma Inc</span>
 					}
 					@mspFeedItem("3h ago") {
-						<yr-pill tone="info">info</yr-pill>
+						@Pill("info", &PillProps{Tone: "info"})
 						<span>New user joined — Delta Co</span>
 					}
 				}
@@ -187,15 +180,15 @@ templ mspDashboard() {
 						}
 					</div>
 					@mspFeedItem("") {
-						<yr-pill tone="danger">expired</yr-pill>
+						@Pill("expired", &PillProps{Tone: "danger"})
 						<span>Slack OAuth — Acme Corp</span>
 					}
 					@mspFeedItem("") {
-						<yr-pill tone="warning">14d</yr-pill>
+						@Pill("14d", &PillProps{Tone: "warning"})
 						<span>HubSpot API — Beta LLC</span>
 					}
 					@mspFeedItem("") {
-						<yr-pill tone="warning">22d</yr-pill>
+						@Pill("22d", &PillProps{Tone: "warning"})
 						<span>Stripe key — Gamma Inc</span>
 					}
 				}
@@ -203,30 +196,30 @@ templ mspDashboard() {
 			@Grid(GridProps{Gap: Space8}) {
 				@mspSection("Recent Activity") {
 					@mspFeedItem("10m ago") {
-						@mspIcon("user-plus")
+						@Icon("user-plus")
 						<span>User invited to Acme Corp</span>
 					}
 					@mspFeedItem("45m ago") {
-						@mspIcon("play")
+						@Icon("play")
 						<span>Workflow deployed to Beta LLC</span>
 					}
 					@mspFeedItem("2h ago") {
-						@mspIcon("refresh-cw")
+						@Icon("refresh-cw")
 						<span>Credential rotated — Gamma Inc</span>
 					}
 					@mspFeedItem("5h ago") {
-						@mspIcon("shield")
+						@Icon("shield")
 						<span>2FA enforced on Delta Co</span>
 					}
 				}
 				@mspSection("Onboarding Progress") {
 					@mspClientRow("") {
 						<span class="mock-client-name">NewCo Industries</span>
-						<yr-pill>2 of 4 steps</yr-pill>
+						@Pill("2 of 4 steps", &PillProps{})
 					}
 					@mspClientRow("") {
 						<span class="mock-client-name">FreshOrg Ltd</span>
-						<yr-pill>Users invited</yr-pill>
+						@Pill("Users invited", &PillProps{})
 					}
 				}
 			}
@@ -240,34 +233,31 @@ templ mspClients() {
 		@Stack(StackProps{Gap: Space6}) {
 			@Cluster(ClusterProps{Justify: JustifyBetween}) {
 				@mspPageTitle("Clients")
-				<yr-button variant="primary">
-					@mspIcon("plus")
-					Add Client
-				</yr-button>
+				@Button("Add Client", ButtonProps{Variant: ButtonPrimary})
 			}
 			@Stack(StackProps{Gap: Space2}) {
 				@mspClientRow("8 users · 3 connectors · 12 workflows") {
-					<yr-pill tone="success">healthy</yr-pill>
+					@Pill("healthy", &PillProps{Tone: "success"})
 					<span class="mock-client-name">Acme Corp</span>
 				}
 				@mspClientRow("4 users · 2 connectors · 6 workflows") {
-					<yr-pill tone="success">healthy</yr-pill>
+					@Pill("healthy", &PillProps{Tone: "success"})
 					<span class="mock-client-name">Beta LLC</span>
 				}
 				@mspClientRow("12 users · 5 connectors · 18 workflows") {
-					<yr-pill tone="warning">attention</yr-pill>
+					@Pill("attention", &PillProps{Tone: "warning"})
 					<span class="mock-client-name">Gamma Inc</span>
 				}
 				@mspClientRow("3 users · 1 connector · 4 workflows") {
-					<yr-pill tone="success">healthy</yr-pill>
+					@Pill("healthy", &PillProps{Tone: "success"})
 					<span class="mock-client-name">Delta Co</span>
 				}
 				@mspClientRow("6 users · 4 connectors · 9 workflows") {
-					<yr-pill tone="danger">critical</yr-pill>
+					@Pill("critical", &PillProps{Tone: "danger"})
 					<span class="mock-client-name">Epsilon Group</span>
 				}
 				@mspClientRow("5 users · 2 connectors · 7 workflows") {
-					<yr-pill tone="success">healthy</yr-pill>
+					@Pill("healthy", &PillProps{Tone: "success"})
 					<span class="mock-client-name">Zeta Partners</span>
 				}
 			}
@@ -288,14 +278,14 @@ const (
 // client's org block and its links, with the page named active highlighted.
 templ mspClientNav(active string) {
 	@mspNav("") {
-		<yr-sidebar-org name="Acme Corp" initial="A"></yr-sidebar-org>
-		<yr-sidebar-nav>
+		@SidebarOrg(&SidebarOrgProps{Name: "Acme Corp", Initial: "A"})
+		@SidebarNav(&SidebarNavProps{}) {
 			@mspNavLink("layout-dashboard", "Overview", mspClientOverview, active)
 			@mspNavLink("users", "Users", mspClientUsers, active)
 			@mspNavLink("plug", "Connectors", mspClientConnectors, active)
 			@mspNavLink("play", "Workflows", mspClientWorkflows, active)
 			@mspNavLink("settings", "Settings", mspClientSettings, active)
-		</yr-sidebar-nav>
+		}
 	}
 }
 
@@ -336,7 +326,7 @@ templ mspConnectorRow(icon, name, meta string) {
 	<div class="mock-client-row">
 		@Cluster(ClusterProps{Justify: JustifyBetween, Gap: Space4}) {
 			@Cluster(ClusterProps{Gap: Space3}) {
-				@mspIcon(icon)
+				@Icon(icon)
 				@Stack(StackProps{Gap: Space1}) {
 					<span class="mock-client-name">{ name }</span>
 					<span class="mock-client-meta">{ meta }</span>
@@ -360,25 +350,25 @@ templ mspClientOverviewPage() {
 			@Grid(GridProps{Gap: Space8}) {
 				@mspSection("Recent Activity") {
 					@mspFeedItem("2h ago") {
-						@mspIcon("user-plus")
+						@Icon("user-plus")
 						<span>Jane Smith invited</span>
 					}
 					@mspFeedItem("1d ago") {
-						@mspIcon("play")
+						@Icon("play")
 						<span>Invoice sync deployed</span>
 					}
 					@mspFeedItem("3d ago") {
-						@mspIcon("refresh-cw")
+						@Icon("refresh-cw")
 						<span>Slack credential rotated</span>
 					}
 				}
 				@mspSection("Alerts") {
 					@mspFeedItem("2m ago") {
-						<yr-pill tone="danger">critical</yr-pill>
+						@Pill("critical", &PillProps{Tone: "danger"})
 						<span>Slack OAuth expired</span>
 					}
 					@mspFeedItem("1h ago") {
-						<yr-pill tone="info">info</yr-pill>
+						@Pill("info", &PillProps{Tone: "info"})
 						<span>2 workflows paused</span>
 					}
 				}
@@ -393,10 +383,7 @@ templ mspClientUsersPage() {
 		@Stack(StackProps{Gap: Space8}) {
 			@Stack(StackProps{Gap: Space6}) {
 				@mspPageHeader("Acme Corp — Users") {
-					<yr-button variant="primary">
-						@mspIcon("user-plus")
-						Invite User
-					</yr-button>
+					@Button("Invite User", ButtonProps{Variant: ButtonPrimary})
 				}
 				<table class="yr-table">
 					<thead>
@@ -406,37 +393,37 @@ templ mspClientUsersPage() {
 						<tr>
 							<td>Alex Johnson</td>
 							<td>alex@acme.com</td>
-							<td><yr-pill>Admin</yr-pill></td>
+							<td>@Pill("Admin", &PillProps{})</td>
 							<td>All spaces</td>
-							<td><yr-pill tone="success">Active</yr-pill></td>
+							<td>@Pill("Active", &PillProps{Tone: "success"})</td>
 						</tr>
 						<tr>
 							<td>Maria Chen</td>
 							<td>maria@acme.com</td>
-							<td><yr-pill>Editor</yr-pill></td>
+							<td>@Pill("Editor", &PillProps{})</td>
 							<td>Sales, Support</td>
-							<td><yr-pill tone="success">Active</yr-pill></td>
+							<td>@Pill("Active", &PillProps{Tone: "success"})</td>
 						</tr>
 						<tr>
 							<td>Sam Patel</td>
 							<td>sam@acme.com</td>
-							<td><yr-pill>Viewer</yr-pill></td>
+							<td>@Pill("Viewer", &PillProps{})</td>
 							<td>Sales</td>
-							<td><yr-pill tone="success">Active</yr-pill></td>
+							<td>@Pill("Active", &PillProps{Tone: "success"})</td>
 						</tr>
 						<tr>
 							<td>Taylor Kim</td>
 							<td>taylor@acme.com</td>
-							<td><yr-pill>Editor</yr-pill></td>
+							<td>@Pill("Editor", &PillProps{})</td>
 							<td>Ops, Finance</td>
-							<td><yr-pill>Invited</yr-pill></td>
+							<td>@Pill("Invited", &PillProps{})</td>
 						</tr>
 					</tbody>
 				</table>
 			}
 			@mspSection("SCIM Sync") {
 				@mspSetting("Azure AD", "Last synced 4 hours ago · 8 users") {
-					<yr-pill tone="success">Connected</yr-pill>
+					@Pill("Connected", &PillProps{Tone: "success"})
 				}
 			}
 		}
@@ -448,20 +435,17 @@ templ mspClientConnectorsPage() {
 	@mspShell("Acme Corp — Connectors · MSP Portal", mspClientNav(mspClientConnectors)) {
 		@Stack(StackProps{Gap: Space6}) {
 			@mspPageHeader("Acme Corp — Connectors") {
-				<yr-button variant="primary">
-					@mspIcon("plug")
-					Add Connector
-				</yr-button>
+				@Button("Add Connector", ButtonProps{Variant: ButtonPrimary})
 			}
 			@Stack(StackProps{Gap: Space2}) {
 				@mspConnectorRow("message-square", "Slack", "OAuth · Used by 4 workflows") {
-					<yr-pill tone="danger">Expired</yr-pill>
+					@Pill("Expired", &PillProps{Tone: "danger"})
 				}
 				@mspConnectorRow("database", "HubSpot", "API Key · Used by 6 workflows") {
-					<yr-pill tone="success">Healthy</yr-pill>
+					@Pill("Healthy", &PillProps{Tone: "success"})
 				}
 				@mspConnectorRow("credit-card", "Stripe", "API Key · Used by 2 workflows") {
-					<yr-pill tone="success">Healthy</yr-pill>
+					@Pill("Healthy", &PillProps{Tone: "success"})
 				}
 			}
 		}
@@ -475,10 +459,10 @@ templ mspClientSettingsPage() {
 			@mspPageTitle("Acme Corp — Settings")
 			@mspSection("Authentication") {
 				@mspSetting("Two-Factor Authentication", "Require 2FA for all users in this organization") {
-					<yr-pill tone="success">Required</yr-pill>
+					@Pill("Required", &PillProps{Tone: "success"})
 				}
 				@mspSetting("Single Sign-On", "SAML/OIDC integration with client identity provider") {
-					<yr-pill>Not configured</yr-pill>
+					@Pill("Not configured", &PillProps{})
 				}
 			}
 			@mspSection("Session Policies") {
