@@ -45,8 +45,7 @@ templ dropdownMenuExampleOpen() {
 
 templ dropdownMenuExampleAccountMenu() {
 	<div style="display:flex;justify-content:flex-end;min-height:20rem">
-		@ui.AccountMenu(&ui.AccountMenuProps{Name: "Jordan Ellery", Email: "jordan@ellerylogistics.com"}) {
-			<span slot="avatar">JE</span>
+		@ui.AccountMenu(&ui.AccountMenuProps{Name: "Jordan Ellery", Email: "jordan@ellerylogistics.com", Avatar: "JE"}) {
 			<a href="#" class="yr-dropdown-menu-item">Organization</a>
 			<a href="#" class="yr-dropdown-menu-item">Account settings</a>
 			<div class="yr-dropdown-menu-divider"></div>

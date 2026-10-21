@@ -181,13 +181,13 @@ func dropdownMenuExampleAccountMenu() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "<span slot=\"avatar\">JE</span> <a href=\"#\" class=\"yr-dropdown-menu-item\">Organization</a> <a href=\"#\" class=\"yr-dropdown-menu-item\">Account settings</a><div class=\"yr-dropdown-menu-divider\"></div><button type=\"button\" class=\"yr-dropdown-menu-item\">Log out</button>")
+			templ_7745c5c3_Err = templruntime.WriteString(templ_7745c5c3_Buffer, 11, "<a href=\"#\" class=\"yr-dropdown-menu-item\">Organization</a> <a href=\"#\" class=\"yr-dropdown-menu-item\">Account settings</a><div class=\"yr-dropdown-menu-divider\"></div><button type=\"button\" class=\"yr-dropdown-menu-item\">Log out</button>")
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.AccountMenu(&ui.AccountMenuProps{Name: "Jordan Ellery", Email: "jordan@ellerylogistics.com"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.AccountMenu(&ui.AccountMenuProps{Name: "Jordan Ellery", Email: "jordan@ellerylogistics.com", Avatar: "JE"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

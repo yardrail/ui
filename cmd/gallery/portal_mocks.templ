@@ -21,8 +21,7 @@ templ portalShell(title string, nav templ.Component) {
 						@templ.Raw(exampleIcon("search", `class="yr-search-icon" style="left:0.5rem"`, navSearchIconSize))
 						<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
 					</div>
-					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
-						<span slot="avatar">BL</span>
+					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com", Avatar: "BL"}) {
 						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
 					}

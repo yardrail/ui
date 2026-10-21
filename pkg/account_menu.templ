@@ -2,21 +2,41 @@ package ui
 
 // AccountMenuProps configures an AccountMenu.
 type AccountMenuProps struct {
-	Name  string
-	Email string
-	Attrs templ.Attributes
+	Name   string
+	Email  string
+	Avatar string
+	Attrs  templ.Attributes
 }
 
 // AccountMenu renders an account dropdown menu with avatar, name, and email.
+// Children are the menu items (links, buttons, dividers).
 func AccountMenu(p *AccountMenuProps) templ.Component {
 	return accountMenu(p)
 }
 
 templ accountMenu(p *AccountMenuProps) {
-	<yr-account-menu name={ p.Name } email={ p.Email } { filterAttrs("AccountMenu", p.Attrs)... }>
-		<span slot="chevron" class="yr-dropdown-menu-chevron">
-			@IconChevronDown()
-		</span>
-		{ children... }
+	<yr-account-menu { filterAttrs("AccountMenu", p.Attrs)... }>
+		<button slot="trigger" class="yr-account-menu-trigger">
+			<yr-avatar>{ p.Avatar }</yr-avatar>
+			<span class="yr-dropdown-menu-chevron">
+				@IconChevronDown()
+			</span>
+		</button>
+		<div slot="panel">
+			<div class="yr-dropdown-menu-header">
+				<yr-avatar size="lg">{ p.Avatar }</yr-avatar>
+				if p.Name != "" || p.Email != "" {
+					<div>
+						if p.Name != "" {
+							<div class="yr-dropdown-menu-header-name">{ p.Name }</div>
+						}
+						if p.Email != "" {
+							<div class="yr-dropdown-menu-header-email">{ p.Email }</div>
+						}
+					</div>
+				}
+			</div>
+			{ children... }
+		</div>
 	</yr-account-menu>
 }
