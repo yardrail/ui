@@ -21,8 +21,7 @@ templ navbarExampleWithContent() {
 			<input class="yr-search-input" type="search" placeholder="Search…" style="padding:var(--yr-space-1) var(--yr-space-2) var(--yr-space-1) 1.75rem;font-size:var(--yr-font-size-sm)"/>
 		</div>
 		<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);text-decoration:none">Docs</a>
-		@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
-			<span slot="avatar">BL</span>
+		@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com", Avatar: "BL"}) {
 			<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 			<a class="yr-dropdown-menu-item" href="#">Sign out</a>
 		}
@@ -37,8 +36,7 @@ templ navbarExampleStandardUnauthed() {
 templ navbarExampleStandardAuthed() {
 	@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
 		<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);text-decoration:none">Docs</a>
-		@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
-			<span slot="avatar">BL</span>
+		@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com", Avatar: "BL"}) {
 			<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 			<a class="yr-dropdown-menu-item" href="#">Sign out</a>
 		}

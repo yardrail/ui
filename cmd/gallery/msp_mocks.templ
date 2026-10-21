@@ -31,8 +31,7 @@ templ mspShell(title string, nav templ.Component) {
 		<body style="margin:0;height:100%">
 			@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
 				@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
-					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com"}) {
-						<span slot="avatar">BL</span>
+					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com", Avatar: "BL"}) {
 						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
 						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
 					}
