@@ -3,7 +3,17 @@ package main
 import ui "github.com/yardrail/ui/pkg"
 
 templ navbarExampleDefault() {
-	<style>.demo-slot{background:var(--yr-bg);border:1px dashed var(--yr-border);border-radius:var(--yr-radius-sm);padding:var(--yr-space-1) var(--yr-space-3);color:var(--yr-text-disabled);font-family:var(--yr-font-mono);font-size:var(--yr-font-size-xs)}</style>
+	<style>
+		.demo-slot {
+			background: var(--yr-bg);
+			border: 1px dashed var(--yr-border);
+			border-radius: var(--yr-radius-sm);
+			padding: var(--yr-space-1) var(--yr-space-3);
+			color: var(--yr-text-disabled);
+			font-family: var(--yr-font-mono);
+			font-size: var(--yr-font-size-xs);
+		}
+	</style>
 	@ui.Navbar(&ui.NavbarProps{
 		Left:   navbarDemoSlot("left"),
 		Center: navbarDemoSlot("center"),

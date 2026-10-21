@@ -2,7 +2,7 @@ version: '3'
 
 tasks:
   install:
-    desc: Install npm dependencies (esbuild, stylelint)
+    internal: true
     sources:
       - package.json
       - pnpm-lock.yaml
@@ -24,28 +24,38 @@ tasks:
     cmds:
       - task: gen
       - task: build
-      # -N (intent-to-add) surfaces newly generated, untracked files to git diff
-      # so a new .templ file whose output was never committed fails the check too.
       - git add -N -- 'pkg/*_templ.go' pkg/dist/
       - git diff --exit-code -- 'pkg/*_templ.go' pkg/dist/
 
-  test:
-    desc: Run Go tests
-    cmd: go test ./...
+  fmt:
+    desc: Run all formatters (writes to files)
+    cmds:
+      - task: fmt:go
+      - task: fmt:templ
+
+  fmt:go:
+    desc: Format Go files
+    cmd: golangci-lint fmt ./...
+
+  fmt:templ:
+    desc: Format .templ files
+    cmd: templ fmt .
 
   lint:
-    desc: Run all lints
+    desc: Run all lints (read-only)
     cmds:
       - task: lint:go
+      - task: lint:templ
       - task: lint:ts
       - task: lint:css
 
   lint:go:
     desc: Run Go lints
-    cmds:
-      - golangci-lint config verify
-      - golangci-lint fmt ./...
-      - golangci-lint run --max-same-issues 50 ./...
+    cmd: golangci-lint run --max-same-issues 50 ./...
+
+  lint:templ:
+    desc: Verify .templ files are formatted
+    cmd: templ fmt . --check
 
   lint:ts:
     desc: Type-check and lint TypeScript
@@ -55,9 +65,13 @@ tasks:
       - pnpm exec eslint .
 
   lint:css:
-    desc: Lint hand-written CSS in pkg/ and the gallery's stylesheets
+    desc: Lint hand-written CSS
     deps: [install]
     cmd: pnpm exec stylelint "src/**/*.css" "pkg/**/*.css" "!pkg/dist/**" "cmd/gallery/gallery.css" "cmd/gallery/mocks.css"
+
+  test:
+    desc: Run Go tests
+    cmd: go test ./...
 
   docs:
     desc: Regenerate CLAUDE.md and README.md from templates and source

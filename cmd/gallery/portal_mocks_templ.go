@@ -864,7 +864,7 @@ func portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 			var templ_7745c5c3_Var34 string
 			templ_7745c5c3_Var34, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 154, Col: 43}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 153, Col: 43}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var34))
 			if templ_7745c5c3_Err != nil {
@@ -877,7 +877,7 @@ func portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 			var templ_7745c5c3_Var35 string
 			templ_7745c5c3_Var35, templ_7745c5c3_Err = templ.JoinStringErrs(desc)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 155, Col: 40}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 154, Col: 40}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var35))
 			if templ_7745c5c3_Err != nil {
@@ -967,7 +967,7 @@ func portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 			var templ_7745c5c3_Var39 string
 			templ_7745c5c3_Var39, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 169, Col: 43}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 168, Col: 43}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var39))
 			if templ_7745c5c3_Err != nil {
@@ -980,7 +980,7 @@ func portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 			var templ_7745c5c3_Var40 string
 			templ_7745c5c3_Var40, templ_7745c5c3_Err = templ.JoinStringErrs(desc)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 170, Col: 40}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 169, Col: 40}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var40))
 			if templ_7745c5c3_Err != nil {
@@ -1185,7 +1185,7 @@ func portalActivityRowContent(name, runID, tone, status, detail, duration, waiti
 			var templ_7745c5c3_Var47 string
 			templ_7745c5c3_Var47, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 202, Col: 43}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 201, Col: 43}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var47))
 			if templ_7745c5c3_Err != nil {
@@ -1198,7 +1198,7 @@ func portalActivityRowContent(name, runID, tone, status, detail, duration, waiti
 			var templ_7745c5c3_Var48 string
 			templ_7745c5c3_Var48, templ_7745c5c3_Err = templ.JoinStringErrs(runID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 204, Col: 50}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 203, Col: 50}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var48))
 			if templ_7745c5c3_Err != nil {
@@ -1219,7 +1219,7 @@ func portalActivityRowContent(name, runID, tone, status, detail, duration, waiti
 			var templ_7745c5c3_Var49 string
 			templ_7745c5c3_Var49, templ_7745c5c3_Err = templ.JoinStringErrs(detail)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 206, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 205, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var49))
 			if templ_7745c5c3_Err != nil {
@@ -1250,7 +1250,7 @@ func portalActivityRowContent(name, runID, tone, status, detail, duration, waiti
 				var templ_7745c5c3_Var50 string
 				templ_7745c5c3_Var50, templ_7745c5c3_Err = templ.JoinStringErrs(duration)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 215, Col: 51}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 214, Col: 51}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var50))
 				if templ_7745c5c3_Err != nil {
@@ -1370,7 +1370,7 @@ func portalAutomationsPage() templ.Component {
 				var templ_7745c5c3_Var55 string
 				templ_7745c5c3_Var55, templ_7745c5c3_Err = templ.ResolveAttributeValue(exampleLogo)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 235, Col: 26}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 233, Col: 26}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var55)
 				if templ_7745c5c3_Err != nil {
@@ -1574,7 +1574,7 @@ func portalAutoTile(icon templ.Component, badgeTone, title, desc, action string)
 			var templ_7745c5c3_Var63 string
 			templ_7745c5c3_Var63, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 271, Col: 43}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 269, Col: 43}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var63))
 			if templ_7745c5c3_Err != nil {
@@ -1587,7 +1587,7 @@ func portalAutoTile(icon templ.Component, badgeTone, title, desc, action string)
 			var templ_7745c5c3_Var64 string
 			templ_7745c5c3_Var64, templ_7745c5c3_Err = templ.JoinStringErrs(desc)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 272, Col: 40}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 270, Col: 40}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var64))
 			if templ_7745c5c3_Err != nil {
@@ -1755,7 +1755,7 @@ func portalWorkflowRow(name, space, tone, status, lastRun, action string) templ.
 			var templ_7745c5c3_Var69 string
 			templ_7745c5c3_Var69, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 327, Col: 39}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 324, Col: 39}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var69))
 			if templ_7745c5c3_Err != nil {
@@ -1768,7 +1768,7 @@ func portalWorkflowRow(name, space, tone, status, lastRun, action string) templ.
 			var templ_7745c5c3_Var70 string
 			templ_7745c5c3_Var70, templ_7745c5c3_Err = templ.JoinStringErrs(space)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 329, Col: 17}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 326, Col: 17}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var70))
 			if templ_7745c5c3_Err != nil {
@@ -1790,7 +1790,7 @@ func portalWorkflowRow(name, space, tone, status, lastRun, action string) templ.
 				var templ_7745c5c3_Var71 string
 				templ_7745c5c3_Var71, templ_7745c5c3_Err = templ.JoinStringErrs(lastRun)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 332, Col: 20}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 329, Col: 20}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var71))
 				if templ_7745c5c3_Err != nil {
@@ -2012,7 +2012,7 @@ func portalCommunityInstalls(installs string) templ.Component {
 		var templ_7745c5c3_Var76 string
 		templ_7745c5c3_Var76, templ_7745c5c3_Err = templ.JoinStringErrs(installs)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 389, Col: 56}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 385, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var76))
 		if templ_7745c5c3_Err != nil {
@@ -2211,7 +2211,7 @@ func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool)
 				var templ_7745c5c3_Var83 string
 				templ_7745c5c3_Var83, templ_7745c5c3_Err = templ.ResolveAttributeValue(exampleLogo)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 424, Col: 26}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 419, Col: 26}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var83)
 				if templ_7745c5c3_Err != nil {
@@ -2224,7 +2224,7 @@ func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool)
 				var templ_7745c5c3_Var84 string
 				templ_7745c5c3_Var84, templ_7745c5c3_Err = templ.ResolveAttributeValue(name)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 424, Col: 39}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 419, Col: 39}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var84)
 				if templ_7745c5c3_Err != nil {
@@ -2242,7 +2242,7 @@ func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool)
 				var templ_7745c5c3_Var85 string
 				templ_7745c5c3_Var85, templ_7745c5c3_Err = templ.JoinStringErrs(initials)
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 428, Col: 14}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 423, Col: 14}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var85))
 				if templ_7745c5c3_Err != nil {
@@ -2260,7 +2260,7 @@ func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool)
 			var templ_7745c5c3_Var86 string
 			templ_7745c5c3_Var86, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 432, Col: 39}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 427, Col: 39}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var86))
 			if templ_7745c5c3_Err != nil {
@@ -2273,7 +2273,7 @@ func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool)
 			var templ_7745c5c3_Var87 string
 			templ_7745c5c3_Var87, templ_7745c5c3_Err = templ.JoinStringErrs(meta)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 434, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 429, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var87))
 			if templ_7745c5c3_Err != nil {
@@ -2349,7 +2349,7 @@ func portalAvailableConnector(initials, name, desc string) templ.Component {
 			var templ_7745c5c3_Var90 string
 			templ_7745c5c3_Var90, templ_7745c5c3_Err = templ.JoinStringErrs(initials)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 447, Col: 13}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 442, Col: 13}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var90))
 			if templ_7745c5c3_Err != nil {
@@ -2362,7 +2362,7 @@ func portalAvailableConnector(initials, name, desc string) templ.Component {
 			var templ_7745c5c3_Var91 string
 			templ_7745c5c3_Var91, templ_7745c5c3_Err = templ.JoinStringErrs(name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 450, Col: 39}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 445, Col: 39}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var91))
 			if templ_7745c5c3_Err != nil {
@@ -2375,7 +2375,7 @@ func portalAvailableConnector(initials, name, desc string) templ.Component {
 			var templ_7745c5c3_Var92 string
 			templ_7745c5c3_Var92, templ_7745c5c3_Err = templ.JoinStringErrs(desc)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 451, Col: 39}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 446, Col: 39}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var92))
 			if templ_7745c5c3_Err != nil {
@@ -3416,7 +3416,7 @@ func portalWorkflowRunPage() templ.Component {
 				var templ_7745c5c3_Var127 string
 				templ_7745c5c3_Var127, templ_7745c5c3_Err = templ.JoinStringErrs(" newsletter-draft.html")
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 660, Col: 30}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 652, Col: 30}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var127))
 				if templ_7745c5c3_Err != nil {
@@ -3433,7 +3433,7 @@ func portalWorkflowRunPage() templ.Component {
 				var templ_7745c5c3_Var128 string
 				templ_7745c5c3_Var128, templ_7745c5c3_Err = templ.JoinStringErrs(" recipient-list.csv")
 				if templ_7745c5c3_Err != nil {
-					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 665, Col: 27}
+					return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 657, Col: 27}
 				}
 				_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var128))
 				if templ_7745c5c3_Err != nil {
@@ -3599,7 +3599,7 @@ func portalJournalEntry(desc, stepID, stepType, datetime, display string) templ.
 			var templ_7745c5c3_Var133 string
 			templ_7745c5c3_Var133, templ_7745c5c3_Err = templ.JoinStringErrs(desc)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 687, Col: 43}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 679, Col: 43}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var133))
 			if templ_7745c5c3_Err != nil {
@@ -3612,7 +3612,7 @@ func portalJournalEntry(desc, stepID, stepType, datetime, display string) templ.
 			var templ_7745c5c3_Var134 string
 			templ_7745c5c3_Var134, templ_7745c5c3_Err = templ.JoinStringErrs(stepID)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 689, Col: 51}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 681, Col: 51}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var134))
 			if templ_7745c5c3_Err != nil {
@@ -3625,7 +3625,7 @@ func portalJournalEntry(desc, stepID, stepType, datetime, display string) templ.
 			var templ_7745c5c3_Var135 string
 			templ_7745c5c3_Var135, templ_7745c5c3_Err = templ.JoinStringErrs(stepType)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 690, Col: 14}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 682, Col: 14}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var135))
 			if templ_7745c5c3_Err != nil {
@@ -3638,7 +3638,7 @@ func portalJournalEntry(desc, stepID, stepType, datetime, display string) templ.
 			var templ_7745c5c3_Var136 string
 			templ_7745c5c3_Var136, templ_7745c5c3_Err = templ.ResolveAttributeValue(datetime)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 693, Col: 61}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 685, Col: 61}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var136)
 			if templ_7745c5c3_Err != nil {
@@ -3651,7 +3651,7 @@ func portalJournalEntry(desc, stepID, stepType, datetime, display string) templ.
 			var templ_7745c5c3_Var137 string
 			templ_7745c5c3_Var137, templ_7745c5c3_Err = templ.JoinStringErrs(display)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 693, Col: 73}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `cmd/gallery/portal_mocks.templ`, Line: 685, Col: 73}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var137))
 			if templ_7745c5c3_Err != nil {
