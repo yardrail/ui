@@ -37,6 +37,7 @@ tasks:
     desc: Run all lints
     cmds:
       - task: lint:go
+      - task: lint:ts
       - task: lint:css
 
   lint:go:
@@ -45,6 +46,13 @@ tasks:
       - golangci-lint config verify
       - golangci-lint fmt ./...
       - golangci-lint run --fix --max-same-issues 50 ./...
+
+  lint:ts:
+    desc: Type-check and lint TypeScript
+    deps: [install]
+    cmds:
+      - pnpm exec tsc --noEmit
+      - pnpm exec eslint .
 
   lint:css:
     desc: Lint hand-written CSS in pkg/ and the gallery's stylesheets

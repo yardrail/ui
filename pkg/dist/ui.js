@@ -233,7 +233,7 @@ var YrTabs = class extends HTMLElement {
   handleKeydown = (event) => {
     const currentIndex = this.tabs.findIndex((t) => t.id === event.target.id);
     if (currentIndex === -1) return;
-    let nextIndex = null;
+    let nextIndex;
     switch (event.key) {
       case "ArrowRight":
         nextIndex = (currentIndex + 1) % this.tabs.length;

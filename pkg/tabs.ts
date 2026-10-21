@@ -89,7 +89,7 @@ export class YrTabs extends HTMLElement {
     const currentIndex = this.tabs.findIndex((t) => t.id === (event.target as HTMLElement).id);
     if (currentIndex === -1) return;
 
-    let nextIndex: number | null = null;
+    let nextIndex: number;
     switch (event.key) {
       case 'ArrowRight':
         nextIndex = (currentIndex + 1) % this.tabs.length;
