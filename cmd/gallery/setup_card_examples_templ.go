@@ -71,7 +71,7 @@ func setupCardDefault() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "1"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 1}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -196,7 +196,7 @@ func setupCardFormStep() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "1"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 1}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -329,7 +329,7 @@ func setupCardSelectionStep() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "2"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 2}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -458,7 +458,7 @@ func setupCardConfirmation() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "4"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 4}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

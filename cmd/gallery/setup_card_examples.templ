@@ -29,7 +29,7 @@ const setupOptionStyle = `<style>.setup-option{display:flex;align-items:center;`
 templ setupCardDefault() {
 	@templ.Raw(setupSlotStyle)
 	@ui.SetupCard(&ui.SetupCardProps{}) {
-		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "1"})
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 1})
 		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
 			<div class="demo-slot">header</div>
 		}
@@ -44,7 +44,7 @@ templ setupCardDefault() {
 
 templ setupCardFormStep() {
 	@ui.SetupCard(&ui.SetupCardProps{}) {
-		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "1"})
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 1})
 		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
 			<h2 class="yr-setup-card-title">Create your organization</h2>
 			<p class="yr-setup-card-subtitle">This is the workspace where your team will collaborate.</p>
@@ -62,7 +62,7 @@ templ setupCardFormStep() {
 templ setupCardSelectionStep() {
 	@templ.Raw(setupOptionStyle)
 	@ui.SetupCard(&ui.SetupCardProps{}) {
-		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "2"})
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 2})
 		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
 			<h2 class="yr-setup-card-title">Choose deployment type</h2>
 			<p class="yr-setup-card-subtitle">Select how you want to run your instance.</p>
@@ -92,7 +92,7 @@ templ setupCardSelectionStep() {
 
 templ setupCardConfirmation() {
 	@ui.SetupCard(&ui.SetupCardProps{}) {
-		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: "4", Current: "4"})
+		@ui.SetupCardProgress(&ui.SetupCardProgressProps{Steps: 4, Current: 4})
 		@ui.SetupCardHeader(&ui.SetupCardHeaderProps{}) {
 			<h2 class="yr-setup-card-title">You&#39;re all set</h2>
 			<p class="yr-setup-card-subtitle">Your workspace is ready. You can invite teammates or start exploring on your own.</p>
