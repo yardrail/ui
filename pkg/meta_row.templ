@@ -1,0 +1,7 @@
+package ui
+
+templ metaRow(p *MetaRowProps) {
+	<div class="yr-meta-row" { filterAttrs("MetaRow", p.Attrs)... }>
+		{ children... }
+	</div>
+}

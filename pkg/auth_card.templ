@@ -1,0 +1,7 @@
+package ui
+
+templ authCard(p *AuthCardProps) {
+	<div class="yr-auth-card" { filterAttrs("AuthCard", p.Attrs)... }>
+		{ children... }
+	</div>
+}

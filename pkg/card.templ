@@ -1,0 +1,7 @@
+package ui
+
+templ card(p *CardProps) {
+	<div class={ "yr-card", templ.KV("yr-card--interactive", p.Interactive) } { filterAttrs("Card", p.Attrs)... }>
+		{ children... }
+	</div>
+}

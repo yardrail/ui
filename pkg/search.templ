@@ -1,0 +1,10 @@
+package ui
+
+templ search(p *SearchProps) {
+	<form class={ p.class() } method="get" action={ templ.SafeURL(p.action()) } role="search" { filterAttrs("Search", p.Attrs)... }>
+		<span class="yr-search-icon">
+			@Icon("search")
+		</span>
+		<input class="yr-search-input" type="search" name={ p.name() } placeholder={ p.Placeholder } autocomplete="off"/>
+	</form>
+}

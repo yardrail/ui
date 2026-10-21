@@ -1,0 +1,7 @@
+package ui
+
+templ pageWorkspace(p *PageWorkspaceProps) {
+	<yr-page-workspace { filterAttrs("PageWorkspace", p.Attrs)... }>
+		{ children... }
+	</yr-page-workspace>
+}

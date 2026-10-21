@@ -1,0 +1,7 @@
+package ui
+
+templ reviewCard(p *ReviewCardProps) {
+	<div class="yr-review-card" { filterAttrs("ReviewCard", p.Attrs)... }>
+		{ children... }
+	</div>
+}

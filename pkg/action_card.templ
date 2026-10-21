@@ -1,0 +1,7 @@
+package ui
+
+templ actionCard(p *ActionCardProps) {
+	<div class={ "yr-action-card", templ.KV("yr-action-card--urgent", p.Urgent), templ.KV("yr-action-card--urgent-danger", p.UrgentDanger) } { filterAttrs("ActionCard", p.Attrs)... }>
+		{ children... }
+	</div>
+}

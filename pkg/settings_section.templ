@@ -1,0 +1,7 @@
+package ui
+
+templ settingsSection(p *SettingsSectionProps) {
+	<div class="yr-settings-section" { filterAttrs("SettingsSection", p.Attrs)... }>
+		{ children... }
+	</div>
+}

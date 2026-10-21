@@ -1,0 +1,7 @@
+package ui
+
+templ connectorPill(p *ConnectorPillProps) {
+	<div class="yr-connector-pill--icon" title={ p.Title } { filterAttrs("ConnectorPill", p.Attrs)... }>
+		{ children... }
+	</div>
+}

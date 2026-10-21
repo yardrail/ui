@@ -1,0 +1,22 @@
+package ui
+
+templ workflowCard(name, footerText string, p *WorkflowCardProps) {
+	<yr-workflow-card { filterAttrs("WorkflowCard", p.Attrs)... }>
+		<div class="yr-workflow-card-header">
+			<span class="yr-workflow-card-name">{ name }</span>
+			if p.Status != nil {
+				@p.Status
+			}
+		</div>
+		<div class="yr-workflow-card-stats">
+			@Stat(p.Runs, &StatProps{Label: "Runs"})
+			@Stat(p.SuccessRate, &StatProps{Label: "Success"})
+		</div>
+		<div class="yr-workflow-card-footer">
+			<span>{ footerText }</span>
+			if p.Action != nil {
+				@p.Action
+			}
+		</div>
+	</yr-workflow-card>
+}

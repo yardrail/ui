@@ -1,0 +1,13 @@
+package ui
+
+import "github.com/a-h/templ"
+
+// DownloadListProps configures a DownloadList.
+type DownloadListProps struct {
+	Attrs templ.Attributes
+}
+
+// DownloadList renders a list of downloadable file links. Children are the download links.
+func DownloadList(p *DownloadListProps) templ.Component {
+	return downloadList(p)
+}

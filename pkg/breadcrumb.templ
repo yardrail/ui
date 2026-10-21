@@ -1,0 +1,7 @@
+package ui
+
+templ breadcrumb(p *BreadcrumbProps) {
+	<nav class="yr-breadcrumb" { filterAttrs("Breadcrumb", p.Attrs)... }>
+		{ children... }
+	</nav>
+}

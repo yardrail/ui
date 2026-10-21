@@ -1,0 +1,52 @@
+package ui
+
+templ sidebarComponent(p *SidebarProps) {
+	<yr-sidebar
+		if p.Collapsed {
+			collapsed
+		}
+		{ filterAttrs("Sidebar", p.Attrs)... }
+	>
+		{ children... }
+	</yr-sidebar>
+}
+
+templ sidebarHeader(p *SidebarHeaderProps) {
+	<yr-sidebar-header { filterAttrs("SidebarHeader", p.Attrs)... }>
+		{ children... }
+	</yr-sidebar-header>
+}
+
+templ sidebarNav(p *SidebarNavProps) {
+	<yr-sidebar-nav
+		label={ p.Label }
+		if p.Bottom {
+			bottom
+		}
+		{ filterAttrs("SidebarNav", p.Attrs)... }
+	>
+		{ children... }
+	</yr-sidebar-nav>
+}
+
+templ sidebarLink(p *SidebarLinkProps) {
+	<yr-sidebar-link
+		href={ p.Href }
+		if p.Active {
+			active
+		}
+		{ filterAttrs("SidebarLink", p.Attrs)... }
+	>
+		{ children... }
+	</yr-sidebar-link>
+}
+
+templ sidebarOrg(p *SidebarOrgProps) {
+	<yr-sidebar-org name={ p.Name } initial={ p.Initial } { filterAttrs("SidebarOrg", p.Attrs)... }></yr-sidebar-org>
+}
+
+templ sidebarFooter(p *SidebarFooterProps) {
+	<yr-sidebar-footer { filterAttrs("SidebarFooter", p.Attrs)... }>
+		{ children... }
+	</yr-sidebar-footer>
+}

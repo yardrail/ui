@@ -1,0 +1,21 @@
+package ui
+
+templ templateCard(name, desc, price string, p *TemplateCardProps) {
+	<a href={ templ.SafeURL(p.href()) } class="yr-card yr-card--interactive yr-template-card" { filterAttrs("TemplateCard", p.Attrs)... }>
+		<h3 class="yr-template-card-name">{ name }</h3>
+		<p class="yr-template-card-desc">{ desc }</p>
+		if p.Connectors != nil {
+			<div class="yr-template-card-connectors">
+				@p.Connectors
+			</div>
+		}
+		<div class="yr-card-footer">
+			if p.FooterLeft != nil {
+				<div class="yr-template-card-footer-left">
+					@p.FooterLeft
+				</div>
+			}
+			<span class="yr-template-card-price">{ price }</span>
+		</div>
+	</a>
+}

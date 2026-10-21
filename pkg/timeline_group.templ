@@ -1,0 +1,13 @@
+package ui
+
+templ timelineGroup(p *TimelineGroupProps) {
+	<yr-timeline-group { filterAttrs("TimelineGroup", p.Attrs)... }>
+		{ children... }
+	</yr-timeline-group>
+}
+
+templ timelineEntries(p *TimelineEntriesProps) {
+	<yr-timeline-entries { filterAttrs("TimelineEntries", p.Attrs)... }>
+		{ children... }
+	</yr-timeline-entries>
+}
