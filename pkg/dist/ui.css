@@ -3294,5 +3294,24 @@ yr-chat-input {
   max-width: 10rem;
 }
 
+/* pkg/workflow_canvas.css */
+yr-content-main:has(> .yr-workflow-canvas) {
+  padding: 0;
+}
+.yr-workflow-canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  overflow: auto;
+  position: relative;
+  background-color: var(--yr-surface);
+}
+.yr-workflow-canvas__grid {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
 /* src/styles.css */
 /*# sourceMappingURL=ui.css.map */

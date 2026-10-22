@@ -96,6 +96,9 @@ var sections = []section{
 			"chat-fab",
 			"cappy-drawer",
 		}},
+		{Slug: "workflow", Name: "Workflow", ContextSlot: nil, Components: []string{
+			"workflow-canvas",
+		}},
 	}},
 }
 
