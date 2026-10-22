@@ -1,0 +1,58 @@
+package ui
+
+// ChatAttachmentType identifies the kind of attachment.
+type ChatAttachmentType struct{ v string }
+
+// Attachment types.
+var (
+	AttachmentImage = ChatAttachmentType{v: "image"}
+	AttachmentAudio = ChatAttachmentType{v: "audio"}
+	AttachmentFile  = ChatAttachmentType{v: "file"}
+)
+
+// ChatAttachmentProps holds a ChatAttachment's settings.
+type ChatAttachmentProps struct {
+	// Type is the kind of attachment.
+	Type ChatAttachmentType
+	// Name is the filename displayed on the attachment.
+	Name string
+	// URL is the source URL for the attachment (image src, audio src, or download href).
+	URL string
+}
+
+// ChatAttachment renders a single attachment card. All types share the same card
+// format: an icon or thumbnail on the left, filename and size on the right.
+func ChatAttachment(p ChatAttachmentProps) templ.Component {
+	return chatAttachment(&p)
+}
+
+templ chatAttachment(p *ChatAttachmentProps) {
+	<a
+		class="yr-chat-attachment"
+		href={ templ.SafeURL(p.URL) }
+		if p.Type != AttachmentImage {
+			download={ p.Name }
+		}
+		target="_blank"
+	>
+		if p.Type == AttachmentImage {
+			<img class="yr-chat-attachment__preview" src={ p.URL } alt={ p.Name }/>
+		} else {
+			<span class="yr-chat-attachment__icon">
+				if p.Type == AttachmentAudio {
+					@IconFileAudio()
+				} else {
+					@IconFile()
+				}
+			</span>
+		}
+		<span class="yr-chat-attachment__name">{ p.Name }</span>
+	</a>
+}
+
+// ChatAttachments renders a horizontal row of attachment blocks below a message bubble.
+templ ChatAttachments() {
+	<div class="yr-chat-attachments">
+		{ children... }
+	</div>
+}

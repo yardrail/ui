@@ -1,0 +1,53 @@
+package ui
+
+// ChatFabProps holds a ChatFab's optional settings; every zero value is the default.
+type ChatFabProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// Variant is the Cappy visual variant; the zero value is CappyWave.
+	Variant CappyVariant
+	// Label is the accessible label; the zero value is "Chat with Cappy".
+	Label string
+	// Badge indicates an unread message. Empty string hides the badge.
+	// Values: "cappy" shows a blue dot, "human" shows a green dot.
+	Badge string
+}
+
+// label returns the accessible label.
+func (p *ChatFabProps) label() string {
+	if p.Label == "" {
+		return "Chat with Cappy"
+	}
+
+	return p.Label
+}
+
+// ChatFab renders a floating action button pinned to the bottom-right corner of the viewport.
+// It displays Cappy's image as the trigger and dispatches a yr-chat-toggle event when clicked.
+// The consuming app wires this to open the yr-cappy-drawer.
+func ChatFab(p ChatFabProps) templ.Component {
+	return chatFab(&p)
+}
+
+templ chatFab(p *ChatFabProps) {
+	<yr-chat-fab aria-label={ p.label() } corner="bottom-right" { filterAttrs("ChatFab", p.Attrs)... }>
+		<button type="button" class="yr-chat-fab__dismiss" aria-label="Dismiss Cappy">
+			<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+				<path d="M18 6 6 18"></path>
+				<path d="m6 6 12 12"></path>
+			</svg>
+		</button>
+		<button type="button" class="yr-chat-fab__trigger" aria-label={ p.label() }>
+			<img
+				class="yr-chat-fab__img"
+				src={ "/static/ui/cappy/" + p.Variant.ImageFile() }
+				alt="Cappy"
+				width="48"
+				height="48"
+			/>
+			if p.Badge != "" {
+				<span class={ "yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge }></span>
+			}
+		</button>
+	</yr-chat-fab>
+}

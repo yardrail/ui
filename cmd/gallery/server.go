@@ -92,6 +92,10 @@ var sections = []section{
 		{Slug: "misc", Name: "Misc", ContextSlot: nil, Components: []string{
 			"author-link", "connector-pill", "live-duration",
 		}},
+		{Slug: "cappy", Name: "Cappy", ContextSlot: nil, Components: []string{
+			"chat-fab",
+			"cappy-drawer",
+		}},
 	}},
 }
 

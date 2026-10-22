@@ -65,6 +65,13 @@ func IconFile() templ.Component {
 	return templ.Raw(iconFileSVG)
 }
 
+const iconFileAudioSVG = `<svg  class="lucide lucide-file-audio"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" >  <path d="M17.5 22h.5a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3" />  <path d="M14 2v5h5" />  <path d="M2 19a2 2 0 1 1 4 0v1a2 2 0 1 1-4 0v-4a6 6 0 0 1 12 0v4a2 2 0 1 1-4 0v-1a2 2 0 1 1 4 0" /> </svg>`
+
+// IconFileAudio renders the Lucide file-audio icon.
+func IconFileAudio() templ.Component {
+	return templ.Raw(iconFileAudioSVG)
+}
+
 const iconFileImageSVG = `<svg  class="lucide lucide-file-image"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" >  <path d="M6 22a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h8a2.4 2.4 0 0 1 1.704.706l3.588 3.588A2.4 2.4 0 0 1 20 8v12a2 2 0 0 1-2 2z" />  <path d="M14 2v5a1 1 0 0 0 1 1h5" />  <circle cx="10" cy="12" r="2" />  <path d="m20 17-1.296-1.296a2.41 2.41 0 0 0-3.408 0L9 22" /> </svg>`
 
 // IconFileImage renders the Lucide file-image icon.
@@ -245,6 +252,20 @@ const iconPanelLeftOpenSVG = `<svg class="lucide lucide-panel-left-open yr-sideb
 // IconPanelLeftOpen renders the sidebar expand toggle icon.
 func IconPanelLeftOpen() templ.Component {
 	return templ.Raw(iconPanelLeftOpenSVG)
+}
+
+const iconPanelRightCloseSVG = `<svg class="lucide lucide-panel-right-close yr-cappy-drawer__collapse-open" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/><path d="m8 9 3 3-3 3"/></svg>`
+
+// IconPanelRightClose renders the drawer collapse toggle icon (chevron pointing right).
+func IconPanelRightClose() templ.Component {
+	return templ.Raw(iconPanelRightCloseSVG)
+}
+
+const iconPanelRightOpenSVG = `<svg class="lucide lucide-panel-right-open yr-cappy-drawer__collapse-closed" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M15 3v18"/><path d="m10 15-3-3 3-3"/></svg>`
+
+// IconPanelRightOpen renders the drawer expand toggle icon (chevron pointing left).
+func IconPanelRightOpen() templ.Component {
+	return templ.Raw(iconPanelRightOpenSVG)
 }
 
 const iconZapSVG = `<svg  class="lucide lucide-zap"  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="none"  stroke="currentColor"  stroke-width="2"  stroke-linecap="round"  stroke-linejoin="round" >  <path d="M15.914 4a1.5 1.5 0 00-2.474-1.561l-9 9A1.5 1.5 0 005.5 14h4.002a.5.5 0 01.471.666L8.086 20a1.5 1.5 0 002.475 1.56l9-9A1.5 1.5 0 0018.5 10h-3.997a.5.5 0 01-.472-.667z" /> </svg>`

@@ -1,0 +1,158 @@
+package main
+
+import ui "github.com/yardrail/ui/pkg"
+
+templ chatFabDefault() {
+	<!DOCTYPE html>
+	<html lang="en">
+		<head>
+			<meta charset="utf-8"/>
+			<meta name="viewport" content="width=device-width, initial-scale=1"/>
+			<title>Chat FAB · Yardrail</title>
+			<link rel="stylesheet" href="/static/ui/ui.css"/>
+			<script type="module" src="/static/ui/ui.js"></script>
+			<link rel="stylesheet" href="/mocks.css"/>
+		</head>
+		<body style="margin:0;height:100%">
+			@ui.PageWorkspace(&ui.PageWorkspaceProps{}) {
+				@ui.NavbarStd(&ui.NavbarStdProps{Logo: "/logo.png", Brand: "Yardrail", Authed: true}) {
+					@ui.AccountMenu(&ui.AccountMenuProps{Name: "Brahm Lower", Email: "brahm@yardrail.com", Avatar: "BL"}) {
+						<a class="yr-dropdown-menu-item" href="#">Account settings</a>
+						<a class="yr-dropdown-menu-item" href="#">Sign out</a>
+					}
+				}
+				@ui.Sidebar(&ui.SidebarProps{}) {
+					@ui.SidebarHeader(&ui.SidebarHeaderProps{}) {
+						<span style="font-family:var(--yr-font-body);font-weight:600;font-size:var(--yr-font-size-sm)">Yardrail</span>
+					}
+					@ui.SidebarNav(&ui.SidebarNavProps{}) {
+						@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#"}) {
+							@ui.IconHome()
+							Dashboard
+						}
+						@ui.SidebarLink(&ui.SidebarLinkProps{Href: "#", Active: true}) {
+							@ui.IconZap()
+							Automations
+						}
+					}
+				}
+				@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "sidebar"})
+				@ui.Content(&ui.ContentProps{}) {
+					@ui.ContentMain(&ui.ContentMainProps{}) {
+						<h1 class="portal-page-title">Automations</h1>
+						<p>Click Cappy in the bottom-right to open the chat drawer.</p>
+					}
+					@ui.ResizeHandle(&ui.ResizeHandleProps{Target: "drawer"})
+					@ui.CappyDrawer(ui.CappyDrawerProps{Support: ui.SupportOnline}) {
+						@ui.ChatMessage(ui.ChatMessageProps{
+							Sender:    ui.ChatSenderCappy,
+							Name:      "Cappy",
+							Timestamp: "2:30 PM",
+						}) {
+							<p style="margin: 0;">Hi there! I'm Cappy. How can I help you today?</p>
+						}
+					}
+				}
+			}
+			@ui.ChatFab(ui.ChatFabProps{})
+			<script>
+				const fab = document.querySelector("yr-chat-fab");
+				const drawer = document.querySelector("yr-cappy-drawer");
+				fab.addEventListener("yr-chat-toggle", () => {
+					const opening = !drawer.hasAttribute("open");
+					drawer.toggleAttribute("open");
+					fab.hidden = opening;
+				});
+				new MutationObserver(() => {
+					fab.hidden = drawer.hasAttribute("open");
+				}).observe(drawer, { attributes: true, attributeFilter: ["open"] });
+			</script>
+		</body>
+	</html>
+}
+
+templ chatFabVariants() {
+	<div style="display: flex; gap: var(--yr-space-8); flex-wrap: wrap; padding: var(--yr-space-4);">
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Wave (default)</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Construction</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappyConstructionWorker})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Train Engineer</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappyTrainEngineer})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Learner</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappyLearner})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Thinking</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappyThinking})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Excited</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappyExcited})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">See No Evil</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappySeeNoEvil})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Pointing</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInline(ui.ChatFabProps{Variant: ui.CappyPointing})
+			</div>
+		</div>
+	</div>
+}
+
+// chatFabInline renders a non-fixed ChatFab for the variants gallery.
+templ chatFabInline(p ui.ChatFabProps) {
+	<button type="button" class="yr-chat-fab__trigger" style="position: relative;">
+		<img class="yr-chat-fab__img" src={ "/static/ui/cappy/" + p.Variant.ImageFile() } alt="Cappy" width="48" height="48"/>
+	</button>
+}
+
+templ chatFabWithBadge() {
+	<div style="display: flex; gap: var(--yr-space-8); padding: var(--yr-space-4);">
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Cappy message</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInlineBadge(ui.ChatFabProps{Badge: "cappy"})
+			</div>
+		</div>
+		<div style="text-align: center;">
+			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Human message</p>
+			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
+				@chatFabInlineBadge(ui.ChatFabProps{Badge: "human"})
+			</div>
+		</div>
+	</div>
+}
+
+templ chatFabInlineBadge(p ui.ChatFabProps) {
+	<button type="button" class="yr-chat-fab__trigger" style="position: relative;">
+		<img class="yr-chat-fab__img" src={ "/static/ui/cappy/" + p.Variant.ImageFile() } alt="Cappy" width="48" height="48"/>
+		if p.Badge != "" {
+			<span class={ "yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge }></span>
+		}
+	</button>
+}

@@ -1,0 +1,55 @@
+package ui
+
+// ChatTypingProps holds a ChatTyping indicator's settings.
+type ChatTypingProps struct {
+	// Sender identifies who is typing.
+	Sender ChatSender
+	// Name is the display name, e.g. "Cappy" or "Sarah".
+	Name string
+	// Working shows "is working" instead of "is typing" (e.g. during tool calls).
+	Working bool
+}
+
+// label returns the activity label.
+func (p *ChatTypingProps) label() string {
+	if p.Working {
+		return p.Name + " is working"
+	}
+
+	return p.Name + " is typing"
+}
+
+// ChatTyping renders a typing indicator with the sender's name.
+func ChatTyping(p ChatTypingProps) templ.Component {
+	return chatTyping(&p)
+}
+
+templ chatTyping(p *ChatTypingProps) {
+	<div class={ "yr-chat-typing yr-chat-typing--" + p.Sender.String() }>
+		<span class="yr-chat-typing__dots" aria-hidden="true">
+			<span class="yr-chat-typing__dot"></span>
+			<span class="yr-chat-typing__dot"></span>
+			<span class="yr-chat-typing__dot"></span>
+		</span>
+		<span class="yr-chat-typing__label">{ p.label() }</span>
+	</div>
+}
+
+// ChatJoinProps holds a ChatJoin announcement's settings.
+type ChatJoinProps struct {
+	// Name is the person who joined, e.g. "Sarah from support".
+	Name string
+}
+
+// ChatJoin renders a join announcement divider in the chat log.
+func ChatJoin(p ChatJoinProps) templ.Component {
+	return chatJoin(&p)
+}
+
+templ chatJoin(p *ChatJoinProps) {
+	<div class="yr-chat-join" role="status">
+		<hr class="yr-chat-join__line"/>
+		<span class="yr-chat-join__label">{ p.Name } has joined</span>
+		<hr class="yr-chat-join__line"/>
+	</div>
+}

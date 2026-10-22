@@ -1,0 +1,46 @@
+package ui
+
+// ChatMessageProps holds a ChatMessage's settings.
+type ChatMessageProps struct {
+	// Sender identifies who sent the message.
+	Sender ChatSender
+	// Name is the display name of the sender.
+	Name string
+	// AvatarURL is the sender's avatar image URL. For Cappy messages, this is the
+	// current variant image. For human messages, the support person's profile picture.
+	// User messages don't show an avatar.
+	AvatarURL string
+	// Timestamp is the display timestamp, e.g. "2:34 PM".
+	Timestamp string
+	// Attachments renders below the bubble but within the message block.
+	Attachments templ.Component
+}
+
+// ChatMessage renders a single message bubble. Blue for Cappy, green for the support
+// person, grey for the user. Cappy and human messages are left-aligned with an avatar;
+// user messages are right-aligned.
+func ChatMessage(p ChatMessageProps) templ.Component {
+	return chatMessage(&p)
+}
+
+templ chatMessage(p *ChatMessageProps) {
+	<div class={ "yr-chat-msg yr-chat-msg--" + p.Sender.String() }>
+		if p.Sender != ChatSenderUser && p.AvatarURL != "" {
+			<img class="yr-chat-msg__avatar" src={ p.AvatarURL } alt={ p.Name } width="36" height="36"/>
+		}
+		<div class="yr-chat-msg__content">
+			if p.Sender != ChatSenderUser {
+				<span class="yr-chat-msg__name">{ p.Name }</span>
+			}
+			<div class={ "yr-chat-msg__bubble yr-chat-msg__bubble--" + p.Sender.String() }>
+				{ children... }
+			</div>
+			if p.Attachments != nil {
+				@p.Attachments
+			}
+			if p.Timestamp != "" {
+				<span class="yr-chat-msg__time">{ p.Timestamp }</span>
+			}
+		</div>
+	</div>
+}

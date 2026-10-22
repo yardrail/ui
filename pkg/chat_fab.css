@@ -1,0 +1,110 @@
+/* ChatFab — floating action button showing Cappy's image. Draggable to any
+   viewport corner; snaps with animation on release. Dispatches yr-chat-toggle
+   when clicked; the consuming app opens the yr-cappy-drawer in response. */
+
+yr-chat-fab {
+  position: fixed;
+  z-index: 1000;
+  transition: top 0.4s ease, left 0.4s ease;
+}
+
+/* While dragging, disable the snap animation. */
+yr-chat-fab[dragging] {
+  transition: none;
+}
+
+/* Corner positions. */
+yr-chat-fab[corner="bottom-right"] {
+  bottom: var(--yr-space-6);
+  right: var(--yr-space-6);
+}
+
+yr-chat-fab[corner="bottom-left"] {
+  bottom: var(--yr-space-6);
+  left: var(--yr-space-6);
+}
+
+yr-chat-fab[corner="top-right"] {
+  top: var(--yr-space-6);
+  right: var(--yr-space-6);
+}
+
+yr-chat-fab[corner="top-left"] {
+  top: var(--yr-space-6);
+  left: var(--yr-space-6);
+}
+
+.yr-chat-fab__trigger {
+  position: relative;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  padding: 0;
+  transition: transform 0.15s ease;
+  filter: drop-shadow(0 3px 6px rgb(0 0 0 / 20%));
+}
+.yr-chat-fab__trigger:hover {
+  transform: scale(1.1);
+  filter: drop-shadow(0 4px 10px rgb(0 0 0 / 25%));
+}
+.yr-chat-fab__trigger:active {
+  transform: scale(0.95);
+}
+
+.yr-chat-fab__img {
+  width: 4.5rem;
+  height: 4.5rem;
+  object-fit: contain;
+  display: block;
+  margin: calc(-1 * var(--yr-space-2));
+  pointer-events: none;
+}
+
+/* Dismiss button — appears on hover, top-right of the FAB. */
+.yr-chat-fab__dismiss {
+  position: absolute;
+  top: calc(-1 * var(--yr-space-1));
+  right: calc(-1 * var(--yr-space-1));
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--yr-radius-full);
+  border: 1px solid var(--yr-border);
+  background: var(--yr-surface);
+  color: var(--yr-text-subtle);
+  cursor: pointer;
+  padding: 0;
+  opacity: 0;
+  transition: opacity 0.15s ease;
+}
+
+yr-chat-fab:hover .yr-chat-fab__dismiss {
+  opacity: 1;
+}
+
+.yr-chat-fab__dismiss:hover {
+  background: var(--yr-surface-muted);
+  color: var(--yr-text);
+}
+
+/* Notification badge — positioned top-right of the trigger. */
+.yr-chat-fab__badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: var(--yr-radius-full);
+  border: 2px solid var(--yr-surface);
+}
+.yr-chat-fab__badge--cappy {
+  background: var(--yr-accent);
+}
+.yr-chat-fab__badge--human {
+  background: var(--yr-success);
+}
