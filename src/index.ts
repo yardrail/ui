@@ -31,3 +31,4 @@ import '../pkg/download_list';
 import '../pkg/chat_fab';
 import '../pkg/cappy_drawer';
 import '../pkg/chat_input';
+import '../pkg/workflow_canvas';

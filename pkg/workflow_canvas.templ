@@ -1,0 +1,17 @@
+package ui
+
+// WorkflowCanvasProps holds a WorkflowCanvas's optional settings.
+type WorkflowCanvasProps struct {
+	Attrs templ.Attributes
+}
+
+// WorkflowCanvas renders a full-bleed canvas with a blueprint-style graph paper background.
+func WorkflowCanvas(p WorkflowCanvasProps) templ.Component {
+	return workflowCanvas(&p)
+}
+
+templ workflowCanvas(p *WorkflowCanvasProps) {
+	<yr-workflow-canvas class="yr-workflow-canvas" { filterAttrs("WorkflowCanvas", p.Attrs)... }>
+		{ children... }
+	</yr-workflow-canvas>
+}
