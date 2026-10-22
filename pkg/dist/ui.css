@@ -495,8 +495,15 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
   position: sticky;
   top: 0;
   z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-4);
   height: var(--yr-topbar-height);
+  padding-inline: var(--yr-page-gutter);
   background: var(--yr-bg);
+}
+.yr-shell__topbar > :last-child {
+  margin-inline-start: auto;
 }
 .yr-shell__nav {
   grid-area: nav;
@@ -515,6 +522,31 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
   padding: var(--yr-space-4);
   background: var(--yr-bg);
   color: var(--yr-text);
+}
+.yr-shell__nav-panel ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-1);
+}
+.yr-shell__nav-panel a {
+  display: block;
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border-radius: var(--yr-radius-md);
+  text-decoration: none;
+  color: var(--yr-text-subtle);
+  font-size: var(--yr-font-size-sm);
+}
+.yr-shell__nav-panel a:hover {
+  background: var(--yr-surface);
+  color: var(--yr-text);
+}
+.yr-shell__nav-panel a[aria-current=page] {
+  background: var(--yr-surface);
+  color: var(--yr-text);
+  font-weight: 600;
 }
 @media (width >= 48rem) {
   .yr-shell__nav {
@@ -537,7 +569,7 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
     inset: auto;
     margin: 0;
     border: 0;
-    padding: 0;
+    padding: var(--yr-space-4);
     width: auto;
     height: auto;
     max-height: none;
@@ -569,6 +601,9 @@ ul:is(.yr-stack, .yr-cluster, .yr-grid) {
 }
 .yr-shell__footer {
   grid-area: footer;
+  padding: var(--yr-space-6) var(--yr-page-gutter);
+  color: var(--yr-text-subtle);
+  font-size: var(--yr-font-size-sm);
 }
 
 /* pkg/button.css */
