@@ -7,7 +7,8 @@ tmp_dir = ".air"
   args_bin = ["--addr", "localhost:6007"]
   delay = 200
   include_ext = ["go", "templ", "css", "js", "ts"]
-  exclude_dir = ["node_modules", "dist", ".air", ".git", "testdata"]
+  exclude_regex = ["pkg/dist"]
+  exclude_dir = ["node_modules", ".air", ".git", "testdata"]
   kill_delay = 500
 
 [log]
