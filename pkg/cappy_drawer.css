@@ -1,0 +1,179 @@
+/* yr-cappy-drawer — dedicated chat drawer for Cappy, distinct from yr-drawer.
+   Slides in from the right inside yr-content. */
+
+yr-cappy-drawer {
+  width: var(--yr-drawer-width);
+  min-width: var(--yr-drawer-width);
+  overflow: hidden;
+  border-left: 1px solid var(--yr-border);
+  background: var(--yr-surface);
+  flex-shrink: 0;
+  display: none;
+  flex-direction: column;
+}
+
+yr-cappy-drawer[open] {
+  display: flex;
+}
+
+yr-cappy-drawer[collapsed] {
+  width: var(--yr-sidebar-width-collapsed);
+  min-width: var(--yr-sidebar-width-collapsed);
+}
+
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__log,
+yr-cappy-drawer[collapsed] yr-chat-input,
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__identity,
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__escalate,
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__close {
+  display: none;
+}
+
+/* Collapsed avatars — shown only when collapsed. */
+.yr-cappy-drawer__collapsed-avatars {
+  display: none;
+}
+
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__collapsed-avatars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--yr-space-2);
+  padding: var(--yr-space-3) 0;
+}
+
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__header {
+  justify-content: center;
+}
+
+.yr-cappy-drawer__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 3.5rem;
+  padding: var(--yr-space-3) var(--yr-space-4);
+  border-bottom: 1px solid var(--yr-border);
+  background: var(--yr-surface);
+}
+
+.yr-cappy-drawer__identity {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+}
+
+.yr-cappy-drawer__avatar {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--yr-radius-lg);
+  object-fit: cover;
+}
+
+.yr-cappy-drawer__avatar--sm {
+  width: 1.25rem;
+  height: 1.25rem;
+}
+
+.yr-cappy-drawer__name {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  color: var(--yr-text);
+}
+
+/* Participants row — shown when a support person has joined. */
+.yr-cappy-drawer__participants {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-2);
+}
+
+.yr-cappy-drawer__separator {
+  color: var(--yr-text-disabled);
+  font-size: var(--yr-font-size-sm);
+}
+
+.yr-cappy-drawer__support-avatar {
+  width: 1.25rem;
+  height: 1.25rem;
+  border-radius: var(--yr-radius-md);
+  object-fit: cover;
+}
+
+.yr-cappy-drawer__support-name {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  font-weight: 600;
+  color: var(--yr-success);
+}
+
+/* Header action buttons — escalate and close. */
+.yr-cappy-drawer__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-1);
+}
+
+/* Collapse toggle — icon swaps between open/closed chevrons. */
+.yr-cappy-drawer__collapse-closed {
+  display: none;
+}
+
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__collapse-open {
+  display: none;
+}
+
+yr-cappy-drawer[collapsed] .yr-cappy-drawer__collapse-closed {
+  display: block;
+}
+
+.yr-cappy-drawer__close,
+.yr-cappy-drawer__escalate,
+.yr-cappy-drawer__collapse {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: none;
+  color: var(--yr-text-subtle);
+  cursor: pointer;
+  padding: var(--yr-space-1);
+  border-radius: var(--yr-radius-sm);
+}
+
+.yr-cappy-drawer__close:hover,
+.yr-cappy-drawer__escalate:hover,
+.yr-cappy-drawer__collapse:hover {
+  color: var(--yr-text);
+  background: var(--yr-surface-muted);
+}
+
+/* Availability dot on the escalate button. */
+.yr-cappy-drawer__avail {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: var(--yr-radius-full);
+  border: 1px solid var(--yr-surface);
+}
+
+.yr-cappy-drawer__avail--online {
+  background: var(--yr-success);
+}
+
+.yr-cappy-drawer__avail--offline {
+  background: var(--yr-danger);
+}
+
+/* Chat log — scrollable message area. */
+.yr-cappy-drawer__log {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--yr-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-3);
+}

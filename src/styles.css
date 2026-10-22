@@ -50,3 +50,10 @@
 @import "../pkg/workflow_card.css";
 @import "../pkg/status_banner.css";
 @import "../pkg/download_list.css";
+@import "../pkg/chat_fab.css";
+@import "../pkg/cappy_drawer.css";
+@import "../pkg/chat_message.css";
+@import "../pkg/chat_tool_call.css";
+@import "../pkg/chat_status.css";
+@import "../pkg/chat_input.css";
+@import "../pkg/chat_attachment.css";

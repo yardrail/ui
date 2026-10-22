@@ -1,0 +1,148 @@
+package ui
+
+// SupportAvailability indicates whether a support person is available to chat.
+type SupportAvailability struct{ v string }
+
+// Support availability states.
+var (
+	// SupportHidden hides the escalation button entirely.
+	SupportHidden = SupportAvailability{}
+	// SupportOnline shows the button with a green availability dot.
+	SupportOnline = SupportAvailability{v: "online"}
+	// SupportOffline shows the button with a red dot (user can still leave a message).
+	SupportOffline = SupportAvailability{v: "offline"}
+)
+
+// CappyDrawerProps holds a CappyDrawer's settings.
+type CappyDrawerProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// Variant is the current Cappy visual variant shown in the header.
+	Variant CappyVariant
+	// Open renders the drawer in its open state.
+	Open bool
+	// AutoApprove shows the auto-approve toggle in the input toolbar.
+	AutoApprove bool
+	// Support controls the escalation button in the header. The zero value hides it.
+	Support SupportAvailability
+	// Placeholder overrides the input placeholder text.
+	Placeholder string
+	// SupportName is the display name of the support person, shown in the header
+	// when present. Empty means no support person has joined.
+	SupportName string
+	// SupportAvatarURL is the support person's profile picture URL.
+	SupportAvatarURL string
+}
+
+// CappyDrawer renders the Cappy chat drawer — a right-side panel with Cappy's avatar
+// in the header, a scrollable chat log, and a text input. The chat log content is
+// provided as children.
+func CappyDrawer(p CappyDrawerProps) templ.Component {
+	return cappyDrawer(&p)
+}
+
+templ cappyDrawer(p *CappyDrawerProps) {
+	<yr-cappy-drawer
+		if p.Open {
+			open
+		}
+		{ filterAttrs("CappyDrawer", p.Attrs)... }
+	>
+		<header class="yr-cappy-drawer__header">
+			<div class="yr-cappy-drawer__identity">
+				if p.SupportName != "" {
+					if p.SupportAvatarURL != "" {
+						<img
+							class="yr-cappy-drawer__support-avatar"
+							src={ p.SupportAvatarURL }
+							alt={ p.SupportName }
+							width="20"
+							height="20"
+						/>
+					}
+					<span class="yr-cappy-drawer__support-name">{ p.SupportName }</span>
+					<span class="yr-cappy-drawer__separator">·</span>
+					<img
+						class="yr-cappy-drawer__avatar yr-cappy-drawer__avatar--sm"
+						src={ "/static/ui/cappy/" + p.Variant.ImageFile() }
+						alt="Cappy"
+						width="20"
+						height="20"
+					/>
+					<span class="yr-cappy-drawer__name">Cappy</span>
+				} else {
+					<img
+						class="yr-cappy-drawer__avatar"
+						src={ "/static/ui/cappy/" + p.Variant.ImageFile() }
+						alt="Cappy"
+						width="32"
+						height="32"
+					/>
+					<span class="yr-cappy-drawer__name">Cappy</span>
+				}
+			</div>
+			<div class="yr-cappy-drawer__actions">
+				if p.Support.v != "" {
+					<button
+						type="button"
+						class="yr-cappy-drawer__escalate"
+						aria-label={ escalateLabel(p.Support) }
+						title={ escalateLabel(p.Support) }
+					>
+						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+							<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+							<circle cx="9" cy="7" r="4"></circle>
+							<line x1="19" x2="19" y1="8" y2="14"></line>
+							<line x1="22" x2="16" y1="11" y2="11"></line>
+						</svg>
+						<span class={ "yr-cappy-drawer__avail yr-cappy-drawer__avail--" + p.Support.v }></span>
+					</button>
+				}
+				<button type="button" class="yr-cappy-drawer__collapse" aria-label="Collapse chat">
+					@IconPanelRightClose()
+					@IconPanelRightOpen()
+				</button>
+				<button type="button" class="yr-cappy-drawer__close" aria-label="Close chat">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="M18 6 6 18"></path>
+						<path d="m6 6 12 12"></path>
+					</svg>
+				</button>
+			</div>
+		</header>
+		<div class="yr-cappy-drawer__collapsed-avatars">
+			<img
+				class="yr-cappy-drawer__avatar yr-cappy-drawer__avatar--sm"
+				src={ "/static/ui/cappy/" + p.Variant.ImageFile() }
+				alt="Cappy"
+				width="28"
+				height="28"
+			/>
+			if p.SupportName != "" && p.SupportAvatarURL != "" {
+				<img
+					class="yr-cappy-drawer__support-avatar"
+					src={ p.SupportAvatarURL }
+					alt={ p.SupportName }
+					width="28"
+					height="28"
+				/>
+			}
+		</div>
+		<div class="yr-cappy-drawer__log">
+			{ children... }
+		</div>
+		@ChatInput(ChatInputProps{
+			AutoApprove: p.AutoApprove,
+			Placeholder: p.Placeholder,
+		})
+	</yr-cappy-drawer>
+}
+
+// escalateLabel returns the accessible label for the escalation button.
+func escalateLabel(s SupportAvailability) string {
+	if s == SupportOnline {
+		return "Talk to a person (available)"
+	}
+
+	return "Talk to a person (offline)"
+}

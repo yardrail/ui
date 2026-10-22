@@ -112,6 +112,8 @@ func ExampleGroups() []ExampleGroup {
 		{Component: "output-row", Examples: outputRowExamples()},
 		{Component: "timeline", Examples: timelineExamples()},
 		{Component: "download-list", Examples: downloadListExamples()},
+		{Component: "chat-fab", Examples: chatFabExamples()},
+		{Component: "cappy-drawer", Examples: cappyDrawerExamples()},
 	}
 }
 

@@ -1,0 +1,58 @@
+package ui
+
+// ChatInputProps holds a ChatInput's optional settings.
+type ChatInputProps struct {
+	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
+	Attrs templ.Attributes
+	// Placeholder is the input placeholder text; the zero value is "Message Cappy…".
+	Placeholder string
+	// AutoApprove shows the auto-approve toggle for tool call mutations.
+	AutoApprove bool
+}
+
+// placeholder returns the input placeholder text.
+func (p *ChatInputProps) placeholder() string {
+	if p.Placeholder == "" {
+		return "Message Cappy…"
+	}
+
+	return p.Placeholder
+}
+
+// ChatInput renders a multiline chat text input with file attachment support.
+func ChatInput(p ChatInputProps) templ.Component {
+	return chatInput(&p)
+}
+
+templ chatInput(p *ChatInputProps) {
+	<yr-chat-input { filterAttrs("ChatInput", p.Attrs)... }>
+		<textarea
+			class="yr-chat-input__field"
+			placeholder={ p.placeholder() }
+			rows="1"
+		></textarea>
+		<div class="yr-chat-input__staging" hidden></div>
+		<div class="yr-chat-input__bar">
+			<div class="yr-chat-input__bar-left">
+				<button type="button" class="yr-chat-input__attach" aria-label="Attach file">
+					<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+						<path d="m21.44 11.05-9.19 9.19a6 6 0 0 1-8.49-8.49l8.57-8.57A4 4 0 1 1 18 8.84l-8.59 8.57a2 2 0 0 1-2.83-2.83l8.49-8.48"></path>
+					</svg>
+				</button>
+				if p.AutoApprove {
+					<label class="yr-chat-input__auto-approve">
+						<input type="checkbox" class="yr-chat-input__auto-approve-check"/>
+						<span>Auto-approve</span>
+					</label>
+				}
+			</div>
+			<button type="button" class="yr-chat-input__send" aria-label="Send message">
+				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+					<path d="M14.536 21.686a.5.5 0 0 0 .937-.024l6.5-19a.496.496 0 0 0-.635-.635l-19 6.5a.5.5 0 0 0-.024.937l7.93 3.18a2 2 0 0 1 1.112 1.11z"></path>
+					<path d="m21.854 2.147-10.94 10.939"></path>
+				</svg>
+			</button>
+		</div>
+		<input type="file" class="yr-chat-input__file" multiple hidden/>
+	</yr-chat-input>
+}

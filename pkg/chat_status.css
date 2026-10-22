@@ -1,0 +1,78 @@
+/* yr-chat-typing — animated typing indicator with sender name. */
+
+.yr-chat-typing {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-2);
+  padding: var(--yr-space-1) 0;
+  margin-top: auto;
+}
+
+.yr-chat-typing__dots {
+  display: flex;
+  gap: var(--yr-space-1);
+  align-items: center;
+}
+
+.yr-chat-typing__dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--yr-radius-full);
+  animation: yr-typing-bounce 1.2s ease-in-out infinite;
+}
+
+.yr-chat-typing__dot:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.yr-chat-typing__dot:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+.yr-chat-typing--cappy .yr-chat-typing__dot {
+  background: var(--yr-accent);
+}
+
+.yr-chat-typing--human .yr-chat-typing__dot {
+  background: var(--yr-success);
+}
+
+@keyframes yr-typing-bounce {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+  }
+  30% {
+    transform: translateY(-4px);
+  }
+}
+
+.yr-chat-typing__label {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+}
+
+/* yr-chat-join — divider with label when a support person joins. */
+
+.yr-chat-join {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-3);
+  padding: var(--yr-space-3) 0;
+}
+
+.yr-chat-join__line {
+  flex: 1;
+  border: none;
+  border-top: 1px solid var(--yr-border);
+  margin: 0;
+}
+
+.yr-chat-join__label {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+  white-space: nowrap;
+}

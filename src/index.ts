@@ -28,3 +28,6 @@ import '../pkg/journal_log';
 import '../pkg/workflow_card';
 import '../pkg/status_banner';
 import '../pkg/download_list';
+import '../pkg/chat_fab';
+import '../pkg/cappy_drawer';
+import '../pkg/chat_input';

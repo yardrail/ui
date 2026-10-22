@@ -1,0 +1,86 @@
+/* yr-chat-msg — a single chat message bubble. Sender type controls alignment,
+   color, and avatar visibility. */
+
+.yr-chat-msg {
+  display: flex;
+  gap: var(--yr-space-2);
+  max-width: 85%;
+}
+
+/* User messages align right. */
+.yr-chat-msg--user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+/* Cappy and human messages align left. */
+.yr-chat-msg--cappy,
+.yr-chat-msg--human {
+  align-self: flex-start;
+}
+
+.yr-chat-msg__avatar {
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: var(--yr-radius-lg);
+  object-fit: cover;
+  flex-shrink: 0;
+  margin-top: var(--yr-space-3);
+}
+
+.yr-chat-msg__content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--yr-space-1);
+  min-width: 0;
+}
+
+.yr-chat-msg__name {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-xs);
+  font-weight: 600;
+  color: var(--yr-text-subtle);
+  padding-inline: var(--yr-space-1);
+}
+
+.yr-chat-msg__bubble {
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border-radius: var(--yr-radius-lg);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-sm);
+  line-height: 1.5;
+  overflow-wrap: break-word;
+}
+
+/* Cappy — blue */
+.yr-chat-msg__bubble--cappy {
+  background: var(--yr-accent);
+  color: var(--yr-on-accent);
+  border-end-start-radius: var(--yr-radius-sm);
+}
+
+/* Human support — green */
+.yr-chat-msg__bubble--human {
+  background: var(--yr-success);
+  color: var(--yr-on-accent);
+  border-end-start-radius: var(--yr-radius-sm);
+}
+
+/* User — grey */
+.yr-chat-msg__bubble--user {
+  background: var(--yr-surface-muted);
+  color: var(--yr-text);
+  border-end-end-radius: var(--yr-radius-sm);
+}
+
+.yr-chat-msg__time {
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-xs);
+  color: var(--yr-text-disabled);
+  padding-inline: var(--yr-space-1);
+  display: none;
+}
+
+.yr-chat-msg[data-show-time] .yr-chat-msg__time {
+  display: block;
+}

@@ -1,0 +1,49 @@
+/* yr-chat-attachments — horizontal row of attachment cards below a message bubble. */
+.yr-chat-attachments {
+  display: flex;
+  gap: var(--yr-space-2);
+  flex-wrap: wrap;
+  margin-top: var(--yr-space-1);
+}
+
+/* yr-chat-attachment — unified card for all file types. */
+.yr-chat-attachment {
+  display: flex;
+  align-items: center;
+  gap: var(--yr-space-2);
+  padding: var(--yr-space-2) var(--yr-space-3);
+  border: 1px solid var(--yr-border);
+  border-radius: var(--yr-radius-md);
+  background: var(--yr-surface-muted);
+  font-family: var(--yr-font-body);
+  font-size: var(--yr-font-size-xs);
+  text-decoration: none;
+  color: var(--yr-text);
+}
+
+.yr-chat-attachment:hover {
+  background: var(--yr-surface);
+}
+
+.yr-chat-attachment__preview {
+  width: 2rem;
+  height: 2rem;
+  border-radius: var(--yr-radius-sm);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.yr-chat-attachment__icon {
+  display: flex;
+  align-items: center;
+  color: var(--yr-text-subtle);
+  flex-shrink: 0;
+}
+
+.yr-chat-attachment__name {
+  color: var(--yr-text);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 10rem;
+}
