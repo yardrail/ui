@@ -3,3 +3,5 @@ node_modules/
 .air/
 .playwright-mcp/
 /gallery
+.mise.local.toml
+.mise.*.toml

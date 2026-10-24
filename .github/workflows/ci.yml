@@ -15,7 +15,7 @@ jobs:
         with:
           go-version-file: go.mod
 
-      - uses: go-task/setup-task@v1
+      - uses: jdx/mise-action@v2
 
       - run: task test
 
@@ -28,10 +28,17 @@ jobs:
         with:
           go-version-file: go.mod
 
+      - uses: jdx/mise-action@v2
+
+      - name: Read tool versions from mise
+        id: versions
+        run: |
+          echo "golangci-lint=v$(mise current golangci-lint)" >> "$GITHUB_OUTPUT"
+
       - name: Install golangci-lint
         uses: golangci/golangci-lint-action@v9
         with:
-          version: v2.14.0
+          version: ${{ steps.versions.outputs.golangci-lint }}
           install-only: true
 
       - uses: actions/setup-node@v5
@@ -40,11 +47,6 @@ jobs:
           package-manager-cache: false
 
       - run: corepack enable
-
-      - name: Install templ
-        run: go install github.com/a-h/templ/cmd/templ@v0.3.1020
-
-      - uses: go-task/setup-task@v1
 
       - run: task lint
 
