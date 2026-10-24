@@ -49,7 +49,7 @@ task lint       # run all lints
 
 ### AccountMenu
 
-AccountMenu renders an account dropdown menu with avatar, name, and email.
+AccountMenu renders an account dropdown menu with avatar, name, and email. Children are the menu items (links, buttons, dividers).
 
 ### ActionCard
 
@@ -91,6 +91,10 @@ Breadcrumb renders a breadcrumb navigation. Children are the links, separators, 
 
 Button renders a native `<button>` whose text, and accessible name, is label.
 
+### CappyDrawer
+
+CappyDrawer renders the Cappy chat drawer — a right-side panel with Cappy's avatar in the header, a scrollable chat log, and a text input. The chat log content is provided as children.
+
 ### Card
 
 Card renders a generic container card. Children are the card content.
@@ -102,6 +106,42 @@ Cell renders a `<td>` around its children.
 ### Center
 
 Center caps its children at Measure and centres them horizontally.
+
+### ChatAttachment
+
+ChatAttachment renders a single attachment card. All types share the same card format: an icon or thumbnail on the left, filename and size on the right.
+
+### ChatAttachments
+
+ChatAttachments renders a horizontal row of attachment blocks below a message bubble.
+
+### ChatFab
+
+ChatFab renders a floating action button pinned to the bottom-right corner of the viewport. It displays Cappy's image as the trigger and dispatches a yr-chat-toggle event when clicked. The consuming app wires this to open the yr-cappy-drawer.
+
+### ChatInput
+
+ChatInput renders a multiline chat text input with file attachment support.
+
+### ChatJoin
+
+ChatJoin renders a join announcement divider in the chat log.
+
+### ChatMessage
+
+ChatMessage renders a single message bubble. Blue for Cappy, green for the support person, grey for the user. Cappy and human messages are left-aligned with an avatar; user messages are right-aligned.
+
+### ChatToolCall
+
+ChatToolCall renders an inline action block within a Cappy message showing a tool's name and execution status. Mutation calls show in yellow with Allow/Deny controls when pending.
+
+### ChatToolCalls
+
+ChatToolCalls renders a collapsed summary of tool calls that expands to show details. Shown after tools finish; while tools run, use ChatTyping with Working: true instead.
+
+### ChatTyping
+
+ChatTyping renders a typing indicator with the sender's name.
 
 ### Cluster
 
@@ -203,6 +243,10 @@ IconDatabase renders the Lucide database icon.
 
 IconFile renders the Lucide file icon.
 
+### IconFileAudio
+
+IconFileAudio renders the Lucide file-audio icon.
+
 ### IconFileImage
 
 IconFileImage renders the Lucide file-image icon.
@@ -246,6 +290,22 @@ IconMail renders the Lucide mail icon.
 ### IconMessageSquare
 
 IconMessageSquare renders the Lucide message-square icon.
+
+### IconPanelLeftClose
+
+IconPanelLeftClose renders the sidebar collapse toggle icon.
+
+### IconPanelLeftOpen
+
+IconPanelLeftOpen renders the sidebar expand toggle icon.
+
+### IconPanelRightClose
+
+IconPanelRightClose renders the drawer collapse toggle icon (chevron pointing right).
+
+### IconPanelRightOpen
+
+IconPanelRightOpen renders the drawer expand toggle icon (chevron pointing left).
 
 ### IconPencil
 
@@ -321,15 +381,15 @@ MetaRow renders a middot-joined row of metadata fragments.
 
 ### NavShell
 
-NavShell renders the top navigation shell.
+NavShell renders the top navigation shell with left, center, and right sections. Left and Center are component props; children go into the right section.
 
 ### Navbar
 
-Navbar renders a generic navigation bar.
+Navbar renders a generic navigation bar. Children go into the right section.
 
 ### NavbarStd
 
-NavbarStd renders the standard navigation bar with logo, brand, and account menu.
+NavbarStd renders the standard navigation bar with logo, brand, and account menu. Children go into the right section (typically an account menu).
 
 ### PageAuth
 
@@ -494,6 +554,10 @@ TimelineEntries renders a container for timeline entry rows. Children are the en
 ### TimelineGroup
 
 TimelineGroup renders a date-labeled container with a vertical time rail. Children are the group content.
+
+### WorkflowCanvas
+
+WorkflowCanvas renders a full-bleed canvas with a blueprint-style graph paper background.
 
 ### WorkflowCard
 

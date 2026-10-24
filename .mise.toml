@@ -1,0 +1,14 @@
+[settings]
+idiomatic_version_file_enable_tools = ["go"]
+
+[tools]
+node = "24"
+pnpm = "9.15.4"
+
+golangci-lint = "2.14.0"
+task = "3.54.0"
+lefthook = "2.2.2"
+air = "1.67.4"
+
+"go:github.com/a-h/templ/cmd/templ" = "0.3.1020"
+"go:github.com/conventionalcommit/commitlint" = "0.12.0"

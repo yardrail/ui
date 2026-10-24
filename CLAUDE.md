@@ -17,6 +17,11 @@ Typed templ component library for Yardrail's web UI. Go package `github.com/yard
 - Web components use the `yr-` prefix (e.g. `yr-sidebar`, `yr-pill`).
 - Icons: `Icon(name)` renders a Lucide SVG from `dist/icons/`.
 
+## Setup
+
+Tool versions are managed by [mise](https://mise.jdx.dev/). Run `mise install` to install all
+required tools (task, templ, golangci-lint, air, lefthook, commitlint, node, pnpm).
+
 ## Gallery
 
 `cmd/gallery/` serves all examples at `:6007`. Run with `task gallery` (uses `air` for hot reload).
@@ -25,14 +30,18 @@ Typed templ component library for Yardrail's web UI. Go package `github.com/yard
 
 Run `task <name>`:
 
-- `install` — Install npm dependencies (esbuild, stylelint)
 - `build` — Build CSS/JS to pkg/dist/ (ui.js, ui.css and their source maps)
 - `gen` — Compile .templ files to *_templ.go
 - `gen:check` — Verify committed codegen output (*_templ.go, dist/) is up to date with its sources
-- `test` — Run Go tests
-- `lint` — Run all lints
+- `fmt` — Run all formatters (writes to files)
+- `fmt:go` — Format Go files
+- `fmt:templ` — Format .templ files
+- `lint` — Run all lints (read-only)
 - `lint:go` — Run Go lints
-- `lint:css` — Lint hand-written CSS in pkg/ and the gallery's stylesheets
+- `lint:templ` — Verify .templ files are formatted
+- `lint:ts` — Type-check and lint TypeScript
+- `lint:css` — Lint hand-written CSS
+- `test` — Run Go tests
 - `docs` — Regenerate CLAUDE.md and README.md from templates and source
 - `docs:check` — Fail if CLAUDE.md or README.md is out of date
 - `gallery` — Serve every component example on :6007 with live reload via air

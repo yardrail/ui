@@ -2,13 +2,13 @@ pre-commit:
   parallel: true
   commands:
     gen-check:
-      run: task gen:check
+      run: mise exec -- task gen:check
     lint:
-      run: task lint
+      run: mise exec -- task lint
     test:
-      run: task test
+      run: mise exec -- task test
 
 commit-msg:
   commands:
     commitlint:
-      run: commitlint --edit {1}
+      run: mise exec -- commitlint lint --message {1}
