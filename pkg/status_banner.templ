@@ -2,7 +2,7 @@ package ui
 
 // StatusBannerProps configures a StatusBanner.
 type StatusBannerProps struct {
-	Tone  string
+	Tone  Tone
 	Attrs templ.Attributes
 }
 
@@ -12,7 +12,7 @@ func StatusBanner(p *StatusBannerProps) templ.Component {
 }
 
 templ statusBanner(p *StatusBannerProps) {
-	<yr-status-banner tone={ p.Tone } { filterAttrs("StatusBanner", p.Attrs)... }>
+	<yr-status-banner tone={ p.Tone.String() } { filterAttrs("StatusBanner", p.Attrs)... }>
 		{ children... }
 	</yr-status-banner>
 }

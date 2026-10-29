@@ -64,7 +64,7 @@ func connectorRowExampleRows() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -107,7 +107,7 @@ func connectorRowExampleRows() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -150,7 +150,7 @@ func connectorRowExampleRows() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Disconnected", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Disconnected", &ui.PillProps{Tone: ui.ToneDanger, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

@@ -739,13 +739,13 @@ func portalHomePage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalUrgentCard(ui.IconClock(), "amber", "Approve budget over $5k for Acme lead",
-				"Waiting 2h 14m · Lead Scoring · Marketing Ops", "warning", "Waiting").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalUrgentCard(ui.IconClock(), ui.ToneAmber, "Approve budget over $5k for Acme lead",
+				"Waiting 2h 14m · Lead Scoring · Marketing Ops", ui.ToneWarning, "Waiting").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalUrgentCard(ui.IconClock(), "amber", "Review generated newsletter draft",
-				"Waiting 45m · Newsletter Digest · Marketing Ops", "warning", "Waiting").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalUrgentCard(ui.IconClock(), ui.ToneAmber, "Review generated newsletter draft",
+				"Waiting 45m · Newsletter Digest · Marketing Ops", ui.ToneWarning, "Waiting").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -779,8 +779,8 @@ func portalHomePage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalDangerCard(ui.IconAlertTriangle(), "danger", "Social Scheduler failed",
-				"Rate limit exceeded · 3 consecutive failures · 1h ago", "danger", "Failed").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalDangerCard(ui.IconAlertTriangle(), ui.ToneDanger, "Social Scheduler failed",
+				"Rate limit exceeded · 3 consecutive failures · 1h ago", ui.ToneDanger, "Failed").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -802,7 +802,7 @@ func portalHomePage() templ.Component {
 	})
 }
 
-func portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pillText string) templ.Component {
+func portalUrgentCard(icon templ.Component, badgeTone ui.Tone, title, desc string, pillTone ui.Tone, pillText string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -887,7 +887,7 @@ func portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -905,7 +905,7 @@ func portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 	})
 }
 
-func portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, pillText string) templ.Component {
+func portalDangerCard(icon templ.Component, badgeTone ui.Tone, title, desc string, pillTone ui.Tone, pillText string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -990,7 +990,7 @@ func portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, pi
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1063,7 +1063,7 @@ func portalHomeActivity() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-48", ui.ToneSuccess, "Completed", "3 outputs", "1m 23s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1071,7 +1071,7 @@ func portalHomeActivity() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Lead Scoring", "R-47", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-01T09:00:00Z", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Lead Scoring", "R-47", ui.ToneWarning, "Waiting", "Approve budget >$5k", "", "2026-10-01T09:00:00Z", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1079,7 +1079,7 @@ func portalHomeActivity() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Social Scheduler", "R-46", "danger", "Failed", "Rate limit exceeded", "12s", "", true).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Social Scheduler", "R-46", ui.ToneDanger, "Failed", "Rate limit exceeded", "12s", "", true).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1087,7 +1087,7 @@ func portalHomeActivity() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Contact Sync", "R-45", "success", "Completed", "24 records synced", "4m 8s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Contact Sync", "R-45", ui.ToneSuccess, "Completed", "24 records synced", "4m 8s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1095,7 +1095,7 @@ func portalHomeActivity() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Invoice Processor", "R-44", "success", "Completed", "12 invoices", "2m 51s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Invoice Processor", "R-44", ui.ToneSuccess, "Completed", "12 invoices", "2m 51s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1109,7 +1109,7 @@ func portalHomeActivity() templ.Component {
 	})
 }
 
-func portalActivityRow(name, runID, tone, status, detail, duration, waitingSince string, isError bool) templ.Component {
+func portalActivityRow(name, runID string, tone ui.Tone, status, detail, duration, waitingSince string, isError bool) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -1145,7 +1145,7 @@ func portalActivityRow(name, runID, tone, status, detail, duration, waitingSince
 	})
 }
 
-func portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince string, p *ui.ActivityRowProps) templ.Component {
+func portalActivityRowContent(name, runID string, tone ui.Tone, status, detail, duration, waitingSince string, p *ui.ActivityRowProps) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -1309,15 +1309,15 @@ func portalAutomationsPage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalAutoTile(ui.IconGitBranch(), "accent", "Workflows", "7 active workflows across 4 spaces", "View all").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalAutoTile(ui.IconGitBranch(), ui.ToneAccent, "Workflows", "7 active workflows across 4 spaces", "View all").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalAutoTile(ui.IconLayoutGrid(), "purple", "Template Catalog", "Browse 500+ pre-built automation templates", "Browse").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalAutoTile(ui.IconLayoutGrid(), ui.TonePurple, "Template Catalog", "Browse 500+ pre-built automation templates", "Browse").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalAutoTile(ui.IconPlug(), "amber", "Connectors", "4 tools connected to your organization", "Manage").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalAutoTile(ui.IconPlug(), ui.ToneAmber, "Connectors", "4 tools connected to your organization", "Manage").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1512,7 +1512,7 @@ func portalAutomationsPage() templ.Component {
 	})
 }
 
-func portalAutoTile(icon templ.Component, badgeTone, title, desc, action string) templ.Component {
+func portalAutoTile(icon templ.Component, badgeTone ui.Tone, title, desc, action string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -1669,27 +1669,27 @@ func portalWorkflowsPage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalWorkflowRow("Newsletter Digest", "Marketing Ops", "success", "Active", "Last run 2h ago", "Trigger").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalWorkflowRow("Newsletter Digest", "Marketing Ops", ui.ToneSuccess, "Active", "Last run 2h ago", "Trigger").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalWorkflowRow("Lead Scoring", "Sales Ops", "", "Paused", "Last run 3d ago", "Resume").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalWorkflowRow("Lead Scoring", "Sales Ops", ui.Tone{}, "Paused", "Last run 3d ago", "Resume").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalWorkflowRow("Invoice Sync", "Client Onboarding", "success", "Active", "Last run 15m ago", "Trigger").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalWorkflowRow("Invoice Sync", "Client Onboarding", ui.ToneSuccess, "Active", "Last run 15m ago", "Trigger").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalWorkflowRow("Social Scheduler", "Marketing Ops", "danger", "Error", "Failed 1h ago", "View").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalWorkflowRow("Social Scheduler", "Marketing Ops", ui.ToneDanger, "Error", "Failed 1h ago", "View").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalWorkflowRow("Onboarding Flow", "Client Onboarding", "warning", "Draft", "", "Edit").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalWorkflowRow("Onboarding Flow", "Client Onboarding", ui.ToneWarning, "Draft", "", "Edit").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalWorkflowRow("Ticket Router", "My Space", "success", "Active", "Last run 30m ago", "Trigger").Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalWorkflowRow("Ticket Router", "My Space", ui.ToneSuccess, "Active", "Last run 30m ago", "Trigger").Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1707,7 +1707,7 @@ func portalWorkflowsPage() templ.Component {
 	})
 }
 
-func portalWorkflowRow(name, space, tone, status, lastRun, action string) templ.Component {
+func portalWorkflowRow(name, space string, tone ui.Tone, status, lastRun, action string) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -1778,7 +1778,7 @@ func portalWorkflowRow(name, space, tone, status, lastRun, action string) templ.
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill(status, &ui.PillProps{Tone: tone, Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill(status, &ui.PillProps{Tone: tone, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1869,7 +1869,7 @@ func portalTemplatesPage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("All", &ui.PillProps{Tone: "accent"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("All", &ui.PillProps{Tone: ui.ToneAccent}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -1968,7 +1968,7 @@ func portalVerifiedRating(value, reviews string) templ.Component {
 			templ_7745c5c3_Var74 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = ui.Pill("Verified", &ui.PillProps{Tone: "accent"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Verified", &ui.PillProps{Tone: ui.ToneAccent}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2001,7 +2001,7 @@ func portalCommunityInstalls(installs string) templ.Component {
 			templ_7745c5c3_Var75 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = ui.Pill("Community", &ui.PillProps{Tone: "purple"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Community", &ui.PillProps{Tone: ui.TonePurple}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -2098,19 +2098,19 @@ func portalConnectorsPage() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalConnectorRow("", "Slack", "workspace-prod", "success", "Connected", true).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalConnectorRow("", "Slack", "workspace-prod", ui.ToneSuccess, "Connected", true).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalConnectorRow("HS", "HubSpot", "marketing-hub", "success", "Connected", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalConnectorRow("HS", "HubSpot", "marketing-hub", ui.ToneSuccess, "Connected", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalConnectorRow("GS", "Google Sheets", "ops-shared@acme.com", "success", "Connected", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalConnectorRow("GS", "Google Sheets", "ops-shared@acme.com", ui.ToneSuccess, "Connected", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalConnectorRow("ST", "Stripe", "prod-account", "warning", "Expiring", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalConnectorRow("ST", "Stripe", "prod-account", ui.ToneWarning, "Expiring", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2170,7 +2170,7 @@ func portalConnectorsPage() templ.Component {
 	})
 }
 
-func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool) templ.Component {
+func portalConnectorRow(initials, name, meta string, tone ui.Tone, status string, hasLogo bool) templ.Component {
 	return templruntime.GeneratedTemplate(func(templ_7745c5c3_Input templruntime.GeneratedComponentInput) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_W, ctx := templ_7745c5c3_Input.Writer, templ_7745c5c3_Input.Context
 		if templ_7745c5c3_CtxErr := ctx.Err(); templ_7745c5c3_CtxErr != nil {
@@ -2283,7 +2283,7 @@ func portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill(status, &ui.PillProps{Tone: tone, Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill(status, &ui.PillProps{Tone: tone, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2492,7 +2492,7 @@ func portalSpacePage() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = ui.WorkflowCard("Lead Scoring", "Waiting for input", &ui.WorkflowCardProps{
-				Status: ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}),
+				Status: ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}),
 				Runs:   "42", SuccessRate: "91%",
 				Action: ui.Button("View", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -2500,7 +2500,7 @@ func portalSpacePage() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
-				Status: ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
+				Status: ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}),
 				Runs:   "127", SuccessRate: "98%",
 				Action: ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -2508,7 +2508,7 @@ func portalSpacePage() templ.Component {
 				return templ_7745c5c3_Err
 			}
 			templ_7745c5c3_Err = ui.WorkflowCard("Social Scheduler", "Last run 1d ago", &ui.WorkflowCardProps{
-				Status: ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
+				Status: ui.Pill("Paused", &ui.PillProps{Pill: true}),
 				Runs:   "18", SuccessRate: "85%",
 				Action: ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			}).Render(ctx, templ_7745c5c3_Buffer)
@@ -2557,7 +2557,7 @@ func portalSpacePage() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-45", "success", "Completed", "3 outputs", "1m 23s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-45", ui.ToneSuccess, "Completed", "3 outputs", "1m 23s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2565,7 +2565,7 @@ func portalSpacePage() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = portalActivityRow("Lead Scoring", "R-44", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-11T08:00:00Z", false).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = portalActivityRow("Lead Scoring", "R-44", ui.ToneWarning, "Waiting", "Approve budget >$5k", "", "2026-10-11T08:00:00Z", false).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2573,7 +2573,7 @@ func portalSpacePage() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-43", "success", "Completed", "2 outputs", "58s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-43", ui.ToneSuccess, "Completed", "2 outputs", "58s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2581,7 +2581,7 @@ func portalSpacePage() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = portalActivityRow("Social Scheduler", "R-42", "danger", "Failed", "Rate limit exceeded", "12s", "", true).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = portalActivityRow("Social Scheduler", "R-42", ui.ToneDanger, "Failed", "Rate limit exceeded", "12s", "", true).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2589,7 +2589,7 @@ func portalSpacePage() templ.Component {
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
-				templ_7745c5c3_Err = portalActivityRow("Lead Scoring", "R-41", "success", "Completed", "1 output", "4m 12s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = portalActivityRow("Lead Scoring", "R-41", ui.ToneSuccess, "Completed", "1 output", "4m 12s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2681,7 +2681,7 @@ func portalWorkflowDetailPage() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -2703,7 +2703,7 @@ func portalWorkflowDetailPage() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: "success"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var101), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: ui.ToneSuccess}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var101), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2818,7 +2818,7 @@ func portalWorkflowDetailRuns() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: "warning"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2874,7 +2874,7 @@ func portalWorkflowDetailRuns() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-48", ui.ToneSuccess, "Completed", "3 outputs", "1m 23s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2882,7 +2882,7 @@ func portalWorkflowDetailRuns() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-47", "success", "Completed", "3 outputs", "58s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-47", ui.ToneSuccess, "Completed", "3 outputs", "58s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2890,7 +2890,7 @@ func portalWorkflowDetailRuns() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-46", "success", "Completed", "3 outputs", "1m 05s", "", false).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-46", ui.ToneSuccess, "Completed", "3 outputs", "1m 05s", "", false).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -2898,7 +2898,7 @@ func portalWorkflowDetailRuns() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-45", "danger", "Failed", "SendGrid 429 — rate limit exceeded", "12s", "", true).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = portalActivityRow("Newsletter Digest", "R-45", ui.ToneDanger, "Failed", "SendGrid 429 — rate limit exceeded", "12s", "", true).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -3005,7 +3005,7 @@ func portalWorkflowDetailConfig() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Enabled", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Enabled", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -3061,7 +3061,7 @@ func portalWorkflowDetailConfig() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -3087,7 +3087,7 @@ func portalWorkflowDetailConfig() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -3113,7 +3113,7 @@ func portalWorkflowDetailConfig() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -3303,7 +3303,7 @@ func portalWorkflowRunPage() templ.Component {
 					}()
 				}
 				ctx = templ.InitializeContext(ctx)
-				templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -3359,7 +3359,7 @@ func portalWorkflowRunPage() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.HitlPrompt(&ui.HitlPromptProps{Tone: "warning"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var124), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.HitlPrompt(&ui.HitlPromptProps{Tone: ui.ToneWarning}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var124), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

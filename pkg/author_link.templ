@@ -6,7 +6,7 @@ type AuthorLinkProps struct {
 	Handle   string
 	Verified bool
 	Avatar   string
-	Size     string
+	Large    bool
 	Heading  bool
 	Attrs    templ.Attributes
 }
@@ -32,9 +32,13 @@ templ authorLink(name string, p *AuthorLinkProps) {
 
 templ authorLinkContent(name string, p *AuthorLinkProps) {
 	if p.Avatar != "" {
-		<yr-avatar size={ p.Size }>{ p.Avatar }</yr-avatar>
+		<yr-avatar
+			if p.Large {
+				size="lg"
+			}
+		>{ p.Avatar }</yr-avatar>
 	}
-	if p.Size == "lg" && name != "" && p.Handle != "" {
+	if p.Large && name != "" && p.Handle != "" {
 		<div class="yr-author-link-text">
 			<div class="yr-author-link-name-row">
 				if p.Heading {

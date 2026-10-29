@@ -77,7 +77,7 @@ func actionCardStacked() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = ui.IconBadge("accent", &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.IconBadge(ui.ToneAccent, &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}
@@ -125,7 +125,7 @@ func actionCardStacked() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = ui.IconBadge("amber", &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.IconBadge(ui.ToneAmber, &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

@@ -1,14 +1,9 @@
 package ui
 
-// Pill shapes.
-const (
-	ShapePill = "pill"
-)
-
 // PillProps configures a Pill.
 type PillProps struct {
-	Tone  string
-	Shape string
+	Tone  Tone
+	Pill  bool
 	Attrs templ.Attributes
 }
 
@@ -18,5 +13,11 @@ func Pill(text string, p *PillProps) templ.Component {
 }
 
 templ pill(text string, p *PillProps) {
-	<yr-pill tone={ p.Tone } shape={ p.Shape } { filterAttrs("Pill", p.Attrs)... }>{ text }</yr-pill>
+	<yr-pill
+		tone={ p.Tone.String() }
+		if p.Pill {
+			shape="pill"
+		}
+		{ filterAttrs("Pill", p.Attrs)... }
+	>{ text }</yr-pill>
 }

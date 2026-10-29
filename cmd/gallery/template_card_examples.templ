@@ -28,11 +28,11 @@ templ templateCardConnectors() {
 }
 
 templ templateCardVerifiedFooter(value, reviews string) {
-	@ui.Pill("Verified", &ui.PillProps{Tone: "accent"})
+	@ui.Pill("Verified", &ui.PillProps{Tone: ui.ToneAccent})
 	@ui.Rating(value, &ui.RatingProps{Reviews: reviews})
 }
 
 templ templateCardCommunityFooter(installs string) {
-	@ui.Pill("Community", &ui.PillProps{Tone: "purple"})
+	@ui.Pill("Community", &ui.PillProps{Tone: ui.TonePurple})
 	<span class="yr-template-card-install-count">{ installs }</span>
 }

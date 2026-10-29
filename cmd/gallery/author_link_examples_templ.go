@@ -48,7 +48,7 @@ func authorLinkSizesExample() templ.Component {
 		}
 		templ_7745c5c3_Err = ui.AuthorLink("Yardrail", &ui.AuthorLinkProps{
 			Href: "/authors/yardrail", Handle: "yardrail",
-			Avatar: "YR", Verified: true, Size: "lg",
+			Avatar: "YR", Verified: true, Large: true,
 		}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err

@@ -496,7 +496,7 @@ func chatFabWithBadge() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = chatFabInlineBadge(ui.ChatFabProps{Badge: "cappy"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = chatFabInlineBadge(ui.ChatFabProps{Badge: ui.ChatFabBadgeCappy}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -504,7 +504,7 @@ func chatFabWithBadge() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = chatFabInlineBadge(ui.ChatFabProps{Badge: "human"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = chatFabInlineBadge(ui.ChatFabProps{Badge: ui.ChatFabBadgeHuman}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -554,8 +554,8 @@ func chatFabInlineBadge(p ui.ChatFabProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if p.Badge != "" {
-			var templ_7745c5c3_Var20 = []any{"yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge}
+		if p.Badge.String() != "" {
+			var templ_7745c5c3_Var20 = []any{"yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge.String()}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var20...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

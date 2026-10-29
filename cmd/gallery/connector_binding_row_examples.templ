@@ -7,16 +7,16 @@ templ connectorBindingRowExampleRows() {
 		@ui.MetaRow(&ui.MetaRowProps{}) {
 			<span>email.send</span>
 			<span>SendGrid</span>
-			@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			@ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 		}
 		@ui.MetaRow(&ui.MetaRowProps{}) {
 			<span>crm.read</span>
 			<span>HubSpot</span>
-			@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+			@ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 		}
 		@ui.MetaRow(&ui.MetaRowProps{}) {
 			<span>chat.post</span>
-			@ui.Pill("Not connected", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+			@ui.Pill("Not connected", &ui.PillProps{Tone: ui.ToneDanger, Pill: true})
 			<a href="#" style="font-family:var(--yr-font-ui);font-size:var(--yr-font-size-sm);color:var(--yr-accent)">Set up</a>
 		}
 	</div>

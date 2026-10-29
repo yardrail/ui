@@ -136,13 +136,13 @@ templ chatFabWithBadge() {
 		<div style="text-align: center;">
 			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Cappy message</p>
 			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
-				@chatFabInlineBadge(ui.ChatFabProps{Badge: "cappy"})
+				@chatFabInlineBadge(ui.ChatFabProps{Badge: ui.ChatFabBadgeCappy})
 			</div>
 		</div>
 		<div style="text-align: center;">
 			<p style="font-size: var(--yr-font-size-xs); color: var(--yr-text-subtle); margin-bottom: var(--yr-space-2);">Human message</p>
 			<div style="position: relative; width: 3.5rem; height: 3.5rem;">
-				@chatFabInlineBadge(ui.ChatFabProps{Badge: "human"})
+				@chatFabInlineBadge(ui.ChatFabProps{Badge: ui.ChatFabBadgeHuman})
 			</div>
 		</div>
 	</div>
@@ -151,8 +151,8 @@ templ chatFabWithBadge() {
 templ chatFabInlineBadge(p ui.ChatFabProps) {
 	<button type="button" class="yr-chat-fab__trigger" style="position: relative;">
 		<img class="yr-chat-fab__img" src={ "/static/ui/cappy/" + p.Variant.ImageFile() } alt="Cappy" width="48" height="48"/>
-		if p.Badge != "" {
-			<span class={ "yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge }></span>
+		if p.Badge.String() != "" {
+			<span class={ "yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge.String() }></span>
 		}
 	</button>
 }

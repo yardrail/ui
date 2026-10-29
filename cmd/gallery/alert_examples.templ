@@ -4,16 +4,16 @@ import ui "github.com/yardrail/ui/pkg"
 
 templ alertTonesExample() {
 	<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:32rem">
-		@ui.Alert(&ui.AlertProps{Tone: "success"}) {
+		@ui.Alert(&ui.AlertProps{Tone: ui.ToneSuccess}) {
 			Your changes were saved.
 		}
-		@ui.Alert(&ui.AlertProps{Tone: "warning"}) {
+		@ui.Alert(&ui.AlertProps{Tone: ui.ToneWarning}) {
 			The connector token expires in 3 days.
 		}
-		@ui.Alert(&ui.AlertProps{Tone: "danger"}) {
+		@ui.Alert(&ui.AlertProps{Tone: ui.ToneDanger}) {
 			That username is already taken.
 		}
-		@ui.Alert(&ui.AlertProps{Tone: "info"}) {
+		@ui.Alert(&ui.AlertProps{Tone: ui.ToneInfo}) {
 			A new version of this template is available.
 		}
 		@ui.Alert(&ui.AlertProps{}) {
@@ -24,11 +24,11 @@ templ alertTonesExample() {
 
 templ alertWithIconExample() {
 	<div style="display:flex;flex-direction:column;gap:0.75rem;max-width:32rem">
-		@ui.Alert(&ui.AlertProps{Tone: "success"}) {
+		@ui.Alert(&ui.AlertProps{Tone: ui.ToneSuccess}) {
 			@ui.IconCheckCircle()
 			<strong>Added!</strong> The template is in your library.
 		}
-		@ui.Alert(&ui.AlertProps{Tone: "danger"}) {
+		@ui.Alert(&ui.AlertProps{Tone: ui.ToneDanger}) {
 			@ui.IconCircleX()
 			<strong>Run failed.</strong> The webhook returned 500.
 		}

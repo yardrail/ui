@@ -5,7 +5,7 @@ import ui "github.com/yardrail/ui/pkg"
 templ workflowCardActive() {
 	<div style="max-width:22rem">
 		@ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
-			Status:      ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
+			Status:      ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}),
 			Runs:        "127",
 			SuccessRate: "98%",
 			Action:      ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
@@ -16,7 +16,7 @@ templ workflowCardActive() {
 templ workflowCardPaused() {
 	<div style="max-width:22rem">
 		@ui.WorkflowCard("Lead Scoring", "Last run 3d ago", &ui.WorkflowCardProps{
-			Status:      ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
+			Status:      ui.Pill("Paused", &ui.PillProps{Pill: true}),
 			Runs:        "42",
 			SuccessRate: "91%",
 			Action:      ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),

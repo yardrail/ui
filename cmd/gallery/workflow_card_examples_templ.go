@@ -36,7 +36,7 @@ func workflowCardActive() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
-			Status:      ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
+			Status:      ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}),
 			Runs:        "127",
 			SuccessRate: "98%",
 			Action:      ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
@@ -78,7 +78,7 @@ func workflowCardPaused() templ.Component {
 			return templ_7745c5c3_Err
 		}
 		templ_7745c5c3_Err = ui.WorkflowCard("Lead Scoring", "Last run 3d ago", &ui.WorkflowCardProps{
-			Status:      ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
+			Status:      ui.Pill("Paused", &ui.PillProps{Pill: true}),
 			Runs:        "42",
 			SuccessRate: "91%",
 			Action:      ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),

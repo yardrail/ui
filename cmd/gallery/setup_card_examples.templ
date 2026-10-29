@@ -98,7 +98,7 @@ templ setupCardConfirmation() {
 			<p class="yr-setup-card-subtitle">Your workspace is ready. You can invite teammates or start exploring on your own.</p>
 		}
 		@ui.SetupCardBody(&ui.SetupCardBodyProps{}) {
-			@ui.Alert(&ui.AlertProps{Tone: "success"}) {
+			@ui.Alert(&ui.AlertProps{Tone: ui.ToneSuccess}) {
 				Organization created successfully.
 			}
 		}

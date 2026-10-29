@@ -5,7 +5,7 @@ import ui "github.com/yardrail/ui/pkg"
 templ attentionCardDefault() {
 	<div style="max-width:40rem">
 		@ui.ActionCard(&ui.ActionCardProps{Urgent: true}) {
-			@ui.IconBadge("amber", &ui.IconBadgeProps{}) {
+			@ui.IconBadge(ui.ToneAmber, &ui.IconBadgeProps{}) {
 				@ui.IconClock()
 			}
 			<div class="yr-action-card-body">
@@ -13,7 +13,7 @@ templ attentionCardDefault() {
 				<p class="yr-action-card-desc">Waiting since 2h ago · Refund triage</p>
 			</div>
 			<div class="yr-action-card-action">
-				@ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+				@ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true})
 			</div>
 		}
 	</div>
@@ -22,7 +22,7 @@ templ attentionCardDefault() {
 templ attentionCardDanger() {
 	<div style="max-width:40rem">
 		@ui.ActionCard(&ui.ActionCardProps{UrgentDanger: true}) {
-			@ui.IconBadge("danger", &ui.IconBadgeProps{}) {
+			@ui.IconBadge(ui.ToneDanger, &ui.IconBadgeProps{}) {
 				@ui.IconAlertTriangle()
 			}
 			<div class="yr-action-card-body">
@@ -30,7 +30,7 @@ templ attentionCardDanger() {
 				<p class="yr-action-card-desc">Connector returned 401 · 3h ago</p>
 			</div>
 			<div class="yr-action-card-action">
-				@ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+				@ui.Pill("Failed", &ui.PillProps{Tone: ui.ToneDanger, Pill: true})
 			</div>
 		}
 	</div>

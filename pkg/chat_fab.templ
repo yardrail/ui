@@ -1,5 +1,17 @@
 package ui
 
+// ChatFabBadge indicates the type of unread-message badge on a ChatFab.
+type ChatFabBadge struct{ v string }
+
+var (
+	ChatFabBadgeCappy = ChatFabBadge{v: "cappy"}
+	ChatFabBadgeHuman = ChatFabBadge{v: "human"}
+)
+
+func (b ChatFabBadge) String() string {
+	return b.v
+}
+
 // ChatFabProps holds a ChatFab's optional settings; every zero value is the default.
 type ChatFabProps struct {
 	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
@@ -8,9 +20,8 @@ type ChatFabProps struct {
 	Variant CappyVariant
 	// Label is the accessible label; the zero value is "Chat with Cappy".
 	Label string
-	// Badge indicates an unread message. Empty string hides the badge.
-	// Values: "cappy" shows a blue dot, "human" shows a green dot.
-	Badge string
+	// Badge indicates an unread message. The zero value hides the badge.
+	Badge ChatFabBadge
 }
 
 // label returns the accessible label.
@@ -45,8 +56,8 @@ templ chatFab(p *ChatFabProps) {
 				width="48"
 				height="48"
 			/>
-			if p.Badge != "" {
-				<span class={ "yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge }></span>
+			if p.Badge.String() != "" {
+				<span class={ "yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge.String() }></span>
 			}
 		</button>
 	</yr-chat-fab>

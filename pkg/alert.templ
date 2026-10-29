@@ -2,7 +2,7 @@ package ui
 
 // AlertProps configures an Alert.
 type AlertProps struct {
-	Tone  string
+	Tone  Tone
 	Attrs templ.Attributes
 }
 
@@ -12,7 +12,7 @@ func Alert(p *AlertProps) templ.Component {
 }
 
 templ alert(p *AlertProps) {
-	<yr-alert tone={ p.Tone } { filterAttrs("Alert", p.Attrs)... }>
+	<yr-alert tone={ p.Tone.String() } { filterAttrs("Alert", p.Attrs)... }>
 		{ children... }
 	</yr-alert>
 }

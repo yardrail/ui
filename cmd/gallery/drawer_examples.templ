@@ -39,7 +39,7 @@ templ drawerExampleWithContent() {
 			<p style="font-size:var(--yr-font-size-sm);color:var(--yr-text-muted);margin:0 0 var(--yr-space-4)">Drawer content goes here.</p>
 			@ui.Card(&ui.CardProps{}) {
 				<div class="yr-card-title">Status</div>
-				@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+				@ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess})
 			}
 		</yr-drawer-body>
 	</yr-drawer>

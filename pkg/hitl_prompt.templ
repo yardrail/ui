@@ -2,7 +2,7 @@ package ui
 
 // HitlPromptProps configures a HitlPrompt.
 type HitlPromptProps struct {
-	Tone  string
+	Tone  Tone
 	Attrs templ.Attributes
 }
 
@@ -12,7 +12,7 @@ func HitlPrompt(p *HitlPromptProps) templ.Component {
 }
 
 templ hitlPrompt(p *HitlPromptProps) {
-	<yr-hitl-prompt tone={ p.Tone } { filterAttrs("HitlPrompt", p.Attrs)... }>
+	<yr-hitl-prompt tone={ p.Tone.String() } { filterAttrs("HitlPrompt", p.Attrs)... }>
 		{ children... }
 	</yr-hitl-prompt>
 }

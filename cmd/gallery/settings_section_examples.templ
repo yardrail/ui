@@ -7,7 +7,7 @@ templ settingsSectionAvatarRow() {
 		<h2>Profile photo</h2>
 		<p class="yr-settings-section-success">Your photo has been updated.</p>
 		<div class="yr-settings-section-avatar-row">
-			@ui.Avatar("BL", &ui.AvatarProps{Size: "lg"})
+			@ui.Avatar("BL", &ui.AvatarProps{Large: true})
 			<form method="post" action="#" enctype="multipart/form-data">
 				<input type="file" name="avatar" accept="image/png,image/jpeg" required/>
 				@ui.Button("Upload", ui.ButtonProps{Variant: ui.ButtonPrimary, Type: ui.ButtonSubmit})

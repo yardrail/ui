@@ -1,26 +1,28 @@
 package ui
 
-// Search variants.
-const (
-	SearchHero    = "hero"
-	SearchCompact = "compact"
+// SearchVariant is the visual style of a Search form.
+type SearchVariant struct{ v string }
+
+var (
+	SearchPlain   = SearchVariant{v: "plain"}
+	SearchHero    = SearchVariant{v: "hero"}
+	SearchCompact = SearchVariant{v: "compact"}
 )
+
+func (v SearchVariant) class() string {
+	if v.v == "plain" {
+		return "yr-search"
+	}
+	return "yr-search yr-search--" + v.v
+}
 
 // SearchProps configures a Search form.
 type SearchProps struct {
-	Variant     string
+	Variant     SearchVariant
 	Placeholder string
 	Action      string
 	Name        string
 	Attrs       templ.Attributes
-}
-
-func (p *SearchProps) class() string {
-	if p.Variant != "" {
-		return "yr-search yr-search--" + p.Variant
-	}
-
-	return "yr-search"
 }
 
 func (p *SearchProps) action() string {
@@ -45,7 +47,7 @@ func Search(p *SearchProps) templ.Component {
 }
 
 templ search(p *SearchProps) {
-	<form class={ p.class() } method="get" action={ templ.SafeURL(p.action()) } role="search" { filterAttrs("Search", p.Attrs)... }>
+	<form class={ p.Variant.class() } method="get" action={ templ.SafeURL(p.action()) } role="search" { filterAttrs("Search", p.Attrs)... }>
 		<span class="yr-search-icon">
 			@IconSearch()
 		</span>
