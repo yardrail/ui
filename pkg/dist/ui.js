@@ -181,7 +181,7 @@ var YrTabs = class extends HTMLElement {
     tablist.setAttribute("role", "tablist");
     const label = this.getAttribute("label");
     if (label) tablist.setAttribute("aria-label", label);
-    this.tabs.forEach((tab) => tablist.appendChild(tab));
+    for (const tab of this.tabs) tablist.appendChild(tab);
     this.prepend(tablist);
     this.tabs.forEach((tab, i2) => {
       const key = tab.dataset.tab ?? String(i2);
@@ -198,13 +198,15 @@ var YrTabs = class extends HTMLElement {
         panel.tabIndex = 0;
       }
     });
-    if (this.syncHash) window.addEventListener("hashchange", this.handleHashChange);
+    if (this.syncHash)
+      window.addEventListener("hashchange", this.handleHashChange);
     const hashKey = location.hash.slice(1);
     const initial = this.syncHash && this.tabs.some((t2) => t2.dataset.tab === hashKey) ? hashKey : this.tabs[0].dataset.tab ?? "";
     this.render(initial);
   }
   disconnectedCallback() {
-    if (this.syncHash) window.removeEventListener("hashchange", this.handleHashChange);
+    if (this.syncHash)
+      window.removeEventListener("hashchange", this.handleHashChange);
   }
   get syncHash() {
     return this.hasAttribute("sync-hash");
@@ -231,7 +233,9 @@ var YrTabs = class extends HTMLElement {
     if (this.tabs.some((t2) => t2.dataset.tab === key)) this.render(key);
   };
   handleKeydown = (event) => {
-    const currentIndex = this.tabs.findIndex((t2) => t2.id === event.target.id);
+    const currentIndex = this.tabs.findIndex(
+      (t2) => t2.id === event.target.id
+    );
     if (currentIndex === -1) return;
     let nextIndex;
     switch (event.key) {
@@ -408,7 +412,8 @@ var YrResizeHandle = class extends HTMLElement {
   }
   resizeTarget() {
     const shell = this.closest("body") ?? this.parentElement;
-    if (this.isSidebar) return shell?.querySelector("yr-sidebar");
+    if (this.isSidebar)
+      return shell?.querySelector("yr-sidebar");
     return shell?.querySelector("yr-drawer[open], yr-cappy-drawer[open]") ?? shell?.querySelector("yr-drawer, yr-cappy-drawer");
   }
   onMouseMove = (e2) => {
@@ -523,7 +528,8 @@ customElements.define("yr-hitl-prompt", YrHitlPrompt);
 var YrJournalLog = class extends HTMLElement {
   connectedCallback() {
     if (!this.getAttribute("role")) this.setAttribute("role", "log");
-    if (!this.getAttribute("aria-label")) this.setAttribute("aria-label", "Run journal");
+    if (!this.getAttribute("aria-label"))
+      this.setAttribute("aria-label", "Run journal");
   }
 };
 customElements.define("yr-journal-log", YrJournalLog);
@@ -558,15 +564,30 @@ var YrChatFab = class extends HTMLElement {
   isDragging = false;
   hasMoved = false;
   connectedCallback() {
-    this.trigger?.addEventListener("mousedown", this.onPointerDown);
+    this.trigger?.addEventListener(
+      "mousedown",
+      this.onPointerDown
+    );
     this.trigger?.addEventListener("click", this.onClick);
-    this.querySelector(".yr-chat-fab__dismiss")?.addEventListener("click", this.onDismiss);
+    this.querySelector(".yr-chat-fab__dismiss")?.addEventListener(
+      "click",
+      this.onDismiss
+    );
   }
   disconnectedCallback() {
-    this.trigger?.removeEventListener("mousedown", this.onPointerDown);
+    this.trigger?.removeEventListener(
+      "mousedown",
+      this.onPointerDown
+    );
     this.trigger?.removeEventListener("click", this.onClick);
-    this.querySelector(".yr-chat-fab__dismiss")?.removeEventListener("click", this.onDismiss);
-    document.removeEventListener("mousemove", this.onPointerMove);
+    this.querySelector(".yr-chat-fab__dismiss")?.removeEventListener(
+      "click",
+      this.onDismiss
+    );
+    document.removeEventListener(
+      "mousemove",
+      this.onPointerMove
+    );
     document.removeEventListener("mouseup", this.onPointerUp);
   }
   get trigger() {
@@ -622,7 +643,10 @@ var YrChatFab = class extends HTMLElement {
     this.style.top = `${e2.clientY - SIZE / 2}px`;
   };
   onPointerUp = () => {
-    document.removeEventListener("mousemove", this.onPointerMove);
+    document.removeEventListener(
+      "mousemove",
+      this.onPointerMove
+    );
     document.removeEventListener("mouseup", this.onPointerUp);
     this.isDragging = false;
     if (!this.hasMoved) return;
@@ -678,17 +702,41 @@ var YrCappyDrawer = class extends HTMLElement {
   };
   connectedCallback() {
     document.addEventListener("keydown", this.onKeyDown);
-    this.querySelector(".yr-cappy-drawer__close")?.addEventListener("click", this.close);
-    this.querySelector(".yr-cappy-drawer__collapse")?.addEventListener("click", this.toggleCollapse);
-    this.querySelector(".yr-cappy-drawer__escalate")?.addEventListener("click", this.escalate);
-    this.querySelector(".yr-cappy-drawer__log")?.addEventListener("click", this.onLogClick);
+    this.querySelector(".yr-cappy-drawer__close")?.addEventListener(
+      "click",
+      this.close
+    );
+    this.querySelector(".yr-cappy-drawer__collapse")?.addEventListener(
+      "click",
+      this.toggleCollapse
+    );
+    this.querySelector(".yr-cappy-drawer__escalate")?.addEventListener(
+      "click",
+      this.escalate
+    );
+    this.querySelector(".yr-cappy-drawer__log")?.addEventListener(
+      "click",
+      this.onLogClick
+    );
   }
   disconnectedCallback() {
     document.removeEventListener("keydown", this.onKeyDown);
-    this.querySelector(".yr-cappy-drawer__close")?.removeEventListener("click", this.close);
-    this.querySelector(".yr-cappy-drawer__collapse")?.removeEventListener("click", this.toggleCollapse);
-    this.querySelector(".yr-cappy-drawer__escalate")?.removeEventListener("click", this.escalate);
-    this.querySelector(".yr-cappy-drawer__log")?.removeEventListener("click", this.onLogClick);
+    this.querySelector(".yr-cappy-drawer__close")?.removeEventListener(
+      "click",
+      this.close
+    );
+    this.querySelector(".yr-cappy-drawer__collapse")?.removeEventListener(
+      "click",
+      this.toggleCollapse
+    );
+    this.querySelector(".yr-cappy-drawer__escalate")?.removeEventListener(
+      "click",
+      this.escalate
+    );
+    this.querySelector(".yr-cappy-drawer__log")?.removeEventListener(
+      "click",
+      this.onLogClick
+    );
   }
   attributeChangedCallback() {
   }
@@ -716,7 +764,10 @@ var YrChatInput = class extends HTMLElement {
     this.sendBtn?.addEventListener("click", this.handleSend);
     this.field?.addEventListener("keydown", this.handleKeydown);
     this.field?.addEventListener("input", this.handleAutoGrow);
-    this.querySelector(".yr-chat-input__attach")?.addEventListener("click", this.handleAttach);
+    this.querySelector(".yr-chat-input__attach")?.addEventListener(
+      "click",
+      this.handleAttach
+    );
     this.fileInput?.addEventListener("change", this.handleFiles);
     this.stagingEl?.addEventListener("click", this.handleStagingClick);
   }
@@ -724,7 +775,10 @@ var YrChatInput = class extends HTMLElement {
     this.sendBtn?.removeEventListener("click", this.handleSend);
     this.field?.removeEventListener("keydown", this.handleKeydown);
     this.field?.removeEventListener("input", this.handleAutoGrow);
-    this.querySelector(".yr-chat-input__attach")?.removeEventListener("click", this.handleAttach);
+    this.querySelector(".yr-chat-input__attach")?.removeEventListener(
+      "click",
+      this.handleAttach
+    );
     this.fileInput?.removeEventListener("change", this.handleFiles);
     this.stagingEl?.removeEventListener("click", this.handleStagingClick);
   }
@@ -749,10 +803,12 @@ var YrChatInput = class extends HTMLElement {
   handleSend = () => {
     const value = this.field?.value.trim();
     if (!value && this.staged.length === 0) return;
-    this.dispatchEvent(new CustomEvent("yr-chat-send", {
-      bubbles: true,
-      detail: { text: value || "", files: [...this.staged] }
-    }));
+    this.dispatchEvent(
+      new CustomEvent("yr-chat-send", {
+        bubbles: true,
+        detail: { text: value || "", files: [...this.staged] }
+      })
+    );
     if (this.field) {
       this.field.value = "";
       this.field.style.height = "auto";
@@ -779,7 +835,9 @@ var YrChatInput = class extends HTMLElement {
     this.renderStaging();
   };
   handleStagingClick = (e2) => {
-    const btn = e2.target.closest(".yr-chat-input__chip-remove");
+    const btn = e2.target.closest(
+      ".yr-chat-input__chip-remove"
+    );
     if (!btn) return;
     const idx = Number(btn.getAttribute("data-index"));
     if (!Number.isNaN(idx)) {
@@ -799,7 +857,7 @@ var YrChatInput = class extends HTMLElement {
     el.innerHTML = this.staged.map((f2, i2) => this.chipHTML(f2, i2)).join("");
   }
   chipHTML(file, index) {
-    const name = file.name.length > 20 ? file.name.slice(0, 17) + "..." : file.name;
+    const name = file.name.length > 20 ? `${file.name.slice(0, 17)}...` : file.name;
     const isImage = file.type.startsWith("image/");
     const isAudio = file.type.startsWith("audio/");
     const icon = isImage ? `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2" ry="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-3.086-3.086a2 2 0 0 0-2.828 0L6 21"/></svg>` : isAudio ? `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17.5 22h.5a2 2 0 0 0 2-2V7l-5-5H6a2 2 0 0 0-2 2v3"/><path d="M14 2v5h5"/><path d="M2 19a2 2 0 1 1 4 0v1a2 2 0 1 1-4 0v-4a6 6 0 0 1 12 0v4a2 2 0 1 1-4 0v-1a2 2 0 1 1 4 0"/></svg>` : `<svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7Z"/><path d="M14 2v4a2 2 0 0 0 2 2h4"/></svg>`;
@@ -1847,7 +1905,13 @@ var YrWorkflowCanvas = class extends HTMLElement {
     svg.setAttribute("viewBox", `0 0 ${w2} ${h2}`);
     svg.innerHTML = "";
     const rc = at.svg(svg);
-    const opts = { stroke: "#d0cdc6", strokeWidth: 1, roughness: 1.5, bowing: 1, disableMultiStroke: true };
+    const opts = {
+      stroke: "#d0cdc6",
+      strokeWidth: 1,
+      roughness: 1.5,
+      bowing: 1,
+      disableMultiStroke: true
+    };
     for (let x2 = spacing; x2 < w2; x2 += spacing) {
       svg.appendChild(rc.line(x2, 0, x2, h2, opts));
     }

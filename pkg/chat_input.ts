@@ -5,7 +5,10 @@ export class YrChatInput extends HTMLElement {
     this.sendBtn?.addEventListener('click', this.handleSend);
     this.field?.addEventListener('keydown', this.handleKeydown);
     this.field?.addEventListener('input', this.handleAutoGrow);
-    this.querySelector('.yr-chat-input__attach')?.addEventListener('click', this.handleAttach);
+    this.querySelector('.yr-chat-input__attach')?.addEventListener(
+      'click',
+      this.handleAttach,
+    );
     this.fileInput?.addEventListener('change', this.handleFiles);
     this.stagingEl?.addEventListener('click', this.handleStagingClick);
   }
@@ -14,7 +17,10 @@ export class YrChatInput extends HTMLElement {
     this.sendBtn?.removeEventListener('click', this.handleSend);
     this.field?.removeEventListener('keydown', this.handleKeydown);
     this.field?.removeEventListener('input', this.handleAutoGrow);
-    this.querySelector('.yr-chat-input__attach')?.removeEventListener('click', this.handleAttach);
+    this.querySelector('.yr-chat-input__attach')?.removeEventListener(
+      'click',
+      this.handleAttach,
+    );
     this.fileInput?.removeEventListener('change', this.handleFiles);
     this.stagingEl?.removeEventListener('click', this.handleStagingClick);
   }
@@ -45,10 +51,12 @@ export class YrChatInput extends HTMLElement {
   private handleSend = () => {
     const value = this.field?.value.trim();
     if (!value && this.staged.length === 0) return;
-    this.dispatchEvent(new CustomEvent('yr-chat-send', {
-      bubbles: true,
-      detail: { text: value || '', files: [...this.staged] },
-    }));
+    this.dispatchEvent(
+      new CustomEvent('yr-chat-send', {
+        bubbles: true,
+        detail: { text: value || '', files: [...this.staged] },
+      }),
+    );
     if (this.field) {
       this.field.value = '';
       this.field.style.height = 'auto';
@@ -79,7 +87,9 @@ export class YrChatInput extends HTMLElement {
   };
 
   private handleStagingClick = (e: Event) => {
-    const btn = (e.target as HTMLElement).closest('.yr-chat-input__chip-remove');
+    const btn = (e.target as HTMLElement).closest(
+      '.yr-chat-input__chip-remove',
+    );
     if (!btn) return;
     const idx = Number(btn.getAttribute('data-index'));
     if (!Number.isNaN(idx)) {
@@ -101,9 +111,8 @@ export class YrChatInput extends HTMLElement {
   }
 
   private chipHTML(file: File, index: number): string {
-    const name = file.name.length > 20
-      ? file.name.slice(0, 17) + '...'
-      : file.name;
+    const name =
+      file.name.length > 20 ? `${file.name.slice(0, 17)}...` : file.name;
     const isImage = file.type.startsWith('image/');
     const isAudio = file.type.startsWith('audio/');
     const icon = isImage

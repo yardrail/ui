@@ -11,8 +11,12 @@ yr-hitl-prompt {
   border-left-width: 4px;
   border-left-color: var(--yr-warning);
 }
-yr-hitl-prompt[tone="danger"] { border-left-color: var(--yr-danger); }
-yr-hitl-prompt[tone="info"]   { border-left-color: var(--yr-info); }
+yr-hitl-prompt[tone="danger"] {
+  border-left-color: var(--yr-danger);
+}
+yr-hitl-prompt[tone="info"] {
+  border-left-color: var(--yr-info);
+}
 
 yr-hitl-prompt .yr-hitl-prompt-title {
   font-family: var(--yr-font-body);

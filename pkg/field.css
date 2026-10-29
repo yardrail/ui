@@ -24,7 +24,9 @@
   border-radius: var(--yr-control-radius);
   padding: var(--yr-control-padding-y) var(--yr-control-padding-x);
   outline: none;
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 .yr-field input:focus,
 .yr-field-input:focus {

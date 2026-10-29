@@ -34,12 +34,13 @@ Run `task <name>`:
 - `gen` — Compile .templ files to *_templ.go
 - `gen:check` — Verify committed codegen output (*_templ.go, dist/) is up to date with its sources
 - `fmt` — Run all formatters (writes to files)
+- `fmt:web` — Format TypeScript and CSS files
 - `fmt:go` — Format Go files
 - `fmt:templ` — Format .templ files
 - `lint` — Run all lints (read-only)
 - `lint:go` — Run Go lints
 - `lint:templ` — Verify .templ files are formatted
-- `lint:ts` — Type-check and lint TypeScript
+- `lint:biome` — Lint TypeScript and CSS (Biome rules)
 - `lint:css` — Lint hand-written CSS
 - `test` — Run Go tests
 - `docs` — Regenerate CLAUDE.md and README.md from templates and source

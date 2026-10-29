@@ -16,9 +16,10 @@ export class YrResizeHandle extends HTMLElement {
 
   private resizeTarget(): HTMLElement | null {
     const shell = this.closest('body') ?? this.parentElement;
-    if (this.isSidebar) return shell?.querySelector('yr-sidebar') as HTMLElement | null;
-    return (shell?.querySelector('yr-drawer[open], yr-cappy-drawer[open]')
-      ?? shell?.querySelector('yr-drawer, yr-cappy-drawer')) as HTMLElement | null;
+    if (this.isSidebar)
+      return shell?.querySelector('yr-sidebar') as HTMLElement | null;
+    return (shell?.querySelector('yr-drawer[open], yr-cappy-drawer[open]') ??
+      shell?.querySelector('yr-drawer, yr-cappy-drawer')) as HTMLElement | null;
   }
 
   private onMouseMove = (e: MouseEvent) => {

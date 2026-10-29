@@ -12,7 +12,9 @@
   background: var(--yr-bg);
   border: 1.5px solid var(--yr-border);
   border-radius: var(--yr-radius-md);
-  transition: border-color 0.15s, box-shadow 0.15s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s;
 }
 .yr-search:focus-within {
   border-color: var(--yr-accent);
