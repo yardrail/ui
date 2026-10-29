@@ -13,7 +13,10 @@
 }
 
 .yr-card--interactive {
-  transition: border-color 0.15s, box-shadow 0.15s, transform 0.1s;
+  transition:
+    border-color 0.15s,
+    box-shadow 0.15s,
+    transform 0.1s;
 }
 .yr-card--interactive:hover {
   border-color: var(--yr-accent);

@@ -15,16 +15,31 @@ export class YrChatFab extends HTMLElement {
   private hasMoved = false;
 
   connectedCallback() {
-    this.trigger?.addEventListener('mousedown', this.onPointerDown as EventListener);
+    this.trigger?.addEventListener(
+      'mousedown',
+      this.onPointerDown as EventListener,
+    );
     this.trigger?.addEventListener('click', this.onClick);
-    this.querySelector('.yr-chat-fab__dismiss')?.addEventListener('click', this.onDismiss);
+    this.querySelector('.yr-chat-fab__dismiss')?.addEventListener(
+      'click',
+      this.onDismiss,
+    );
   }
 
   disconnectedCallback() {
-    this.trigger?.removeEventListener('mousedown', this.onPointerDown as EventListener);
+    this.trigger?.removeEventListener(
+      'mousedown',
+      this.onPointerDown as EventListener,
+    );
     this.trigger?.removeEventListener('click', this.onClick);
-    this.querySelector('.yr-chat-fab__dismiss')?.removeEventListener('click', this.onDismiss);
-    document.removeEventListener('mousemove', this.onPointerMove as EventListener);
+    this.querySelector('.yr-chat-fab__dismiss')?.removeEventListener(
+      'click',
+      this.onDismiss,
+    );
+    document.removeEventListener(
+      'mousemove',
+      this.onPointerMove as EventListener,
+    );
     document.removeEventListener('mouseup', this.onPointerUp);
   }
 
@@ -89,7 +104,10 @@ export class YrChatFab extends HTMLElement {
   };
 
   private onPointerUp = () => {
-    document.removeEventListener('mousemove', this.onPointerMove as EventListener);
+    document.removeEventListener(
+      'mousemove',
+      this.onPointerMove as EventListener,
+    );
     document.removeEventListener('mouseup', this.onPointerUp);
     this.isDragging = false;
 
@@ -104,8 +122,12 @@ export class YrChatFab extends HTMLElement {
 
     const corner: Corner =
       cy < midY
-        ? cx < midX ? 'top-left' : 'top-right'
-        : cx < midX ? 'bottom-left' : 'bottom-right';
+        ? cx < midX
+          ? 'top-left'
+          : 'top-right'
+        : cx < midX
+          ? 'bottom-left'
+          : 'bottom-right';
 
     const target = this.cornerPosition(corner);
 

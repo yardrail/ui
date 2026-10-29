@@ -5,7 +5,8 @@
 export class YrJournalLog extends HTMLElement {
   connectedCallback() {
     if (!this.getAttribute('role')) this.setAttribute('role', 'log');
-    if (!this.getAttribute('aria-label')) this.setAttribute('aria-label', 'Run journal');
+    if (!this.getAttribute('aria-label'))
+      this.setAttribute('aria-label', 'Run journal');
   }
 }
 

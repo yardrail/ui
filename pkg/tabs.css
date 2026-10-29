@@ -21,7 +21,9 @@ yr-tabs [role="tab"] {
   color: var(--yr-text-muted);
   cursor: pointer;
 }
-yr-tabs [role="tab"]:hover { color: var(--yr-text); }
+yr-tabs [role="tab"]:hover {
+  color: var(--yr-text);
+}
 yr-tabs [role="tab"][aria-selected="true"] {
   color: var(--yr-accent);
   border-bottom-color: var(--yr-accent);

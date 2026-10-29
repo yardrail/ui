@@ -21,7 +21,9 @@ yr-setup-card-progress {
   height: 8px;
   border-radius: var(--yr-radius-full);
   background: var(--yr-border);
-  transition: background 0.2s ease, width 0.2s ease;
+  transition:
+    background 0.2s ease,
+    width 0.2s ease;
 }
 
 .yr-setup-card-dot--active {

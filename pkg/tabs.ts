@@ -23,7 +23,7 @@ export class YrTabs extends HTMLElement {
     tablist.setAttribute('role', 'tablist');
     const label = this.getAttribute('label');
     if (label) tablist.setAttribute('aria-label', label);
-    this.tabs.forEach((tab) => tablist.appendChild(tab));
+    for (const tab of this.tabs) tablist.appendChild(tab);
     this.prepend(tablist);
 
     this.tabs.forEach((tab, i) => {
@@ -43,17 +43,20 @@ export class YrTabs extends HTMLElement {
       }
     });
 
-    if (this.syncHash) window.addEventListener('hashchange', this.handleHashChange);
+    if (this.syncHash)
+      window.addEventListener('hashchange', this.handleHashChange);
 
     const hashKey = location.hash.slice(1);
-    const initial = this.syncHash && this.tabs.some((t) => t.dataset.tab === hashKey)
-      ? hashKey
-      : this.tabs[0].dataset.tab ?? '';
+    const initial =
+      this.syncHash && this.tabs.some((t) => t.dataset.tab === hashKey)
+        ? hashKey
+        : (this.tabs[0].dataset.tab ?? '');
     this.render(initial);
   }
 
   disconnectedCallback() {
-    if (this.syncHash) window.removeEventListener('hashchange', this.handleHashChange);
+    if (this.syncHash)
+      window.removeEventListener('hashchange', this.handleHashChange);
   }
 
   private get syncHash(): boolean {
@@ -86,7 +89,9 @@ export class YrTabs extends HTMLElement {
   };
 
   private handleKeydown = (event: KeyboardEvent) => {
-    const currentIndex = this.tabs.findIndex((t) => t.id === (event.target as HTMLElement).id);
+    const currentIndex = this.tabs.findIndex(
+      (t) => t.id === (event.target as HTMLElement).id,
+    );
     if (currentIndex === -1) return;
 
     let nextIndex: number;

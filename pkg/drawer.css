@@ -11,7 +11,9 @@ yr-drawer {
   flex-shrink: 0;
   transform: translateX(100%);
   margin-right: calc(-1 * var(--yr-drawer-width));
-  transition: transform 0.2s ease, margin-right 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    margin-right 0.2s ease;
 }
 
 yr-drawer[open] {

@@ -167,7 +167,12 @@
   display: grid;
   grid-template-columns:
     [full-start] minmax(var(--yr-page-gutter), 1fr)
-    [content-start] min(100% - 2 * var(--yr-page-gutter), var(--yr-page-standard))
+    [content-start] min(
+      100% -
+      2 *
+      var(--yr-page-gutter),
+      var(--yr-page-standard)
+    )
     [content-end] minmax(var(--yr-page-gutter), 1fr)
     [full-end];
   align-content: start;

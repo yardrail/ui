@@ -5,7 +5,9 @@
 /* MSP portal mock styles */
 
 /* Icon — an inline icon at the mocks' icon size. */
-.mock-icon { display: inline-flex; }
+.mock-icon {
+  display: inline-flex;
+}
 .mock-icon > * {
   inline-size: var(--yr-space-4);
   block-size: var(--yr-space-4);
@@ -44,9 +46,15 @@
   border-radius: var(--yr-radius-md);
   padding: var(--yr-space-4) var(--yr-space-6);
 }
-.mock-stat-card--success { border-left: 3px solid var(--yr-success); }
-.mock-stat-card--warning { border-left: 3px solid var(--yr-warning); }
-.mock-stat-card--danger { border-left: 3px solid var(--yr-danger); }
+.mock-stat-card--success {
+  border-left: 3px solid var(--yr-success);
+}
+.mock-stat-card--warning {
+  border-left: 3px solid var(--yr-warning);
+}
+.mock-stat-card--danger {
+  border-left: 3px solid var(--yr-danger);
+}
 .mock-stat-value {
   margin: 0;
   font-family: var(--yr-font-display);
@@ -54,9 +62,15 @@
   font-weight: 600;
   color: var(--yr-text);
 }
-.mock-stat-value--compact { font-size: var(--yr-font-size-lg); }
-.mock-stat-value--warning { color: var(--yr-warning); }
-.mock-stat-value--danger { color: var(--yr-danger); }
+.mock-stat-value--compact {
+  font-size: var(--yr-font-size-lg);
+}
+.mock-stat-value--warning {
+  color: var(--yr-warning);
+}
+.mock-stat-value--danger {
+  color: var(--yr-danger);
+}
 .mock-stat-label {
   margin: 0;
   font-family: var(--yr-font-ui);
@@ -72,7 +86,9 @@
   font-size: var(--yr-font-size-sm);
   color: var(--yr-text-muted);
 }
-.mock-feed-item:hover { background: var(--yr-surface-muted); }
+.mock-feed-item:hover {
+  background: var(--yr-surface-muted);
+}
 .mock-feed-time {
   font-size: var(--yr-font-size-xs);
   color: var(--yr-text-disabled);
@@ -131,9 +147,15 @@
   display: grid;
   gap: var(--yr-space-4);
 }
-.portal-grid-2 { grid-template-columns: 1fr 1fr; }
-.portal-grid-3 { grid-template-columns: 1fr 1fr 1fr; }
-.portal-grid-4 { grid-template-columns: 1fr 1fr 1fr 1fr; }
+.portal-grid-2 {
+  grid-template-columns: 1fr 1fr;
+}
+.portal-grid-3 {
+  grid-template-columns: 1fr 1fr 1fr;
+}
+.portal-grid-4 {
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+}
 
 /* Stat card — a figure over its label. */
 .portal-stat-card {
@@ -172,7 +194,9 @@
   color: var(--yr-text-muted);
   border-radius: var(--yr-radius-sm);
 }
-.portal-feed-item:hover { background: var(--yr-surface-muted); }
+.portal-feed-item:hover {
+  background: var(--yr-surface-muted);
+}
 .portal-feed-time {
   font-size: var(--yr-font-size-xs);
   color: var(--yr-text-disabled);

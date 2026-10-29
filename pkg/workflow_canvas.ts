@@ -32,7 +32,13 @@ export class YrWorkflowCanvas extends HTMLElement {
     svg.innerHTML = '';
 
     const rc = rough.svg(svg);
-    const opts = { stroke: '#d0cdc6', strokeWidth: 1, roughness: 1.5, bowing: 1, disableMultiStroke: true };
+    const opts = {
+      stroke: '#d0cdc6',
+      strokeWidth: 1,
+      roughness: 1.5,
+      bowing: 1,
+      disableMultiStroke: true,
+    };
 
     for (let x = spacing; x < w; x += spacing) {
       svg.appendChild(rc.line(x, 0, x, h, opts));

@@ -36,8 +36,8 @@ rules:
   # ID selectors are too specific for a component library.
   selector-max-id: 0
 
-  # Catch accidental selector repetition.
-  no-duplicate-selectors: true
+  # Now covered by Biome suspicious/noDuplicateSelectors.
+  no-duplicate-selectors: null
 
   # State selectors deliberately follow the base rules they override
   # (.yr-field--invalid input after .yr-field input:focus), which this rule

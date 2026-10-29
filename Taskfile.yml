@@ -32,6 +32,11 @@ tasks:
     cmds:
       - task: fmt:go
       - task: fmt:templ
+      - task: fmt:web
+
+  fmt:web:
+    desc: Format TypeScript and CSS files
+    cmd: biome format --write .
 
   fmt:go:
     desc: Format Go files
@@ -46,7 +51,7 @@ tasks:
     cmds:
       - task: lint:go
       - task: lint:templ
-      - task: lint:ts
+      - task: lint:biome
       - task: lint:css
 
   lint:go:
@@ -57,12 +62,12 @@ tasks:
     desc: Verify .templ files are formatted
     cmd: templ fmt . --check
 
-  lint:ts:
-    desc: Type-check and lint TypeScript
+  lint:biome:
+    desc: Lint TypeScript and CSS (Biome rules)
     deps: [install]
     cmds:
       - pnpm exec tsc --noEmit
-      - pnpm exec eslint .
+      - biome lint .
 
   lint:css:
     desc: Lint hand-written CSS
