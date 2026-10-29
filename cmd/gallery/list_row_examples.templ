@@ -13,7 +13,7 @@ templ listRowExampleRows() {
 				<div class="yr-list-row-desc">ellery-logistics.slack.com</div>
 			</div>
 			<div class="yr-list-row-actions">
-				@ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+				@ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 				<a href="#" class="yr-button yr-button--secondary">Manage</a>
 			</div>
 		}
@@ -31,7 +31,7 @@ templ listRowExampleRows() {
 				<a href="#" class="yr-list-row-name">Refund triage</a>
 				<p class="yr-list-row-desc">Routes refund requests to the right approver.</p>
 				<div class="yr-list-row-meta">
-					@ui.Pill("Verified", &ui.PillProps{Tone: "accent"})
+					@ui.Pill("Verified", &ui.PillProps{Tone: ui.ToneAccent})
 					<span>Purchased 12 Sep 2026</span>
 				</div>
 			</div>

@@ -12,7 +12,7 @@ templ workflowRowExampleRows() {
 				<div class="yr-list-row-name">Newsletter Digest</div>
 				<div class="yr-list-row-meta">
 					<span>Marketing Ops</span>
-					@ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+					@ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 					<span>Last run 2h ago</span>
 				</div>
 			</div>
@@ -28,7 +28,7 @@ templ workflowRowExampleRows() {
 				<div class="yr-list-row-name">Lead Scoring</div>
 				<div class="yr-list-row-meta">
 					<span>Sales Ops</span>
-					@ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill})
+					@ui.Pill("Paused", &ui.PillProps{Pill: true})
 					<span>Last run 3d ago</span>
 				</div>
 			</div>
@@ -44,7 +44,7 @@ templ workflowRowExampleRows() {
 				<div class="yr-list-row-name">Social Scheduler</div>
 				<div class="yr-list-row-meta">
 					<span>Marketing Ops</span>
-					@ui.Pill("Error", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+					@ui.Pill("Error", &ui.PillProps{Tone: ui.ToneDanger, Pill: true})
 					<span>Failed 1h ago</span>
 				</div>
 			</div>
@@ -60,7 +60,7 @@ templ workflowRowExampleRows() {
 				<div class="yr-list-row-name">Onboarding Flow</div>
 				<div class="yr-list-row-meta">
 					<span>Client Onboarding</span>
-					@ui.Pill("Draft", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+					@ui.Pill("Draft", &ui.PillProps{Tone: ui.ToneWarning, Pill: true})
 				</div>
 			</div>
 			<div class="yr-list-row-actions">

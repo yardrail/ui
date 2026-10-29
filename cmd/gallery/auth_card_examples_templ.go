@@ -128,7 +128,7 @@ func authCardWithError() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "danger"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneDanger}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

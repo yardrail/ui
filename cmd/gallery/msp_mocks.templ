@@ -156,19 +156,19 @@ templ mspDashboard() {
 			@ui.Grid(ui.GridProps{Gap: ui.Space8}) {
 				@mspSection("Alerts") {
 					@mspFeedItem("2m ago") {
-						@ui.Pill("critical", &ui.PillProps{Tone: "danger"})
+						@ui.Pill("critical", &ui.PillProps{Tone: ui.ToneDanger})
 						<span>Workflow failed — Acme Corp</span>
 					}
 					@mspFeedItem("18m ago") {
-						@ui.Pill("warning", &ui.PillProps{Tone: "warning"})
+						@ui.Pill("warning", &ui.PillProps{Tone: ui.ToneWarning})
 						<span>Connector unhealthy — Beta LLC</span>
 					}
 					@mspFeedItem("1h ago") {
-						@ui.Pill("warning", &ui.PillProps{Tone: "warning"})
+						@ui.Pill("warning", &ui.PillProps{Tone: ui.ToneWarning})
 						<span>API key expires in 7d — Gamma Inc</span>
 					}
 					@mspFeedItem("3h ago") {
-						@ui.Pill("info", &ui.PillProps{Tone: "info"})
+						@ui.Pill("info", &ui.PillProps{Tone: ui.ToneInfo})
 						<span>New user joined — Delta Co</span>
 					}
 				}
@@ -181,15 +181,15 @@ templ mspDashboard() {
 						}
 					</div>
 					@mspFeedItem("") {
-						@ui.Pill("expired", &ui.PillProps{Tone: "danger"})
+						@ui.Pill("expired", &ui.PillProps{Tone: ui.ToneDanger})
 						<span>Slack OAuth — Acme Corp</span>
 					}
 					@mspFeedItem("") {
-						@ui.Pill("14d", &ui.PillProps{Tone: "warning"})
+						@ui.Pill("14d", &ui.PillProps{Tone: ui.ToneWarning})
 						<span>HubSpot API — Beta LLC</span>
 					}
 					@mspFeedItem("") {
-						@ui.Pill("22d", &ui.PillProps{Tone: "warning"})
+						@ui.Pill("22d", &ui.PillProps{Tone: ui.ToneWarning})
 						<span>Stripe key — Gamma Inc</span>
 					}
 				}
@@ -238,27 +238,27 @@ templ mspClients() {
 			}
 			@ui.Stack(ui.StackProps{Gap: ui.Space2}) {
 				@mspClientRow("8 users · 3 connectors · 12 workflows") {
-					@ui.Pill("healthy", &ui.PillProps{Tone: "success"})
+					@ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess})
 					<span class="mock-client-name">Acme Corp</span>
 				}
 				@mspClientRow("4 users · 2 connectors · 6 workflows") {
-					@ui.Pill("healthy", &ui.PillProps{Tone: "success"})
+					@ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess})
 					<span class="mock-client-name">Beta LLC</span>
 				}
 				@mspClientRow("12 users · 5 connectors · 18 workflows") {
-					@ui.Pill("attention", &ui.PillProps{Tone: "warning"})
+					@ui.Pill("attention", &ui.PillProps{Tone: ui.ToneWarning})
 					<span class="mock-client-name">Gamma Inc</span>
 				}
 				@mspClientRow("3 users · 1 connector · 4 workflows") {
-					@ui.Pill("healthy", &ui.PillProps{Tone: "success"})
+					@ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess})
 					<span class="mock-client-name">Delta Co</span>
 				}
 				@mspClientRow("6 users · 4 connectors · 9 workflows") {
-					@ui.Pill("critical", &ui.PillProps{Tone: "danger"})
+					@ui.Pill("critical", &ui.PillProps{Tone: ui.ToneDanger})
 					<span class="mock-client-name">Epsilon Group</span>
 				}
 				@mspClientRow("5 users · 2 connectors · 7 workflows") {
-					@ui.Pill("healthy", &ui.PillProps{Tone: "success"})
+					@ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess})
 					<span class="mock-client-name">Zeta Partners</span>
 				}
 			}
@@ -365,11 +365,11 @@ templ mspClientOverviewPage() {
 				}
 				@mspSection("Alerts") {
 					@mspFeedItem("2m ago") {
-						@ui.Pill("critical", &ui.PillProps{Tone: "danger"})
+						@ui.Pill("critical", &ui.PillProps{Tone: ui.ToneDanger})
 						<span>Slack OAuth expired</span>
 					}
 					@mspFeedItem("1h ago") {
-						@ui.Pill("info", &ui.PillProps{Tone: "info"})
+						@ui.Pill("info", &ui.PillProps{Tone: ui.ToneInfo})
 						<span>2 workflows paused</span>
 					}
 				}
@@ -399,7 +399,7 @@ templ mspClientUsersPage() {
 							</td>
 							<td>All spaces</td>
 							<td>
-								@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+								@ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess})
 							</td>
 						</tr>
 						<tr>
@@ -410,7 +410,7 @@ templ mspClientUsersPage() {
 							</td>
 							<td>Sales, Support</td>
 							<td>
-								@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+								@ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess})
 							</td>
 						</tr>
 						<tr>
@@ -421,7 +421,7 @@ templ mspClientUsersPage() {
 							</td>
 							<td>Sales</td>
 							<td>
-								@ui.Pill("Active", &ui.PillProps{Tone: "success"})
+								@ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess})
 							</td>
 						</tr>
 						<tr>
@@ -440,7 +440,7 @@ templ mspClientUsersPage() {
 			}
 			@mspSection("SCIM Sync") {
 				@mspSetting("Azure AD", "Last synced 4 hours ago · 8 users") {
-					@ui.Pill("Connected", &ui.PillProps{Tone: "success"})
+					@ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess})
 				}
 			}
 		}
@@ -456,13 +456,13 @@ templ mspClientConnectorsPage() {
 			}
 			@ui.Stack(ui.StackProps{Gap: ui.Space2}) {
 				@mspConnectorRow(ui.IconMessageSquare(), "Slack", "OAuth · Used by 4 workflows") {
-					@ui.Pill("Expired", &ui.PillProps{Tone: "danger"})
+					@ui.Pill("Expired", &ui.PillProps{Tone: ui.ToneDanger})
 				}
 				@mspConnectorRow(ui.IconDatabase(), "HubSpot", "API Key · Used by 6 workflows") {
-					@ui.Pill("Healthy", &ui.PillProps{Tone: "success"})
+					@ui.Pill("Healthy", &ui.PillProps{Tone: ui.ToneSuccess})
 				}
 				@mspConnectorRow(ui.IconCreditCard(), "Stripe", "API Key · Used by 2 workflows") {
-					@ui.Pill("Healthy", &ui.PillProps{Tone: "success"})
+					@ui.Pill("Healthy", &ui.PillProps{Tone: ui.ToneSuccess})
 				}
 			}
 		}
@@ -476,7 +476,7 @@ templ mspClientSettingsPage() {
 			@mspPageTitle("Acme Corp — Settings")
 			@mspSection("Authentication") {
 				@mspSetting("Two-Factor Authentication", "Require 2FA for all users in this organization") {
-					@ui.Pill("Required", &ui.PillProps{Tone: "success"})
+					@ui.Pill("Required", &ui.PillProps{Tone: ui.ToneSuccess})
 				}
 				@mspSetting("Single Sign-On", "SAML/OIDC integration with client identity provider") {
 					@ui.Pill("Not configured", &ui.PillProps{})

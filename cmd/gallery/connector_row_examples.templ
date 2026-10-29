@@ -12,7 +12,7 @@ templ connectorRowExampleRows() {
 				<div class="yr-list-row-name">Slack</div>
 				<div class="yr-list-row-meta">
 					<span>workspace-prod</span>
-					@ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+					@ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 				</div>
 			</div>
 			<div class="yr-list-row-actions">
@@ -27,7 +27,7 @@ templ connectorRowExampleRows() {
 				<div class="yr-list-row-name">HubSpot</div>
 				<div class="yr-list-row-meta">
 					<span>marketing-hub</span>
-					@ui.Pill("Connected", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+					@ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 				</div>
 			</div>
 			<div class="yr-list-row-actions">
@@ -41,7 +41,7 @@ templ connectorRowExampleRows() {
 			<div class="yr-list-row-main">
 				<div class="yr-list-row-name">Jira</div>
 				<div class="yr-list-row-meta">
-					@ui.Pill("Disconnected", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+					@ui.Pill("Disconnected", &ui.PillProps{Tone: ui.ToneDanger, Pill: true})
 				</div>
 			</div>
 			<div class="yr-list-row-actions">

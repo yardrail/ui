@@ -9,7 +9,7 @@ templ runSummaryRowExampleStates() {
 				<div class="yr-activity-row-desc">Newsletter Digest</div>
 				<div class="yr-activity-row-meta">
 					<span class="yr-activity-row-id-badge">R-45</span>
-					@ui.Pill("Completed", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+					@ui.Pill("Completed", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 					<span>3 outputs</span>
 				</div>
 			</div>
@@ -22,7 +22,7 @@ templ runSummaryRowExampleStates() {
 				<div class="yr-activity-row-desc">Social Scheduler</div>
 				<div class="yr-activity-row-meta">
 					<span class="yr-activity-row-id-badge">R-42</span>
-					@ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill})
+					@ui.Pill("Failed", &ui.PillProps{Tone: ui.ToneDanger, Pill: true})
 					<span>Rate limit exceeded</span>
 				</div>
 			</div>
@@ -35,7 +35,7 @@ templ runSummaryRowExampleStates() {
 				<div class="yr-activity-row-desc">Lead Scoring</div>
 				<div class="yr-activity-row-meta">
 					<span class="yr-activity-row-id-badge">R-44</span>
-					@ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+					@ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true})
 					<span>Approve budget >$5k</span>
 				</div>
 			</div>

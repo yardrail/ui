@@ -8,6 +8,18 @@ package ui
 import "github.com/a-h/templ"
 import templruntime "github.com/a-h/templ/runtime"
 
+// ChatFabBadge indicates the type of unread-message badge on a ChatFab.
+type ChatFabBadge struct{ v string }
+
+var (
+	ChatFabBadgeCappy = ChatFabBadge{v: "cappy"}
+	ChatFabBadgeHuman = ChatFabBadge{v: "human"}
+)
+
+func (b ChatFabBadge) String() string {
+	return b.v
+}
+
 // ChatFabProps holds a ChatFab's optional settings; every zero value is the default.
 type ChatFabProps struct {
 	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
@@ -16,9 +28,8 @@ type ChatFabProps struct {
 	Variant CappyVariant
 	// Label is the accessible label; the zero value is "Chat with Cappy".
 	Label string
-	// Badge indicates an unread message. Empty string hides the badge.
-	// Values: "cappy" shows a blue dot, "human" shows a green dot.
-	Badge string
+	// Badge indicates an unread message. The zero value hides the badge.
+	Badge ChatFabBadge
 }
 
 // label returns the accessible label.
@@ -65,7 +76,7 @@ func chatFab(p *ChatFabProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.label())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 33, Col: 36}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 44, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
@@ -86,7 +97,7 @@ func chatFab(p *ChatFabProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.label())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 40, Col: 75}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 51, Col: 75}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -99,7 +110,7 @@ func chatFab(p *ChatFabProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue("/static/ui/cappy/" + p.Variant.ImageFile())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 43, Col: 53}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 54, Col: 53}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {
@@ -109,8 +120,8 @@ func chatFab(p *ChatFabProps) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		if p.Badge != "" {
-			var templ_7745c5c3_Var5 = []any{"yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge}
+		if p.Badge.String() != "" {
+			var templ_7745c5c3_Var5 = []any{"yr-chat-fab__badge yr-chat-fab__badge--" + p.Badge.String()}
 			templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var5...)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err

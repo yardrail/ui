@@ -53,7 +53,7 @@ func alertTonesExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "success"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneSuccess}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -75,7 +75,7 @@ func alertTonesExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "warning"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneWarning}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -97,7 +97,7 @@ func alertTonesExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "danger"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneDanger}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -119,7 +119,7 @@ func alertTonesExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "info"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneInfo}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var5), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -200,7 +200,7 @@ func alertWithIconExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "success"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var8), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneSuccess}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var8), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -226,7 +226,7 @@ func alertWithIconExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "danger"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneDanger}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var9), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

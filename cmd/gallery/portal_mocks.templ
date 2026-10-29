@@ -128,23 +128,23 @@ templ portalHomePage() {
 			Needs You <a href="#">View all</a>
 		}
 		<div style="margin-bottom:var(--yr-space-8)">
-			@portalUrgentCard(ui.IconClock(), "amber", "Approve budget over $5k for Acme lead",
-				"Waiting 2h 14m · Lead Scoring · Marketing Ops", "warning", "Waiting")
-			@portalUrgentCard(ui.IconClock(), "amber", "Review generated newsletter draft",
-				"Waiting 45m · Newsletter Digest · Marketing Ops", "warning", "Waiting")
+			@portalUrgentCard(ui.IconClock(), ui.ToneAmber, "Approve budget over $5k for Acme lead",
+				"Waiting 2h 14m · Lead Scoring · Marketing Ops", ui.ToneWarning, "Waiting")
+			@portalUrgentCard(ui.IconClock(), ui.ToneAmber, "Review generated newsletter draft",
+				"Waiting 45m · Newsletter Digest · Marketing Ops", ui.ToneWarning, "Waiting")
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
 			Problems
 		}
 		<div style="margin-bottom:var(--yr-space-8)">
-			@portalDangerCard(ui.IconAlertTriangle(), "danger", "Social Scheduler failed",
-				"Rate limit exceeded · 3 consecutive failures · 1h ago", "danger", "Failed")
+			@portalDangerCard(ui.IconAlertTriangle(), ui.ToneDanger, "Social Scheduler failed",
+				"Rate limit exceeded · 3 consecutive failures · 1h ago", ui.ToneDanger, "Failed")
 		</div>
 		@portalHomeActivity()
 	}
 }
 
-templ portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, pillText string) {
+templ portalUrgentCard(icon templ.Component, badgeTone ui.Tone, title, desc string, pillTone ui.Tone, pillText string) {
 	@ui.ActionCard(&ui.ActionCardProps{Urgent: true}) {
 		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
 			@icon
@@ -154,12 +154,12 @@ templ portalUrgentCard(icon templ.Component, badgeTone, title, desc, pillTone, p
 			<p class="yr-action-card-desc">{ desc }</p>
 		</div>
 		<div class="yr-action-card-action">
-			@ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Shape: ui.ShapePill})
+			@ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Pill: true})
 		</div>
 	}
 }
 
-templ portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, pillText string) {
+templ portalDangerCard(icon templ.Component, badgeTone ui.Tone, title, desc string, pillTone ui.Tone, pillText string) {
 	@ui.ActionCard(&ui.ActionCardProps{UrgentDanger: true}) {
 		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
 			@icon
@@ -169,7 +169,7 @@ templ portalDangerCard(icon templ.Component, badgeTone, title, desc, pillTone, p
 			<p class="yr-action-card-desc">{ desc }</p>
 		</div>
 		<div class="yr-action-card-action">
-			@ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Shape: ui.ShapePill})
+			@ui.Pill(pillText, &ui.PillProps{Tone: pillTone, Pill: true})
 		</div>
 	}
 }
@@ -179,15 +179,15 @@ templ portalHomeActivity() {
 		Recent Activity <a href="#">See more</a>
 	}
 	@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
-		@portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false)
-		@portalActivityRow("Lead Scoring", "R-47", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-01T09:00:00Z", false)
-		@portalActivityRow("Social Scheduler", "R-46", "danger", "Failed", "Rate limit exceeded", "12s", "", true)
-		@portalActivityRow("Contact Sync", "R-45", "success", "Completed", "24 records synced", "4m 8s", "", false)
-		@portalActivityRow("Invoice Processor", "R-44", "success", "Completed", "12 invoices", "2m 51s", "", false)
+		@portalActivityRow("Newsletter Digest", "R-48", ui.ToneSuccess, "Completed", "3 outputs", "1m 23s", "", false)
+		@portalActivityRow("Lead Scoring", "R-47", ui.ToneWarning, "Waiting", "Approve budget >$5k", "", "2026-10-01T09:00:00Z", false)
+		@portalActivityRow("Social Scheduler", "R-46", ui.ToneDanger, "Failed", "Rate limit exceeded", "12s", "", true)
+		@portalActivityRow("Contact Sync", "R-45", ui.ToneSuccess, "Completed", "24 records synced", "4m 8s", "", false)
+		@portalActivityRow("Invoice Processor", "R-44", ui.ToneSuccess, "Completed", "12 invoices", "2m 51s", "", false)
 	}
 }
 
-templ portalActivityRow(name, runID, tone, status, detail, duration, waitingSince string, isError bool) {
+templ portalActivityRow(name, runID string, tone ui.Tone, status, detail, duration, waitingSince string, isError bool) {
 	if isError {
 		@portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince, &ui.ActivityRowProps{IsError: true})
 	} else {
@@ -195,7 +195,7 @@ templ portalActivityRow(name, runID, tone, status, detail, duration, waitingSinc
 	}
 }
 
-templ portalActivityRowContent(name, runID, tone, status, detail, duration, waitingSince string, p *ui.ActivityRowProps) {
+templ portalActivityRowContent(name, runID string, tone ui.Tone, status, detail, duration, waitingSince string, p *ui.ActivityRowProps) {
 	@ui.ActivityRow(p) {
 		<div>
 			<div class="yr-activity-row-desc">{ name }</div>
@@ -221,9 +221,9 @@ templ portalAutomationsPage() {
 	@portalShell("Automations · Yardrail", portalNav("automations")) {
 		<h1 class="portal-page-title">Automations</h1>
 		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
-			@portalAutoTile(ui.IconGitBranch(), "accent", "Workflows", "7 active workflows across 4 spaces", "View all")
-			@portalAutoTile(ui.IconLayoutGrid(), "purple", "Template Catalog", "Browse 500+ pre-built automation templates", "Browse")
-			@portalAutoTile(ui.IconPlug(), "amber", "Connectors", "4 tools connected to your organization", "Manage")
+			@portalAutoTile(ui.IconGitBranch(), ui.ToneAccent, "Workflows", "7 active workflows across 4 spaces", "View all")
+			@portalAutoTile(ui.IconLayoutGrid(), ui.TonePurple, "Template Catalog", "Browse 500+ pre-built automation templates", "Browse")
+			@portalAutoTile(ui.IconPlug(), ui.ToneAmber, "Connectors", "4 tools connected to your organization", "Manage")
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
 			Connected Tools <a href="#">Manage</a>
@@ -260,7 +260,7 @@ templ portalAutomationsPage() {
 	}
 }
 
-templ portalAutoTile(icon templ.Component, badgeTone, title, desc, action string) {
+templ portalAutoTile(icon templ.Component, badgeTone ui.Tone, title, desc, action string) {
 	@ui.ActionCard(&ui.ActionCardProps{}) {
 		@ui.IconBadge(badgeTone, &ui.IconBadgeProps{}) {
 			@icon
@@ -305,17 +305,17 @@ templ portalWorkflowsPage() {
 			</div>
 		</div>
 		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3)">
-			@portalWorkflowRow("Newsletter Digest", "Marketing Ops", "success", "Active", "Last run 2h ago", "Trigger")
-			@portalWorkflowRow("Lead Scoring", "Sales Ops", "", "Paused", "Last run 3d ago", "Resume")
-			@portalWorkflowRow("Invoice Sync", "Client Onboarding", "success", "Active", "Last run 15m ago", "Trigger")
-			@portalWorkflowRow("Social Scheduler", "Marketing Ops", "danger", "Error", "Failed 1h ago", "View")
-			@portalWorkflowRow("Onboarding Flow", "Client Onboarding", "warning", "Draft", "", "Edit")
-			@portalWorkflowRow("Ticket Router", "My Space", "success", "Active", "Last run 30m ago", "Trigger")
+			@portalWorkflowRow("Newsletter Digest", "Marketing Ops", ui.ToneSuccess, "Active", "Last run 2h ago", "Trigger")
+			@portalWorkflowRow("Lead Scoring", "Sales Ops", ui.Tone{}, "Paused", "Last run 3d ago", "Resume")
+			@portalWorkflowRow("Invoice Sync", "Client Onboarding", ui.ToneSuccess, "Active", "Last run 15m ago", "Trigger")
+			@portalWorkflowRow("Social Scheduler", "Marketing Ops", ui.ToneDanger, "Error", "Failed 1h ago", "View")
+			@portalWorkflowRow("Onboarding Flow", "Client Onboarding", ui.ToneWarning, "Draft", "", "Edit")
+			@portalWorkflowRow("Ticket Router", "My Space", ui.ToneSuccess, "Active", "Last run 30m ago", "Trigger")
 		</div>
 	}
 }
 
-templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
+templ portalWorkflowRow(name, space string, tone ui.Tone, status, lastRun, action string) {
 	@ui.ListRow(&ui.ListRowProps{}) {
 		<div class="yr-list-row-icon">
 			@ui.IconGitBranch()
@@ -324,7 +324,7 @@ templ portalWorkflowRow(name, space, tone, status, lastRun, action string) {
 			<div class="yr-list-row-name">{ name }</div>
 			<div class="yr-list-row-meta">
 				<span>{ space }</span>
-				@ui.Pill(status, &ui.PillProps{Tone: tone, Shape: ui.ShapePill})
+				@ui.Pill(status, &ui.PillProps{Tone: tone, Pill: true})
 				if lastRun != "" {
 					<span>{ lastRun }</span>
 				}
@@ -345,7 +345,7 @@ templ portalTemplatesPage() {
 			<input class="yr-search-input" type="search" name="q" placeholder="Search 500+ templates…" autocomplete="off"/>
 		</form>
 		<div style="display:flex;gap:var(--yr-space-2);margin-bottom:var(--yr-space-6)">
-			@ui.Pill("All", &ui.PillProps{Tone: "accent"})
+			@ui.Pill("All", &ui.PillProps{Tone: ui.ToneAccent})
 			@ui.Pill("Marketing", &ui.PillProps{})
 			@ui.Pill("Sales", &ui.PillProps{})
 			@ui.Pill("Operations", &ui.PillProps{})
@@ -376,12 +376,12 @@ templ portalTemplatesPage() {
 }
 
 templ portalVerifiedRating(value, reviews string) {
-	@ui.Pill("Verified", &ui.PillProps{Tone: "accent"})
+	@ui.Pill("Verified", &ui.PillProps{Tone: ui.ToneAccent})
 	@ui.Rating(value, &ui.RatingProps{Reviews: reviews})
 }
 
 templ portalCommunityInstalls(installs string) {
-	@ui.Pill("Community", &ui.PillProps{Tone: "purple"})
+	@ui.Pill("Community", &ui.PillProps{Tone: ui.TonePurple})
 	<span class="yr-template-card-install-count">{ installs }</span>
 }
 
@@ -396,10 +396,10 @@ templ portalConnectorsPage() {
 			Connected
 		}
 		<div style="display:flex;flex-direction:column;gap:var(--yr-space-3);margin-bottom:var(--yr-space-8)">
-			@portalConnectorRow("", "Slack", "workspace-prod", "success", "Connected", true)
-			@portalConnectorRow("HS", "HubSpot", "marketing-hub", "success", "Connected", false)
-			@portalConnectorRow("GS", "Google Sheets", "ops-shared@acme.com", "success", "Connected", false)
-			@portalConnectorRow("ST", "Stripe", "prod-account", "warning", "Expiring", false)
+			@portalConnectorRow("", "Slack", "workspace-prod", ui.ToneSuccess, "Connected", true)
+			@portalConnectorRow("HS", "HubSpot", "marketing-hub", ui.ToneSuccess, "Connected", false)
+			@portalConnectorRow("GS", "Google Sheets", "ops-shared@acme.com", ui.ToneSuccess, "Connected", false)
+			@portalConnectorRow("ST", "Stripe", "prod-account", ui.ToneWarning, "Expiring", false)
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
 			Available
@@ -412,7 +412,7 @@ templ portalConnectorsPage() {
 	}
 }
 
-templ portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool) {
+templ portalConnectorRow(initials, name, meta string, tone ui.Tone, status string, hasLogo bool) {
 	@ui.ListRow(&ui.ListRowProps{}) {
 		if hasLogo {
 			<div class="yr-list-row-icon">
@@ -427,7 +427,7 @@ templ portalConnectorRow(initials, name, meta, tone, status string, hasLogo bool
 			<div class="yr-list-row-name">{ name }</div>
 			<div class="yr-list-row-meta">
 				<span>{ meta }</span>
-				@ui.Pill(status, &ui.PillProps{Tone: tone, Shape: ui.ShapePill})
+				@ui.Pill(status, &ui.PillProps{Tone: tone, Pill: true})
 			</div>
 		</div>
 		<div class="yr-list-row-actions">
@@ -473,17 +473,17 @@ templ portalSpacePage() {
 		}
 		<div class="portal-grid portal-grid-3" style="margin-bottom:var(--yr-space-8)">
 			@ui.WorkflowCard("Lead Scoring", "Waiting for input", &ui.WorkflowCardProps{
-				Status: ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}),
+				Status: ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}),
 				Runs:   "42", SuccessRate: "91%",
 				Action: ui.Button("View", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			})
 			@ui.WorkflowCard("Newsletter Digest", "Last run 2h ago", &ui.WorkflowCardProps{
-				Status: ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}),
+				Status: ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}),
 				Runs:   "127", SuccessRate: "98%",
 				Action: ui.Button("Trigger", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			})
 			@ui.WorkflowCard("Social Scheduler", "Last run 1d ago", &ui.WorkflowCardProps{
-				Status: ui.Pill("Paused", &ui.PillProps{Shape: ui.ShapePill}),
+				Status: ui.Pill("Paused", &ui.PillProps{Pill: true}),
 				Runs:   "18", SuccessRate: "85%",
 				Action: ui.Button("Resume", ui.ButtonProps{Variant: ui.ButtonSecondary}),
 			})
@@ -492,11 +492,11 @@ templ portalSpacePage() {
 			Recent Activity <a href="#">View all</a>
 		}
 		@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
-			@portalActivityRow("Newsletter Digest", "R-45", "success", "Completed", "3 outputs", "1m 23s", "", false)
-			@portalActivityRow("Lead Scoring", "R-44", "warning", "Waiting", "Approve budget >$5k", "", "2026-10-11T08:00:00Z", false)
-			@portalActivityRow("Newsletter Digest", "R-43", "success", "Completed", "2 outputs", "58s", "", false)
-			@portalActivityRow("Social Scheduler", "R-42", "danger", "Failed", "Rate limit exceeded", "12s", "", true)
-			@portalActivityRow("Lead Scoring", "R-41", "success", "Completed", "1 output", "4m 12s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-45", ui.ToneSuccess, "Completed", "3 outputs", "1m 23s", "", false)
+			@portalActivityRow("Lead Scoring", "R-44", ui.ToneWarning, "Waiting", "Approve budget >$5k", "", "2026-10-11T08:00:00Z", false)
+			@portalActivityRow("Newsletter Digest", "R-43", ui.ToneSuccess, "Completed", "2 outputs", "58s", "", false)
+			@portalActivityRow("Social Scheduler", "R-42", ui.ToneDanger, "Failed", "Rate limit exceeded", "12s", "", true)
+			@portalActivityRow("Lead Scoring", "R-41", ui.ToneSuccess, "Completed", "1 output", "4m 12s", "", false)
 		}
 	}
 }
@@ -512,8 +512,8 @@ templ portalWorkflowDetailPage() {
 			<span class="yr-breadcrumb-current">Newsletter Digest</span>
 		}
 		<h1 class="portal-page-title">Newsletter Digest</h1>
-		@ui.StatusBanner(&ui.StatusBannerProps{Tone: "success"}) {
-			@ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+		@ui.StatusBanner(&ui.StatusBannerProps{Tone: ui.ToneSuccess}) {
+			@ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 			<span class="yr-status-banner-message">Running on schedule. Last triggered 2h ago.</span>
 			<div class="yr-status-banner-actions">
 				@ui.Button("Pause", ui.ButtonProps{Variant: ui.ButtonSecondary})
@@ -539,7 +539,7 @@ templ portalWorkflowDetailRuns() {
 				<div class="yr-activity-row-desc">Approve newsletter content draft</div>
 				<div class="yr-activity-row-meta">
 					<span class="yr-activity-row-id-badge">R-49</span>
-					@ui.Pill("Waiting", &ui.PillProps{Tone: "warning"})
+					@ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning})
 					<span>Content review required</span>
 				</div>
 			</div>
@@ -552,10 +552,10 @@ templ portalWorkflowDetailRuns() {
 			Recent Runs
 		}
 		@ui.TimelineEntries(&ui.TimelineEntriesProps{}) {
-			@portalActivityRow("Newsletter Digest", "R-48", "success", "Completed", "3 outputs", "1m 23s", "", false)
-			@portalActivityRow("Newsletter Digest", "R-47", "success", "Completed", "3 outputs", "58s", "", false)
-			@portalActivityRow("Newsletter Digest", "R-46", "success", "Completed", "3 outputs", "1m 05s", "", false)
-			@portalActivityRow("Newsletter Digest", "R-45", "danger", "Failed", "SendGrid 429 — rate limit exceeded", "12s", "", true)
+			@portalActivityRow("Newsletter Digest", "R-48", ui.ToneSuccess, "Completed", "3 outputs", "1m 23s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-47", ui.ToneSuccess, "Completed", "3 outputs", "58s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-46", ui.ToneSuccess, "Completed", "3 outputs", "1m 05s", "", false)
+			@portalActivityRow("Newsletter Digest", "R-45", ui.ToneDanger, "Failed", "SendGrid 429 — rate limit exceeded", "12s", "", true)
 		}
 	</div>
 }
@@ -572,7 +572,7 @@ templ portalWorkflowDetailConfig() {
 			}
 			@ui.MetaRow(&ui.MetaRowProps{}) {
 				<span>Manual</span>
-				@ui.Pill("Enabled", &ui.PillProps{Tone: "success"})
+				@ui.Pill("Enabled", &ui.PillProps{Tone: ui.ToneSuccess})
 			}
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
@@ -582,17 +582,17 @@ templ portalWorkflowDetailConfig() {
 			@ui.MetaRow(&ui.MetaRowProps{}) {
 				<span>email.send</span>
 				<span>SendGrid</span>
-				@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+				@ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 			}
 			@ui.MetaRow(&ui.MetaRowProps{}) {
 				<span>crm.read</span>
 				<span>HubSpot</span>
-				@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+				@ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 			}
 			@ui.MetaRow(&ui.MetaRowProps{}) {
 				<span>file.store</span>
 				<span>Google Drive</span>
-				@ui.Pill("Bound", &ui.PillProps{Tone: "success", Shape: ui.ShapePill})
+				@ui.Pill("Bound", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true})
 			}
 		</div>
 		@ui.SectionHeader(&ui.SectionHeaderProps{}) {
@@ -628,12 +628,12 @@ templ portalWorkflowRunPage() {
 		}
 		<h1 class="portal-page-title">Run #42</h1>
 		@ui.MetaRow(&ui.MetaRowProps{}) {
-			@ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill})
+			@ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true})
 			<span>Started Oct 11, 2026 at 2:30 PM</span>
 			@ui.LiveDuration("2026-10-11T14:30:00Z", &ui.LiveDurationProps{})
 			<span>Triggered by schedule</span>
 		}
-		@ui.HitlPrompt(&ui.HitlPromptProps{Tone: "warning"}) {
+		@ui.HitlPrompt(&ui.HitlPromptProps{Tone: ui.ToneWarning}) {
 			<div class="yr-hitl-prompt-title">Approve the content draft for this week's newsletter?</div>
 			<p class="yr-hitl-prompt-desc">
 				The workflow generated a newsletter draft from 12 recent blog posts and 3 product updates. Review the draft in the outputs below before approving.

@@ -65,7 +65,7 @@ func attentionCardDefault() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.IconBadge("amber", &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconBadge(ui.ToneAmber, &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var3), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -73,7 +73,7 @@ func attentionCardDefault() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -150,7 +150,7 @@ func attentionCardDanger() templ.Component {
 				}
 				return nil
 			})
-			templ_7745c5c3_Err = ui.IconBadge("danger", &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.IconBadge(ui.ToneDanger, &ui.IconBadgeProps{}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -158,7 +158,7 @@ func attentionCardDanger() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: ui.ToneDanger, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

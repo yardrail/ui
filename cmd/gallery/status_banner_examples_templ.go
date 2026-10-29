@@ -47,7 +47,7 @@ func statusBannerActiveExample() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -65,7 +65,7 @@ func statusBannerActiveExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: "success"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: ui.ToneSuccess}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var2), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -114,7 +114,7 @@ func statusBannerPausedExample() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Pill("Paused", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Paused", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -132,7 +132,7 @@ func statusBannerPausedExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: "warning"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: ui.ToneWarning}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var4), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -181,7 +181,7 @@ func statusBannerFailedExample() templ.Component {
 				}()
 			}
 			ctx = templ.InitializeContext(ctx)
-			templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: ui.ToneDanger, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -199,7 +199,7 @@ func statusBannerFailedExample() templ.Component {
 			}
 			return nil
 		})
-		templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: "danger"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.StatusBanner(&ui.StatusBannerProps{Tone: ui.ToneDanger}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var6), templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

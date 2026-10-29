@@ -2,7 +2,7 @@ package ui
 
 // AvatarProps configures an Avatar.
 type AvatarProps struct {
-	Size  string
+	Large bool
 	Attrs templ.Attributes
 }
 
@@ -12,5 +12,10 @@ func Avatar(text string, p *AvatarProps) templ.Component {
 }
 
 templ avatar(text string, p *AvatarProps) {
-	<yr-avatar size={ p.Size } { filterAttrs("Avatar", p.Attrs)... }>{ text }</yr-avatar>
+	<yr-avatar
+		if p.Large {
+			size="lg"
+		}
+		{ filterAttrs("Avatar", p.Attrs)... }
+	>{ text }</yr-avatar>
 }

@@ -522,7 +522,7 @@ func setupCardConfirmation() templ.Component {
 					}
 					return nil
 				})
-				templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: "success"}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var20), templ_7745c5c3_Buffer)
+				templ_7745c5c3_Err = ui.Alert(&ui.AlertProps{Tone: ui.ToneSuccess}).Render(templ.WithChildren(ctx, templ_7745c5c3_Var20), templ_7745c5c3_Buffer)
 				if templ_7745c5c3_Err != nil {
 					return templ_7745c5c3_Err
 				}

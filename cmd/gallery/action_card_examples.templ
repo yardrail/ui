@@ -6,7 +6,7 @@ templ actionCardStacked() {
 	<div style="max-width:40rem">
 		@ui.Stack(ui.StackProps{Gap: ui.Space3}) {
 			@ui.ActionCard(&ui.ActionCardProps{}) {
-				@ui.IconBadge("accent", &ui.IconBadgeProps{}) {
+				@ui.IconBadge(ui.ToneAccent, &ui.IconBadgeProps{}) {
 					@ui.IconPencil()
 				}
 				<div class="yr-action-card-body">
@@ -18,7 +18,7 @@ templ actionCardStacked() {
 				</div>
 			}
 			@ui.ActionCard(&ui.ActionCardProps{}) {
-				@ui.IconBadge("amber", &ui.IconBadgeProps{}) {
+				@ui.IconBadge(ui.ToneAmber, &ui.IconBadgeProps{}) {
 					@ui.IconMail()
 				}
 				<div class="yr-action-card-body">

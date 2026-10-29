@@ -35,31 +35,31 @@ func pillTonesExample() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Accent", &ui.PillProps{Tone: "accent"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Accent", &ui.PillProps{Tone: ui.ToneAccent}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Amber", &ui.PillProps{Tone: "amber"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Amber", &ui.PillProps{Tone: ui.ToneAmber}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Blue", &ui.PillProps{Tone: "blue"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Blue", &ui.PillProps{Tone: ui.ToneBlue}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Green", &ui.PillProps{Tone: "green"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Green", &ui.PillProps{Tone: ui.ToneGreen}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Purple", &ui.PillProps{Tone: "purple"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Purple", &ui.PillProps{Tone: ui.TonePurple}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Pink", &ui.PillProps{Tone: "pink"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Pink", &ui.PillProps{Tone: ui.TonePink}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Danger", &ui.PillProps{Tone: "danger"}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Danger", &ui.PillProps{Tone: ui.ToneDanger}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
@@ -100,19 +100,19 @@ func pillStatusExample() templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Running", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Running", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Deploying", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Deploying", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: ui.ToneDanger, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}
-		templ_7745c5c3_Err = ui.Pill("Idle", &ui.PillProps{Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = ui.Pill("Idle", &ui.PillProps{Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return templ_7745c5c3_Err
 		}

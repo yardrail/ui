@@ -51,7 +51,7 @@ func runSummaryRowExampleStates() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Completed", &ui.PillProps{Tone: "success", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Completed", &ui.PillProps{Tone: ui.ToneSuccess, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -81,7 +81,7 @@ func runSummaryRowExampleStates() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: "danger", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Failed", &ui.PillProps{Tone: ui.ToneDanger, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
@@ -111,7 +111,7 @@ func runSummaryRowExampleStates() templ.Component {
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}
-			templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: "warning", Shape: ui.ShapePill}).Render(ctx, templ_7745c5c3_Buffer)
+			templ_7745c5c3_Err = ui.Pill("Waiting", &ui.PillProps{Tone: ui.ToneWarning, Pill: true}).Render(ctx, templ_7745c5c3_Buffer)
 			if templ_7745c5c3_Err != nil {
 				return templ_7745c5c3_Err
 			}

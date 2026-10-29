@@ -1107,7 +1107,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("critical", &ui.PillProps{Tone: "danger"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("critical", &ui.PillProps{Tone: ui.ToneDanger}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1137,7 +1137,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("warning", &ui.PillProps{Tone: "warning"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("warning", &ui.PillProps{Tone: ui.ToneWarning}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1167,7 +1167,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("warning", &ui.PillProps{Tone: "warning"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("warning", &ui.PillProps{Tone: ui.ToneWarning}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1197,7 +1197,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("info", &ui.PillProps{Tone: "info"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("info", &ui.PillProps{Tone: ui.ToneInfo}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1291,7 +1291,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("expired", &ui.PillProps{Tone: "danger"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("expired", &ui.PillProps{Tone: ui.ToneDanger}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1321,7 +1321,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("14d", &ui.PillProps{Tone: "warning"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("14d", &ui.PillProps{Tone: ui.ToneWarning}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1351,7 +1351,7 @@ func mspDashboard() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("22d", &ui.PillProps{Tone: "warning"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("22d", &ui.PillProps{Tone: ui.ToneWarning}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -1731,7 +1731,7 @@ func mspClients() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1761,7 +1761,7 @@ func mspClients() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1791,7 +1791,7 @@ func mspClients() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("attention", &ui.PillProps{Tone: "warning"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("attention", &ui.PillProps{Tone: ui.ToneWarning}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1821,7 +1821,7 @@ func mspClients() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1851,7 +1851,7 @@ func mspClients() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("critical", &ui.PillProps{Tone: "danger"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("critical", &ui.PillProps{Tone: ui.ToneDanger}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -1881,7 +1881,7 @@ func mspClients() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("healthy", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -2648,7 +2648,7 @@ func mspClientOverviewPage() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("critical", &ui.PillProps{Tone: "danger"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("critical", &ui.PillProps{Tone: ui.ToneDanger}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -2678,7 +2678,7 @@ func mspClientOverviewPage() templ.Component {
 								}()
 							}
 							ctx = templ.InitializeContext(ctx)
-							templ_7745c5c3_Err = ui.Pill("info", &ui.PillProps{Tone: "info"}).Render(ctx, templ_7745c5c3_Buffer)
+							templ_7745c5c3_Err = ui.Pill("info", &ui.PillProps{Tone: ui.ToneInfo}).Render(ctx, templ_7745c5c3_Buffer)
 							if templ_7745c5c3_Err != nil {
 								return templ_7745c5c3_Err
 							}
@@ -2812,7 +2812,7 @@ func mspClientUsersPage() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -2828,7 +2828,7 @@ func mspClientUsersPage() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -2844,7 +2844,7 @@ func mspClientUsersPage() templ.Component {
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
-					templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+					templ_7745c5c3_Err = ui.Pill("Active", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 					if templ_7745c5c3_Err != nil {
 						return templ_7745c5c3_Err
 					}
@@ -2902,7 +2902,7 @@ func mspClientUsersPage() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("Connected", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("Connected", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -3030,7 +3030,7 @@ func mspClientConnectorsPage() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("Expired", &ui.PillProps{Tone: "danger"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("Expired", &ui.PillProps{Tone: ui.ToneDanger}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -3056,7 +3056,7 @@ func mspClientConnectorsPage() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("Healthy", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("Healthy", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -3082,7 +3082,7 @@ func mspClientConnectorsPage() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("Healthy", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("Healthy", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
@@ -3192,7 +3192,7 @@ func mspClientSettingsPage() templ.Component {
 							}()
 						}
 						ctx = templ.InitializeContext(ctx)
-						templ_7745c5c3_Err = ui.Pill("Required", &ui.PillProps{Tone: "success"}).Render(ctx, templ_7745c5c3_Buffer)
+						templ_7745c5c3_Err = ui.Pill("Required", &ui.PillProps{Tone: ui.ToneSuccess}).Render(ctx, templ_7745c5c3_Buffer)
 						if templ_7745c5c3_Err != nil {
 							return templ_7745c5c3_Err
 						}
