@@ -16,6 +16,11 @@ func (v SearchVariant) class() string {
 	return "yr-search yr-search--" + v.v
 }
 
+// All returns every SearchVariant value.
+func (SearchVariant) All() []SearchVariant {
+	return []SearchVariant{SearchPlain, SearchHero, SearchCompact}
+}
+
 // SearchProps configures a Search form.
 type SearchProps struct {
 	Variant     SearchVariant

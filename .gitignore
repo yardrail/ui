@@ -5,3 +5,4 @@ node_modules/
 /gallery
 .mise.local.toml
 .mise.*.toml
+pkg/testdata/classcoverage/

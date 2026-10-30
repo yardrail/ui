@@ -6,6 +6,7 @@
       "**/pkg/**/*.ts",
       "**/pkg/**/*.css",
       "**/cmd/gallery/**/*.css",
+      "**/pkg/testdata/classcoverage/**/*.html",
       "!**/node_modules",
       "!**/pkg/dist",
       "!**/pkg/**/*_templ.go"
@@ -47,6 +48,19 @@
       "semicolons": "always"
     }
   },
+  "overrides": [
+    {
+      "includes": ["**/pkg/testdata/classcoverage/**/*.html"],
+      "linter": {
+        "rules": {
+          "preset": "none",
+          "nursery": {
+            "noUnusedClasses": "warn"
+          }
+        }
+      }
+    }
+  ],
   "css": {
     "linter": {
       "enabled": true

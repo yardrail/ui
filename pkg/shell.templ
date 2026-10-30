@@ -40,6 +40,11 @@ var (
 	ShellWidthFull = ShellWidth{v: "full"}
 )
 
+// All returns every ShellWidth value.
+func (ShellWidth) All() []ShellWidth {
+	return []ShellWidth{{}, ShellWidthFull}
+}
+
 // ShellProps holds a Shell's optional settings; every zero value is the default.
 type ShellProps struct {
 	// Head holds app additions to <head>, such as stylesheets, fonts and scripts. It renders

@@ -24,6 +24,11 @@ var (
 	Space16 = Space{v: "--yr-space-16"}
 )
 
+// All returns every Space value.
+func (Space) All() []Space {
+	return []Space{{}, Space1, Space2, Space3, Space4, Space6, Space8, Space12, Space16}
+}
+
 // FontSize is a step of the text size scale. The zero value carries no token and means the
 // primitive's default.
 type FontSize struct{ v string }
@@ -73,6 +78,11 @@ var (
 	MeasureWide = Measure{v: "--yr-measure-wide"}
 )
 
+// All returns every Measure value.
+func (Measure) All() []Measure {
+	return []Measure{{}, MeasureNarrow, MeasureProse, MeasureWide}
+}
+
 // SideWidth is the width of a sidebar or side panel. The zero value carries no token and means the
 // primitive's default.
 type SideWidth struct{ v string }
@@ -87,6 +97,11 @@ var (
 	SideWidthLg = SideWidth{v: "--yr-side-lg"}
 )
 
+// All returns every SideWidth value.
+func (SideWidth) All() []SideWidth {
+	return []SideWidth{{}, SideWidthSm, SideWidthMd, SideWidthLg}
+}
+
 // ItemWidth is the minimum width of an item in a grid. The zero value carries no token and means
 // the primitive's default.
 type ItemWidth struct{ v string }
@@ -98,3 +113,8 @@ var (
 	// ItemWidthMd is 20rem.
 	ItemWidthMd = ItemWidth{v: "--yr-item-width-md"}
 )
+
+// All returns every ItemWidth value.
+func (ItemWidth) All() []ItemWidth {
+	return []ItemWidth{{}, ItemWidthSm, ItemWidthMd}
+}

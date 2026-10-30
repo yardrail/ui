@@ -29,6 +29,11 @@ func (t ButtonType) String() string {
 	return t.v
 }
 
+// All returns every ButtonType value.
+func (ButtonType) All() []ButtonType {
+	return []ButtonType{{}, ButtonSubmit, ButtonReset}
+}
+
 // ButtonVariant is the visual style of a Button. The zero value is ButtonPrimary.
 type ButtonVariant struct{ v string }
 
@@ -45,6 +50,11 @@ var (
 	// ButtonDangerQuiet is a low-emphasis destructive action, for example Remove in a table row.
 	ButtonDangerQuiet = ButtonVariant{v: "danger-quiet"}
 )
+
+// All returns every ButtonVariant value.
+func (ButtonVariant) All() []ButtonVariant {
+	return []ButtonVariant{{}, ButtonSecondary, ButtonLink, ButtonDanger, ButtonDangerQuiet}
+}
 
 // buttonClass is the base class every Button carries.
 const buttonClass = "yr-button"
@@ -111,7 +121,7 @@ func Button(label string, p ButtonProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Type.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 75, Col: 24}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 85, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -142,7 +152,7 @@ func Button(label string, p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var5 string
 			templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Name)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 78, Col: 16}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 88, Col: 16}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var5)
 			if templ_7745c5c3_Err != nil {
@@ -161,7 +171,7 @@ func Button(label string, p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var6 string
 			templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 81, Col: 18}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 91, Col: 18}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var6)
 			if templ_7745c5c3_Err != nil {
@@ -180,7 +190,7 @@ func Button(label string, p ButtonProps) templ.Component {
 			var templ_7745c5c3_Var7 string
 			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.Confirm)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 84, Col: 25}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 94, Col: 25}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 			if templ_7745c5c3_Err != nil {
@@ -208,7 +218,7 @@ func Button(label string, p ButtonProps) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 88, Col: 9}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/button.templ`, Line: 98, Col: 9}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {

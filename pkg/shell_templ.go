@@ -48,6 +48,11 @@ var (
 	ShellWidthFull = ShellWidth{v: "full"}
 )
 
+// All returns every ShellWidth value.
+func (ShellWidth) All() []ShellWidth {
+	return []ShellWidth{{}, ShellWidthFull}
+}
+
 // ShellProps holds a Shell's optional settings; every zero value is the default.
 type ShellProps struct {
 	// Head holds app additions to <head>, such as stylesheets, fonts and scripts. It renders
@@ -239,7 +244,7 @@ func shellDocument(title string, p *ShellProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.lang())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 208, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 213, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
@@ -252,7 +257,7 @@ func shellDocument(title string, p *ShellProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(title)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 212, Col: 17}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 217, Col: 17}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -283,7 +288,7 @@ func shellDocument(title string, p *ShellProps) templ.Component {
 		var templ_7745c5c3_Var4 templ.SafeURL
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinURLErrs(templ.SafeURL("#" + shellMainID))
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 221, Col: 68}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 226, Col: 68}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -380,7 +385,7 @@ func shellNav(p *RegionProps) templ.Component {
 		var templ_7745c5c3_Var7 string
 		templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.ResolveAttributeValue(shellNavID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 237, Col: 79}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 242, Col: 79}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var7)
 		if templ_7745c5c3_Err != nil {
@@ -393,7 +398,7 @@ func shellNav(p *RegionProps) templ.Component {
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.ResolveAttributeValue(shellNavID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 238, Col: 22}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 243, Col: 22}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var8)
 		if templ_7745c5c3_Err != nil {
@@ -457,7 +462,7 @@ func shellMain(p *ShellMainProps) templ.Component {
 		var templ_7745c5c3_Var11 string
 		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.ResolveAttributeValue(shellMainID)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 246, Col: 23}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/shell.templ`, Line: 251, Col: 23}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var11)
 		if templ_7745c5c3_Err != nil {
