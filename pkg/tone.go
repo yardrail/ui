@@ -31,3 +31,11 @@ var (
 func (t Tone) String() string {
 	return t.v
 }
+
+// All returns every Tone value.
+func (Tone) All() []Tone {
+	return []Tone{
+		ToneAccent, ToneAmber, ToneBlue, ToneGreen, TonePurple,
+		TonePink, ToneSuccess, ToneWarning, ToneDanger, ToneInfo,
+	}
+}

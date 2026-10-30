@@ -29,6 +29,11 @@ func (t FieldType) String() string {
 	return t.v
 }
 
+// All returns every FieldType value.
+func (FieldType) All() []FieldType {
+	return []FieldType{{}, FieldEmail, FieldPassword, FieldURL, FieldSearch}
+}
+
 // Autocomplete is the autofill token of a Field. The zero value renders no autocomplete attribute.
 type Autocomplete struct{ v string }
 
@@ -49,6 +54,15 @@ var (
 	// AutocompleteOrganization is a company or organization name.
 	AutocompleteOrganization = Autocomplete{v: "organization"}
 )
+
+// All returns every Autocomplete value.
+func (Autocomplete) All() []Autocomplete {
+	return []Autocomplete{
+		{}, AutocompleteOff, AutocompleteName, AutocompleteEmail,
+		AutocompleteUsername, AutocompleteCurrentPassword, AutocompleteNewPassword,
+		AutocompleteOrganization,
+	}
+}
 
 // FieldProps holds a Field's optional settings; every zero value is the default.
 type FieldProps struct {

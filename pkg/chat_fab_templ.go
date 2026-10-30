@@ -20,6 +20,11 @@ func (b ChatFabBadge) String() string {
 	return b.v
 }
 
+// All returns every ChatFabBadge value.
+func (ChatFabBadge) All() []ChatFabBadge {
+	return []ChatFabBadge{ChatFabBadgeCappy, ChatFabBadgeHuman}
+}
+
 // ChatFabProps holds a ChatFab's optional settings; every zero value is the default.
 type ChatFabProps struct {
 	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.
@@ -76,7 +81,7 @@ func chatFab(p *ChatFabProps) templ.Component {
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.label())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 44, Col: 36}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 49, Col: 36}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var2)
 		if templ_7745c5c3_Err != nil {
@@ -97,7 +102,7 @@ func chatFab(p *ChatFabProps) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.ResolveAttributeValue(p.label())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 51, Col: 75}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 56, Col: 75}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var3)
 		if templ_7745c5c3_Err != nil {
@@ -110,7 +115,7 @@ func chatFab(p *ChatFabProps) templ.Component {
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.ResolveAttributeValue("/static/ui/cappy/" + p.Variant.ImageFile())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 54, Col: 53}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `pkg/chat_fab.templ`, Line: 59, Col: 53}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ_7745c5c3_Var4)
 		if templ_7745c5c3_Err != nil {

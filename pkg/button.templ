@@ -21,6 +21,11 @@ func (t ButtonType) String() string {
 	return t.v
 }
 
+// All returns every ButtonType value.
+func (ButtonType) All() []ButtonType {
+	return []ButtonType{{}, ButtonSubmit, ButtonReset}
+}
+
 // ButtonVariant is the visual style of a Button. The zero value is ButtonPrimary.
 type ButtonVariant struct{ v string }
 
@@ -37,6 +42,11 @@ var (
 	// ButtonDangerQuiet is a low-emphasis destructive action, for example Remove in a table row.
 	ButtonDangerQuiet = ButtonVariant{v: "danger-quiet"}
 )
+
+// All returns every ButtonVariant value.
+func (ButtonVariant) All() []ButtonVariant {
+	return []ButtonVariant{{}, ButtonSecondary, ButtonLink, ButtonDanger, ButtonDangerQuiet}
+}
 
 // buttonClass is the base class every Button carries.
 const buttonClass = "yr-button"

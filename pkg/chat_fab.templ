@@ -12,6 +12,11 @@ func (b ChatFabBadge) String() string {
 	return b.v
 }
 
+// All returns every ChatFabBadge value.
+func (ChatFabBadge) All() []ChatFabBadge {
+	return []ChatFabBadge{ChatFabBadgeCappy, ChatFabBadgeHuman}
+}
+
 // ChatFabProps holds a ChatFab's optional settings; every zero value is the default.
 type ChatFabProps struct {
 	// Attrs holds htmx and script hooks, filtered by the Attrs allow-list.

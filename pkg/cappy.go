@@ -25,6 +25,15 @@ func (v CappyVariant) ImageFile() string {
 	return v.v + ".png"
 }
 
+// All returns every CappyVariant value.
+func (CappyVariant) All() []CappyVariant {
+	return []CappyVariant{
+		{},
+		CappyExcited, CappyThinking, CappyPointing,
+		CappySeeNoEvil, CappyTrainEngineer, CappyConstructionWorker, CappyLearner,
+	}
+}
+
 // ChatSender identifies who sent a chat message.
 type ChatSender struct{ v string }
 
@@ -38,6 +47,11 @@ var (
 // String returns the sender key used in CSS class modifiers and data attributes.
 func (s ChatSender) String() string {
 	return s.v
+}
+
+// All returns every ChatSender value.
+func (ChatSender) All() []ChatSender {
+	return []ChatSender{ChatSenderUser, ChatSenderCappy, ChatSenderHuman}
 }
 
 // ToolCallStatus is the execution state of a tool call.
@@ -54,4 +68,9 @@ var (
 // String returns the status key used in CSS class modifiers.
 func (s ToolCallStatus) String() string {
 	return s.v
+}
+
+// All returns every ToolCallStatus value.
+func (ToolCallStatus) All() []ToolCallStatus {
+	return []ToolCallStatus{ToolCallPending, ToolCallRunning, ToolCallDone, ToolCallError}
 }

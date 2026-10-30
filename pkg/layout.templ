@@ -33,6 +33,11 @@ var (
 	AlignStretch = Align{v: "stretch"}
 )
 
+// All returns every Align value.
+func (Align) All() []Align {
+	return []Align{{}, AlignStart, AlignCenter, AlignEnd, AlignStretch}
+}
+
 // Justify is how a layout primitive distributes its children along its main axis. The zero value
 // means the primitive's default.
 type Justify struct{ v string }
@@ -49,12 +54,22 @@ var (
 	JustifyBetween = Justify{v: "between"}
 )
 
+// All returns every Justify value.
+func (Justify) All() []Justify {
+	return []Justify{{}, JustifyStart, JustifyCenter, JustifyEnd, JustifyBetween}
+}
+
 // As is the element a layout primitive renders as. The zero value renders a <div>.
 type As struct{ v string }
 
 // AsList renders the primitive as <ul role="list">, with list styling reset. Callers supply the
 // <li> children.
 var AsList = As{v: "list"}
+
+// All returns every As value.
+func (As) All() []As {
+	return []As{{}, AsList}
+}
 
 // list reports whether the primitive renders as a list.
 func (a As) list() bool {
