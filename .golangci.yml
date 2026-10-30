@@ -137,6 +137,9 @@ linters:
         source: "\\.Render\\("
       - linters:
           - goconst
+        path: "_test\\.go$"
+      - linters:
+          - goconst
         path: "^cmd/gallery/"
     paths:
       - third_party$

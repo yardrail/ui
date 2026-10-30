@@ -136,3 +136,44 @@ func TestShellMainWidth(t *testing.T) {
 		t.Errorf("zero width output contains %q:\n%s", fullClass, standard)
 	}
 }
+
+func TestRenderShell(t *testing.T) {
+	t.Parallel()
+
+	html := renderString(t, withChildren(
+		Shell("Test Page", ShellProps{}),
+		ShellMain(ShellMainProps{}),
+	))
+	writeClassCoverage(t, "shell", "default", html)
+
+	html = renderString(t, withChildren(
+		Shell("German Page", ShellProps{Lang: "de", Head: text("<link rel=\"icon\">")}),
+		ShellMain(ShellMainProps{}),
+	))
+	writeClassCoverage(t, "shell", "lang_and_head", html)
+
+	html = renderString(t, withChildren(
+		Shell("Body Attrs", ShellProps{Attrs: templ.Attributes{"data-page": "x"}}),
+		ShellMain(ShellMainProps{Attrs: templ.Attributes{"data-main": "y"}}),
+	))
+	writeClassCoverage(t, "shell", "with_attrs", html)
+}
+
+func TestRenderShellWithRegions(t *testing.T) {
+	t.Parallel()
+
+	html := renderString(t, withChildren(
+		Shell("Full Shell", ShellProps{}),
+		withChildren(ShellTopBar(RegionProps{Attrs: templ.Attributes{"data-bar": "1"}}), text("topbar")),
+		withChildren(ShellNav(RegionProps{Attrs: templ.Attributes{"aria-label": "Primary"}}), text("nav")),
+		withChildren(ShellMain(ShellMainProps{
+			Width:    ShellWidthFull,
+			Messages: text("saved"),
+		}),
+			text("main"),
+			withChildren(ShellBand(RegionProps{Attrs: templ.Attributes{"data-band": "1"}}), text("band")),
+		),
+		withChildren(ShellFooter(RegionProps{Attrs: templ.Attributes{"data-footer": "1"}}), text("footer")),
+	))
+	writeClassCoverage(t, "shell", "with_regions", html)
+}
