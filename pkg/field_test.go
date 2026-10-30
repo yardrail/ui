@@ -1,6 +1,7 @@
 package ui
 
 import (
+	"fmt"
 	"strings"
 	"testing"
 )
@@ -90,5 +91,78 @@ func TestFieldRequiredArgs(t *testing.T) {
 		t.Parallel()
 
 		assertPanics(t, Field(fieldLabelTeamName, "", FieldProps{}))
+	})
+}
+
+func TestRenderField(t *testing.T) {
+	t.Parallel()
+
+	i := 0
+
+	for _, ft := range (FieldType{}).All() {
+		for _, optional := range []bool{false, true} {
+			for _, hideLabel := range []bool{false, true} {
+				for _, focus := range []bool{false, true} {
+					html := renderString(t, Field("Label", "name", FieldProps{
+						Type:      ft,
+						Optional:  optional,
+						HideLabel: hideLabel,
+						Focus:     focus,
+					}))
+					writeClassCoverage(t, "field", fmt.Sprintf("%03d", i), html)
+					i++
+				}
+			}
+		}
+	}
+}
+
+func TestRenderFieldBranches(t *testing.T) {
+	t.Parallel()
+
+	t.Run("with value", func(t *testing.T) {
+		t.Parallel()
+
+		html := renderString(t, Field("Label", "name", FieldProps{Value: "hello"}))
+		if !strings.Contains(html, `value="hello"`) {
+			t.Error("missing value attribute")
+		}
+
+		writeClassCoverage(t, "field", "with_value", html)
+	})
+
+	t.Run("with hint", func(t *testing.T) {
+		t.Parallel()
+
+		html := renderString(t, Field("Label", "name", FieldProps{Hint: "Help text"}))
+		if !strings.Contains(html, "Help text") {
+			t.Error("missing hint text")
+		}
+
+		writeClassCoverage(t, "field", "with_hint", html)
+	})
+
+	t.Run("with error", func(t *testing.T) {
+		t.Parallel()
+
+		html := renderString(t, Field("Label", "name", FieldProps{Error: "Required"}))
+		if !strings.Contains(html, "yr-field--invalid") {
+			t.Error("missing invalid class")
+		}
+
+		if !strings.Contains(html, "yr-field-error") {
+			t.Error("missing error element")
+		}
+
+		writeClassCoverage(t, "field", "with_error", html)
+	})
+
+	t.Run("with autocomplete", func(t *testing.T) {
+		t.Parallel()
+
+		for _, ac := range (Autocomplete{}).All() {
+			html := renderString(t, Field("Label", "name", FieldProps{Autocomplete: ac}))
+			writeClassCoverage(t, "field", "ac_"+ac.v, html)
+		}
 	})
 }

@@ -78,12 +78,6 @@ tasks:
     desc: Run Go tests
     cmd: go test ./...
 
-  lint:html:
-    desc: Check CSS class coverage against generated HTML
-    cmds:
-      - go test ./pkg -run TestRender -count=1
-      - biome lint pkg/testdata/classcoverage/
-
   docs:
     desc: Regenerate CLAUDE.md and README.md from templates and source
     cmd: go run ./scripts/gen-docs/
