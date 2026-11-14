@@ -1,7 +1,72 @@
 version: '3'
 
+# =============================================================================
+# Target design
+#
+# Targets follow a <resource>:<verb> convention. Four entities consume them:
+#
+#   Entity         Automated flow
+#   ─────────────  ──────────────────────────────────────────────
+#   Developer      any target directly
+#   Git hooks      build → lint:short + ui:test:short
+#   PR CI          build → lint:short + ui:test:short
+#   Nightly CI     lint + ui:test
+#
+# Hooks and PR CI run identical checks. CI may parallelize across jobs, but
+# the set of targets is the same.
+#
+# Unqualified lint/test mean thorough (full codebase golangci-lint).
+# :short variants are the fast path (incremental golangci-lint, -short tests).
+#
+# Top-level targets (build, lint, test) dispatch to all resources.
+# Resource targets (ui:*) operate on a single resource.
+# =============================================================================
+
 tasks:
-  install:
+  # ---------------------------------------------------------------------------
+  # Dispatch targets
+  # ---------------------------------------------------------------------------
+
+  build:
+    desc: Build all resources
+    cmds:
+      - task: ui:build
+      - task: gallery:build
+
+  lint:
+    desc: Run all lints (full codebase golangci-lint)
+    cmds:
+      - task: ui:lint
+
+  lint:short:
+    desc: Run all lints (incremental golangci-lint)
+    cmds:
+      - task: ui:lint:short
+
+  test:
+    desc: Run all lints and tests (full)
+    cmds:
+      - task: ui:lint
+      - task: ui:test
+
+  test:short:
+    desc: Run all lints and tests (fast)
+    cmds:
+      - task: ui:lint:short
+      - task: ui:test:short
+
+  # ---------------------------------------------------------------------------
+  # UI (templ component library)
+  # ---------------------------------------------------------------------------
+
+  ui:build:
+    desc: Format, generate, and build the component library
+    cmds:
+      - task: ui:fmt
+      - task: ui:gen
+      - task: ui:dist
+
+  ui:install:
     internal: true
     sources:
       - package.json
@@ -10,85 +75,146 @@ tasks:
       - node_modules/.modules.yaml
     cmd: pnpm install --frozen-lockfile
 
-  build:
-    desc: Build CSS/JS to pkg/dist/ (ui.js, ui.css and their source maps)
-    deps: [install]
+  ui:dist:
+    internal: true
+    deps: [ui:install]
     cmd: pnpm build
 
-  gen:
-    desc: Compile .templ files to *_templ.go
+  ui:fmt:
+    internal: true
+    cmds:
+      - go mod tidy
+      - templ fmt .
+      - golangci-lint fmt ./...
+      - biome format --write .
+
+  ui:gen:
+    internal: true
     cmd: templ generate
 
-  gen:check:
-    desc: Verify committed codegen output (*_templ.go, dist/) is up to date with its sources
+  ui:gen:check:
+    desc: Verify codegen output is up to date
     cmds:
-      - task: gen
-      - task: build
+      - task: ui:gen
+      - task: ui:dist
       - git add -N -- 'pkg/*_templ.go' pkg/dist/
       - git diff --exit-code -- 'pkg/*_templ.go' pkg/dist/
 
-  fmt:
-    desc: Run all formatters (writes to files)
+  ui:lint:
+    desc: Run all UI lints (full codebase golangci-lint)
     cmds:
-      - task: fmt:go
-      - task: fmt:templ
-      - task: fmt:web
+      - task: ui:gen:check
+      - task: ui:lint:common
+      - task: ui:lint:go
 
-  fmt:web:
-    desc: Format TypeScript and CSS files
-    cmd: biome format --write .
-
-  fmt:go:
-    desc: Format Go files
-    cmd: golangci-lint fmt ./...
-
-  fmt:templ:
-    desc: Format .templ files
-    cmd: templ fmt .
-
-  lint:
-    desc: Run all lints (read-only)
+  ui:lint:short:
+    desc: Run all UI lints (incremental golangci-lint)
     cmds:
-      - task: lint:go
-      - task: lint:templ
-      - task: lint:biome
-      - task: lint:css
+      - task: ui:gen:check
+      - task: ui:lint:common
+      - task: ui:lint:go:new
 
-  lint:go:
-    desc: Run Go lints
-    cmd: golangci-lint run --max-same-issues 50 ./...
+  ui:lint:common:
+    internal: true
+    cmds:
+      - task: ui:lint:tidy
+      - task: ui:lint:templ
+      - task: ui:lint:biome
+      - task: ui:lint:css
 
-  lint:templ:
-    desc: Verify .templ files are formatted
-    cmd: templ fmt . --check
+  ui:lint:tidy:
+    internal: true
+    cmds:
+      - go mod tidy
+      - git diff --exit-code -- go.mod go.sum
 
-  lint:biome:
-    desc: Lint TypeScript and CSS (Biome rules)
-    deps: [install]
+  ui:lint:templ:
+    internal: true
+    cmds:
+      - templ fmt .
+      - git diff --exit-code -- '*.templ'
+
+  ui:lint:biome:
+    internal: true
+    deps: [ui:install]
     cmds:
       - pnpm exec tsc --noEmit
       - biome lint .
 
-  lint:css:
-    desc: Lint hand-written CSS
-    deps: [install]
+  ui:lint:css:
+    internal: true
+    deps: [ui:install]
     cmd: pnpm exec stylelint "src/**/*.css" "pkg/**/*.css" "!pkg/dist/**" "cmd/gallery/gallery.css" "cmd/gallery/mocks.css"
 
-  test:
-    desc: Run Go tests
-    cmd: go test ./...
+  ui:lint:go:
+    internal: true
+    cmds:
+      - golangci-lint config verify
+      - golangci-lint run --max-same-issues 50 ./...
 
-  docs:
+  ui:lint:go:new:
+    internal: true
+    cmds:
+      - golangci-lint config verify
+      - golangci-lint run --max-same-issues 50 --new-from-rev=origin/main ./...
+
+  ui:test:
+    desc: Run Go tests with race detector (full suite)
+    cmd: go test -race ./...
+
+  ui:test:short:
+    desc: Run Go tests (fast, no race detector)
+    cmd: go test -short ./...
+
+  # ---------------------------------------------------------------------------
+  # Gallery (component examples on :6007)
+  # ---------------------------------------------------------------------------
+
+  gallery:
+    desc: Build and serve the gallery with live reload
+    cmds:
+      - task: gallery:build
+      - task: gallery:run
+
+  gallery:build:
+    desc: Build gallery assets and binary
+    cmds:
+      - task: ui:dist
+      - go build -o .air/gallery ./cmd/gallery
+
+  gallery:run:
+    desc: Serve the gallery on :6007 with live reload via air
+    deps: [ui:dist]
+    cmd: air
+
+  # ---------------------------------------------------------------------------
+  # Chore
+  # ---------------------------------------------------------------------------
+
+  chore:docs:
     desc: Regenerate CLAUDE.md and README.md from templates and source
     cmd: go run ./scripts/gen-docs/
 
-  docs:check:
+  chore:docs:check:
     desc: Fail if CLAUDE.md or README.md is out of date
     cmds:
-      - task: docs
+      - task: chore:docs
       - git diff --exit-code -- CLAUDE.md README.md
 
-  gallery:
-    desc: Serve every component example on :6007 with live reload via air
-    deps: [build]
-    cmd: air
+  # ---------------------------------------------------------------------------
+  # Dev environment
+  # ---------------------------------------------------------------------------
+
+  dev:setup:
+    desc: Full local dev setup (tools + dependencies)
+    cmds:
+      - task: dev:setup:tools
+      - task: dev:setup:deps
+
+  dev:setup:tools:
+    internal: true
+    cmd: mise install
+
+  dev:setup:deps:
+    internal: true
+    cmd: pnpm install --frozen-lockfile

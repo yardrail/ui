@@ -35,5 +35,5 @@ Run `task <name>`:
 
 ## Git hooks (lefthook)
 
-Pre-commit runs `gen:check`, `lint`, `test` in parallel. Commit messages validated by commitlint.
-Use conventional commits (`feat:`, `fix:`, `refactor:`, `chore:`).
+Pre-commit runs `build` first, then `lint:short` and `ui:test:short` in parallel.
+Commit messages validated by commitlint. Use conventional commits (`feat:`, `fix:`, `refactor:`, `chore:`).

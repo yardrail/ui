@@ -1,12 +1,15 @@
 pre-commit:
-  parallel: true
-  commands:
-    gen-check:
-      run: mise exec -- task gen:check
-    lint:
-      run: mise exec -- task lint
-    test:
-      run: mise exec -- task test
+  jobs:
+    - name: build
+      run: mise exec -- task build
+    - name: lint-and-test
+      group:
+        parallel: true
+        jobs:
+          - name: lint
+            run: mise exec -- task lint:short
+          - name: test
+            run: mise exec -- task ui:test:short
 
 commit-msg:
   commands:
