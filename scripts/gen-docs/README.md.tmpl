@@ -33,11 +33,11 @@ templ myPage() {
 ## Development
 
 ```sh
+task dev:setup  # install tools and dependencies
 task gallery    # serve examples on :6007 with hot reload
-task build      # build CSS/JS
-task gen        # compile .templ files
-task test       # run Go tests
-task lint       # run all lints
+task build      # format, generate, and build
+task test       # run all lints and tests (full)
+task test:short # run all lints and tests (fast)
 ```
 
 ## Components
