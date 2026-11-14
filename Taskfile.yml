@@ -170,12 +170,6 @@ tasks:
   # Gallery (component examples on :6007)
   # ---------------------------------------------------------------------------
 
-  gallery:
-    desc: Build and serve the gallery with live reload
-    cmds:
-      - task: gallery:build
-      - task: gallery:run
-
   gallery:build:
     desc: Build gallery assets and binary
     cmds:
