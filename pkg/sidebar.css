@@ -1,24 +1,12 @@
-/* yr-sidebar — fixed left sidebar, full height below yr-nav-shell.
-   Width controlled by --yr-sidebar-width; collapses to
-   --yr-sidebar-width-collapsed when the collapsed attribute is set. */
+/* yr-sidebar — vertical sidebar shell. Positioning and width are owned by
+   the page-level grid (yr-page-workspace). */
 
 yr-sidebar {
-  position: fixed;
-  top: 52px;
-  left: 0;
-  bottom: 0;
-  width: var(--yr-sidebar-width);
   background: var(--yr-surface);
   border-right: 1px solid var(--yr-border);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: width 0.2s ease;
-  z-index: 50;
-}
-
-yr-sidebar[collapsed] {
-  width: var(--yr-sidebar-width-collapsed);
 }
 
 yr-sidebar-header {

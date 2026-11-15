@@ -1,6 +1,6 @@
 yr-page-setup {
   display: grid;
-  grid-template-rows: 52px 1fr;
+  grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 
