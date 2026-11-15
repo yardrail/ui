@@ -1989,21 +1989,11 @@ yr-author-link[size=lg] .yr-author-link-badge svg {
 
 /* pkg/sidebar.css */
 yr-sidebar {
-  position: fixed;
-  top: 52px;
-  left: 0;
-  bottom: 0;
-  width: var(--yr-sidebar-width);
   background: var(--yr-surface);
   border-right: 1px solid var(--yr-border);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: width 0.2s ease;
-  z-index: 50;
-}
-yr-sidebar[collapsed] {
-  width: var(--yr-sidebar-width-collapsed);
 }
 yr-sidebar-header {
   display: flex;
@@ -2202,12 +2192,6 @@ yr-drawer-body {
 /* pkg/content.css */
 yr-content {
   display: flex;
-  margin-left: var(--yr-sidebar-width);
-  height: calc(100vh - 52px);
-  transition: margin-left 0.2s ease;
-}
-yr-sidebar[collapsed] ~ yr-content {
-  margin-left: var(--yr-sidebar-width-collapsed);
 }
 yr-content-main {
   display: block;
@@ -2238,19 +2222,6 @@ yr-resize-handle:hover::after,
 yr-resize-handle[active]::after {
   background: var(--yr-accent);
 }
-yr-resize-handle[target=sidebar] {
-  position: fixed;
-  top: 52px;
-  bottom: 0;
-  width: 5px;
-  left: var(--yr-sidebar-width);
-}
-yr-resize-handle[target=sidebar]::after {
-  left: 2px;
-}
-yr-sidebar[collapsed] ~ yr-resize-handle[target=sidebar] {
-  left: var(--yr-sidebar-width-collapsed);
-}
 yr-resize-handle[target=drawer] {
   width: 5px;
   flex-shrink: 0;
@@ -2259,6 +2230,7 @@ yr-resize-handle[target=drawer] {
 yr-resize-handle[target=drawer]::after {
   right: 2px;
 }
+.yr-resizing yr-page-workspace,
 .yr-resizing yr-sidebar,
 .yr-resizing yr-content,
 .yr-resizing yr-drawer,
@@ -2269,9 +2241,10 @@ yr-resize-handle[target=drawer]::after {
 /* pkg/page_workspace.css */
 yr-page-workspace {
   display: grid;
-  grid-template-rows: 52px 1fr;
+  grid-template-rows: auto 1fr;
   grid-template-columns: var(--yr-sidebar-width) 5px 1fr;
   height: 100vh;
+  transition: grid-template-columns 0.2s ease;
 }
 yr-page-workspace > yr-nav-shell,
 yr-page-workspace > yr-navbar,
@@ -2279,30 +2252,20 @@ yr-page-workspace > yr-navbar-std {
   grid-column: 1 / -1;
 }
 yr-page-workspace > yr-sidebar {
-  position: static !important;
-  width: auto !important;
-  height: 100% !important;
   grid-row: 2;
   grid-column: 1;
+  min-height: 0;
 }
 yr-page-workspace:has(> yr-sidebar[collapsed]) {
   grid-template-columns: var(--yr-sidebar-width-collapsed) 5px 1fr;
 }
 yr-page-workspace > yr-resize-handle[target=sidebar] {
-  position: relative;
-  top: 0;
-  left: auto;
   grid-row: 2;
   grid-column: 2;
-  height: 100%;
 }
 yr-page-workspace > yr-content {
-  margin-left: 0;
-  height: 100%;
   grid-row: 2;
-}
-yr-page-workspace yr-drawer {
-  height: auto;
+  min-height: 0;
 }
 
 /* pkg/page_auth.css */
@@ -2318,7 +2281,7 @@ yr-page-auth {
 /* pkg/page_setup.css */
 yr-page-setup {
   display: grid;
-  grid-template-rows: 52px 1fr;
+  grid-template-rows: auto 1fr;
   min-height: 100vh;
 }
 yr-page-setup > yr-nav-shell,
